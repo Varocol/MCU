@@ -1,0 +1,3 @@
+
+.\build\Release\src\·äÃùÆ÷.o TO .\build\Release\80C51
+PRINT(.\build\Release\80C51.map) REMOVEUNUSED

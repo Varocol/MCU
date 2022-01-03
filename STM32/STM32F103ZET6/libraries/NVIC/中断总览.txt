@@ -1,0 +1,83 @@
+NVIC 组别:
+NVIC_PriorityGroup = NVIC_PriorityGroup_0(0 bit PreemptionPriority / 4 bits SubPriority)
+中断名称:
+NonMaskableInt_IRQn   
+MemoryManagement_IRQn 
+BusFault_IRQn         
+UsageFault_IRQn       
+SVCall_IRQn           
+DebugMonitor_IRQn     
+PendSV_IRQn           
+SysTick_IRQn 
+WWDG_IRQn            
+PVD_IRQn             
+TAMPER_IRQn          
+RTC_IRQn             
+FLASH_IRQn           
+RCC_IRQn             
+EXTI0_IRQn           
+EXTI1_IRQn           
+EXTI2_IRQn           
+EXTI3_IRQn           
+EXTI4_IRQn           
+DMA1_Channel1_IRQn   
+DMA1_Channel2_IRQn   
+DMA1_Channel3_IRQn   
+DMA1_Channel4_IRQn   
+DMA1_Channel5_IRQn   
+DMA1_Channel6_IRQn   
+DMA1_Channel7_IRQn   
+ADC1_2_IRQn          
+USB_HP_CAN1_TX_IRQn  
+USB_LP_CAN1_RX0_IRQn 
+CAN1_RX1_IRQn        
+CAN1_SCE_IRQn        
+EXTI9_5_IRQn         
+TIM1_BRK_IRQn        
+TIM1_UP_IRQn         
+TIM1_TRG_COM_IRQn    
+TIM1_CC_IRQn         
+TIM2_IRQn            
+TIM3_IRQn            
+TIM4_IRQn            
+I2C1_EV_IRQn         
+I2C1_ER_IRQn         
+I2C2_EV_IRQn         
+I2C2_ER_IRQn         
+SPI1_IRQn            
+SPI2_IRQn            
+USART1_IRQn          
+USART2_IRQn          
+USART3_IRQn          
+EXTI15_10_IRQn       
+RTCAlarm_IRQn        
+USBWakeUp_IRQn       
+TIM8_BRK_IRQn        
+TIM8_UP_IRQn         
+TIM8_TRG_COM_IRQn    
+TIM8_CC_IRQn         
+ADC3_IRQn            
+FSMC_IRQn            
+SDIO_IRQn            
+TIM5_IRQn            
+SPI3_IRQn            
+UART4_IRQn           
+UART5_IRQn           
+TIM6_IRQn            
+TIM7_IRQn            
+DMA2_Channel1_IRQn   
+DMA2_Channel2_IRQn   
+DMA2_Channel3_IRQn   
+DMA2_Channel4_5_IRQn          
+
+NVIC 优先级:
+USART1  0
+USART2  1
+USART3  2
+UART4   3
+UART5   4
+TIM2    5
+I2C1_ER 6
+I2C1_EV 7
+I2C2_ER 8
+I2C2_EV 9

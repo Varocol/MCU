@@ -1,0 +1,36 @@
+#include"note.h"
+#include"music.h"
+void saygoodbye()
+{
+    basicspeed=60;
+    music(m6,0.5);
+    music(h2,0.5);
+    music(h1u,0.25);
+    music(h2,0.5);
+    pause(0.25);
+    music(h2,0.25);
+    music(h2,0.5);
+    pause(0.25);
+    music(h2,0.25);
+    music(h1u,0.75);
+    music(h2,0.25);
+    music(h3,0.75);
+    music(h1u,0.25);
+    music(m6,2.25);
+    pause(0.25);
+    music(m6,0.5);
+    music(h2,0.5);
+    music(h3,0.5);
+    music(h4u,0.25);
+    pause(0.25);
+    music(h4u,0.25);
+    music(h4u,0.5);
+    pause(0.25);
+    music(h4u,0.25);
+    music(h4u,0.5);
+    music(h3,0.25);
+    pause(0.25);
+    music(h4u,0.75);
+    music(h5,0.25);
+    music(h4u,2.25);
+}

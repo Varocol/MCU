@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<ccsVersion value="11.0.0"/>
+	<deviceVariant value="MSP430F5529"/>
+	<deviceFamily value="MSP430"/>
+	<deviceEndianness value="little"/>
+	<codegenToolVersion value="20.2.5.LTS"/>
+	<isElfFormat value="true"/>
+	<linkerCommandFile value="lnk_msp430f5529.cmd"/>
+	<rts value="libc.a"/>
+	<createSlaveProjects value=""/>
+	<templateProperties value="id=timer_a_ex1_pwmSingle.projectspec.timer_a_ex1_pwmSingle"/>
+	<origin value="C:\Users\Varocol\Desktop\MCU\TI\msp430_driverlib_2_91_13_01\examples\MSP430F5xx_6xx\timer_a\CCS\timer_a_ex1_pwmSingle.projectspec"/>
+	<filesToOpen value=""/>
+</projectOptions>

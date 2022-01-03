@@ -1,0 +1,14 @@
+#include "main.h"
+
+void setup ()
+{
+    led.Init();
+    button.attachClick(click);
+    button.attachDoubleClick(doubleclick);
+    button.attachLongPressStart(longclick);
+}
+void loop ()
+{
+    button.tick();
+//    rt_thread_mdelay(10);
+}

@@ -1,0 +1,20 @@
+#include "main.h"
+//该占空比为高电平的百分比
+PWM pwm = PWM(ATOM0_CH7_P20_8, 50, 100);
+void setup ()
+{
+    pwm.Init();
+}
+void loop ()
+{
+    int flag = 1;
+    for (int i = 1;; i += flag)
+    {
+        if((i == 1000 && flag == 1 )|| (i == 0 && flag == -1))
+        {
+            flag = -flag;
+        }
+        pwm.Update_Percent(i/10.0);
+        rt_thread_mdelay(1);
+    }
+}

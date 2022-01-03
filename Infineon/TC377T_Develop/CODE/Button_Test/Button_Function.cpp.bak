@@ -1,0 +1,29 @@
+#include "Button_Function.h"
+LED led;
+Button button;
+void doubleclick ()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        led.LED_Toggle();
+        rt_thread_mdelay(300);
+    }
+}
+void click ()
+{
+    rt_kprintf("click\n");
+    for (int i = 0; i < 2; i++)
+    {
+        led.LED_Toggle();
+        rt_thread_mdelay(100);
+    }
+}
+void longclick ()
+{
+    rt_kprintf("longclick\n");
+    led.LED_Toggle();
+    if (led.Pin_Get())
+        rt_kprintf("start\n");
+    else
+        rt_kprintf("end\n");
+}

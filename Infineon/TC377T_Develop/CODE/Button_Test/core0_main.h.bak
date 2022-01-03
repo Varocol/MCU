@@ -1,0 +1,7 @@
+#ifndef __CORE0_MAIN_H
+#define __CORE0_MAIN_H
+#include "Libraries.h"
+#include "Button_Function.h"
+void core0_setup();
+void core0_loop();
+#endif /*__CORE0_MAIN_H*/

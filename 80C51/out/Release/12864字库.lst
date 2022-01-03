@@ -1,0 +1,1372 @@
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 12864譥縚
+OBJECT MODULE PLACED IN .\out\Release\12864字库.o
+COMPILER INVOKED BY: D:\Chipenvironment\keilC51\C51\BIN\C51.exe .\SRC\12864字库.C PRINT(.\out\Release\12864字库.lst) OMF
+                    -2 TABS(4) CODE NOCOND SYMBOLS OPTIMIZE(8,SPEED) SMALL ROM(LARGE) INCDIR(D:\Chipenvironment\keilC51\C51\INC;.\src;.\libra
+                    -ries) DEFINE(__UVISION_VERSION=526) OBJECT(.\out\Release\12864字库.o)
+
+line level    source
+
+   1          #include"12864libs.h"
+   2          
+   3          uchar str1[17]="年轻人不讲武德啊";
+   4          uchar  code yue[49]="六月七月八月九月十月冬月腊月";
+   5          void main()
+   6          {
+   7   1         uint i=0;
+   8   1         LCD12864_init();
+   9   1         LCD12864_pos(1,0);
+  10   1         while(yue[i]!='\0')
+  11   1         {
+  12   2             LCD12864_write_data(yue[i]);
+  13   2             i++;
+  14   2         }
+  15   1         while(1);
+  16   1      }
+  17          /*总结下来有三个错误点
+  18            1. 判忙函数写错了
+  19            2. 读取状态和数据的函数写成死循环
+  20            3. 写指令函数没有将CS置高电平,若不用判忙函数又会少一个字节
+  21          */
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION _String_numtostring (BEGIN)
+                                           ; SOURCE LINE # 15
+0000 8B00        R     MOV     p,R3
+0002 8A00        R     MOV     p+01H,R2
+0004 8900        R     MOV     p+02H,R1
+;---- Variable 'num' assigned to Register 'DPTR' ----
+0006 8F82              MOV     DPL,R7
+0008 8E83              MOV     DPH,R6
+                                           ; SOURCE LINE # 16
+                                           ; SOURCE LINE # 18
+000A E4                CLR     A
+000B F500        R     MOV     i,A
+000D F500        R     MOV     i+01H,A
+                                           ; SOURCE LINE # 19
+000F F500        R     MOV     temp,A
+0011 F500        R     MOV     temp+01H,A
+                                           ; SOURCE LINE # 20
+0013 E582              MOV     A,DPL
+0015 4583              ORL     A,DPH
+0017 7005              JNZ     ?C0001
+0019 FE                MOV     R6,A
+001A 7F01              MOV     R7,#01H
+001C 8004              SJMP    ?C0002
+001E         ?C0001:
+001E 7E00              MOV     R6,#00H
+0020 7F00              MOV     R7,#00H
+0022         ?C0002:
+0022 8E00        R     MOV     count,R6
+0024 8F00        R     MOV     count+01H,R7
+0026         ?C0003:
+                                           ; SOURCE LINE # 21
+0026 E582              MOV     A,DPL
+0028 4583              ORL     A,DPH
+002A 6037              JZ      ?C0005
+                                           ; SOURCE LINE # 22
+                                           ; SOURCE LINE # 23
+002C 7C00              MOV     R4,#00H
+002E 7D0A              MOV     R5,#0AH
+0030 AF82              MOV     R7,DPL
+0032 AE83              MOV     R6,DPH
+0034 120000      E     LCALL   ?C?UIDIV
+0037 AA04              MOV     R2,AR4
+0039 AB05              MOV     R3,AR5
+003B AE00        R     MOV     R6,temp
+003D AF00        R     MOV     R7,temp+01H
+003F 7C00              MOV     R4,#00H
+0041 7D0A              MOV     R5,#0AH
+0043 120000      E     LCALL   ?C?IMUL
+0046 EF                MOV     A,R7
+0047 2B                ADD     A,R3
+0048 F500        R     MOV     temp+01H,A
+004A EE                MOV     A,R6
+004B 3A                ADDC    A,R2
+004C F500        R     MOV     temp,A
+                                           ; SOURCE LINE # 24
+004E AF82              MOV     R7,DPL
+0050 AE83              MOV     R6,DPH
+0052 120000      E     LCALL   ?C?UIDIV
+0055 8E83              MOV     DPH,R6
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 3   
+
+0057 8F82              MOV     DPL,R7
+                                           ; SOURCE LINE # 25
+0059 0500        R     INC     count+01H
+005B E500        R     MOV     A,count+01H
+005D 70C7              JNZ     ?C0003
+005F 0500        R     INC     count
+0061         ?C0109:
+                                           ; SOURCE LINE # 26
+0061 80C3              SJMP    ?C0003
+                                           ; SOURCE LINE # 27
+0063         ?C0005:
+0063 E500        R     MOV     A,count+01H
+0065 1500        R     DEC     count+01H
+0067 AE00        R     MOV     R6,count
+0069 7002              JNZ     ?C0110
+006B 1500        R     DEC     count
+006D         ?C0110:
+006D 4E                ORL     A,R6
+006E 6036              JZ      ?C0006
+                                           ; SOURCE LINE # 28
+                                           ; SOURCE LINE # 29
+0070 AE00        R     MOV     R6,temp
+0072 AF00        R     MOV     R7,temp+01H
+0074 7C00              MOV     R4,#00H
+0076 7D0A              MOV     R5,#0AH
+0078 120000      E     LCALL   ?C?UIDIV
+007B ED                MOV     A,R5
+007C 2430              ADD     A,#030H
+007E AB00        R     MOV     R3,p
+0080 AA00        R     MOV     R2,p+01H
+0082 A900        R     MOV     R1,p+02H
+0084 850082      R     MOV     DPL,i+01H
+0087 850083      R     MOV     DPH,i
+008A 120000      E     LCALL   ?C?CSTOPTR
+                                           ; SOURCE LINE # 30
+008D AE00        R     MOV     R6,temp
+008F AF00        R     MOV     R7,temp+01H
+0091 7C00              MOV     R4,#00H
+0093 7D0A              MOV     R5,#0AH
+0095 120000      E     LCALL   ?C?UIDIV
+0098 8E00        R     MOV     temp,R6
+009A 8F00        R     MOV     temp+01H,R7
+                                           ; SOURCE LINE # 31
+009C 0500        R     INC     i+01H
+009E E500        R     MOV     A,i+01H
+00A0 70C1              JNZ     ?C0005
+00A2 0500        R     INC     i
+00A4         ?C0111:
+00A4 80BD              SJMP    ?C0005
+00A6         ?C0006:
+                                           ; SOURCE LINE # 32
+00A6 AB00        R     MOV     R3,p
+00A8 AA00        R     MOV     R2,p+01H
+00AA A900        R     MOV     R1,p+02H
+00AC 850082      R     MOV     DPL,i+01H
+00AF 850083      R     MOV     DPH,i
+00B2 E4                CLR     A
+00B3 020000      E     LJMP    ?C?CSTOPTR
+             ; FUNCTION _String_numtostring (END)
+
+             ; FUNCTION _String_mergestring (BEGIN)
+                                           ; SOURCE LINE # 65
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 4   
+
+0000 8B00        R     MOV     a,R3
+0002 8A00        R     MOV     a+01H,R2
+0004 8900        R     MOV     a+02H,R1
+                                           ; SOURCE LINE # 66
+                                           ; SOURCE LINE # 68
+0006 E4                CLR     A
+0007 F500        R     MOV     i,A
+0009         ?C0009:
+0009 E500        R     MOV     A,i
+000B C3                CLR     C
+000C 9500        R     SUBB    A,len1
+000E 501B              JNC     ?C0012
+                                           ; SOURCE LINE # 69
+                                           ; SOURCE LINE # 70
+0010 AB00        R     MOV     R3,a
+0012 AA00        R     MOV     R2,a+01H
+0014 A900        R     MOV     R1,a+02H
+0016 850082      R     MOV     DPL,i
+0019 758300            MOV     DPH,#00H
+001C 120000      E     LCALL   ?C?CLDOPTR
+001F FF                MOV     R7,A
+0020 7400        R     MOV     A,#LOW temp
+0022 2500        R     ADD     A,i
+0024 F8                MOV     R0,A
+0025 A607              MOV     @R0,AR7
+                                           ; SOURCE LINE # 71
+0027 0500        R     INC     i
+0029 80DE              SJMP    ?C0009
+                                           ; SOURCE LINE # 72
+002B         ?C0012:
+002B AD00        R     MOV     R5,len1
+002D 7C00              MOV     R4,#00H
+002F ED                MOV     A,R5
+0030 2500        R     ADD     A,len2
+0032 FF                MOV     R7,A
+0033 EC                MOV     A,R4
+0034 33                RLC     A
+0035 FE                MOV     R6,A
+0036 C3                CLR     C
+0037 E500        R     MOV     A,i
+0039 9F                SUBB    A,R7
+003A EE                MOV     A,R6
+003B 6480              XRL     A,#080H
+003D F8                MOV     R0,A
+003E 7480              MOV     A,#080H
+0040 98                SUBB    A,R0
+0041 5020              JNC     ?C0013
+                                           ; SOURCE LINE # 73
+                                           ; SOURCE LINE # 74
+0043 C3                CLR     C
+0044 E500        R     MOV     A,i
+0046 9D                SUBB    A,R5
+0047 FF                MOV     R7,A
+0048 E4                CLR     A
+0049 9C                SUBB    A,R4
+004A AB00        R     MOV     R3,b
+004C AA00        R     MOV     R2,b+01H
+004E A900        R     MOV     R1,b+02H
+0050 8F82              MOV     DPL,R7
+0052 F583              MOV     DPH,A
+0054 120000      E     LCALL   ?C?CLDOPTR
+0057 FF                MOV     R7,A
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 5   
+
+0058 7400        R     MOV     A,#LOW temp
+005A 2500        R     ADD     A,i
+005C F8                MOV     R0,A
+005D A607              MOV     @R0,AR7
+                                           ; SOURCE LINE # 75
+005F 0500        R     INC     i
+0061 80C8              SJMP    ?C0012
+0063         ?C0013:
+                                           ; SOURCE LINE # 76
+0063 E4                CLR     A
+0064 F500        R     MOV     i,A
+0066         ?C0015:
+0066 E500        R     MOV     A,len1
+0068 2500        R     ADD     A,len2
+006A FF                MOV     R7,A
+006B E4                CLR     A
+006C 33                RLC     A
+006D FE                MOV     R6,A
+006E C3                CLR     C
+006F E500        R     MOV     A,i
+0071 9F                SUBB    A,R7
+0072 EE                MOV     A,R6
+0073 6480              XRL     A,#080H
+0075 F8                MOV     R0,A
+0076 7480              MOV     A,#080H
+0078 98                SUBB    A,R0
+0079 5019              JNC     ?C0016
+                                           ; SOURCE LINE # 77
+                                           ; SOURCE LINE # 78
+007B 7400        R     MOV     A,#LOW temp
+007D 2500        R     ADD     A,i
+007F F8                MOV     R0,A
+0080 E6                MOV     A,@R0
+0081 AB00        R     MOV     R3,c
+0083 AA00        R     MOV     R2,c+01H
+0085 A900        R     MOV     R1,c+02H
+0087 850082      R     MOV     DPL,i
+008A 758300            MOV     DPH,#00H
+008D 120000      E     LCALL   ?C?CSTOPTR
+                                           ; SOURCE LINE # 79
+0090 0500        R     INC     i
+0092 80D2              SJMP    ?C0015
+0094         ?C0016:
+                                           ; SOURCE LINE # 80
+0094 AB00        R     MOV     R3,c
+0096 AA00        R     MOV     R2,c+01H
+0098 A900        R     MOV     R1,c+02H
+009A 850082      R     MOV     DPL,i
+009D 758300            MOV     DPH,#00H
+00A0 E4                CLR     A
+00A1 020000      E     LJMP    ?C?CSTOPTR
+             ; FUNCTION _String_mergestring (END)
+
+             ; FUNCTION _String_strcpy (BEGIN)
+                                           ; SOURCE LINE # 82
+0000 8B00        R     MOV     a,R3
+0002 8A00        R     MOV     a+01H,R2
+0004 8900        R     MOV     a+02H,R1
+                                           ; SOURCE LINE # 83
+                                           ; SOURCE LINE # 85
+;---- Variable 'i' assigned to Register 'R7' ----
+0006 E4                CLR     A
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 6   
+
+0007 FF                MOV     R7,A
+0008         ?C0019:
+0008 EF                MOV     A,R7
+0009 C3                CLR     C
+000A 9500        R     SUBB    A,len+01H
+000C E4                CLR     A
+000D 9500        R     SUBB    A,len
+000F 501F              JNC     ?C0020
+                                           ; SOURCE LINE # 86
+                                           ; SOURCE LINE # 87
+0011 AB00        R     MOV     R3,b
+0013 AA00        R     MOV     R2,b+01H
+0015 A900        R     MOV     R1,b+02H
+0017 8F82              MOV     DPL,R7
+0019 758300            MOV     DPH,#00H
+001C 120000      E     LCALL   ?C?CLDOPTR
+001F AB00        R     MOV     R3,a
+0021 AA00        R     MOV     R2,a+01H
+0023 A900        R     MOV     R1,a+02H
+0025 8F82              MOV     DPL,R7
+0027 758300            MOV     DPH,#00H
+002A 120000      E     LCALL   ?C?CSTOPTR
+                                           ; SOURCE LINE # 88
+002D 0F                INC     R7
+002E 80D8              SJMP    ?C0019
+0030         ?C0020:
+                                           ; SOURCE LINE # 89
+0030 AB00        R     MOV     R3,a
+0032 AA00        R     MOV     R2,a+01H
+0034 A900        R     MOV     R1,a+02H
+0036 8F82              MOV     DPL,R7
+0038 758300            MOV     DPH,#00H
+003B E4                CLR     A
+003C 020000      E     LJMP    ?C?CSTOPTR
+             ; FUNCTION _String_strcpy (END)
+
+             ; FUNCTION _String_strlen (BEGIN)
+                                           ; SOURCE LINE # 91
+0000 8B00        R     MOV     a,R3
+0002 8A00        R     MOV     a+01H,R2
+0004 8900        R     MOV     a+02H,R1
+                                           ; SOURCE LINE # 92
+                                           ; SOURCE LINE # 93
+;---- Variable 'i' assigned to Register 'R7' ----
+0006 E4                CLR     A
+0007 FF                MOV     R7,A
+0008         ?C0023:
+                                           ; SOURCE LINE # 94
+0008 AB00        R     MOV     R3,a
+000A AA00        R     MOV     R2,a+01H
+000C A900        R     MOV     R1,a+02H
+000E 8F82              MOV     DPL,R7
+0010 758300            MOV     DPH,#00H
+0013 120000      E     LCALL   ?C?CLDOPTR
+0016 6003              JZ      ?C0024
+                                           ; SOURCE LINE # 95
+0018 0F                INC     R7
+0019 80ED              SJMP    ?C0023
+001B         ?C0024:
+                                           ; SOURCE LINE # 96
+                                           ; SOURCE LINE # 97
+001B         ?C0025:
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 7   
+
+001B 22                RET     
+             ; FUNCTION _String_strlen (END)
+
+             ; FUNCTION LCD12864_clear_DDRAM (BEGIN)
+                                           ; SOURCE LINE # 36
+                                           ; SOURCE LINE # 37
+                                           ; SOURCE LINE # 38
+0000 7F01              MOV     R7,#01H
+0002 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 39
+0005 7F03              MOV     R7,#03H
+0007 020000      R     LJMP    _LCD12864_write_cmd
+             ; FUNCTION LCD12864_clear_DDRAM (END)
+
+             ; FUNCTION L?0117 (BEGIN)
+0000 C4                SWAP    A
+0001 54F0              ANL     A,#0F0H
+0003 FF                MOV     R7,A
+             ; FUNCTION _LCD12864_sendbyte (BEGIN)
+                                           ; SOURCE LINE # 41
+;---- Variable 'Data' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 42
+                                           ; SOURCE LINE # 44
+;---- Variable 'i' assigned to Register 'R6' ----
+0004 E4                CLR     A
+0005 FE                MOV     R6,A
+0006         ?C0027:
+                                           ; SOURCE LINE # 45
+                                           ; SOURCE LINE # 46
+0006 C2A7              CLR     LCD_SCK
+                                           ; SOURCE LINE # 47
+0008 EF                MOV     A,R7
+0009 C4                SWAP    A
+000A 13                RRC     A
+000B 13                RRC     A
+000C 13                RRC     A
+000D 5401              ANL     A,#01H
+000F 24FF              ADD     A,#0FFH
+0011 92A5              MOV     LCD_SID,C
+                                           ; SOURCE LINE # 48
+0013 EF                MOV     A,R7
+0014 25E0              ADD     A,ACC
+0016 FF                MOV     R7,A
+                                           ; SOURCE LINE # 49
+0017 D2A7              SETB    LCD_SCK
+                                           ; SOURCE LINE # 50
+0019 C2A7              CLR     LCD_SCK
+                                           ; SOURCE LINE # 51
+001B 0E                INC     R6
+001C BE08E7            CJNE    R6,#08H,?C0027
+                                           ; SOURCE LINE # 52
+001F         ?C0030:
+001F 22                RET     
+             ; FUNCTION _LCD12864_sendbyte (END)
+
+             ; FUNCTION L?0116 (BEGIN)
+0000 E500        R     MOV     A,i
+0002 2480              ADD     A,#080H
+0004 FF                MOV     R7,A
+             ; FUNCTION _LCD12864_write_cmd (BEGIN)
+                                           ; SOURCE LINE # 53
+0005 8F00        R     MOV     cmd,R7
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 8   
+
+                                           ; SOURCE LINE # 54
+                                           ; SOURCE LINE # 55
+0007 D2A6              SETB    LCD_CS
+                                           ; SOURCE LINE # 56
+0009 120000      R     LCALL   LCD12864_check_busy
+                                           ; SOURCE LINE # 57
+000C 7FF8              MOV     R7,#0F8H
+000E 120000      R     LCALL   _LCD12864_sendbyte
+                                           ; SOURCE LINE # 58
+0011 E500        R     MOV     A,cmd
+0013 54F0              ANL     A,#0F0H
+0015 FF                MOV     R7,A
+0016 120000      R     LCALL   _LCD12864_sendbyte
+                                           ; SOURCE LINE # 59
+0019 E500        R     MOV     A,cmd
+001B 120000      R     LCALL   L?0117
+                                           ; SOURCE LINE # 60
+001E C2A6              CLR     LCD_CS
+                                           ; SOURCE LINE # 61
+0020 22                RET     
+             ; FUNCTION _LCD12864_write_cmd (END)
+
+             ; FUNCTION L?0118 (BEGIN)
+0000 AB00        R     MOV     R3,p
+0002 AA00        R     MOV     R2,p+01H
+0004 A900        R     MOV     R1,p+02H
+0006 120000      E     LCALL   ?C?CLDPTR
+0009 FF                MOV     R7,A
+             ; FUNCTION _LCD12864_write_data (BEGIN)
+                                           ; SOURCE LINE # 62
+000A 8F00        R     MOV     Data,R7
+                                           ; SOURCE LINE # 63
+                                           ; SOURCE LINE # 64
+000C D2A6              SETB    LCD_CS
+                                           ; SOURCE LINE # 65
+000E 120000      R     LCALL   LCD12864_check_busy
+                                           ; SOURCE LINE # 66
+0011 7FFA              MOV     R7,#0FAH
+0013 120000      R     LCALL   _LCD12864_sendbyte
+                                           ; SOURCE LINE # 67
+0016 E500        R     MOV     A,Data
+0018 54F0              ANL     A,#0F0H
+001A FF                MOV     R7,A
+001B 120000      R     LCALL   _LCD12864_sendbyte
+                                           ; SOURCE LINE # 68
+001E E500        R     MOV     A,Data
+0020 120000      R     LCALL   L?0117
+                                           ; SOURCE LINE # 69
+0023 C2A6              CLR     LCD_CS
+                                           ; SOURCE LINE # 70
+0025 22                RET     
+             ; FUNCTION _LCD12864_write_data (END)
+
+             ; FUNCTION _LCD12864_pos (BEGIN)
+                                           ; SOURCE LINE # 71
+;---- Variable 'x' assigned to Register 'R7' ----
+;---- Variable 'y' assigned to Register 'R5' ----
+                                           ; SOURCE LINE # 72
+                                           ; SOURCE LINE # 73
+0000 EF                MOV     A,R7
+0001 14                DEC     A
+0002 600E              JZ      ?C0035
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 9   
+
+0004 14                DEC     A
+0005 600F              JZ      ?C0036
+0007 14                DEC     A
+0008 6010              JZ      ?C0037
+000A 2403              ADD     A,#03H
+000C 700E              JNZ     ?C0033
+                                           ; SOURCE LINE # 74
+                                           ; SOURCE LINE # 75
+000E         ?C0034:
+000E 7F80              MOV     R7,#080H
+                                           ; SOURCE LINE # 76
+0010 800A              SJMP    ?C0033
+                                           ; SOURCE LINE # 77
+0012         ?C0035:
+0012 7F90              MOV     R7,#090H
+                                           ; SOURCE LINE # 78
+0014 8006              SJMP    ?C0033
+                                           ; SOURCE LINE # 79
+0016         ?C0036:
+0016 7F88              MOV     R7,#088H
+                                           ; SOURCE LINE # 80
+0018 8002              SJMP    ?C0033
+                                           ; SOURCE LINE # 81
+001A         ?C0037:
+001A 7F98              MOV     R7,#098H
+                                           ; SOURCE LINE # 82
+                                           ; SOURCE LINE # 83
+001C         ?C0033:
+                                           ; SOURCE LINE # 84
+001C EF                MOV     A,R7
+001D 2D                ADD     A,R5
+001E FF                MOV     R7,A
+001F 020000      R     LJMP    _LCD12864_write_cmd
+             ; FUNCTION _LCD12864_pos (END)
+
+             ; FUNCTION LCD12864_init (BEGIN)
+                                           ; SOURCE LINE # 86
+                                           ; SOURCE LINE # 87
+                                           ; SOURCE LINE # 88
+0000 7F30              MOV     R7,#030H
+0002 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 89
+0005 7F0C              MOV     R7,#0CH
+0007 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 90
+000A 7F01              MOV     R7,#01H
+000C 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 91
+000F 7F06              MOV     R7,#06H
+0011 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 92
+0014 7F03              MOV     R7,#03H
+0016 020000      R     LJMP    _LCD12864_write_cmd
+             ; FUNCTION LCD12864_init (END)
+
+             ; FUNCTION LCD12864_check_busy (BEGIN)
+                                           ; SOURCE LINE # 94
+                                           ; SOURCE LINE # 95
+0000         ?C0040:
+                                           ; SOURCE LINE # 97
+0000 120000      R     LCALL   LCD12864_read_status
+0003 EF                MOV     A,R7
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 10  
+
+0004 20E7F9            JB      ACC.7,?C0040
+                                           ; SOURCE LINE # 98
+0007 22                RET     
+             ; FUNCTION LCD12864_check_busy (END)
+
+             ; FUNCTION _LCD12864_SET_CGRAM (BEGIN)
+                                           ; SOURCE LINE # 99
+0000 8F00        R     MOV     num,R7
+0002 8B00        R     MOV     p,R3
+0004 8A00        R     MOV     p+01H,R2
+0006 8900        R     MOV     p+02H,R1
+                                           ; SOURCE LINE # 100
+                                           ; SOURCE LINE # 102
+0008 7F34              MOV     R7,#034H
+000A 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 103
+000D 7F02              MOV     R7,#02H
+000F 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 104
+0012 7F30              MOV     R7,#030H
+0014 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 105
+0017 E500        R     MOV     A,num
+0019 C4                SWAP    A
+001A 54F0              ANL     A,#0F0H
+001C 4440              ORL     A,#040H
+001E F500        R     MOV     firstadd,A
+                                           ; SOURCE LINE # 106
+0020 E4                CLR     A
+0021 F500        R     MOV     i,A
+0023         ?C0044:
+                                           ; SOURCE LINE # 107
+                                           ; SOURCE LINE # 108
+0023 E500        R     MOV     A,firstadd
+0025 2500        R     ADD     A,i
+0027 FF                MOV     R7,A
+0028 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 109
+002B AB00        R     MOV     R3,p
+002D AA00        R     MOV     R2,p+01H
+002F A900        R     MOV     R1,p+02H
+0031 75F002            MOV     B,#02H
+0034 E500        R     MOV     A,i
+0036 A4                MUL     AB
+0037 F582              MOV     DPL,A
+0039 85F083            MOV     DPH,B
+003C 120000      E     LCALL   ?C?CLDOPTR
+003F FF                MOV     R7,A
+0040 120000      R     LCALL   _LCD12864_write_data
+                                           ; SOURCE LINE # 110
+0043 AB00        R     MOV     R3,p
+0045 AA00        R     MOV     R2,p+01H
+0047 A900        R     MOV     R1,p+02H
+0049 75F002            MOV     B,#02H
+004C E500        R     MOV     A,i
+004E A4                MUL     AB
+004F 2401              ADD     A,#01H
+0051 F582              MOV     DPL,A
+0053 E4                CLR     A
+0054 35F0              ADDC    A,B
+0056 F583              MOV     DPH,A
+0058 120000      E     LCALL   ?C?CLDOPTR
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 11  
+
+005B FF                MOV     R7,A
+005C 120000      R     LCALL   _LCD12864_write_data
+                                           ; SOURCE LINE # 111
+005F 0500        R     INC     i
+0061 E500        R     MOV     A,i
+0063 C3                CLR     C
+0064 9410              SUBB    A,#010H
+0066 40BB              JC      ?C0044
+                                           ; SOURCE LINE # 112
+0068         ?C0047:
+0068 22                RET     
+             ; FUNCTION _LCD12864_SET_CGRAM (END)
+
+             ; FUNCTION _LCD12864_display_CGRAM (BEGIN)
+                                           ; SOURCE LINE # 113
+0000 8F00        R     MOV     num,R7
+;---- Variable 'y' assigned to Register 'R6' ----
+0002 AE03              MOV     R6,AR3
+;---- Variable 'x' assigned to Register 'R7' ----
+0004 AF05              MOV     R7,AR5
+                                           ; SOURCE LINE # 114
+                                           ; SOURCE LINE # 115
+0006 AD06              MOV     R5,AR6
+0008 120000      R     LCALL   _LCD12864_pos
+                                           ; SOURCE LINE # 116
+000B E4                CLR     A
+000C FF                MOV     R7,A
+000D 120000      R     LCALL   _LCD12864_write_data
+                                           ; SOURCE LINE # 117
+0010 E500        R     MOV     A,num
+0012 25E0              ADD     A,ACC
+0014 FF                MOV     R7,A
+0015 020000      R     LJMP    _LCD12864_write_data
+             ; FUNCTION _LCD12864_display_CGRAM (END)
+
+             ; FUNCTION _LCD12864_showstring (BEGIN)
+                                           ; SOURCE LINE # 119
+0000 8B00        R     MOV     p,R3
+0002 8A00        R     MOV     p+01H,R2
+0004 8900        R     MOV     p+02H,R1
+0006 8C00        R     MOV     row,R4
+0008 8D00        R     MOV     row+01H,R5
+                                           ; SOURCE LINE # 120
+                                           ; SOURCE LINE # 122
+000A AF00        R     MOV     R7,row+01H
+000C AD00        R     MOV     R5,col+01H
+000E 120000      R     LCALL   _LCD12864_pos
+                                           ; SOURCE LINE # 123
+0011 E500        R     MOV     A,row
+0013 702D              JNZ     ?C0049
+0015 E500        R     MOV     A,row+01H
+0017 14                DEC     A
+0018 6012              JZ      ?C0051
+001A 14                DEC     A
+001B 6017              JZ      ?C0052
+001D 14                DEC     A
+001E 601C              JZ      ?C0053
+0020 2403              ADD     A,#03H
+0022 701E              JNZ     ?C0049
+                                           ; SOURCE LINE # 124
+                                           ; SOURCE LINE # 125
+0024         ?C0050:
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 12  
+
+0024 750000      R     MOV     row,#00H
+0027 750080      R     MOV     row+01H,#080H
+                                           ; SOURCE LINE # 126
+002A 8016              SJMP    ?C0049
+                                           ; SOURCE LINE # 127
+002C         ?C0051:
+002C 750000      R     MOV     row,#00H
+002F 750090      R     MOV     row+01H,#090H
+                                           ; SOURCE LINE # 128
+0032 800E              SJMP    ?C0049
+                                           ; SOURCE LINE # 129
+0034         ?C0052:
+0034 750000      R     MOV     row,#00H
+0037 750088      R     MOV     row+01H,#088H
+                                           ; SOURCE LINE # 130
+003A 8006              SJMP    ?C0049
+                                           ; SOURCE LINE # 131
+003C         ?C0053:
+003C 750000      R     MOV     row,#00H
+003F 750098      R     MOV     row+01H,#098H
+                                           ; SOURCE LINE # 132
+                                           ; SOURCE LINE # 133
+0042         ?C0049:
+                                           ; SOURCE LINE # 134
+0042 E500        R     MOV     A,col+01H
+0044 2500        R     ADD     A,row+01H
+0046 F500        R     MOV     row+01H,A
+0048 E500        R     MOV     A,col
+004A 3500        R     ADDC    A,row
+004C F500        R     MOV     row,A
+                                           ; SOURCE LINE # 135
+004E E4                CLR     A
+004F F500        R     MOV     i,A
+0051         ?C0054:
+0051 AB00        R     MOV     R3,p
+0053 AA00        R     MOV     R2,p+01H
+0055 A900        R     MOV     R1,p+02H
+0057 850082      R     MOV     DPL,i
+005A 758300            MOV     DPH,#00H
+005D 120000      E     LCALL   ?C?CLDOPTR
+0060 FF                MOV     R7,A
+0061 6049              JZ      ?C0063
+                                           ; SOURCE LINE # 136
+                                           ; SOURCE LINE # 137
+0063 120000      R     LCALL   _LCD12864_write_data
+                                           ; SOURCE LINE # 138
+0066 E500        R     MOV     A,i
+0068 30E03D            JNB     ACC.0,?C0056
+                                           ; SOURCE LINE # 139
+                                           ; SOURCE LINE # 140
+006B 0500        R     INC     row+01H
+006D E500        R     MOV     A,row+01H
+006F 7002              JNZ     ?C0112
+0071 0500        R     INC     row
+0073         ?C0112:
+                                           ; SOURCE LINE # 141
+0073 E500        R     MOV     A,row
+0075 7029              JNZ     ?C0058
+0077 E500        R     MOV     A,row+01H
+0079 2470              ADD     A,#070H
+007B 6018              JZ      ?C0061
+007D 24F8              ADD     A,#0F8H
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 13  
+
+007F 600C              JZ      ?C0060
+0081 2410              ADD     A,#010H
+0083 701B              JNZ     ?C0058
+                                           ; SOURCE LINE # 142
+                                           ; SOURCE LINE # 143
+0085         ?C0059:
+0085 750000      R     MOV     row,#00H
+0088 750090      R     MOV     row+01H,#090H
+                                           ; SOURCE LINE # 144
+                                           ; SOURCE LINE # 145
+008B 800E              SJMP    ?C0115
+                                           ; SOURCE LINE # 146
+008D         ?C0060:
+008D 750000      R     MOV     row,#00H
+0090 750088      R     MOV     row+01H,#088H
+                                           ; SOURCE LINE # 147
+0093         ?C0114:
+                                           ; SOURCE LINE # 148
+0093 8006              SJMP    ?C0115
+                                           ; SOURCE LINE # 149
+0095         ?C0061:
+0095 750000      R     MOV     row,#00H
+0098 750098      R     MOV     row+01H,#098H
+                                           ; SOURCE LINE # 150
+009B         ?C0115:
+009B AF00        R     MOV     R7,row+01H
+009D 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 151
+                                           ; SOURCE LINE # 152
+00A0         ?C0058:
+                                           ; SOURCE LINE # 153
+00A0 E500        R     MOV     A,row+01H
+00A2 64A0              XRL     A,#0A0H
+00A4 4500        R     ORL     A,row
+00A6 6004              JZ      ?C0063
+00A8         ?C0062:
+                                           ; SOURCE LINE # 154
+                                           ; SOURCE LINE # 155
+00A8         ?C0056:
+00A8 0500        R     INC     i
+00AA 80A5              SJMP    ?C0054
+                                           ; SOURCE LINE # 156
+00AC         ?C0063:
+00AC 22                RET     
+             ; FUNCTION _LCD12864_showstring (END)
+
+             ; FUNCTION _LCD12864_shownum (BEGIN)
+                                           ; SOURCE LINE # 157
+;---- Variable 'num' assigned to Register 'R6/R7' ----
+0000 8B00        R     MOV     p,R3
+0002 8A00        R     MOV     p+01H,R2
+0004 8900        R     MOV     p+02H,R1
+                                           ; SOURCE LINE # 158
+                                           ; SOURCE LINE # 160
+0006 120000      R     LCALL   _String_numtostring
+                                           ; SOURCE LINE # 161
+0009 AB00        R     MOV     R3,p
+000B AA00        R     MOV     R2,p+01H
+000D A900        R     MOV     R1,p+02H
+000F 120000      R     LCALL   _String_strlen
+0012 8F00        R     MOV     length,R7
+                                           ; SOURCE LINE # 162
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 14  
+
+0014 E500        R     MOV     A,length
+0016 30E022            JNB     ACC.0,?C0064
+                                           ; SOURCE LINE # 163
+                                           ; SOURCE LINE # 164
+0019 AB00        R     MOV     R3,p
+001B AA00        R     MOV     R2,p+01H
+001D A900        R     MOV     R1,p+02H
+001F 8B00        R     MOV     ?_String_mergestring?BYTE+03H,R3
+0021 8A00        R     MOV     ?_String_mergestring?BYTE+04H,R2
+0023 8900        R     MOV     ?_String_mergestring?BYTE+05H,R1
+0025 750001      R     MOV     ?_String_mergestring?BYTE+06H,#01H
+0028 F500        R     MOV     ?_String_mergestring?BYTE+07H,A
+002A 8B00        R     MOV     ?_String_mergestring?BYTE+08H,R3
+002C 8A00        R     MOV     ?_String_mergestring?BYTE+09H,R2
+002E 8900        R     MOV     ?_String_mergestring?BYTE+0AH,R1
+0030 7BFF              MOV     R3,#0FFH
+0032 7A00        R     MOV     R2,#HIGH ?SC_0
+0034 7900        R     MOV     R1,#LOW ?SC_0
+0036 120000      R     LCALL   _String_mergestring
+                                           ; SOURCE LINE # 165
+0039 0500        R     INC     length
+                                           ; SOURCE LINE # 166
+003B         ?C0064:
+                                           ; SOURCE LINE # 167
+003B AB00        R     MOV     R3,p
+003D AA00        R     MOV     R2,p+01H
+003F A900        R     MOV     R1,p+02H
+0041 E500        R     MOV     A,x
+0043 FD                MOV     R5,A
+0044 7C00              MOV     R4,#00H
+0046 750000      R     MOV     ?_LCD12864_showstring?BYTE+05H,#00H
+0049 850000      R     MOV     ?_LCD12864_showstring?BYTE+06H,y
+004C 020000      R     LJMP    _LCD12864_showstring
+             ; FUNCTION _LCD12864_shownum (END)
+
+             ; FUNCTION _LCD12864_display_image (BEGIN)
+                                           ; SOURCE LINE # 169
+0000 8B00        R     MOV     p,R3
+0002 8A00        R     MOV     p+01H,R2
+0004 8900        R     MOV     p+02H,R1
+                                           ; SOURCE LINE # 170
+                                           ; SOURCE LINE # 172
+0006 7F34              MOV     R7,#034H
+0008 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 173
+000B E4                CLR     A
+000C F500        R     MOV     i,A
+000E         ?C0066:
+                                           ; SOURCE LINE # 174
+                                           ; SOURCE LINE # 175
+000E 120000      R     LCALL   L?0116
+                                           ; SOURCE LINE # 176
+0011 7F80              MOV     R7,#080H
+0013 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 177
+0016 E4                CLR     A
+0017 F500        R     MOV     j,A
+0019         ?C0069:
+                                           ; SOURCE LINE # 178
+                                           ; SOURCE LINE # 179
+0019 120000      R     LCALL   L?0118
+                                           ; SOURCE LINE # 180
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 15  
+
+001C 7401              MOV     A,#01H
+001E 2500        R     ADD     A,p+02H
+0020 F500        R     MOV     p+02H,A
+0022 E4                CLR     A
+0023 3500        R     ADDC    A,p+01H
+0025 F500        R     MOV     p+01H,A
+                                           ; SOURCE LINE # 181
+0027 0500        R     INC     j
+0029 E500        R     MOV     A,j
+002B C3                CLR     C
+002C 9410              SUBB    A,#010H
+002E 40E9              JC      ?C0069
+                                           ; SOURCE LINE # 182
+0030         ?C0068:
+0030 0500        R     INC     i
+0032 E500        R     MOV     A,i
+0034 C3                CLR     C
+0035 9420              SUBB    A,#020H
+0037 40D5              JC      ?C0066
+0039         ?C0067:
+                                           ; SOURCE LINE # 183
+0039 E4                CLR     A
+003A F500        R     MOV     i,A
+003C         ?C0072:
+                                           ; SOURCE LINE # 184
+                                           ; SOURCE LINE # 185
+003C 120000      R     LCALL   L?0116
+                                           ; SOURCE LINE # 186
+003F 7F88              MOV     R7,#088H
+0041 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 187
+0044 E4                CLR     A
+0045 F500        R     MOV     j,A
+0047         ?C0075:
+                                           ; SOURCE LINE # 188
+                                           ; SOURCE LINE # 189
+0047 120000      R     LCALL   L?0118
+                                           ; SOURCE LINE # 190
+004A 7401              MOV     A,#01H
+004C 2500        R     ADD     A,p+02H
+004E F500        R     MOV     p+02H,A
+0050 E4                CLR     A
+0051 3500        R     ADDC    A,p+01H
+0053 F500        R     MOV     p+01H,A
+                                           ; SOURCE LINE # 191
+0055 0500        R     INC     j
+0057 E500        R     MOV     A,j
+0059 C3                CLR     C
+005A 9410              SUBB    A,#010H
+005C 40E9              JC      ?C0075
+                                           ; SOURCE LINE # 192
+005E         ?C0074:
+005E 0500        R     INC     i
+0060 E500        R     MOV     A,i
+0062 C3                CLR     C
+0063 9420              SUBB    A,#020H
+0065 40D5              JC      ?C0072
+0067         ?C0073:
+                                           ; SOURCE LINE # 193
+0067 7F36              MOV     R7,#036H
+0069 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 194
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 16  
+
+006C 7F30              MOV     R7,#030H
+006E 020000      R     LJMP    _LCD12864_write_cmd
+             ; FUNCTION _LCD12864_display_image (END)
+
+             ; FUNCTION LCD12864_clear_GDRAM (BEGIN)
+                                           ; SOURCE LINE # 196
+                                           ; SOURCE LINE # 197
+                                           ; SOURCE LINE # 199
+0000 7F34              MOV     R7,#034H
+0002 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 200
+0005 E4                CLR     A
+0006 F500        R     MOV     i,A
+0008         ?C0079:
+                                           ; SOURCE LINE # 201
+                                           ; SOURCE LINE # 202
+0008 E500        R     MOV     A,i
+000A 2480              ADD     A,#080H
+000C FF                MOV     R7,A
+000D 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 203
+0010 7F80              MOV     R7,#080H
+0012 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 204
+0015 E4                CLR     A
+0016 F500        R     MOV     j,A
+0018         ?C0082:
+                                           ; SOURCE LINE # 205
+                                           ; SOURCE LINE # 206
+0018 E4                CLR     A
+0019 FF                MOV     R7,A
+001A 120000      R     LCALL   _LCD12864_write_data
+                                           ; SOURCE LINE # 207
+001D 0500        R     INC     j
+001F E500        R     MOV     A,j
+0021 C3                CLR     C
+0022 9410              SUBB    A,#010H
+0024 40F2              JC      ?C0082
+                                           ; SOURCE LINE # 208
+0026         ?C0081:
+0026 0500        R     INC     i
+0028 E500        R     MOV     A,i
+002A C3                CLR     C
+002B 9420              SUBB    A,#020H
+002D 40D9              JC      ?C0079
+002F         ?C0080:
+                                           ; SOURCE LINE # 209
+002F E4                CLR     A
+0030 F500        R     MOV     i,A
+0032         ?C0085:
+                                           ; SOURCE LINE # 210
+                                           ; SOURCE LINE # 211
+0032 E500        R     MOV     A,i
+0034 2480              ADD     A,#080H
+0036 FF                MOV     R7,A
+0037 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 212
+003A 7F88              MOV     R7,#088H
+003C 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 213
+003F E4                CLR     A
+0040 F500        R     MOV     j,A
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 17  
+
+0042         ?C0088:
+                                           ; SOURCE LINE # 214
+                                           ; SOURCE LINE # 215
+0042 E4                CLR     A
+0043 FF                MOV     R7,A
+0044 120000      R     LCALL   _LCD12864_write_data
+                                           ; SOURCE LINE # 216
+0047 0500        R     INC     j
+0049 E500        R     MOV     A,j
+004B C3                CLR     C
+004C 9410              SUBB    A,#010H
+004E 40F2              JC      ?C0088
+                                           ; SOURCE LINE # 217
+0050         ?C0087:
+0050 0500        R     INC     i
+0052 E500        R     MOV     A,i
+0054 C3                CLR     C
+0055 9420              SUBB    A,#020H
+0057 40D9              JC      ?C0085
+0059         ?C0086:
+                                           ; SOURCE LINE # 218
+0059 7F36              MOV     R7,#036H
+005B 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 219
+005E 7F30              MOV     R7,#030H
+0060 020000      R     LJMP    _LCD12864_write_cmd
+             ; FUNCTION LCD12864_clear_GDRAM (END)
+
+             ; FUNCTION _LCD12864_set_GDRAMadd (BEGIN)
+                                           ; SOURCE LINE # 221
+0000 8F00        R     MOV     x,R7
+;---- Variable 'y' assigned to Register 'R5' ----
+                                           ; SOURCE LINE # 222
+                                           ; SOURCE LINE # 223
+0002 ED                MOV     A,R5
+0003 2480              ADD     A,#080H
+0005 FF                MOV     R7,A
+0006 120000      R     LCALL   _LCD12864_write_cmd
+                                           ; SOURCE LINE # 224
+0009 E500        R     MOV     A,x
+000B 2480              ADD     A,#080H
+000D FF                MOV     R7,A
+000E 020000      R     LJMP    _LCD12864_write_cmd
+             ; FUNCTION _LCD12864_set_GDRAMadd (END)
+
+             ; FUNCTION LCD12864_read_data (BEGIN)
+                                           ; SOURCE LINE # 226
+                                           ; SOURCE LINE # 227
+                                           ; SOURCE LINE # 228
+0000 7FFE              MOV     R7,#0FEH
+0002 120000      R     LCALL   _LCD12864_sendbyte
+                                           ; SOURCE LINE # 229
+0005 120000      R     LCALL   LCD12864_receivebyte
+                                           ; SOURCE LINE # 230
+0008         ?C0093:
+0008 22                RET     
+             ; FUNCTION LCD12864_read_data (END)
+
+             ; FUNCTION LCD12864_receivebyte (BEGIN)
+                                           ; SOURCE LINE # 231
+                                           ; SOURCE LINE # 232
+                                           ; SOURCE LINE # 234
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 18  
+
+;---- Variable 'tmp1' assigned to Register 'R7' ----
+0000 E4                CLR     A
+0001 FF                MOV     R7,A
+                                           ; SOURCE LINE # 235
+;---- Variable 'tmp2' assigned to Register 'R6' ----
+0002 FE                MOV     R6,A
+                                           ; SOURCE LINE # 236
+;---- Variable 'i' assigned to Register 'R5' ----
+0003 FD                MOV     R5,A
+0004         ?C0094:
+                                           ; SOURCE LINE # 237
+                                           ; SOURCE LINE # 238
+0004 EF                MOV     A,R7
+0005 25E0              ADD     A,ACC
+0007 FF                MOV     R7,A
+                                           ; SOURCE LINE # 239
+0008 C2A7              CLR     LCD_SCK
+                                           ; SOURCE LINE # 240
+000A D2A7              SETB    LCD_SCK
+                                           ; SOURCE LINE # 241
+000C C2A7              CLR     LCD_SCK
+                                           ; SOURCE LINE # 242
+000E 30A501            JNB     LCD_SID,?C0096
+0011 0F                INC     R7
+                                           ; SOURCE LINE # 243
+0012         ?C0096:
+0012 0D                INC     R5
+0013 BD08EE            CJNE    R5,#08H,?C0094
+0016         ?C0095:
+                                           ; SOURCE LINE # 244
+0016 E4                CLR     A
+0017 FD                MOV     R5,A
+0018         ?C0098:
+                                           ; SOURCE LINE # 245
+                                           ; SOURCE LINE # 246
+0018 EE                MOV     A,R6
+0019 25E0              ADD     A,ACC
+001B FE                MOV     R6,A
+                                           ; SOURCE LINE # 247
+001C C2A7              CLR     LCD_SCK
+                                           ; SOURCE LINE # 248
+001E D2A7              SETB    LCD_SCK
+                                           ; SOURCE LINE # 249
+0020 C2A7              CLR     LCD_SCK
+                                           ; SOURCE LINE # 250
+0022 30A501            JNB     LCD_SID,?C0100
+0025 0E                INC     R6
+                                           ; SOURCE LINE # 251
+0026         ?C0100:
+0026 0D                INC     R5
+0027 BD08EE            CJNE    R5,#08H,?C0098
+002A         ?C0099:
+                                           ; SOURCE LINE # 252
+002A EE                MOV     A,R6
+002B C4                SWAP    A
+002C 540F              ANL     A,#0FH
+002E FE                MOV     R6,A
+002F EF                MOV     A,R7
+0030 54F0              ANL     A,#0F0H
+0032 4E                ORL     A,R6
+0033 FF                MOV     R7,A
+                                           ; SOURCE LINE # 253
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 19  
+
+0034         ?C0102:
+0034 22                RET     
+             ; FUNCTION LCD12864_receivebyte (END)
+
+             ; FUNCTION LCD12864_read_status (BEGIN)
+                                           ; SOURCE LINE # 254
+                                           ; SOURCE LINE # 255
+                                           ; SOURCE LINE # 256
+0000 7FFC              MOV     R7,#0FCH
+0002 120000      R     LCALL   _LCD12864_sendbyte
+                                           ; SOURCE LINE # 257
+0005 120000      R     LCALL   LCD12864_receivebyte
+                                           ; SOURCE LINE # 258
+0008         ?C0103:
+0008 22                RET     
+             ; FUNCTION LCD12864_read_status (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 5
+                                           ; SOURCE LINE # 6
+                                           ; SOURCE LINE # 7
+0000 E4                CLR     A
+0001 F500        R     MOV     i,A
+0003 F500        R     MOV     i+01H,A
+                                           ; SOURCE LINE # 8
+0005 120000      R     LCALL   LCD12864_init
+                                           ; SOURCE LINE # 9
+0008 E4                CLR     A
+0009 FD                MOV     R5,A
+000A 7F01              MOV     R7,#01H
+000C 120000      R     LCALL   _LCD12864_pos
+000F         ?C0104:
+                                           ; SOURCE LINE # 10
+000F E500        R     MOV     A,i+01H
+0011 900000      R     MOV     DPTR,#yue
+0014 93                MOVC    A,@A+DPTR
+0015 FF                MOV     R7,A
+0016 600D              JZ      ?C0106
+                                           ; SOURCE LINE # 11
+                                           ; SOURCE LINE # 12
+0018 120000      R     LCALL   _LCD12864_write_data
+                                           ; SOURCE LINE # 13
+001B 0500        R     INC     i+01H
+001D E500        R     MOV     A,i+01H
+001F 70EE              JNZ     ?C0104
+0021 0500        R     INC     i
+0023         ?C0113:
+                                           ; SOURCE LINE # 14
+0023 80EA              SJMP    ?C0104
+0025         ?C0106:
+                                           ; SOURCE LINE # 15
+0025 80FE              SJMP    ?C0106
+             ; FUNCTION main (END)
+
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 20  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+_LCD12864_write_cmd. . . . . . . . . .  PUBLIC   CODE   PROC     0005H  -----
+  cmd. . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+P0 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0080H  1
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+_LCD12864_set_GDRAMadd . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  x. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+  y. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+_LCD12864_display_CGRAM. . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  num. . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+  x. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  y. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0006H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+T0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B4H  1
+AC . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D6H  1
+_String_strcpy . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  a. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0000H  3
+  b. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0003H  3
+  len. . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0006H  2
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+T1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B5H  1
+T2 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+EA . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AFH  1
+_String_mergestring. . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  a. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0000H  3
+  b. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0003H  3
+  len1 . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0006H  1
+  len2 . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0007H  1
+  c. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0008H  3
+  temp . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    000BH  21
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0020H  1
+str1 . . . . . . . . . . . . . . . . .  PUBLIC   DATA   ARRAY    0000H  17
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+_LCD12864_pos. . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  x. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  y. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+LCD12864_clear_DDRAM . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+LCD12864_clear_GDRAM . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+  j. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0001H  1
+LCD_SID. . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A5H  1
+LCD_SCK. . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A7H  1
+EXF2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CEH  1
+RD . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B7H  1
+ES . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ACH  1
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+_LCD12864_showstring . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  p. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0000H  3
+  row. . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0003H  2
+  col. . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0005H  2
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0007H  1
+RI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0098H  1
+INT0 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B2H  1
+CY . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D7H  1
+_LCD12864_display_image. . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  p. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0000H  3
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0003H  1
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 21  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+  j. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0004H  1
+TI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0099H  1
+INT1 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B3H  1
+_LCD12864_sendbyte . . . . . . . . . .  PUBLIC   CODE   PROC     0004H  -----
+  Data . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0006H  1
+RCAP2H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CBH  1
+PS . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BCH  1
+SP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0081H  1
+T2EX . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+OV . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D2H  1
+RCAP2L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CAH  1
+main . . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0000H  2
+C_T2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C9H  1
+WR . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B6H  1
+RCLK . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CDH  1
+_String_numtostring. . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  num. . . . . . . . . . . . . . . . .  * REG *  DATA   U_INT    0082H  2
+  p. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0000H  3
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0003H  2
+  temp . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0005H  2
+  count. . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0007H  2
+TCLK . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CCH  1
+SBUF . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0099H  1
+PCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0087H  1
+SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+TMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0089H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+IE0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0089H  1
+IE1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008BH  1
+B. . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F0H  1
+CP_RL2 . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C8H  1
+ACC. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E0H  1
+ET0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A9H  1
+LCD_CS . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A6H  1
+ET1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ABH  1
+TF0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008DH  1
+ET2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ADH  1
+TF1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008FH  1
+TF2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CFH  1
+RB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009AH  1
+TH0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008CH  1
+EX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A8H  1
+IT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0088H  1
+TH1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008DH  1
+TB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009BH  1
+EX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AAH  1
+IT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008AH  1
+TH2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CDH  1
+P. . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D0H  1
+SM0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009FH  1
+TL0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008AH  1
+_LCD12864_shownum. . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  num. . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0006H  2
+  p. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0002H  3
+  x. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0005H  1
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 22  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+  y. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0006H  1
+  length . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0007H  1
+SM1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009EH  1
+TL1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008BH  1
+SM2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009DH  1
+TL2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CCH  1
+yue. . . . . . . . . . . . . . . . . .  PUBLIC   CODE   ARRAY    0002H  49
+PT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B9H  1
+PT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BBH  1
+RS0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D3H  1
+LCD12864_read_data . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+PT2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BDH  1
+TR0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008CH  1
+RS1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D4H  1
+TR1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008EH  1
+TR2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CAH  1
+PX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B8H  1
+PX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BAH  1
+LCD12864_receivebyte . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  tmp1 . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  tmp2 . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0006H  1
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+DPH. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0083H  1
+DPL. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0082H  1
+LCD12864_read_status . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+LCD12864_check_busy. . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+EXEN2. . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CBH  1
+REN. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009CH  1
+_LCD12864_write_data . . . . . . . . .  PUBLIC   CODE   PROC     000AH  -----
+  Data . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+T2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+RXD. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B0H  1
+TXD. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B1H  1
+LCD12864_init. . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+_LCD12864_SET_CGRAM. . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  num. . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+  p. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0001H  3
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0004H  1
+  firstadd . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0005H  1
+F0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D5H  1
+_String_strlen . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  a. . . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0000H  3
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1337    ----
+   CONSTANT SIZE    =     51    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17      88
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+C51 COMPILER V9.00   12864譥縚                                                             04/27/2021 19:32:10 PAGE 23  
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

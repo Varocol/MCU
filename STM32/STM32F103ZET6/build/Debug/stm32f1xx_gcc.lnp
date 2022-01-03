@@ -1,0 +1,43 @@
+--cpu Cortex-M3 --library_type=microlib --scatter "c:/Users/Varocol/Desktop/MCU/STM32/STM32F103ZET6/build/Debug/stm32f1xx_gcc.sct" --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols --info sizes --info totals --info unused --info veneers
+--list .\build\Debug\stm32f1xx_gcc.map
+.\build\Debug\misc.o
+.\build\Debug\stm32f10x_adc.o
+.\build\Debug\stm32f10x_bkp.o
+.\build\Debug\stm32f10x_can.o
+.\build\Debug\stm32f10x_cec.o
+.\build\Debug\stm32f10x_crc.o
+.\build\Debug\stm32f10x_dac.o
+.\build\Debug\stm32f10x_dbgmcu.o
+.\build\Debug\stm32f10x_dma.o
+.\build\Debug\stm32f10x_exti.o
+.\build\Debug\stm32f10x_flash.o
+.\build\Debug\stm32f10x_fsmc.o
+.\build\Debug\stm32f10x_gpio.o
+.\build\Debug\stm32f10x_i2c.o
+.\build\Debug\stm32f10x_iwdg.o
+.\build\Debug\stm32f10x_pwr.o
+.\build\Debug\stm32f10x_rcc.o
+.\build\Debug\stm32f10x_rtc.o
+.\build\Debug\stm32f10x_sdio.o
+.\build\Debug\stm32f10x_spi.o
+.\build\Debug\stm32f10x_tim.o
+.\build\Debug\stm32f10x_usart.o
+.\build\Debug\stm32f10x_wwdg.o
+.\build\Debug\system_stm32f10x.o
+.\build\Debug\USART_DEBUG.o
+.\build\Debug\startup_stm32f10x_hd.o
+.\build\Debug\LCD_12864_Parallel.o
+.\build\Debug\LCD_12864_Serial.o
+.\build\Debug\AT24C02.o
+.\build\Debug\Buzzer.o
+.\build\Debug\GPIO.o
+.\build\Debug\I2C.o
+.\build\Debug\stm32f10x_it.o
+.\build\Debug\NVIC.o
+.\build\Debug\PWM.o
+.\build\Debug\RCC.o
+.\build\Debug\SPI.o
+.\build\Debug\Servo.o
+.\build\Debug\SysTick.o
+.\build\Debug\TIM.o
+.\build\Debug\USART.o -o .\build\Debug\stm32f1xx_gcc.axf

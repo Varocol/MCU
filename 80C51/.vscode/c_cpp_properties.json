@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "win32",
+            "includePath": [
+                "${default}",
+                "D:\\Chipenvironment\\keilC51\\C51\\INC",
+                "${workspaceFolder}\\src",
+                "${workspaceFolder}\\libraries"
+            ],
+            "defines": [
+                "${default}",
+                "__VSCODE_CPPTOOL",
+                "__UVISION_VERSION=526"
+            ],
+            "intelliSenseMode": "${default}",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "${default}"
+            },
+            "forcedInclude": [
+                ".\\..\\..\\..\\.vscode\\extensions\\cl.eide-2.15.0\\bin\\include\\internal_headers\\c51_intr.h"
+            ]
+        }
+    ],
+    "version": 4
+}

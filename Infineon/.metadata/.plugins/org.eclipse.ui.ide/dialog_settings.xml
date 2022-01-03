@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="com.infineon.aurix.buildsystem.feature:1.5.2"/>
+		<item value="com.tasking.ctc.debug:1.18.20.0"/>
+		<item value="com.tasking.dbg:1.9.22.0"/>
+		<item value="com.tasking.debug.darwin:1.16.12.0"/>
+		<item value="com.tasking.debug:1.24.21.0"/>
+		<item value="org.eclipse.cdt.build.crossgcc:9.11.1.202004012021"/>
+		<item value="org.eclipse.cdt.debug.gdbjtag:9.11.1.202005131504"/>
+		<item value="org.eclipse.cdt.examples.dsf:9.11.1.202004012021"/>
+		<item value="org.eclipse.cdt.gdb:9.11.1.202004012021"/>
+		<item value="org.eclipse.cdt.gnu.build:9.11.1.202004012021"/>
+		<item value="org.eclipse.cdt.gnu.debug:9.11.1.202004012021"/>
+		<item value="org.eclipse.cdt.gnu.dsf:9.11.1.202004012021"/>
+		<item value="org.eclipse.cdt.native:9.11.1.202005051837"/>
+		<item value="org.eclipse.cdt.platform:9.11.1.202006011430"/>
+		<item value="org.eclipse.egit.source:5.13.0.202109080827-r"/>
+		<item value="org.eclipse.egit:5.13.0.202109080827-r"/>
+		<item value="org.eclipse.emf.common:2.19.0.v20200324-0932"/>
+		<item value="org.eclipse.emf.ecore:2.22.0.v20200519-1135"/>
+		<item value="org.eclipse.help:2.3.200.v20200604-0540"/>
+		<item value="org.eclipse.jgit.gpg.bc:5.13.0.202109080827-r"/>
+		<item value="org.eclipse.jgit.http.apache:5.13.0.202109080827-r"/>
+		<item value="org.eclipse.jgit.ssh.apache:5.13.0.202109080827-r"/>
+		<item value="org.eclipse.jgit:5.13.0.202109080827-r"/>
+		<item value="org.eclipse.launchbar:2.4.100.202001141724"/>
+		<item value="org.eclipse.platform:4.16.0.v20200604-0951"/>
+		<item value="org.eclipse.rcp:4.16.0.v20200604-0951"/>
+	</list>
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\Varocol\Desktop\MCU\Infineon"/>
+		</list>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="663"/>
+		<item key="DIALOG_Y_ORIGIN" value="89"/>
+		<item key="DIALOG_WIDTH" value="613"/>
+		<item key="DIALOG_HEIGHT" value="645"/>
+		<item key="DIALOG_FONT_NAME" value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI"/>
+	</section>
+</section>

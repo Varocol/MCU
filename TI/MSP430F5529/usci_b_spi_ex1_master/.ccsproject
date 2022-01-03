@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<ccsVersion value="11.0.0"/>
+	<deviceVariant value="MSP430F5438A"/>
+	<deviceFamily value="MSP430"/>
+	<deviceEndianness value="little"/>
+	<codegenToolVersion value="20.2.5.LTS"/>
+	<isElfFormat value="true"/>
+	<linkerCommandFile value="lnk_msp430f5438a.cmd"/>
+	<rts value="libc.a"/>
+	<createSlaveProjects value=""/>
+	<templateProperties value="id=usci_b_spi_ex1_master.projectspec.usci_b_spi_ex1_master"/>
+	<origin value="C:\Users\Varocol\Desktop\MCU\TI\msp430_driverlib_2_91_13_01\examples\MSP430F5xx_6xx\usci_b_spi\CCS\usci_b_spi_ex1_master.projectspec"/>
+	<filesToOpen value=""/>
+</projectOptions>

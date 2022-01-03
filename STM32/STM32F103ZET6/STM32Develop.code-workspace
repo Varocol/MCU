@@ -1,0 +1,55 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            ".eideignore": "ignore",
+            "string": "cpp",
+            "memory": "cpp",
+            "*.tcc": "cpp",
+            "string_view": "cpp",
+            "fstream": "cpp",
+            "istream": "cpp",
+            "ostream": "cpp",
+            "sstream": "cpp",
+            "stdexcept": "cpp",
+            "system_error": "cpp",
+            "typeinfo": "cpp",
+            "new": "cpp",
+            "stm32f10x_i2c.h": "c",
+            "stm32f10x_rcc.h": "c",
+            "*.rh": "cpp",
+            "exception": "cpp",
+            "xiosbase": "cpp",
+            "xstring": "cpp",
+            "xutility": "cpp"
+        },
+        "C_Cpp.default.intelliSenseMode": "gcc-arm",
+        "files.autoGuessEncoding": false,
+        "C_Cpp.default.cppStandard": "c++14",
+        "C_Cpp.default.cStandard": "c17",
+        "files.encoding": "gbk",
+        "git.ignoreLimitWarning": true,
+        "[yaml]": {
+            "editor.insertSpaces": true,
+            "editor.tabSize": 4,
+            "editor.autoIndent": "advanced"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "cl.eide",
+            "keroc.hex-fmt",
+            "xiaoyongdong.srecord",
+            "hars.cppsnippets",
+            "zixuanwang.linkerscript",
+            "redhat.vscode-yaml",
+            "dan-c-underwood.arm",
+            "zixuanwang.linkerscript",
+            "marus25.cortex-debug"
+        ]
+    }
+}

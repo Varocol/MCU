@@ -1,0 +1,929 @@
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE ·_Ã_Æ÷
+OBJECT MODULE PLACED IN .\build\Release\src\·äÃùÆ÷.o
+COMPILER INVOKED BY: D:\Chipenvironment\keilC51\C51\BIN\C51.exe .\SRC\·äÃùÆ÷.C PRINT(.\build\Release\src\·äÃùÆ÷.lst) OMF
+                    -2 TABS(4) CODE NOCOND SYMBOLS OPTIMIZE(8,SPEED) SMALL ROM(LARGE) INCDIR(D:\Chipenvironment\keilC51\C51\INC;.\src;.\libra
+                    -ries) DEFINE(__UVISION_VERSION=526) OBJECT(.\build\Release\src\·äÃùÆ÷.o)
+
+line level    source
+
+   1          #include"reg52.h"
+   2          //#include"ÉúÈÕ¿ìÀÖ.h"
+   3          #include"³¬¼¶ÂêÀö°Â.h"
+   4          //#include"ËµÁËÔÙ¼û.h"
+   5          //#include"ÊÕÁ².h"
+   6          void main()
+   7          {
+   8   1           super();
+   9   1      }
+  10          
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION _cal (BEGIN)
+                                           ; SOURCE LINE # 7
+;---- Variable 'hz' assigned to Register 'R6/R7' ----
+                                           ; SOURCE LINE # 8
+                                           ; SOURCE LINE # 9
+0000 AD07              MOV     R5,AR7
+0002 AC06              MOV     R4,AR6
+0004 EC                MOV     A,R4
+0005 120000      E     LCALL   ?C?FCASTI
+0008 AB00        R     MOV     R3,jq+03H
+000A AA00        R     MOV     R2,jq+02H
+000C A900        R     MOV     R1,jq+01H
+000E A800        R     MOV     R0,jq
+0010 120000      E     LCALL   ?C?FPMUL
+0013 E4                CLR     A
+0014 FB                MOV     R3,A
+0015 FA                MOV     R2,A
+0016 7920              MOV     R1,#020H
+0018 7841              MOV     R0,#041H
+001A 120000      E     LCALL   ?C?FPMUL
+001D A804              MOV     R0,AR4
+001F A905              MOV     R1,AR5
+0021 AA06              MOV     R2,AR6
+0023 AB07              MOV     R3,AR7
+0025 E4                CLR     A
+0026 FF                MOV     R7,A
+0027 FE                MOV     R6,A
+0028 7D80              MOV     R5,#080H
+002A 7C3F              MOV     R4,#03FH
+002C 120000      E     LCALL   ?C?FPDIV
+002F 120000      E     LCALL   ?C?CASTF
+                                           ; SOURCE LINE # 10
+0032         ?C0001:
+0032 22                RET     
+             ; FUNCTION _cal (END)
+
+             ; FUNCTION L?0017 (BEGIN)
+0000         L?0018:
+0000 E4                CLR     A
+0001 F500        R     MOV     ?_music?BYTE+05H,A
+0003 F500        R     MOV     ?_music?BYTE+04H,A
+0005 F500        R     MOV     ?_music?BYTE+03H,A
+0007 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+000A         L?0019:
+000A 7F26              MOV     R7,#026H
+000C 7E05              MOV     R6,#05H
+             ; FUNCTION _music (BEGIN)
+                                           ; SOURCE LINE # 12
+000E 8E00        R     MOV     hz,R6
+0010 8F00        R     MOV     hz+01H,R7
+                                           ; SOURCE LINE # 13
+                                           ; SOURCE LINE # 14
+0012 120000      R     LCALL   _cal
+0015 8E00        R     MOV     diao,R6
+0017 8F00        R     MOV     diao+01H,R7
+                                           ; SOURCE LINE # 15
+0019 AC00        R     MOV     R4,hz
+001B AD00        R     MOV     R5,hz+01H
+001D EC                MOV     A,R4
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 3   
+
+001E 120000      E     LCALL   ?C?FCASTI
+0021 E4                CLR     A
+0022 FB                MOV     R3,A
+0023 FA                MOV     R2,A
+0024 7970              MOV     R1,#070H
+0026 7842              MOV     R0,#042H
+0028 120000      E     LCALL   ?C?FPMUL
+002B C004              PUSH    AR4
+002D C005              PUSH    AR5
+002F C006              PUSH    AR6
+0031 C007              PUSH    AR7
+0033 AC00        R     MOV     R4,basicspeed
+0035 AD00        R     MOV     R5,basicspeed+01H
+0037 EC                MOV     A,R4
+0038 120000      E     LCALL   ?C?FCASTI
+003B A804              MOV     R0,AR4
+003D A905              MOV     R1,AR5
+003F AA06              MOV     R2,AR6
+0041 AB07              MOV     R3,AR7
+0043 D007              POP     AR7
+0045 D006              POP     AR6
+0047 D005              POP     AR5
+0049 D004              POP     AR4
+004B 120000      E     LCALL   ?C?FPDIV
+004E AB00        R     MOV     R3,yinfu+03H
+0050 AA00        R     MOV     R2,yinfu+02H
+0052 A900        R     MOV     R1,yinfu+01H
+0054 A800        R     MOV     R0,yinfu
+0056 120000      E     LCALL   ?C?FPMUL
+0059 120000      E     LCALL   ?C?CASTF
+;---- Variable 'ci' assigned to Register 'R6/R7' ----
+005C         ?C0002:
+                                           ; SOURCE LINE # 17
+005C EF                MOV     A,R7
+005D 1F                DEC     R7
+005E AC06              MOV     R4,AR6
+0060 7001              JNZ     ?C0012
+0062 1E                DEC     R6
+0063         ?C0012:
+0063 4C                ORL     A,R4
+0064 6017              JZ      ?C0006
+                                           ; SOURCE LINE # 18
+                                           ; SOURCE LINE # 19
+0066 B2A0              CPL     beep
+                                           ; SOURCE LINE # 20
+0068 850000      R     MOV     x,diao
+006B 850000      R     MOV     x+01H,diao+01H
+006E         ?C0004:
+                                           ; SOURCE LINE # 21
+006E E500        R     MOV     A,x+01H
+0070 1500        R     DEC     x+01H
+0072 AC00        R     MOV     R4,x
+0074 7002              JNZ     ?C0013
+0076 1500        R     DEC     x
+0078         ?C0013:
+0078 4C                ORL     A,R4
+0079 60E1              JZ      ?C0002
+007B 80F1              SJMP    ?C0004
+                                           ; SOURCE LINE # 23
+007D         ?C0006:
+007D 22                RET     
+             ; FUNCTION _music (END)
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 4   
+
+
+             ; FUNCTION L?0015 (BEGIN)
+0000         L?0016:
+0000 7F00              MOV     R7,#00H
+0002 7E00              MOV     R6,#00H
+0004 7D80              MOV     R5,#080H
+0006 7C3E              MOV     R4,#03EH
+             ; FUNCTION _pause (BEGIN)
+                                           ; SOURCE LINE # 24
+0008 8F00        R     MOV     yinfu+03H,R7
+000A 8E00        R     MOV     yinfu+02H,R6
+000C 8D00        R     MOV     yinfu+01H,R5
+000E 8C00        R     MOV     yinfu,R4
+                                           ; SOURCE LINE # 25
+                                           ; SOURCE LINE # 26
+0010 AC00        R     MOV     R4,basicspeed
+0012 AD00        R     MOV     R5,basicspeed+01H
+0014 EC                MOV     A,R4
+0015 120000      E     LCALL   ?C?FCASTI
+0018 A804              MOV     R0,AR4
+001A A905              MOV     R1,AR5
+001C AA06              MOV     R2,AR6
+001E AB07              MOV     R3,AR7
+0020 E4                CLR     A
+0021 FF                MOV     R7,A
+0022 FE                MOV     R6,A
+0023 7D70              MOV     R5,#070H
+0025 7C42              MOV     R4,#042H
+0027 120000      E     LCALL   ?C?FPDIV
+002A AB00        R     MOV     R3,yinfu+03H
+002C AA00        R     MOV     R2,yinfu+02H
+002E A900        R     MOV     R1,yinfu+01H
+0030 A800        R     MOV     R0,yinfu
+0032 120000      E     LCALL   ?C?FPMUL
+0035 C004              PUSH    AR4
+0037 C005              PUSH    AR5
+0039 C006              PUSH    AR6
+003B C007              PUSH    AR7
+003D E4                CLR     A
+003E FF                MOV     R7,A
+003F FE                MOV     R6,A
+0040 7D20              MOV     R5,#020H
+0042 7C41              MOV     R4,#041H
+0044 AB00        R     MOV     R3,jq+03H
+0046 AA00        R     MOV     R2,jq+02H
+0048 A900        R     MOV     R1,jq+01H
+004A A800        R     MOV     R0,jq
+004C 120000      E     LCALL   ?C?FPMUL
+004F A804              MOV     R0,AR4
+0051 A905              MOV     R1,AR5
+0053 AA06              MOV     R2,AR6
+0055 AB07              MOV     R3,AR7
+0057 D007              POP     AR7
+0059 D006              POP     AR6
+005B D005              POP     AR5
+005D D004              POP     AR4
+005F 120000      E     LCALL   ?C?FPDIV
+0062 120000      E     LCALL   ?C?CASTF
+;---- Variable 'time' assigned to Register 'R6/R7' ----
+0065         ?C0007:
+                                           ; SOURCE LINE # 27
+0065 EF                MOV     A,R7
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 5   
+
+0066 1F                DEC     R7
+0067 AC06              MOV     R4,AR6
+0069 7001              JNZ     ?C0014
+006B 1E                DEC     R6
+006C         ?C0014:
+006C 4C                ORL     A,R4
+006D 70F6              JNZ     ?C0007
+006F         ?C0008:
+                                           ; SOURCE LINE # 28
+006F         ?C0009:
+006F 22                RET     
+             ; FUNCTION _pause (END)
+
+             ; FUNCTION super (BEGIN)
+                                           ; SOURCE LINE # 3
+                                           ; SOURCE LINE # 4
+                                           ; SOURCE LINE # 5
+0000 750000      R     MOV     basicspeed,#00H
+0003 750064      R     MOV     basicspeed+01H,#064H
+                                           ; SOURCE LINE # 6
+0006 E4                CLR     A
+0007 F500        R     MOV     ?_music?BYTE+05H,A
+0009 F500        R     MOV     ?_music?BYTE+04H,A
+000B 750080      R     MOV     ?_music?BYTE+03H,#080H
+000E 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0011 120000      R     LCALL   L?0019
+                                           ; SOURCE LINE # 7
+0014 120000      R     LCALL   L?0017
+                                           ; SOURCE LINE # 8
+0017 E4                CLR     A
+0018 F500        R     MOV     ?_music?BYTE+05H,A
+001A F500        R     MOV     ?_music?BYTE+04H,A
+001C 750080      R     MOV     ?_music?BYTE+03H,#080H
+001F 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0022 120000      R     LCALL   L?0019
+                                           ; SOURCE LINE # 9
+0025 120000      R     LCALL   L?0015
+                                           ; SOURCE LINE # 10
+0028 E4                CLR     A
+0029 F500        R     MOV     ?_music?BYTE+05H,A
+002B F500        R     MOV     ?_music?BYTE+04H,A
+002D 750080      R     MOV     ?_music?BYTE+03H,#080H
+0030 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0033 7F16              MOV     R7,#016H
+0035 7E04              MOV     R6,#04H
+0037 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 11
+003A 120000      R     LCALL   L?0017
+                                           ; SOURCE LINE # 12
+003D E4                CLR     A
+003E F500        R     MOV     ?_music?BYTE+05H,A
+0040 F500        R     MOV     ?_music?BYTE+04H,A
+0042 750080      R     MOV     ?_music?BYTE+03H,#080H
+0045 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+0048 7F20              MOV     R7,#020H
+004A 7E06              MOV     R6,#06H
+004C 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 13
+004F 7F00              MOV     R7,#00H
+0051 7E00              MOV     R6,#00H
+0053 7D80              MOV     R5,#080H
+0055 7C3F              MOV     R4,#03FH
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 6   
+
+0057 120000      R     LCALL   _pause
+                                           ; SOURCE LINE # 14
+005A E4                CLR     A
+005B F500        R     MOV     ?_music?BYTE+05H,A
+005D F500        R     MOV     ?_music?BYTE+04H,A
+005F F500        R     MOV     ?_music?BYTE+03H,A
+0061 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+0064 7F16              MOV     R7,#016H
+0066 7E04              MOV     R6,#04H
+0068 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 15
+006B 120000      R     LCALL   L?0015
+                                           ; SOURCE LINE # 16
+006E E4                CLR     A
+006F F500        R     MOV     ?_music?BYTE+05H,A
+0071 F500        R     MOV     ?_music?BYTE+04H,A
+0073 750080      R     MOV     ?_music?BYTE+03H,#080H
+0076 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0079 7F10              MOV     R7,#010H
+007B 7E03              MOV     R6,#03H
+007D 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 17
+0080 7F00              MOV     R7,#00H
+0082 7E00              MOV     R6,#00H
+0084 7D00              MOV     R5,#00H
+0086 7C3F              MOV     R4,#03FH
+0088 120000      R     LCALL   _pause
+                                           ; SOURCE LINE # 18
+008B E4                CLR     A
+008C F500        R     MOV     ?_music?BYTE+05H,A
+008E F500        R     MOV     ?_music?BYTE+04H,A
+0090 F500        R     MOV     ?_music?BYTE+03H,A
+0092 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+0095 7F93              MOV     R7,#093H
+0097 7E02              MOV     R6,#02H
+0099 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 19
+009C 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 20
+009F E4                CLR     A
+00A0 F500        R     MOV     ?_music?BYTE+05H,A
+00A2 F500        R     MOV     ?_music?BYTE+04H,A
+00A4 F500        R     MOV     ?_music?BYTE+03H,A
+00A6 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+00A9 7F70              MOV     R7,#070H
+00AB 7E03              MOV     R6,#03H
+00AD 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 21
+00B0 E4                CLR     A
+00B1 F500        R     MOV     ?_music?BYTE+05H,A
+00B3 F500        R     MOV     ?_music?BYTE+04H,A
+00B5 750080      R     MOV     ?_music?BYTE+03H,#080H
+00B8 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+00BB 7FDC              MOV     R7,#0DCH
+00BD 7E03              MOV     R6,#03H
+00BF 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 22
+00C2 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 23
+00C5 E4                CLR     A
+00C6 F500        R     MOV     ?_music?BYTE+05H,A
+00C8 F500        R     MOV     ?_music?BYTE+04H,A
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 7   
+
+00CA 750080      R     MOV     ?_music?BYTE+03H,#080H
+00CD 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+00D0 7FA4              MOV     R7,#0A4H
+00D2 7E03              MOV     R6,#03H
+00D4 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 24
+00D7 E4                CLR     A
+00D8 F500        R     MOV     ?_music?BYTE+05H,A
+00DA F500        R     MOV     ?_music?BYTE+04H,A
+00DC F500        R     MOV     ?_music?BYTE+03H,A
+00DE 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+00E1 7F70              MOV     R7,#070H
+00E3 7E03              MOV     R6,#03H
+00E5 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 25
+00E8 7500AB      R     MOV     ?_music?BYTE+05H,#0ABH
+00EB 7500AA      R     MOV     ?_music?BYTE+04H,#0AAH
+00EE 7500AA      R     MOV     ?_music?BYTE+03H,#0AAH
+00F1 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+00F4 7F10              MOV     R7,#010H
+00F6 7E03              MOV     R6,#03H
+00F8 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 26
+00FB 7500AB      R     MOV     ?_music?BYTE+05H,#0ABH
+00FE 7500AA      R     MOV     ?_music?BYTE+04H,#0AAH
+0101 7500AA      R     MOV     ?_music?BYTE+03H,#0AAH
+0104 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0107 120000      R     LCALL   L?0019
+                                           ; SOURCE LINE # 27
+010A 7500AB      R     MOV     ?_music?BYTE+05H,#0ABH
+010D 7500AA      R     MOV     ?_music?BYTE+04H,#0AAH
+0110 7500AA      R     MOV     ?_music?BYTE+03H,#0AAH
+0113 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0116 7F20              MOV     R7,#020H
+0118 7E06              MOV     R6,#06H
+011A 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 28
+011D E4                CLR     A
+011E F500        R     MOV     ?_music?BYTE+05H,A
+0120 F500        R     MOV     ?_music?BYTE+04H,A
+0122 F500        R     MOV     ?_music?BYTE+03H,A
+0124 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+0127 7FE0              MOV     R7,#0E0H
+0129 7E06              MOV     R6,#06H
+012B 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 29
+012E E4                CLR     A
+012F F500        R     MOV     ?_music?BYTE+05H,A
+0131 F500        R     MOV     ?_music?BYTE+04H,A
+0133 750080      R     MOV     ?_music?BYTE+03H,#080H
+0136 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0139 7F75              MOV     R7,#075H
+013B 7E05              MOV     R6,#05H
+013D 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 30
+0140 E4                CLR     A
+0141 F500        R     MOV     ?_music?BYTE+05H,A
+0143 F500        R     MOV     ?_music?BYTE+04H,A
+0145 750080      R     MOV     ?_music?BYTE+03H,#080H
+0148 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+014B 7F20              MOV     R7,#020H
+014D 7E06              MOV     R6,#06H
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 8   
+
+014F 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 31
+0152 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 32
+0155 120000      R     LCALL   L?0018
+                                           ; SOURCE LINE # 33
+0158 E4                CLR     A
+0159 F500        R     MOV     ?_music?BYTE+05H,A
+015B F500        R     MOV     ?_music?BYTE+04H,A
+015D 750080      R     MOV     ?_music?BYTE+03H,#080H
+0160 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0163 7F16              MOV     R7,#016H
+0165 7E04              MOV     R6,#04H
+0167 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 34
+016A E4                CLR     A
+016B F500        R     MOV     ?_music?BYTE+05H,A
+016D F500        R     MOV     ?_music?BYTE+04H,A
+016F 750080      R     MOV     ?_music?BYTE+03H,#080H
+0172 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0175 7F97              MOV     R7,#097H
+0177 7E04              MOV     R6,#04H
+0179 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 35
+017C E4                CLR     A
+017D F500        R     MOV     ?_music?BYTE+05H,A
+017F F500        R     MOV     ?_music?BYTE+04H,A
+0181 F500        R     MOV     ?_music?BYTE+03H,A
+0183 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+0186 7FDC              MOV     R7,#0DCH
+0188 7E03              MOV     R6,#03H
+018A 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 36
+018D 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 37
+0190 E4                CLR     A
+0191 F500        R     MOV     ?_music?BYTE+05H,A
+0193 F500        R     MOV     ?_music?BYTE+04H,A
+0195 F500        R     MOV     ?_music?BYTE+03H,A
+0197 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+019A 7F16              MOV     R7,#016H
+019C 7E04              MOV     R6,#04H
+019E 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 38
+01A1 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 39
+01A4 E4                CLR     A
+01A5 F500        R     MOV     ?_music?BYTE+05H,A
+01A7 F500        R     MOV     ?_music?BYTE+04H,A
+01A9 750080      R     MOV     ?_music?BYTE+03H,#080H
+01AC 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+01AF 7F10              MOV     R7,#010H
+01B1 7E03              MOV     R6,#03H
+01B3 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 40
+01B6 7F00              MOV     R7,#00H
+01B8 7E00              MOV     R6,#00H
+01BA 7D00              MOV     R5,#00H
+01BC 7C3F              MOV     R4,#03FH
+01BE 120000      R     LCALL   _pause
+                                           ; SOURCE LINE # 41
+01C1 E4                CLR     A
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 9   
+
+01C2 F500        R     MOV     ?_music?BYTE+05H,A
+01C4 F500        R     MOV     ?_music?BYTE+04H,A
+01C6 F500        R     MOV     ?_music?BYTE+03H,A
+01C8 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+01CB 7F93              MOV     R7,#093H
+01CD 7E02              MOV     R6,#02H
+01CF 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 42
+01D2 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 43
+01D5 E4                CLR     A
+01D6 F500        R     MOV     ?_music?BYTE+05H,A
+01D8 F500        R     MOV     ?_music?BYTE+04H,A
+01DA F500        R     MOV     ?_music?BYTE+03H,A
+01DC 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+01DF 7F70              MOV     R7,#070H
+01E1 7E03              MOV     R6,#03H
+01E3 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 44
+01E6 E4                CLR     A
+01E7 F500        R     MOV     ?_music?BYTE+05H,A
+01E9 F500        R     MOV     ?_music?BYTE+04H,A
+01EB 750080      R     MOV     ?_music?BYTE+03H,#080H
+01EE 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+01F1 7FDC              MOV     R7,#0DCH
+01F3 7E03              MOV     R6,#03H
+01F5 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 45
+01F8 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 46
+01FB E4                CLR     A
+01FC F500        R     MOV     ?_music?BYTE+05H,A
+01FE F500        R     MOV     ?_music?BYTE+04H,A
+0200 750080      R     MOV     ?_music?BYTE+03H,#080H
+0203 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0206 7FA4              MOV     R7,#0A4H
+0208 7E03              MOV     R6,#03H
+020A 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 47
+020D E4                CLR     A
+020E F500        R     MOV     ?_music?BYTE+05H,A
+0210 F500        R     MOV     ?_music?BYTE+04H,A
+0212 F500        R     MOV     ?_music?BYTE+03H,A
+0214 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+0217 7F70              MOV     R7,#070H
+0219 7E03              MOV     R6,#03H
+021B 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 48
+021E 7500AB      R     MOV     ?_music?BYTE+05H,#0ABH
+0221 7500AA      R     MOV     ?_music?BYTE+04H,#0AAH
+0224 7500AA      R     MOV     ?_music?BYTE+03H,#0AAH
+0227 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+022A 7F10              MOV     R7,#010H
+022C 7E03              MOV     R6,#03H
+022E 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 49
+0231 7500AB      R     MOV     ?_music?BYTE+05H,#0ABH
+0234 7500AA      R     MOV     ?_music?BYTE+04H,#0AAH
+0237 7500AA      R     MOV     ?_music?BYTE+03H,#0AAH
+023A 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+023D 120000      R     LCALL   L?0019
+                                           ; SOURCE LINE # 50
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 10  
+
+0240 7500AB      R     MOV     ?_music?BYTE+05H,#0ABH
+0243 7500AA      R     MOV     ?_music?BYTE+04H,#0AAH
+0246 7500AA      R     MOV     ?_music?BYTE+03H,#0AAH
+0249 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+024C 7F20              MOV     R7,#020H
+024E 7E06              MOV     R6,#06H
+0250 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 51
+0253 E4                CLR     A
+0254 F500        R     MOV     ?_music?BYTE+05H,A
+0256 F500        R     MOV     ?_music?BYTE+04H,A
+0258 F500        R     MOV     ?_music?BYTE+03H,A
+025A 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+025D 7FE0              MOV     R7,#0E0H
+025F 7E06              MOV     R6,#06H
+0261 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 52
+0264 E4                CLR     A
+0265 F500        R     MOV     ?_music?BYTE+05H,A
+0267 F500        R     MOV     ?_music?BYTE+04H,A
+0269 750080      R     MOV     ?_music?BYTE+03H,#080H
+026C 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+026F 7F75              MOV     R7,#075H
+0271 7E05              MOV     R6,#05H
+0273 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 53
+0276 E4                CLR     A
+0277 F500        R     MOV     ?_music?BYTE+05H,A
+0279 F500        R     MOV     ?_music?BYTE+04H,A
+027B 750080      R     MOV     ?_music?BYTE+03H,#080H
+027E 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0281 7F20              MOV     R7,#020H
+0283 7E06              MOV     R6,#06H
+0285 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 54
+0288 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 55
+028B 120000      R     LCALL   L?0018
+                                           ; SOURCE LINE # 56
+028E E4                CLR     A
+028F F500        R     MOV     ?_music?BYTE+05H,A
+0291 F500        R     MOV     ?_music?BYTE+04H,A
+0293 750080      R     MOV     ?_music?BYTE+03H,#080H
+0296 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0299 7F16              MOV     R7,#016H
+029B 7E04              MOV     R6,#04H
+029D 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 57
+02A0 E4                CLR     A
+02A1 F500        R     MOV     ?_music?BYTE+05H,A
+02A3 F500        R     MOV     ?_music?BYTE+04H,A
+02A5 750080      R     MOV     ?_music?BYTE+03H,#080H
+02A8 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+02AB 7F97              MOV     R7,#097H
+02AD 7E04              MOV     R6,#04H
+02AF 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 58
+02B2 E4                CLR     A
+02B3 F500        R     MOV     ?_music?BYTE+05H,A
+02B5 F500        R     MOV     ?_music?BYTE+04H,A
+02B7 F500        R     MOV     ?_music?BYTE+03H,A
+02B9 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 11  
+
+02BC 7FDC              MOV     R7,#0DCH
+02BE 7E03              MOV     R6,#03H
+02C0 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 59
+02C3 7F00              MOV     R7,#00H
+02C5 7E00              MOV     R6,#00H
+02C7 7D40              MOV     R5,#040H
+02C9 7C3F              MOV     R4,#03FH
+02CB 120000      R     LCALL   _pause
+                                           ; SOURCE LINE # 60
+02CE E4                CLR     A
+02CF F500        R     MOV     ?_music?BYTE+05H,A
+02D1 F500        R     MOV     ?_music?BYTE+04H,A
+02D3 750080      R     MOV     ?_music?BYTE+03H,#080H
+02D6 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+02D9 7F20              MOV     R7,#020H
+02DB 7E06              MOV     R6,#06H
+02DD 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 61
+02E0 E4                CLR     A
+02E1 F500        R     MOV     ?_music?BYTE+05H,A
+02E3 F500        R     MOV     ?_music?BYTE+04H,A
+02E5 750080      R     MOV     ?_music?BYTE+03H,#080H
+02E8 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+02EB 7FC8              MOV     R7,#0C8H
+02ED 7E05              MOV     R6,#05H
+02EF 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 62
+02F2 E4                CLR     A
+02F3 F500        R     MOV     ?_music?BYTE+05H,A
+02F5 F500        R     MOV     ?_music?BYTE+04H,A
+02F7 750080      R     MOV     ?_music?BYTE+03H,#080H
+02FA 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+02FD 7F75              MOV     R7,#075H
+02FF 7E05              MOV     R6,#05H
+0301 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 63
+0304 E4                CLR     A
+0305 F500        R     MOV     ?_music?BYTE+05H,A
+0307 F500        R     MOV     ?_music?BYTE+04H,A
+0309 F500        R     MOV     ?_music?BYTE+03H,A
+030B 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+030E 7FDD              MOV     R7,#0DDH
+0310 7E04              MOV     R6,#04H
+0312 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 64
+0315 120000      R     LCALL   L?0018
+                                           ; SOURCE LINE # 65
+0318 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 66
+031B E4                CLR     A
+031C F500        R     MOV     ?_music?BYTE+05H,A
+031E F500        R     MOV     ?_music?BYTE+04H,A
+0320 750080      R     MOV     ?_music?BYTE+03H,#080H
+0323 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0326 7F3F              MOV     R7,#03FH
+0328 7E03              MOV     R6,#03H
+032A 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 67
+032D E4                CLR     A
+032E F500        R     MOV     ?_music?BYTE+05H,A
+0330 F500        R     MOV     ?_music?BYTE+04H,A
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 12  
+
+0332 750080      R     MOV     ?_music?BYTE+03H,#080H
+0335 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0338 7F70              MOV     R7,#070H
+033A 7E03              MOV     R6,#03H
+033C 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 68
+033F E4                CLR     A
+0340 F500        R     MOV     ?_music?BYTE+05H,A
+0342 F500        R     MOV     ?_music?BYTE+04H,A
+0344 750080      R     MOV     ?_music?BYTE+03H,#080H
+0347 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+034A 7F16              MOV     R7,#016H
+034C 7E04              MOV     R6,#04H
+034E 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 69
+0351 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 70
+0354 E4                CLR     A
+0355 F500        R     MOV     ?_music?BYTE+05H,A
+0357 F500        R     MOV     ?_music?BYTE+04H,A
+0359 750080      R     MOV     ?_music?BYTE+03H,#080H
+035C 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+035F 7F70              MOV     R7,#070H
+0361 7E03              MOV     R6,#03H
+0363 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 71
+0366 E4                CLR     A
+0367 F500        R     MOV     ?_music?BYTE+05H,A
+0369 F500        R     MOV     ?_music?BYTE+04H,A
+036B 750080      R     MOV     ?_music?BYTE+03H,#080H
+036E 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0371 7F16              MOV     R7,#016H
+0373 7E04              MOV     R6,#04H
+0375 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 72
+0378 E4                CLR     A
+0379 F500        R     MOV     ?_music?BYTE+05H,A
+037B F500        R     MOV     ?_music?BYTE+04H,A
+037D 750080      R     MOV     ?_music?BYTE+03H,#080H
+0380 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0383 7F97              MOV     R7,#097H
+0385 7E04              MOV     R6,#04H
+0387 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 73
+038A 7F00              MOV     R7,#00H
+038C 7E00              MOV     R6,#00H
+038E 7D00              MOV     R5,#00H
+0390 7C3F              MOV     R4,#03FH
+0392 120000      R     LCALL   _pause
+                                           ; SOURCE LINE # 74
+0395 E4                CLR     A
+0396 F500        R     MOV     ?_music?BYTE+05H,A
+0398 F500        R     MOV     ?_music?BYTE+04H,A
+039A 750080      R     MOV     ?_music?BYTE+03H,#080H
+039D 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+03A0 7F20              MOV     R7,#020H
+03A2 7E06              MOV     R6,#06H
+03A4 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 75
+03A7 E4                CLR     A
+03A8 F500        R     MOV     ?_music?BYTE+05H,A
+03AA F500        R     MOV     ?_music?BYTE+04H,A
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 13  
+
+03AC 750080      R     MOV     ?_music?BYTE+03H,#080H
+03AF 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+03B2 7FC8              MOV     R7,#0C8H
+03B4 7E05              MOV     R6,#05H
+03B6 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 76
+03B9 E4                CLR     A
+03BA F500        R     MOV     ?_music?BYTE+05H,A
+03BC F500        R     MOV     ?_music?BYTE+04H,A
+03BE 750080      R     MOV     ?_music?BYTE+03H,#080H
+03C1 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+03C4 7F75              MOV     R7,#075H
+03C6 7E05              MOV     R6,#05H
+03C8 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 77
+03CB E4                CLR     A
+03CC F500        R     MOV     ?_music?BYTE+05H,A
+03CE F500        R     MOV     ?_music?BYTE+04H,A
+03D0 F500        R     MOV     ?_music?BYTE+03H,A
+03D2 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+03D5 7FDD              MOV     R7,#0DDH
+03D7 7E04              MOV     R6,#04H
+03D9 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 78
+03DC E4                CLR     A
+03DD F500        R     MOV     ?_music?BYTE+05H,A
+03DF F500        R     MOV     ?_music?BYTE+04H,A
+03E1 750080      R     MOV     ?_music?BYTE+03H,#080H
+03E4 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+03E7 120000      R     LCALL   L?0019
+                                           ; SOURCE LINE # 79
+03EA 120000      R     LCALL   L?0016
+                                           ; SOURCE LINE # 80
+03ED E4                CLR     A
+03EE F500        R     MOV     ?_music?BYTE+05H,A
+03F0 F500        R     MOV     ?_music?BYTE+04H,A
+03F2 F500        R     MOV     ?_music?BYTE+03H,A
+03F4 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+03F7 7F2D              MOV     R7,#02DH
+03F9 7E08              MOV     R6,#08H
+03FB 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 81
+03FE E4                CLR     A
+03FF F500        R     MOV     ?_music?BYTE+05H,A
+0401 F500        R     MOV     ?_music?BYTE+04H,A
+0403 750080      R     MOV     ?_music?BYTE+03H,#080H
+0406 75003E      R     MOV     ?_music?BYTE+02H,#03EH
+0409 7F2D              MOV     R7,#02DH
+040B 7E08              MOV     R6,#08H
+040D 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 82
+0410 E4                CLR     A
+0411 F500        R     MOV     ?_music?BYTE+05H,A
+0413 F500        R     MOV     ?_music?BYTE+04H,A
+0415 F500        R     MOV     ?_music?BYTE+03H,A
+0417 75003F      R     MOV     ?_music?BYTE+02H,#03FH
+041A 7F2D              MOV     R7,#02DH
+041C 7E08              MOV     R6,#08H
+041E 120000      R     LCALL   _music
+                                           ; SOURCE LINE # 83
+0421 7F00              MOV     R7,#00H
+0423 7E00              MOV     R6,#00H
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 14  
+
+0425 7D80              MOV     R5,#080H
+0427 7C3F              MOV     R4,#03FH
+0429 020000      R     LJMP    _pause
+             ; FUNCTION super (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 6
+                                           ; SOURCE LINE # 7
+                                           ; SOURCE LINE # 8
+0000 020000      R     LJMP    super
+             ; FUNCTION main (END)
+
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 15  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+P0 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0080H  1
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+T0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B4H  1
+AC . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D6H  1
+T1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B5H  1
+T2 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+EA . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AFH  1
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+EXF2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CEH  1
+RD . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B7H  1
+ES . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ACH  1
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+basicspeed . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0000H  2
+RI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0098H  1
+INT0 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B2H  1
+CY . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D7H  1
+TI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0099H  1
+INT1 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B3H  1
+beep . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A0H  1
+_pause . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0008H  -----
+  yinfu. . . . . . . . . . . . . . . .  AUTO     DATA   FLOAT    0000H  4
+  time . . . . . . . . . . . . . . . .  * REG *  DATA   INT      0006H  2
+RCAP2H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CBH  1
+PS . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BCH  1
+SP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0081H  1
+_music . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     000EH  -----
+  hz . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0000H  2
+  yinfu. . . . . . . . . . . . . . . .  AUTO     DATA   FLOAT    0002H  4
+  diao . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0006H  2
+  ci . . . . . . . . . . . . . . . . .  * REG *  DATA   INT      0006H  2
+  x. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0008H  2
+T2EX . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+OV . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D2H  1
+RCAP2L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CAH  1
+main . . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+C_T2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C9H  1
+WR . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B6H  1
+RCLK . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CDH  1
+TCLK . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CCH  1
+_cal . . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  hz . . . . . . . . . . . . . . . . .  * REG *  DATA   INT      0006H  2
+SBUF . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0099H  1
+PCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0087H  1
+super. . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+TMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0089H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+IE0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0089H  1
+IE1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008BH  1
+B. . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F0H  1
+CP_RL2 . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C8H  1
+ACC. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E0H  1
+ET0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A9H  1
+ET1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ABH  1
+TF0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008DH  1
+C51 COMPILER V9.00   ·_Ã_Æ÷                                                                12/08/2021 17:09:54 PAGE 16  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+ET2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ADH  1
+TF1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008FH  1
+TF2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CFH  1
+RB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009AH  1
+TH0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008CH  1
+EX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A8H  1
+IT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0088H  1
+TH1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008DH  1
+TB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009BH  1
+EX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AAH  1
+IT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008AH  1
+TH2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CDH  1
+P. . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D0H  1
+SM0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009FH  1
+TL0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008AH  1
+SM1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009EH  1
+TL1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008BH  1
+SM2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009DH  1
+TL2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CCH  1
+PT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B9H  1
+PT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BBH  1
+RS0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D3H  1
+PT2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BDH  1
+TR0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008CH  1
+RS1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D4H  1
+TR1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008EH  1
+TR2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CAH  1
+PX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B8H  1
+PX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BAH  1
+jq . . . . . . . . . . . . . . . . . .  PUBLIC   DATA   FLOAT    0002H  4
+DPH. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0083H  1
+DPL. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0082H  1
+EXEN2. . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CBH  1
+REN. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009CH  1
+T2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+RXD. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B0H  1
+TXD. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B1H  1
+F0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D5H  1
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1360    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6      14
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

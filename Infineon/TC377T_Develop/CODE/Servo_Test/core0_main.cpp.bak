@@ -1,0 +1,19 @@
+#include "core0_main.h"
+Servo_Param Param{
+    ATOM0_CH1_P33_9,
+    50,
+    2.12,
+    0.92,
+    1.563,
+    1.320,
+    100,
+    0
+};
+void core0_setup ()
+{
+    Servo servo.Set_Param(Param);
+    servo.Init();
+}
+void core0_loop()
+{
+}

@@ -1,0 +1,19 @@
+#define SecondWrite  0x80
+#define SecondRead   0x81
+#define MinuteWrite  0x82
+#define MinuteRead   0x83
+#define HourWrite    0x84
+#define HourRead     0x85
+#define DateWrite    0x86
+#define DateRead     0x87
+#define MonthWrite   0x88
+#define MonthRead    0x89
+#define DayWrite     0x8a
+#define DayRead      0x8b
+#define YearWrite    0x8c
+#define YearRead     0x8d
+#define ProtectWrite 0x8e
+#define ProtectRead  0x8f
+#define PowerWrite   0x90
+#define PowerRead    0x91
+

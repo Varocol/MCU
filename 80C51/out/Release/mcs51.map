@@ -1,0 +1,92 @@
+LX51 LINKER/LOCATER V4.41                                                               11/14/2021  10:51:08  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.41, INVOKED BY:
+D:\CHIPENVIRONMENT\KEILC51\C51\BIN\LX51.EXE .\OUT\RELEASE\流水灯1.O TO .\OUT\RELEASE\MCS51 PRINT (.\out\Release\mcs51.ma
+>> p) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\OUT\RELEASE\流水灯1.O (流水灯1)
+         COMMENT TYPE 0: C51 V9.00
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\OUT\RELEASE\MCS51 (流水灯1)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   00005AH   CODE
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+I:000000H   I:000000H   I:00007FH   000008H   DATA
+
+
+MEMORY MAP OF MODULE:  .\OUT\RELEASE\MCS51 (流水灯1)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   000008H   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   00004DH   00004BH   BYTE   UNIT     CODE           ?PR?MAIN?流水灯1
+00004EH   000059H   00000CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\OUT\RELEASE\MCS51 (流水灯1)
+
+
+FUNCTION/MODULE              BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE  START  STOP  START  STOP
+====================================================
+?C_C51STARTUP               ----- -----  ----- -----
+  +--> ?PR?MAIN?流水灯1
+
+MAIN/流水灯1                ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\OUT\RELEASE\MCS51 (流水灯1)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      00000000H   NUMBER   ---       ?C?CODESEG
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      01000003H   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+      01000003H   CODE     ---       main
+
+LX51 LINKER/LOCATER V4.41                                                             11/14/2021  10:51:08  PAGE 2
+
+
+
+
+SYMBOL TABLE OF MODULE:  .\OUT\RELEASE\MCS51 (流水灯1)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       流水灯1
+      01000003H   PUBLIC    CODE     ---       main
+
+      01000003H   BLOCK     CODE     ---       LVL=0
+      01000003H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+Program Size: data=9.0 xdata=0 const=0 code=90
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

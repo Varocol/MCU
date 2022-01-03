@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="将资源“TC264D_Develop/CODE/main.h”重命名为“core0_main.h”" description="重命名资源“main.h”" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="CODE/main.h" name="core0_main.h" stamp="1640313450752" updateReferences="true"/>
+</session>
