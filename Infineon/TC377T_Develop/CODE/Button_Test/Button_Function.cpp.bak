@@ -5,25 +5,25 @@ void doubleclick ()
 {
     for (int i = 0; i < 4; i++)
     {
-        led.LED_Toggle();
-        rt_thread_mdelay(300);
+        led.Toggle();
+        platform_delay_ms(300);
     }
 }
 void click ()
 {
-    rt_kprintf("click\n");
+    platform_printf("click\n");
     for (int i = 0; i < 2; i++)
     {
-        led.LED_Toggle();
-        rt_thread_mdelay(100);
+        led.Toggle();
+        platform_delay_ms(100);
     }
 }
 void longclick ()
 {
-    rt_kprintf("longclick\n");
-    led.LED_Toggle();
+    platform_printf("longclick\n");
+    led.Toggle();
     if (led.Pin_Get())
-        rt_kprintf("start\n");
+        platform_printf("start\n");
     else
-        rt_kprintf("end\n");
+        platform_printf("end\n");
 }

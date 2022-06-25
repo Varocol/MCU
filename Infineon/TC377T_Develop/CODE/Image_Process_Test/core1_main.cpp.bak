@@ -37,20 +37,71 @@ void core1_setup ()
 }
 void core1_loop ()
 {
+    //使用图像时不要同时使用Buffer_image,mt9v03x_image,Result_image,temp_image
     if (MT9V03x_IMG_Complete())
     {
         MT9V03x_Clear_Flag();
         //先复制一份图像
         DIP::Grayscale_Identity((uint8*) mt9v03x_image, (uint8*) Buffer_image, MT9V03X_H, MT9V03X_W);
-//        DIP::Grayscale_Logarithm((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
         //直方图均衡化
-        DIP::Grayscale_Equalization((uint8*) Buffer_image, (uint8*) Temp_image, MT9V03X_H, MT9V03X_W);
+//        DIP::Grayscale_Equalization((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
         //中值滤波
 //        DIP::Filter_Median(3, (uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
         //均值滤波
-        DIP::Filter_Mean1((uint8*) Temp_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+//        DIP::Filter_Mean((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //高斯滤波
+//        DIP::Filter_Gaussian((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //多次拉普拉斯锐化
+//        DIP::Fliter_Laplace((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+//        DIP::Fliter_Laplace((uint8*) Temp_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //非锐化掩蔽和高提升滤波
+//        DIP::Filter_Gaussian((uint8*) Buffer_image, (uint8*) Temp_image, MT9V03X_H, MT9V03X_W);
+//        DIP::Fliter_Unsharp((uint8*) Buffer_image, (uint8*) Temp_image, (uint8*) Result_image, MT9V03X_W, MT9V03X_H);
+        //sobel算子
+//        DIP::Fliter_Sobel((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //模糊集合灰度变换
+//        DIP::Fuzzy_GrayValue((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //模糊集合边缘增强
+//        DIP::Fuzzy_EdgeEnhance((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //孤立点检测
+//        DIP::Segmentation_Point((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //线检测
+//        DIP::Segmentation_Line((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //全局阈值处理
+//        DIP::Global_threshold((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+        //Otsu最佳全局阈值处理
+//        DIP::Global_Otsu((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+
+        //方案一：
+        //Otsu的优化版本
+//        DIP::Global_Otsu_Better((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+
+        //方案二：
+        //Otsu的优化版本+Sobel(优化或不优化)
+        DIP::Sobel_Recognizer((uint8*) Buffer_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+
+//        if (Shift)
+//        {
+//            //方案一：
+//            //Otsu的优化版本
+//            DIP::Global_Otsu_Better((uint8*) mt9v03x_image, (uint8*) Result_image, MT9V03X_H, MT9V03X_W);
+//            MT9V03x_Sendimg_To_IPS114(Screen, (uint8*) Result_image, MT9V03X_W, MT9V03X_H);
+//        }
+//        else
+//        {
+//            //获取图像直方图
+//            DIP::Get_Histogram((uint8*) mt9v03x_image, (uint8*) Histogram, MT9V03X_H, MT9V03X_W, IPS114_W, IPS114_H);
+//            MT9V03x_Sendimg_To_IPS114(Screen, (uint8*) Histogram, IPS114_H, IPS114_W);
+//        }
+//        //测试帧率
+//        current = platform_getval_ms();
+//        platform_printf("process ms = %d\n", current - past);
+//        past = current;
         //输出图像到屏幕上
-        MT9V03x_Sendimg_To_IPS114(Screen, (uint8*) Result_image, MT9V03X_W, MT9V03X_H);
+//        MT9V03x_Sendimg_To_IPS114(Screen, (uint8*) Result_image, MT9V03X_W, MT9V03X_H);
+//        MT9V03x_Sendimg_To_IPS114(Screen, (uint8*) Histogram, IPS114_H, IPS114_W);
+        //输出图像到电脑上
+//        MT9V03x_Sendimg_To_PC((uint8*) Result_image, MT9V03X_W, MT9V03X_H);
     }
 }
 

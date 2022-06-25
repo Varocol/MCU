@@ -1,5 +1,4 @@
 #include "I2C.h"
-#define STM32_OWN_ADDR7 0xB0
 //I2C1_Default I2C_SCL = PB6
 GPIO_InitTypeDef I2C1_SCL_Pin_1 =
     {
@@ -41,86 +40,6 @@ GPIO_InitTypeDef I2C2_SDA_Pin =
         GPIO_Pin_11,
         GPIO_Speed_50MHz,
         GPIO_Mode_AF_OD};
-
-I2C_InitTypeDef I2C1_InitStructure =
-    {
-        400000,
-        I2C_Mode_I2C,
-        I2C_DutyCycle_16_9,
-        STM32_OWN_ADDR7,
-        I2C_Ack_Enable,
-        I2C_AcknowledgedAddress_7bit};
-
-I2C_InitTypeDef I2C2_InitStructure =
-    {
-        400000,
-        I2C_Mode_I2C,
-        I2C_DutyCycle_16_9,
-        STM32_OWN_ADDR7,
-        I2C_Ack_Enable,
-        I2C_AcknowledgedAddress_7bit};
-
-//I2C1 错误中断
-NVIC_InitTypeDef I2C1_ER_NVIC_InitStructure =
-    {
-        I2C1_ER_IRQn,
-        0,
-        6,
-        ENABLE};
-//I2C1 事件中断
-NVIC_InitTypeDef I2C1_EV_NVIC_InitStructure =
-    {
-        I2C1_EV_IRQn,
-        0,
-        7,
-        ENABLE};
-//I2C2 错误中断
-NVIC_InitTypeDef I2C2_ER_NVIC_InitStructure =
-    {
-        I2C2_ER_IRQn,
-        0,
-        8,
-        ENABLE};
-//I2C2 事件中断
-NVIC_InitTypeDef I2C2_EV_NVIC_InitStructure =
-    {
-        I2C2_EV_IRQn,
-        0,
-        9,
-        ENABLE};
-
-/*
-I2C 中断列表
-I2C_IT_BUF  
-I2C_IT_EVT 
-I2C_IT_ERR
-*/
-I2C_Param I2C1_Param =
-    {
-        I2C1,
-        I2C1_InitStructure,
-        NVIC_Operate(&I2C1_ER_NVIC_InitStructure),
-        NVIC_Operate(&I2C1_EV_NVIC_InitStructure),
-        I2C_Default,
-        DISABLE,
-        I2C_IT_BUF | I2C_IT_EVT | I2C_IT_ERR};
-
-I2C_Param I2C2_Param =
-    {
-        I2C2,
-        I2C2_InitStructure,
-        NVIC_Operate(&I2C2_ER_NVIC_InitStructure),
-        NVIC_Operate(&I2C2_EV_NVIC_InitStructure),
-        I2C_Default,
-        DISABLE,
-        I2C_IT_BUF | I2C_IT_EVT | I2C_IT_ERR};
-
-//I2C1 400KHz 主发送器
-I2C I2C_1 = I2C(I2C1_Param);
-
-//I2C2 400KHz 主发送器
-I2C I2C_2 = I2C(I2C2_Param);
-
 /**
   * @brief  I2C空构造方法
   * @param  None

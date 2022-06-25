@@ -8,7 +8,7 @@
 #include "Buzzer.h"
 #include "IPS_114.h"
 #include "MOTOR.h"
-#include "MT9V03x.h"
 #include "MSH_FUN.h"
 #include "Image_Process.h"
+#include "Platform.h"
 #endif  /*_OJ_LIB_H*/

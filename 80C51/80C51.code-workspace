@@ -13,7 +13,9 @@
         "EIDE.ARM.Option.AutoGenerateRTE_Components": false,
         "C_Cpp.errorSquiggles": "Disabled",
         "files.associations": {
-            ".eideignore": "ignore"
+            ".eideignore": "ignore",
+            "string.h": "c",
+            "ds1302.h": "c"
         },
         "[yaml]": {
             "editor.insertSpaces": true,

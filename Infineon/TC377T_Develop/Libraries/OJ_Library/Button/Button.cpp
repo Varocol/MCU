@@ -21,9 +21,8 @@
 /**
  * @brief Construct a new OneButton object but not (yet) initialize the IO pin.
  */
-Button::Button()
+Button::Button() // @suppress("Class members should be properly initialized")
 {
-  gpio.Set_Pin(P00_0);
   // further initialization has moved to OneButton.h
 }
 
@@ -48,15 +47,46 @@ Button::Button(PIN_enum pin, const bool activeLow, const bool pullupActive)
 
   if (pullupActive) {
     // use the given pin as input and activate internal PULLUP resistor.
-    gpio.Set_Param(pin, GPI, 1, PULLUP);
-    gpio.Init();
+    GPIO::Set_Param(pin, GPI, 1, PULLUP);
   } else {
     // use the given pin as input
-    gpio.Set_Param(pin, GPI, 1, NO_PULL);
-    gpio.Init();
+    GPIO::Set_Param(pin, GPI, 1, NO_PULL);
   } // if
 } // OneButton
 
+/**
+    * Set the Param of OneButton library.
+    * @param pin The pin to be used for input from a momentary button.
+    * @param activeLow Set to true when the input level is LOW when the button is pressed, Default is true.
+    * @param pullupActive Activate the internal pullup when available. Default is true.
+    */
+void Button::Set_Param(PIN_enum pin, const bool activeLow, const bool pullupActive)
+{
+    if (activeLow) {
+       // the button connects the input pin to GND when pressed.
+       _buttonPressed = LOW;
+
+     } else {
+       // the button connects the input pin to VCC when pressed.
+       _buttonPressed = HIGH;
+     } // if
+
+     if (pullupActive) {
+       // use the given pin as input and activate internal PULLUP resistor.
+       GPIO::Set_Param(pin, GPI, 1, PULLUP);
+     } else {
+       // use the given pin as input
+       GPIO::Set_Param(pin, GPI, 1, NO_PULL);
+     } // if
+}
+
+/**
+   * Initialize the hardware of Button
+   */
+void Button::Init()
+{
+    GPIO::Init();
+}
 
 // explicitly set the number of millisec that have to pass by before a click is assumed stable.
 void Button::setDebounceTicks(const int ticks)
@@ -195,7 +225,7 @@ int Button::getNumberClicks(void)
  */
 void Button::tick(void)
 {
-    tick(gpio.Pin_Get() == _buttonPressed);
+    tick(Pin_Get() == _buttonPressed);
 }
 
 
@@ -214,8 +244,9 @@ void Button::_newState(stateMachine_t nextState)
  */
 void Button::tick(bool activeLevel)
 {
-  unsigned long now = rt_tick_get_millisecond(); // current (relative) time in msecs.
+  unsigned long now = platform_getval_ms(); // current (relative) time in msecs.
   unsigned long waitTime = (now - _startTime);
+
 
   // Implementation of the state machine
   switch (_state) {
@@ -267,7 +298,6 @@ void Button::tick(bool activeLevel)
       // button is down again
       _newState(Button::OCS_DOWN);
       _startTime = now; // remember starting time
-
     } else if ((waitTime > _clickTicks) || (_nClicks == _maxClicks)) {
       // now we know how many clicks have been made.
 

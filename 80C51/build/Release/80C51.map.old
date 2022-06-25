@@ -1,0 +1,213 @@
+LX51 LINKER/LOCATER V4.41                                                               12/08/2021  17:09:54  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.41, INVOKED BY:
+D:\CHIPENVIRONMENT\KEILC51\C51\BIN\LX51.EXE .\BUILD\RELEASE\SRC\������.O TO .\BUILD\RELEASE\80C51 PRINT (.\build\Release
+>> \80C51.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  .\BUILD\RELEASE\SRC\������.O (�_�_��)
+         COMMENT TYPE 0: C51 V9.00
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51FPS.LIB (?C?FPMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51FPS.LIB (?C?FPDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51FPS.LIB (?C?FCAST)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51FPS.LIB (?C?CASTF)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51S.LIB (?C?LNEG)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\CHIPENVIRONMENT\KEILC51\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\BUILD\RELEASE\80C51 (�_�_��)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   000859H   CODE
+I:000000H   I:000000H   I:00007FH   000018H   DATA
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\BUILD\RELEASE\80C51 (�_�_��)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   000011H   00000AH   BYTE   UNIT     DATA           _DATA_GROUP_
+000012H   000017H   000006H   BYTE   UNIT     DATA           ?DT?�_�_��
+000018H   000018H   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   00042EH   00042CH   BYTE   UNIT     CODE           ?PR?SUPER?�_�_��
+00042FH   0006A1H   000273H   BYTE   UNIT     CODE           ?C?LIB_CODE
+0006A2H   00072DH   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+00072EH   0007ABH   00007EH   BYTE   UNIT     CODE           ?PR?_MUSIC?�_�_��
+0007ACH   00081BH   000070H   BYTE   UNIT     CODE           ?PR?_PAUSE?�_�_��
+00081CH   00084EH   000033H   BYTE   UNIT     CODE           ?PR?_CAL?�_�_��
+00084FH   000855H   000007H   BYTE   UNIT     CODE           ?C_INITSEG
+000856H   000858H   000003H   BYTE   UNIT     CODE           ?PR?MAIN?�_�_��
+
+
+
+OVERLAY MAP OF MODULE:   .\BUILD\RELEASE\80C51 (�_�_��)
+
+LX51 LINKER/LOCATER V4.41                                                             12/08/2021  17:09:54  PAGE 2
+
+
+
+FUNCTION/MODULE              BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE  START  STOP  START  STOP
+====================================================
+?C_C51STARTUP               ----- -----  ----- -----
+  +--> ?PR?MAIN?�_�_��
+  +--> ?C_INITSEG
+
+MAIN/�_�_��                 ----- -----  ----- -----
+  +--> ?PR?SUPER?�_�_��
+
+SUPER/�_�_��                ----- -----  ----- -----
+  +--> ?PR?_MUSIC?�_�_��
+  +--> ?PR?_PAUSE?�_�_��
+
+_MUSIC/�_�_��               ----- -----  0008H 0011H
+  +--> ?PR?_CAL?�_�_��
+
+_CAL/�_�_��                 ----- -----  ----- -----
+
+_PAUSE/�_�_��               ----- -----  0008H 000BH
+
+?C_INITSEG                  ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\BUILD\RELEASE\80C51 (�_�_��)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      00000008H   DATA     BYTE      ?_music?BYTE
+      01000613H   CODE     ---       ?C?CASTF
+      00000000H   NUMBER   ---       ?C?CODESEG
+      010005DFH   CODE     ---       ?C?FCASTC
+      010005DAH   CODE     ---       ?C?FCASTI
+      010005D5H   CODE     ---       ?C?FCASTL
+      01000538H   CODE     ---       ?C?FPDIV
+      0100064AH   CODE     ---       ?C?FPGETOPN2
+      0100042FH   CODE     ---       ?C?FPMUL
+      0100067FH   CODE     ---       ?C?FPNANRESULT
+      01000689H   CODE     ---       ?C?FPOVERFLOW
+      01000661H   CODE     ---       ?C?FPRESULT
+      01000675H   CODE     ---       ?C?FPRESULT2
+      01000686H   CODE     ---       ?C?FPUNDERFLOW
+      01000694H   CODE     ---       ?C?LNEG
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      010006E9H   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+      0100081CH   CODE     ---       _cal
+      0100073CH   CODE     ---       _music
+      010007B4H   CODE     ---       _pause
+      00000012H   DATA     INT       basicspeed
+      00000014H   DATA     FLOAT     jq
+      01000856H   CODE     ---       main
+      01000003H   CODE     ---       super
+
+
+
+SYMBOL TABLE OF MODULE:  .\BUILD\RELEASE\80C51 (�_�_��)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       �_�_��
+      00000014H   PUBLIC    DATA     FLOAT     jq
+LX51 LINKER/LOCATER V4.41                                                             12/08/2021  17:09:54  PAGE 3
+
+
+      00000012H   PUBLIC    DATA     INT       basicspeed
+      01000856H   PUBLIC    CODE     ---       main
+      01000003H   PUBLIC    CODE     ---       super
+      010007B4H   PUBLIC    CODE     ---       _pause
+      00000008H   PUBLIC    DATA     BYTE      ?_music?BYTE
+      0100073CH   PUBLIC    CODE     ---       _music
+      0100081CH   PUBLIC    CODE     ---       _cal
+
+      0100081CH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100072EH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100073CH   BLOCK     CODE     ---       LVL=0
+      01000740H   BLOCK     CODE     NEAR LAB  LVL=1
+      0000000EH   SYMBOL    DATA     VOID      diao
+      00000006H   SYMBOL    DATA     VOID      ci
+      00000010H   SYMBOL    DATA     VOID      x
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010007ACH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010007B4H   BLOCK     CODE     ---       LVL=0
+      010007BCH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      time
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000003H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000856H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C?FPMUL
+      0100042FH   PUBLIC    CODE     ---       ?C?FPMUL
+
+      ---         MODULE    ---      ---       ?C?FPDIV
+      01000538H   PUBLIC    CODE     ---       ?C?FPDIV
+
+      ---         MODULE    ---      ---       ?C?FCAST
+      010005DFH   PUBLIC    CODE     ---       ?C?FCASTC
+      010005DAH   PUBLIC    CODE     ---       ?C?FCASTI
+      010005D5H   PUBLIC    CODE     ---       ?C?FCASTL
+
+      ---         MODULE    ---      ---       ?C?CASTF
+      01000613H   PUBLIC    CODE     ---       ?C?CASTF
+
+      ---         MODULE    ---      ---       ?C?FPGETOPN
+      0100064AH   PUBLIC    CODE     ---       ?C?FPGETOPN2
+      0100067FH   PUBLIC    CODE     ---       ?C?FPNANRESULT
+      01000689H   PUBLIC    CODE     ---       ?C?FPOVERFLOW
+      01000661H   PUBLIC    CODE     ---       ?C?FPRESULT
+      01000675H   PUBLIC    CODE     ---       ?C?FPRESULT2
+      01000686H   PUBLIC    CODE     ---       ?C?FPUNDERFLOW
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C?LNEG
+      01000694H   PUBLIC    CODE     ---       ?C?LNEG
+
+LX51 LINKER/LOCATER V4.41                                                             12/08/2021  17:09:54  PAGE 4
+
+
+      ---         MODULE    ---      ---       ?C_INIT
+      010006E9H   PUBLIC    CODE     ---       ?C_START
+
+Program Size: data=25.0 xdata=0 const=0 code=2137
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

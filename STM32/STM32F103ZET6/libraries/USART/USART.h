@@ -26,7 +26,7 @@ typedef enum
     USART_BAUDRATE_7812500 = 7812500
 } USART_BAUDRATE;
 
-//USART引脚枚举
+// USART引脚枚举
 typedef enum
 {
     USART_Default,
@@ -36,15 +36,22 @@ typedef enum
     USART3_FullRemap
 } USART_Pin_Selection;
 
-//USART参数列表结构体
+typedef enum
+{
+    USART_DMA_RX,
+    USART_DMA_TX,
+    USART_DMA_BOTH
+} USART_DMA_Selection;
+
+// USART参数列表结构体
 typedef struct
 {
-    USART_TypeDef *USARTx;                          //USARTx
-    USART_InitTypeDef USART_InitStructure;          //USART初始化结构体
-    NVIC_Operate USART_NVIC_Operate;                //USART中断对象
-    USART_Pin_Selection USARTx_Pin_Remap_Selection; //USART引脚选择
-    FunctionalState USART_IT_State;                 //USART中断使(失)能
-    uint16_t USART_IT_Selection;                    //USART中断位选择
+    USART_TypeDef *USARTx;                          // USARTx
+    USART_InitTypeDef USART_InitStructure;          // USART初始化结构体
+    NVIC_Operate USART_NVIC_Operate;                // USART中断对象
+    USART_Pin_Selection USARTx_Pin_Remap_Selection; // USART引脚选择
+    FunctionalState USART_IT_State;                 // USART中断使(失)能
+    uint16_t USART_IT_Selection;                    // USART中断位选择
 } USART_Param;
 
 class USART
@@ -62,18 +69,9 @@ public:
     void Pin_Init();
     void Update(USART_Param USARTx_Param);
     void Set_USART_Param(USART_Param USARTx_Param);
+    void Use_DMA(USART_DMA_Selection USART_DMA_Selection, FunctionalState state);
     void Init();
     void Start();
     void ShutUp();
 };
-
-extern USART USART_1;
-extern USART USART_2;
-extern USART USART_3;
-extern USART UART_4;
-extern USART UART_5;
-
-extern USART_Param USART1_Param;
-extern USART_Param USART2_Param;
-extern USART_Param USART3_Param;
 #endif /*__OJ_USART_H*/

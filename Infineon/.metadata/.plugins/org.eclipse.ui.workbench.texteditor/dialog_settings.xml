@@ -6,20 +6,35 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="20_9"/>
+		<item key="selection" value="Offset"/>
 		<list key="findhistory">
-			<item value="double"/>
-			<item value="20_9"/>
-			<item value="/*********************************************************************************************************************"/>
+			<item value="offset"/>
+			<item value="rt_kprintf"/>
+			<item value="platform"/>
+			<item value="platfrom"/>
+			<item value="platf"/>
+			<item value="= NULL"/>
+			<item value="=NULL"/>
+			<item value="0x700002d0"/>
+			<item value="button"/>
+			<item value="clickFunc"/>
+			<item value="_clickFunc"/>
+			<item value="0x80000826"/>
+			<item value="click"/>
+			<item value="Sinal"/>
+			<item value="0800"/>
 		</list>
 		<list key="replacehistory">
+			<item value="platform_printf"/>
+			<item value=""/>
+			<item value="Gray_Max"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="805"/>
-		<item key="DIALOG_Y_ORIGIN" value="217"/>
-		<item key="DIALOG_WIDTH" value="328"/>
-		<item key="DIALOG_HEIGHT" value="454"/>
+		<item key="DIALOG_X_ORIGIN" value="1277"/>
+		<item key="DIALOG_Y_ORIGIN" value="173"/>
+		<item key="DIALOG_WIDTH" value="545"/>
+		<item key="DIALOG_HEIGHT" value="608"/>
 		<item key="DIALOG_FONT_NAME" value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI"/>
 	</section>
 </section>

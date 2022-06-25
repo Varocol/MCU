@@ -1,51 +1,18 @@
 {
     "configurations": [
         {
-            "name": "win32",
+            "name": "Win32",
             "includePath": [
-                "${default}",
-                "${workspaceFolder}\\.eide\\deps",
-                "${workspaceFolder}\\lib\\cmsis",
-                "D:\\Chipenvironment\\keilmdk\\ARM\\ARMCC\\include",
-                "D:\\Chipenvironment\\keilmdk\\ARM\\ARMCC\\include\\rw",
-                "${workspaceFolder}\\hal\\STM32F10x_StdPeriph_Driver",
-                "${workspaceFolder}\\hal\\STM32F10x_StdPeriph_Driver\\src",
-                "${workspaceFolder}\\hal\\STM32F10x_StdPeriph_Driver\\inc",
-                "${workspaceFolder}\\lib\\STM32F10x_Driver",
-                "${workspaceFolder}\\lib\\CMSIS",
-                "${workspaceFolder}\\libraries\\USART",
-                "${workspaceFolder}\\libraries\\TIM",
-                "${workspaceFolder}\\libraries\\SysTick",
-                "${workspaceFolder}\\libraries\\String",
-                "${workspaceFolder}\\libraries\\SPI",
-                "${workspaceFolder}\\libraries\\Servo",
-                "${workspaceFolder}\\libraries\\RCC",
-                "${workspaceFolder}\\libraries\\PWM",
-                "${workspaceFolder}\\libraries\\NVIC",
-                "${workspaceFolder}\\libraries\\INTERRUPT",
-                "${workspaceFolder}\\libraries\\I2C",
-                "${workspaceFolder}\\libraries\\GPIO(Support Bit-Band Operations)",
-                "${workspaceFolder}\\libraries\\Buzzer",
-                "${workspaceFolder}\\libraries\\AT24C02",
-                "${workspaceFolder}\\libraries\\All_Headers",
-                "${workspaceFolder}\\libraries\\12864",
-                "${workspaceFolder}\\Startup"
+                "${workspaceFolder}/**"
             ],
             "defines": [
-                "${default}",
-                "__VSCODE_CPPTOOL",
-                "USE_STDPERIPH_DRIVER",
-                "STM32F10X_HD",
-                "ARM_MATH_CM3"
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
             ],
-            "intelliSenseMode": "${default}",
-            "browse": {
-                "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": "${default}"
-            },
-            "forcedInclude": [
-                ".\\..\\..\\..\\..\\.vscode\\extensions\\cl.eide-2.15.0\\bin\\include\\internal_headers\\armcc_intr.h"
-            ]
+            "windowsSdkVersion": "10.0.18362.0",
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",
+            "configurationProvider": "cl.eide"
         }
     ],
     "version": 4

@@ -25,7 +25,11 @@
             "exception": "cpp",
             "xiosbase": "cpp",
             "xstring": "cpp",
-            "xutility": "cpp"
+            "xutility": "cpp",
+            "usart_debug.h": "c",
+            "stdio.h": "c",
+            "stm32f10x.h": "c",
+            "nvic.h": "c"
         },
         "C_Cpp.default.intelliSenseMode": "gcc-arm",
         "files.autoGuessEncoding": false,

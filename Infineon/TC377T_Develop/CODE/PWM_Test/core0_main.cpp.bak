@@ -16,6 +16,6 @@ void core0_loop ()
             flag = -flag;
         }
         pwm.Update_Percent(i/10.0);
-        rt_thread_mdelay(1);
+        platform_delay_ms(1);
     }
 }

@@ -20,9 +20,9 @@ class LED :  public GPIO
         void Set_Param(PIN_enum pin,LED_Lighting_Mode mode);
         void Set_Mode(LED_Lighting_Mode mode);
         void Init ();
-        void LED_On();
-        void LED_Off();
-        void LED_Toggle();
+        void On();
+        void Off();
+        void Toggle();
 };
 
 #endif  /*__OJ_LED_H*/

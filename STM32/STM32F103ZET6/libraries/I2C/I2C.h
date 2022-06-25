@@ -93,7 +93,4 @@ public:
   void ClearFlag(uint32_t I2C_FLAG);
   void Software_Reset(FunctionalState NewState);
 };
-
-extern I2C I2C_1;
-extern I2C I2C_2;
 #endif /*__OJ_I2C_H*/

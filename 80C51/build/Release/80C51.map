@@ -1,4 +1,4 @@
-LX51 LINKER/LOCATER V4.41                                                               12/08/2021  17:09:54  PAGE 1
+LX51 LINKER/LOCATER V4.41                                                               02/15/2022  11:10:10  PAGE 1
 
 
 LX51 LINKER/LOCATER V4.41, INVOKED BY:
@@ -67,7 +67,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 
 OVERLAY MAP OF MODULE:   .\BUILD\RELEASE\80C51 (·_Ã_Æ÷)
 
-LX51 LINKER/LOCATER V4.41                                                             12/08/2021  17:09:54  PAGE 2
+LX51 LINKER/LOCATER V4.41                                                             02/15/2022  11:10:10  PAGE 2
 
 
 
@@ -135,7 +135,7 @@ SYMBOL TABLE OF MODULE:  .\BUILD\RELEASE\80C51 (·_Ã_Æ÷)
       ====================================================
       ---         MODULE    ---      ---       ·_Ã_Æ÷
       00000014H   PUBLIC    DATA     FLOAT     jq
-LX51 LINKER/LOCATER V4.41                                                             12/08/2021  17:09:54  PAGE 3
+LX51 LINKER/LOCATER V4.41                                                             02/15/2022  11:10:10  PAGE 3
 
 
       00000012H   PUBLIC    DATA     INT       basicspeed
@@ -203,7 +203,7 @@ SYMBOL TABLE OF MODULE:  .\BUILD\RELEASE\80C51 (·_Ã_Æ÷)
       ---         MODULE    ---      ---       ?C?LNEG
       01000694H   PUBLIC    CODE     ---       ?C?LNEG
 
-LX51 LINKER/LOCATER V4.41                                                             12/08/2021  17:09:54  PAGE 4
+LX51 LINKER/LOCATER V4.41                                                             02/15/2022  11:10:10  PAGE 4
 
 
       ---         MODULE    ---      ---       ?C_INIT

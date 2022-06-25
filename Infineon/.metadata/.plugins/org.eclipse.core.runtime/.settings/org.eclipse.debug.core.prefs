@@ -2,4 +2,4 @@
 //org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.attachLaunchType=org.eclipse.cdt.dsf.gdb.launch.attachCLaunch,debug,;
 //org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.postmortemLaunchType=org.eclipse.cdt.dsf.gdb.launch.coreCLaunch,debug,;
 eclipse.preferences.version=1
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n    <expression enabled\="true" text\="Screen"/>\r\n    <expression enabled\="true" text\="this-&gt;Param"/>\r\n    <expression enabled\="true" text\="Temp_image"/>\r\n    <expression enabled\="true" text\="Result_image&\#13;&\#10;"/>\r\n    <expression enabled\="true" text\="Buffer_image"/>\r\n    <expression enabled\="true" text\="i+m-1"/>\r\n    <expression enabled\="true" text\="j+n-1"/>\r\n    <expression enabled\="true" text\="Pixel_Sum"/>\r\n</watchExpressions>\r\n
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n    <expression enabled\="true" text\="click"/>\r\n</watchExpressions>\r\n

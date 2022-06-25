@@ -6,6 +6,7 @@
   */
 AT24C02::AT24C02()
 {
+    PROCESS_CONDITION = true;
 }
 
 /**
@@ -15,6 +16,7 @@ AT24C02::AT24C02()
   */
 AT24C02::AT24C02(AT24C02_Param AT24C02x_Param)
 {
+    PROCESS_CONDITION = true;
     Set_AT24C02x_Param(AT24C02x_Param);
 }
 

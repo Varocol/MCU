@@ -7,6 +7,6 @@ void core0_setup ()
 }
 void core0_loop ()
 {
-    led1.Pin_Toggle();
-    rt_thread_mdelay(500);
+    led1.Toggle();
+    platform_delay_ms(500);
 }

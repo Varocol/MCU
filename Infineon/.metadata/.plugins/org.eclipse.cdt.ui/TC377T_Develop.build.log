@@ -8,6 +8,6 @@ DAS init done
  ::Warning: The given program file is trying to write on reserved memory addresses, which will be skipped.
 ::Flash memory erase .......... (Done)
 ::Flash memory program .......... (Done)
-Overall time: 1729 ms
+Overall time: 1736 ms
 AurixFlasher Exit Status: pass
 Flashing was successfull

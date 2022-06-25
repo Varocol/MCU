@@ -3,6 +3,10 @@
 	<section name="completion_proposal_size">
 	</section>
 	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+		<item key="size.width" value="777"/>
+		<item key="size.height" value="630"/>
+		<item key="location.x" value="593"/>
+		<item key="location.y" value="237"/>
 	</section>
 	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration.internal">
 		<item key="size.width" value="1609"/>

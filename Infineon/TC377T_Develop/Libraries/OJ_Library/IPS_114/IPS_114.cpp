@@ -611,7 +611,7 @@ void IPS_114::Display_Chinese (uint16 x, uint16 y, uint8 size, const uint8 *p, u
 void IPS_114::Write_Index (uint8 dat)
 {
     IPS_114_DC_PIN->Set_PinVal(0);
-    MOSI_Send(&dat, &dat, 1, 1);
+    MOSI_Send(&dat, NULL, 1, 1);
 }
 
 /*
@@ -622,7 +622,7 @@ void IPS_114::Write_Index (uint8 dat)
 void IPS_114::Write_Data (uint8 dat)
 {
     IPS_114_DC_PIN->Set_PinVal(1);
-    MOSI_Send(&dat, &dat, 1, 1);
+    MOSI_Send(&dat, NULL, 1, 1);
 }
 
 /*
@@ -637,7 +637,7 @@ void IPS_114::Write_Data_16bit (uint16 dat)
     dat1[1] = (uint8) dat;
 
     IPS_114_DC_PIN->Set_PinVal(1);
-    MOSI_Send(dat1, dat1, 2, 1);  //写入数据  高位在前  低位在后
+    MOSI_Send(dat1, NULL, 2, 1);  //写入数据  高位在前  低位在后
 }
 
 /*

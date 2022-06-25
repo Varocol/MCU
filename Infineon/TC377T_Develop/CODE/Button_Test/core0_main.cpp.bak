@@ -12,5 +12,5 @@ void core0_setup ()
 void core0_loop ()
 {
     button.tick();
-//    rt_thread_mdelay(10);
+//    platform_delay_ms(10);
 }

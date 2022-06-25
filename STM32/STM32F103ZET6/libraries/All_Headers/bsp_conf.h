@@ -9,6 +9,7 @@
 #include "GPIO.h"
 #include "USART.h"
 #include "RCC.h"
+#include "DMA.h"
 #include "NVIC.h"
 #include "Servo.h"
 #include "Buzzer.h"
@@ -20,4 +21,5 @@
 #include "LCD_12864.h"
 #include "LCD_12864_Parallel.h"
 #include "LCD_12864_Serial.h"
+#include "Variable_Space.h"
 #endif  /*__OJ_CONF_H*/

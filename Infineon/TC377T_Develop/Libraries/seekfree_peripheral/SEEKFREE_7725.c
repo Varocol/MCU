@@ -7,28 +7,28 @@
  * 以下所有内容版权均属逐飞科技所有，未经允许不得用于商业用途，
  * 欢迎各位使用并传播本程序，修改内容时必须保留逐飞科技的版权声明。
  *
- * @file       		main
- * @company	   		成都逐飞科技有限公司
- * @author     		逐飞科技(QQ3184284598)
- * @version    		查看doc内version文件 版本说明
- * @Software 		ADS v1.2.2
- * @Target core		TC377TP
- * @Taobao   		https://seekfree.taobao.com/
- * @date       		2020-11-23
- * @note		
-					接线定义：
-					------------------------------------ 
-					模块管脚           			单片机管脚
-					SDA   				查看SEEKFREE_IIC文件内的SEEKFREE_SDA宏定义
-					SCL         	           查看SEEKFREE_IIC文件内的SEEKFREE_SCL宏定义
-					场中断(VSY)         	查看SEEKFREE_OV7725.h文件中的OV7725_VSYNC_PIN宏定义
-					行中断(HREF)			未使用，因此不接
-					像素中断(PCLK)      	查看SEEKFREE_OV7725.h文件中的OV7725_PCLK_PIN宏定义
-					数据口(D0-D7)		查看SEEKFREE_OV7725.h文件中的OV7725_DATA_PIN宏定义
-					------------------------------------ 
-	
-					默认分辨率是            		160*120
-					默认FPS            	50帧
+ * @file            main
+ * @company         成都逐飞科技有限公司
+ * @author          逐飞科技(QQ3184284598)
+ * @version         查看doc内version文件 版本说明
+ * @Software        ADS v1.2.2
+ * @Target core     TC264D
+ * @Taobao          https://seekfree.taobao.com/
+ * @date            2020-3-23
+ * @note
+                    接线定义：
+                    ------------------------------------
+                    模块管脚                    单片机管脚
+                    SDA                 查看SEEKFREE_IIC文件内的SEEKFREE_SDA宏定义
+                    SCL                        查看SEEKFREE_IIC文件内的SEEKFREE_SCL宏定义
+                    场中断(VSY)            查看SEEKFREE_OV7725.h文件中的OV7725_VSYNC_PIN宏定义
+                    行中断(HREF)           未使用，因此不接
+                    像素中断(PCLK)          查看SEEKFREE_OV7725.h文件中的OV7725_PCLK_PIN宏定义
+                    数据口(D0-D7)      查看SEEKFREE_OV7725.h文件中的OV7725_DATA_PIN宏定义
+                    ------------------------------------
+
+                    默认分辨率是                  160*120
+                    默认FPS               50帧
  ********************************************************************************************************************/
 
 
@@ -51,20 +51,20 @@ uint8 ov7725_idcode = 0;
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      小钻风摄像头内部寄存器初始化(内部使用，用户无需调用)
 //  @param      NULL
-//  @return     uint8			返回0则出错，返回1则成功
+//  @return     uint8           返回0则出错，返回1则成功
 //  @since      v1.0
 //  Sample usage:
 //-------------------------------------------------------------------------------------------------------------------
 uint8 ov7725_reg_init(void)
 {
-    simiic_delay_set(2000);
-    simiic_write_reg ( OV7725_DEV_ADD, OV7725_COM7, 0x80 );	//复位摄像头
+    simiic_delay_set(700);
+    simiic_write_reg ( OV7725_DEV_ADD, OV7725_COM7, 0x80 ); //复位摄像头
     systick_delay_ms(STM0, 50);
-	ov7725_idcode = simiic_read_reg( OV7725_DEV_ADD, OV7725_VER ,SCCB);
-    if( ov7725_idcode != OV7725_ID )    return 0;			//校验摄像头ID号
+    ov7725_idcode = simiic_read_reg( OV7725_DEV_ADD, OV7725_VER ,SCCB);
+    if( ov7725_idcode != OV7725_ID )    return 0;           //校验摄像头ID号
 
     //ID号确认无误   然后配置寄存器
-    simiic_write_reg(OV7725_DEV_ADD, OV7725_COM4         , 0xC1);  
+    simiic_write_reg(OV7725_DEV_ADD, OV7725_COM4         , 0xC1);
     simiic_write_reg(OV7725_DEV_ADD, OV7725_CLKRC        , 0x01);
     simiic_write_reg(OV7725_DEV_ADD, OV7725_COM2         , 0x03);
     simiic_write_reg(OV7725_DEV_ADD, OV7725_COM3         , 0xD0);
@@ -146,19 +146,19 @@ uint8 ov7725_reg_init(void)
 //-------------------------------------------------------------------------------------------------------------------
 void ov7725_port_init(void)
 {
-	uint8 i;
+    uint8 i;
     camera_type = CAMERA_BIN;//设置连接摄像头类型
     camera_buffer_addr = image_bin[0];
     
-	//摄像头采集初始化
-	//初始化 数据引脚
-	for(i=0; i<8; i++)
-	{
-		gpio_init((PIN_enum)(OV7725_DATA_PIN+i), GPI, 0, PULLUP);
-	}
-	eru_dma_init(OV7725_DMA_CH, GET_PORT_IN_ADDR(OV7725_DATA_PIN), camera_buffer_addr, OV7725_PCLK_PIN, FALLING, OV7725_DMA_NUM);
-    eru_init(OV7725_VSYNC_PIN, FALLING);	//初始化场中断，并设置为下降沿触发中断
-    
+    //摄像头采集初始化
+    //初始化 数据引脚
+    for(i=0; i<8; i++)
+    {
+        gpio_init((PIN_enum)(OV7725_DATA_PIN+i), GPI, 0, PULLUP);
+    }
+    eru_dma_init(OV7725_DMA_CH, GET_PORT_IN_ADDR(OV7725_DATA_PIN), camera_buffer_addr, OV7725_PCLK_PIN, FALLING, OV7725_DMA_NUM);
+    eru_init(OV7725_VSYNC_PIN, FALLING);    //初始化场中断，并设置为下降沿触发中断
+
 }
 
 
@@ -171,34 +171,39 @@ void ov7725_port_init(void)
 //-------------------------------------------------------------------------------------------------------------------
 uint8 ov7725_init(void)
 {
-	boolean interrupt_state = disableInterrupts();
-	simiic_init();
-	ov7725_reg_init();                                          //摄像头寄存器配置
+    simiic_init();
+    ov7725_reg_init();                                          //摄像头寄存器配置
     ov7725_port_init();                                         //摄像头中断引脚及DMA配置
-    restoreInterrupts(interrupt_state);
     return 0;
 }
 
 
 
 
-uint8   ov7725_finish_flag = 0;
+uint8 ov7725_finish_flag = 0;
+uint8 ov7725_dma_init_flag; //重新初始化DMA的标志位
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      小钻风摄像头场中断
 //  @param      NULL
 //  @return     void
 //  @since      v1.0
-//  Sample usage:					此函数在isr.c中被eru（GPIO中断）中断调用
+//  Sample usage:                   此函数在isr.c中被eru（GPIO中断）中断调用
 //-------------------------------------------------------------------------------------------------------------------
 void ov7725_vsync(void)
 {
-	CLEAR_GPIO_FLAG(OV7725_VSYNC_PIN);
-
-	if(!ov7725_finish_flag)//查看图像数组是否使用完毕，如果未使用完毕则不开始采集，避免出现访问冲突
-	{
-		DMA_SET_DESTINATION(OV7725_DMA_CH, camera_buffer_addr);
-		dma_start(OV7725_DMA_CH);
-	}
+    CLEAR_GPIO_FLAG(OV7725_VSYNC_PIN);
+    if(ov7725_dma_init_flag)
+    {
+        ov7725_dma_init_flag = 0;
+        IfxDma_resetChannel(&MODULE_DMA, OV7725_DMA_CH);
+        eru_dma_init(OV7725_DMA_CH, GET_PORT_IN_ADDR(OV7725_DATA_PIN), camera_buffer_addr, OV7725_PCLK_PIN, FALLING, OV7725_DMA_NUM);
+        dma_start(OV7725_DMA_CH);
+    }
+    else
+    {
+        DMA_SET_DESTINATION(OV7725_DMA_CH, camera_buffer_addr);
+        dma_start(OV7725_DMA_CH);
+    }
 }
 
 
@@ -207,13 +212,23 @@ void ov7725_vsync(void)
 //  @param      NULL
 //  @return     void
 //  @since      v1.0
-//  Sample usage:					此函数在isr.c中被dma中断调用
+//  Sample usage:                   此函数在isr.c中被dma中断调用
 //-------------------------------------------------------------------------------------------------------------------
 void ov7725_dma(void)
 {
     CLEAR_DMA_FLAG(OV7725_DMA_CH);
-	ov7725_finish_flag = 1;
-	dma_stop(OV7725_DMA_CH);
+    if(IfxDma_getChannelTransactionRequestLost(&MODULE_DMA, OV7725_DMA_CH))
+    {//图像有错位
+        ov7725_finish_flag = 0;
+        dma_stop(OV7725_DMA_CH);
+        IfxDma_clearChannelTransactionRequestLost(&MODULE_DMA, OV7725_DMA_CH);
+        ov7725_dma_init_flag = 1;
+    }
+    else
+    {
+        ov7725_finish_flag = 1;
+        dma_stop(OV7725_DMA_CH);
+    }
 }
 
 

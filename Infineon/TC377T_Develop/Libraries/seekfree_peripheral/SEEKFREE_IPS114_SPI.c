@@ -7,30 +7,30 @@
  * 以下所有内容版权均属逐飞科技所有，未经允许不得用于商业用途，
  * 欢迎各位使用并传播本程序，修改内容时必须保留逐飞科技的版权声明。
  *
- * @file       		1.14寸IPS屏幕
- * @company	   		成都逐飞科技有限公司
- * @author     		逐飞科技(QQ3184284598)
- * @version    		查看doc内version文件 版本说明
- * @Software 		ADS v1.2.2
- * @Target core		TC377TP
- * @Taobao   		https://seekfree.taobao.com/
- * @date       		2020-11-23
- * @note		
-					接线定义：
-					------------------------------------ 
-						模块管脚            		单片机管脚
-						SCL                 查看IPS114_SCL_PIN宏定义的引脚     硬件SPI引脚不可随意切换
-						SDA                 查看IPS114_SDA_PIN宏定义的引脚     硬件SPI引脚不可随意切换
-						RES                 查看IPS114_REST_PIN宏定义的引脚    
-						DC                  查看IPS114_DC_PIN宏定义的引脚  
-						CS                  查看IPS114_CS_PIN宏定义的引脚      硬件SPI引脚不可随意切换
-						
-						电源引脚
-						BL  3.3V电源（背光控制引脚，也可以接PWM来控制亮度）
-						VCC 3.3V电源
-						GND 电源地
-						最大分辨率135*240
-					------------------------------------ 
+ * @file            1.14寸IPS屏幕
+ * @company         成都逐飞科技有限公司
+ * @author          逐飞科技(QQ3184284598)
+ * @version         查看doc内version文件 版本说明
+ * @Software        ADS v1.2.2
+ * @Target core     TC377TP
+ * @Taobao          https://seekfree.taobao.com/
+ * @date            2020-11-23
+ * @note
+                    接线定义：
+                    ------------------------------------
+                        模块管脚                    单片机管脚
+                        SCL                 查看IPS114_SCL_PIN宏定义的引脚     硬件SPI引脚不可随意切换
+                        SDA                 查看IPS114_SDA_PIN宏定义的引脚     硬件SPI引脚不可随意切换
+                        RES                 查看IPS114_REST_PIN宏定义的引脚
+                        DC                  查看IPS114_DC_PIN宏定义的引脚
+                        CS                  查看IPS114_CS_PIN宏定义的引脚      硬件SPI引脚不可随意切换
+
+                        电源引脚
+                        BL  3.3V电源（背光控制引脚，也可以接PWM来控制亮度）
+                        VCC 3.3V电源
+                        GND 电源地
+                        最大分辨率135*240
+                    ------------------------------------
 
  ********************************************************************************************************************/
 
@@ -44,46 +44,46 @@
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      内部调用，用户无需关心
-//  @param      void 		    
-//  @return     				
+//  @param      void
+//  @return
 //  @since      v1.0
 //  Sample usage:               
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_writeIndex(uint8 dat)			//写命令
-{	
+void ips114_writeIndex(uint8 dat)           //写命令
+{
     IPS114_DC(0);
-    spi_mosi(IPS114_SPIN_PIN,IPS114_CS_PIN,&dat,&dat,1,1);		
+    spi_mosi(IPS114_SPIN_PIN,IPS114_CS_PIN,&dat,NULL,1,1);
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      内部调用，用户无需关心
-//  @param      void 		    
-//  @return     				
+//  @param      void
+//  @return
 //  @since      v1.0
 //  Sample usage:               
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_writeData(uint8 dat)			//写数据
+void ips114_writeData(uint8 dat)            //写数据
 {
     IPS114_DC(1);
-    spi_mosi(IPS114_SPIN_PIN,IPS114_CS_PIN,&dat,&dat,1,1);
+    spi_mosi(IPS114_SPIN_PIN,IPS114_CS_PIN,&dat,NULL,1,1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      内部调用，用户无需关心
-//  @param      void 		    
-//  @return     				
+//  @param      void
+//  @return
 //  @since      v1.0
 //  Sample usage:               
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_writedata_16bit(uint16 dat)	//向液晶屏写一个16位数据
+void ips114_writedata_16bit(uint16 dat) //向液晶屏写一个16位数据
 {
     uint8 dat1[2];
     dat1[0] = dat >> 8;
     dat1[1] = (uint8)dat;
     
     IPS114_DC(1);
-    spi_mosi(IPS114_SPIN_PIN,IPS114_CS_PIN,dat1,dat1,2,1); 	//写入数据  高位在前  低位在后
+    spi_mosi(IPS114_SPIN_PIN,IPS114_CS_PIN,dat1,NULL,2,1);  //写入数据  高位在前  低位在后
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -105,13 +105,13 @@ void ips114_init(void)
     
     IPS114_REST(1);
     systick_delay_ms(STM0, 100);
-	
+
     ips114_writeIndex(0x36);
     
-    if      (IPS114_DISPLAY_DIR==0)	ips114_writeData(0x00);
-    else if (IPS114_DISPLAY_DIR==1)	ips114_writeData(0xC0);
-    else if (IPS114_DISPLAY_DIR==2)	ips114_writeData(0x70);
-    else                           	ips114_writeData(0xA0);
+    if      (IPS114_DISPLAY_DIR==0) ips114_writeData(0x00);
+    else if (IPS114_DISPLAY_DIR==1) ips114_writeData(0xC0);
+    else if (IPS114_DISPLAY_DIR==2) ips114_writeData(0x70);
+    else                            ips114_writeData(0xA0);
     
     ips114_writeIndex(0x3A); 
     ips114_writeData(0x05);
@@ -193,51 +193,51 @@ void ips114_init(void)
 
 void ips114_set_region(uint16 x1,uint16 y1,uint16 x2,uint16 y2)
 {
-	if(IPS114_DISPLAY_DIR==0)
-	{
-		ips114_writeIndex(0x2a);//列地址设置
-		ips114_writedata_16bit(x1+52);
-		ips114_writedata_16bit(x2+52);
-		ips114_writeIndex(0x2b);//行地址设置
-		ips114_writedata_16bit(y1+40);
-		ips114_writedata_16bit(y2+40);
-		ips114_writeIndex(0x2c);//储存器写
-	}
-	else if(IPS114_DISPLAY_DIR==1)
-	{
-		ips114_writeIndex(0x2a);//列地址设置
-		ips114_writedata_16bit(x1+53);
-		ips114_writedata_16bit(x2+53);
-		ips114_writeIndex(0x2b);//行地址设置
-		ips114_writedata_16bit(y1+40);
-		ips114_writedata_16bit(y2+40);
-		ips114_writeIndex(0x2c);//储存器写
-	}
-	else if(IPS114_DISPLAY_DIR==2)
-	{
-		ips114_writeIndex(0x2a);//列地址设置
-		ips114_writedata_16bit(x1+40);
-		ips114_writedata_16bit(x2+40);
-		ips114_writeIndex(0x2b);//行地址设置
-		ips114_writedata_16bit(y1+53);
-		ips114_writedata_16bit(y2+53);
-		ips114_writeIndex(0x2c);//储存器写
-	}
-	else
-	{
-		ips114_writeIndex(0x2a);//列地址设置
-		ips114_writedata_16bit(x1+40);
-		ips114_writedata_16bit(x2+40);
-		ips114_writeIndex(0x2b);//行地址设置
-		ips114_writedata_16bit(y1+52);
-		ips114_writedata_16bit(y2+52);
-		ips114_writeIndex(0x2c);//储存器写
-	}
+    if(IPS114_DISPLAY_DIR==0)
+    {
+        ips114_writeIndex(0x2a);//列地址设置
+        ips114_writedata_16bit(x1+52);
+        ips114_writedata_16bit(x2+52);
+        ips114_writeIndex(0x2b);//行地址设置
+        ips114_writedata_16bit(y1+40);
+        ips114_writedata_16bit(y2+40);
+        ips114_writeIndex(0x2c);//储存器写
+    }
+    else if(IPS114_DISPLAY_DIR==1)
+    {
+        ips114_writeIndex(0x2a);//列地址设置
+        ips114_writedata_16bit(x1+53);
+        ips114_writedata_16bit(x2+53);
+        ips114_writeIndex(0x2b);//行地址设置
+        ips114_writedata_16bit(y1+40);
+        ips114_writedata_16bit(y2+40);
+        ips114_writeIndex(0x2c);//储存器写
+    }
+    else if(IPS114_DISPLAY_DIR==2)
+    {
+        ips114_writeIndex(0x2a);//列地址设置
+        ips114_writedata_16bit(x1+40);
+        ips114_writedata_16bit(x2+40);
+        ips114_writeIndex(0x2b);//行地址设置
+        ips114_writedata_16bit(y1+53);
+        ips114_writedata_16bit(y2+53);
+        ips114_writeIndex(0x2c);//储存器写
+    }
+    else
+    {
+        ips114_writeIndex(0x2a);//列地址设置
+        ips114_writedata_16bit(x1+40);
+        ips114_writedata_16bit(x2+40);
+        ips114_writeIndex(0x2b);//行地址设置
+        ips114_writedata_16bit(y1+52);
+        ips114_writedata_16bit(y2+52);
+        ips114_writeIndex(0x2c);//储存器写
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶清屏函数
-//  @param      color     		颜色设置
+//  @param      color           颜色设置
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_clear(YELLOW);// 全屏设置为黄色
@@ -245,21 +245,21 @@ void ips114_set_region(uint16 x1,uint16 y1,uint16 x2,uint16 y2)
 void ips114_clear(uint16 color)
 {
     uint16 i,j;
-	ips114_set_region(0,0,IPS114_X_MAX-1,IPS114_Y_MAX-1);
+    ips114_set_region(0,0,IPS114_X_MAX-1,IPS114_Y_MAX-1);
     for(i=0;i<IPS114_X_MAX;i++)
     {
         for (j=0;j<IPS114_Y_MAX;j++)
-	   	{
-        	ips114_writedata_16bit(color);	 			 
-	    }
+        {
+            ips114_writedata_16bit(color);
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶画点
-//  @param      x     	        坐标x方向的起点
-//  @param      y     	        坐标y方向的起点
-//  @param      dat       	    需要显示的颜色
+//  @param      x               坐标x方向的起点
+//  @param      y               坐标y方向的起点
+//  @param      dat             需要显示的颜色
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_drawpoint(0,0,RED);  //坐标0,0画一个红色的点
@@ -274,180 +274,180 @@ void ips114_drawpoint(uint16 x,uint16 y,uint16 color)
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示字符
-//  @param      x     	        坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的字符
+//  @param      x               坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的字符
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_showchar(0,0,'x');//坐标0,0写一个字符x
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_showchar(uint16 x,uint16 y,const int8 dat)
 {
-	uint8 i,j;
-	uint8 temp;
+    uint8 i,j;
+    uint8 temp;
     
-	for(i=0; i<16; i++)
-	{
-		ips114_set_region(x,y+i,x+7,y+i);
-		temp = tft_ascii[dat-32][i];//减32因为是取模是从空格开始取得 空格在ascii中序号是32
-		for(j=0; j<8; j++)
-		{
-			if(temp&0x01)	
+    for(i=0; i<16; i++)
+    {
+        ips114_set_region(x,y+i,x+7,y+i);
+        temp = tft_ascii[dat-32][i];//减32因为是取模是从空格开始取得 空格在ascii中序号是32
+        for(j=0; j<8; j++)
+        {
+            if(temp&0x01)
             {
                 ips114_writedata_16bit(IPS114_PENCOLOR);
             }
-			else			ips114_writedata_16bit(IPS114_BGCOLOR);
-			temp>>=1;
-		}
-	}
+            else            ips114_writedata_16bit(IPS114_BGCOLOR);
+            temp>>=1;
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示字符串
-//  @param      x     	        坐标x方向的起点  参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点  参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的字符串
+//  @param      x               坐标x方向的起点  参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点  参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的字符串
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_showstr(0,0,"seekfree");
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_showstr(uint16 x,uint16 y,const int8 dat[])
 {
-	uint16 j;
-	
-	j = 0;
-	while(dat[j] != '\0')
-	{
-		ips114_showchar(x+8*j,y*16,dat[j]);
-		j++;
-	}
+    uint16 j;
+
+    j = 0;
+    while(dat[j] != '\0')
+    {
+        ips114_showchar(x+8*j,y*16,dat[j]);
+        j++;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示8位有符号
-//  @param      x     	        坐标x方向的起点  参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点  参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的变量，数据类型int8
+//  @param      x               坐标x方向的起点  参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点  参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的变量，数据类型int8
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_showint8(0,0,x);//x为int8类型
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_showint8(uint16 x,uint16 y,int8 dat)
 {
-	uint8 a[3];
-	uint8 i;
-	if(dat<0)
-	{
-		ips114_showchar(x,y*16,'-');
-		dat = -dat;
-	}
-	else	ips114_showchar(x,y*16,' ');
-	
-	a[0] = dat/100;
-	a[1] = dat/10%10;
-	a[2] = dat%10;
-	i = 0;
-	while(i<3)
-	{
-		ips114_showchar(x+(8*(i+1)),y*16,'0' + a[i]);
-		i++;
-	}
+    uint8 a[3];
+    uint8 i;
+    if(dat<0)
+    {
+        ips114_showchar(x,y*16,'-');
+        dat = -dat;
+    }
+    else    ips114_showchar(x,y*16,' ');
+
+    a[0] = dat/100;
+    a[1] = dat/10%10;
+    a[2] = dat%10;
+    i = 0;
+    while(i<3)
+    {
+        ips114_showchar(x+(8*(i+1)),y*16,'0' + a[i]);
+        i++;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示8位无符号
-//  @param      x     	        坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的变量，数据类型uint8
+//  @param      x               坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的变量，数据类型uint8
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_showuint8(0,0,x);//x为uint8类型
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_showuint8(uint16 x,uint16 y,uint8 dat)
 {
-	uint8 a[3];
-	uint8 i;
-	
-	a[0] = dat/100;
-	a[1] = dat/10%10;
-	a[2] = dat%10;
-	i = 0;
-	while(i<3)
-	{
-		ips114_showchar(x+(8*i),y*16,'0' + a[i]);
-		i++;
-	}
-	
+    uint8 a[3];
+    uint8 i;
+
+    a[0] = dat/100;
+    a[1] = dat/10%10;
+    a[2] = dat%10;
+    i = 0;
+    while(i<3)
+    {
+        ips114_showchar(x+(8*i),y*16,'0' + a[i]);
+        i++;
+    }
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示16位有符号
-//  @param      x     	        坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的变量，数据类型int16
+//  @param      x               坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的变量，数据类型int16
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_showint16(0,0,x);//x为int16类型
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_showint16(uint16 x,uint16 y,int16 dat)
 {
-	uint8 a[5];
-	uint8 i;
-	if(dat<0)
-	{
-		ips114_showchar(x,y*16,'-');
-		dat = -dat;
-	}
-	else	ips114_showchar(x,y*16,' ');
+    uint8 a[5];
+    uint8 i;
+    if(dat<0)
+    {
+        ips114_showchar(x,y*16,'-');
+        dat = -dat;
+    }
+    else    ips114_showchar(x,y*16,' ');
 
-	a[0] = dat/10000;
-	a[1] = dat/1000%10;
-	a[2] = dat/100%10;
-	a[3] = dat/10%10;
-	a[4] = dat%10;
-	
-	i = 0;
-	while(i<5)
-	{
-		ips114_showchar(x+(8*(i+1)),y*16,'0' + a[i]);
-		i++;
-	}
+    a[0] = dat/10000;
+    a[1] = dat/1000%10;
+    a[2] = dat/100%10;
+    a[3] = dat/10%10;
+    a[4] = dat%10;
+
+    i = 0;
+    while(i<5)
+    {
+        ips114_showchar(x+(8*(i+1)),y*16,'0' + a[i]);
+        i++;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示16位无符号
-//  @param      x     	        坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的变量，数据类型uint16
+//  @param      x               坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的变量，数据类型uint16
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_showuint16(0,0,x);//x为uint16类型
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_showuint16(uint16 x,uint16 y,uint16 dat)
 {
-	uint8 a[5];
-	uint8 i;
+    uint8 a[5];
+    uint8 i;
 
-	a[0] = dat/10000;
-	a[1] = dat/1000%10;
-	a[2] = dat/100%10;
-	a[3] = dat/10%10;
-	a[4] = dat%10;
-	
-	i = 0;
-	while(i<5)
-	{
-		ips114_showchar(x+(8*i),y*16,'0' + a[i]);
-		i++;
-	}
+    a[0] = dat/10000;
+    a[1] = dat/1000%10;
+    a[2] = dat/100%10;
+    a[3] = dat/10%10;
+    a[4] = dat%10;
+
+    i = 0;
+    while(i<5)
+    {
+        ips114_showchar(x+(8*i),y*16,'0' + a[i]);
+        i++;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示32位有符号(去除整数部分无效的0)
-//  @param      x     	        坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的变量，数据类型uint32
-//  @param      num       	    需要显示的位数 最高10位  不包含正负号
+//  @param      x               坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的变量，数据类型uint32
+//  @param      num             需要显示的位数 最高10位  不包含正负号
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_showuint32(0,0,x,3);//x可以为int32 uint16 int16 uint8 int8类型
@@ -475,16 +475,16 @@ void ips114_showint32(uint16 x,uint16 y,int32 dat,uint8 num)
     }
     buff[num] = '\0';
 
-    ips114_showstr(x, y, buff);	//显示数字
+    ips114_showstr(x, y, buff); //显示数字
 }
 
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      液晶显示浮点数(去除整数部分无效的0)
-//  @param      x     	        坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
-//  @param      y     	        坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
-//  @param      dat       	    需要显示的变量，数据类型float或double
-//  @param      num       	    整数位显示长度   最高10位  
+//  @param      x               坐标x方向的起点 参数范围 0 -（IPS114_X_MAX-1）
+//  @param      y               坐标y方向的起点 参数范围 0 -（IPS114_Y_MAX/16-1）
+//  @param      dat             需要显示的变量，数据类型float或double
+//  @param      num             整数位显示长度   最高10位
 //  @param      pointnum        小数位显示长度   最高6位
 //  @return     void
 //  @since      v1.0
@@ -497,10 +497,10 @@ void ips114_showint32(uint16 x,uint16 y,int32 dat,uint8 num)
 void ips114_showfloat(uint16 x,uint16 y,double dat,uint8 num,uint8 pointnum)
 {
     uint32   length;
-	int8    buff[34];
-	int8    start,end,point;
+    int8    buff[34];
+    int8    start,end,point;
 
-	if(6<pointnum)  pointnum = 6;
+    if(6<pointnum)  pointnum = 6;
     if(10<num)      num = 10;
         
     if(0>dat)   length = zf_sprintf( &buff[0],"%f",dat);//负数
@@ -524,15 +524,15 @@ void ips114_showfloat(uint16 x,uint16 y,double dat,uint8 num,uint8 pointnum)
     
     buff[end] = '\0';
 
-    ips114_showstr(x, y, buff);	//显示数字
+    ips114_showstr(x, y, buff); //显示数字
 }
 
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      总钻风(灰度摄像头)液晶显示函数
-//  @param      *p     			图像数组地址
-//  @param      width     	    图像宽度
-//  @param      height     	    图像高度
+//  @param      *p              图像数组地址
+//  @param      width           图像宽度
+//  @param      height          图像高度
 //  @return     void
 //  @since      v1.0
 //  Sample usage:               ips114_displayimage032(mt9v03x_csi_image[0], MT9V03X_CSI_W, MT9V03X_CSI_H)//显示灰度摄像头 图像
@@ -543,8 +543,8 @@ void ips114_displayimage032(uint8 *p, uint16 width, uint16 height)
     uint32 i,j;
                 
     uint16 color = 0;
-	uint16 temp = 0;
-	
+    uint16 temp = 0;
+
     uint16 coord_x = 0;
     uint16 coord_y = 0;
     
@@ -567,9 +567,9 @@ void ips114_displayimage032(uint8 *p, uint16 width, uint16 height)
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      总钻风(灰度摄像头)液晶缩放显示函数
-//  @param      *p     			图像数组地址
-//  @param      width     	    图像宽度
-//  @param      height     	    图像高度
+//  @param      *p              图像数组地址
+//  @param      width           图像宽度
+//  @param      height          图像高度
 //  @param      dis_width       图像显示宽度  1 -（IPS114_X_MAX）
 //  @param      dis_height      图像显示高度  1 -（IPS114_Y_MAX）
 //  @return     void
@@ -582,7 +582,7 @@ void ips114_displayimage032_zoom(uint8 *p, uint16 width, uint16 height, uint16 d
     uint32 i,j;
                 
     uint16 color = 0;
-	uint16 temp = 0;
+    uint16 temp = 0;
 
     ips114_set_region(0,0,dis_width-1,dis_height-1);//设置显示区域 
     
@@ -601,11 +601,11 @@ void ips114_displayimage032_zoom(uint8 *p, uint16 width, uint16 height, uint16 d
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      总钻风(灰度摄像头)液晶缩放显示函数
-//  @param      *p     			图像数组地址
-//  @param      width     	    图像宽度
-//  @param      height     	    图像高度
+//  @param      *p              图像数组地址
+//  @param      width           图像宽度
+//  @param      height          图像高度
 //  @param      start_x         设置显示起点的x轴坐标
-//  @param      start_y     	设置显示起点的y轴坐标
+//  @param      start_y         设置显示起点的y轴坐标
 //  @param      dis_width       图像显示宽度  1 -（IPS114_X_MAX）
 //  @param      dis_height      图像显示高度  1 -（IPS114_Y_MAX）
 //  @return     void
@@ -618,11 +618,11 @@ void ips114_displayimage032_zoom1(uint8 *p, uint16 width, uint16 height, uint16 
     uint32 i,j;
                 
     uint16 color = 0;
-	uint16 temp = 0;
+    uint16 temp = 0;
 
-	//检查设置的参数是否超过屏幕的分辨率
-	if((start_x+dis_width)>IPS114_X_MAX)	ZF_ASSERT(0);
-	if((start_y+dis_height)>IPS114_Y_MAX)	ZF_ASSERT(0);
+    //检查设置的参数是否超过屏幕的分辨率
+    if((start_x+dis_width)>IPS114_X_MAX)    ZF_ASSERT(0);
+    if((start_y+dis_height)>IPS114_Y_MAX)   ZF_ASSERT(0);
     ips114_set_region(start_x,start_y,start_x+dis_width-1,start_y+dis_height-1);//设置显示区域 
     
     for(j=0;j<dis_height;j++)
@@ -641,9 +641,9 @@ void ips114_displayimage032_zoom1(uint8 *p, uint16 width, uint16 height, uint16 
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      凌瞳(彩色摄像头)液晶缩放显示函数
-//  @param      *p     			图像数组地址
-//  @param      width     	    图像宽度
-//  @param      height     	    图像高度
+//  @param      *p              图像数组地址
+//  @param      width           图像宽度
+//  @param      height          图像高度
 //  @param      dis_width       图像显示宽度  0 -（TFT_X_MAX-1）
 //  @param      dis_height      图像显示高度  0 -（TFT_Y_MAX-1）
 //  @return     void
@@ -663,7 +663,7 @@ void ips114_displayimage8660_zoom(uint16 *p, uint16 width, uint16 height, uint16
         for(i=0;i<dis_width;i++)
         {
             color = *(p+(j*height/dis_height)*width+i*width/dis_width);//读取像素点
-			color = ((color&0xff)<<8) | (color>>8);
+            color = ((color&0xff)<<8) | (color>>8);
             ips114_writedata_16bit(color); 
         }
     }
@@ -671,11 +671,11 @@ void ips114_displayimage8660_zoom(uint16 *p, uint16 width, uint16 height, uint16
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      凌瞳(彩色摄像头)液晶缩放显示函数
-//  @param      *p     			图像数组地址
-//  @param      width     	    图像宽度
-//  @param      height     	    图像高度
+//  @param      *p              图像数组地址
+//  @param      width           图像宽度
+//  @param      height          图像高度
 //  @param      start_x         设置显示起点的x轴坐标
-//  @param      start_y     	设置显示起点的y轴坐标
+//  @param      start_y         设置显示起点的y轴坐标
 //  @param      dis_width       图像显示宽度  1 -（TFT_X_MAX）
 //  @param      dis_height      图像显示高度  1 -（TFT_Y_MAX）
 //  @return     void
@@ -688,13 +688,13 @@ void ips114_displayimage8660_zoom1(uint8 *p, uint16 width, uint16 height, uint16
                 
     uint16 color = 0;
 
-	//检查设置的参数是否超过屏幕的分辨率
-	if((start_x+dis_width)>IPS114_X_MAX)	ZF_ASSERT(0);
-	if((start_y+dis_height)>IPS114_Y_MAX)	ZF_ASSERT(0);
+    //检查设置的参数是否超过屏幕的分辨率
+    if((start_x+dis_width)>IPS114_X_MAX)    ZF_ASSERT(0);
+    if((start_y+dis_height)>IPS114_Y_MAX)   ZF_ASSERT(0);
 
     ips114_set_region(start_x,start_y,start_x+dis_width-1,start_y+dis_height-1);//设置显示区域 
     
-	for(j=0;j<dis_height;j++)
+    for(j=0;j<dis_height;j++)
     {
         for(i=0;i<dis_width;i++)
         {
@@ -707,27 +707,27 @@ void ips114_displayimage8660_zoom1(uint8 *p, uint16 width, uint16 height, uint16
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      小钻风(二值化摄像头)液晶显示函数
-//  @param      *p     			图像数组地址
-//  @param      width     	    图像宽度
-//  @param      height     	    图像高度
+//  @param      *p              图像数组地址
+//  @param      width           图像宽度
+//  @param      height          图像高度
 //  @return     void
 //  @since      v1.0
-//  @note      	图像分辨率需要设置在120(高)*160(宽)以下       
+//  @note       图像分辨率需要设置在120(高)*160(宽)以下
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_displayimage7725(uint8 *p, uint16 width, uint16 height) 
 {
     int i,j; 
-	
+
     uint16 temp = 0;
     ips114_set_region(0,0,width-1,height-1);
-	for(i=0;i<height * (width/8);i++)
+    for(i=0;i<height * (width/8);i++)
     {
         temp = *p;
         p++;
         for(j=0; j<8; j++)
         {
-            if( (temp<<j)&0x80 )	ips114_writedata_16bit(WHITE);
-            else					ips114_writedata_16bit(BLACK);
+            if( (temp<<j)&0x80 )    ips114_writedata_16bit(WHITE);
+            else                    ips114_writedata_16bit(BLACK);
         }
     }
 }
@@ -743,8 +743,8 @@ void ips114_displayimage7725(uint8 *p, uint16 width, uint16 height)
 //  @param      color   显示颜色
 //  @return     void
 //  @since      v1.0
-//  Sample usage:		ips114_display_chinese(0,0,16,chinese_test[0],4,RED);//显示font文件里面的 示例
-//  @Note       使用PCtoLCD2002软件取模		    阴码、逐行式、顺向   16*16
+//  Sample usage:       ips114_display_chinese(0,0,16,chinese_test[0],4,RED);//显示font文件里面的 示例
+//  @Note       使用PCtoLCD2002软件取模           阴码、逐行式、顺向   16*16
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_display_chinese(uint16 x, uint16 y, uint8 size, const uint8 *p, uint8 number, uint16 color)
 {

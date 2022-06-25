@@ -1,7 +1,6 @@
 #ifndef __OJ_TIM_H
 #define __OJ_TIM_H
 #include "stm32f10x.h"
-#include "stm32f10x_it.h"
 #include "GPIO.h"
 #include "RCC.h"
 #include "NVIC.h"
@@ -34,8 +33,6 @@ public:
     TIM();
     ~TIM();
     TIM(TIM_Parma TIMx_Parma);
-    static void Delay_ms(uint32_t ms); //保留TIM2用来延时,需要搭配delay_Complete来判断延时是否完成
-    static bool Delay_Complete();      //延时是否完成
     void Update(TIM_Parma TIMx_Parma);
     void Set_TIM_Parma(TIM_Parma TIMx_Parma);
     void Pin_Init(); //后续会更新自动配置引脚
@@ -45,6 +42,4 @@ public:
     void Start();
     void Shutup();
 };
-
-extern TIM TIM_2;
 #endif

@@ -64,6 +64,9 @@ extern "C" {
 #include "SEEKFREE_7725.h"
 #include "SEEKFREE_RDA5807.h"
 #include "SEEKFREE_7725_UART.h"
+
+//平台头文件
+#include "Platform.h"
 #ifdef __cplusplus
 }
 #endif

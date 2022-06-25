@@ -4,8 +4,8 @@ uint8_t aaa[26] =
     {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 uint8_t list[256];
 void Setup();
-void End();
 void Test();
+void End();
 int main()
 {
     Setup();
@@ -22,12 +22,9 @@ void Setup()
     ee = AT24C02(param);
     ee.Init();
 }
-void End()
-{
-}
 void Test()
 {
-    // ee.Write_Byte(0, 'a');
+    // ee.Write_Byte(0, 'z');
     ee.Write_Buffer(255, aaa, 26);
     if (ee.PROCESS_CONDITION)
     {
@@ -53,4 +50,7 @@ void Test()
             printf("%c\n", list[i]);
         }
     }
+}
+void End()
+{
 }

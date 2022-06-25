@@ -71,13 +71,15 @@ DMA2_Channel3_IRQn
 DMA2_Channel4_5_IRQn          
 
 NVIC ”≈œ»º∂:
-USART1  0
-USART2  1
-USART3  2
-UART4   3
-UART5   4
-TIM2    5
-I2C1_ER 6
-I2C1_EV 7
-I2C2_ER 8
-I2C2_EV 9
+USART1                  0
+USART2                  1
+USART3                  2
+UART4                   3
+UART5                   4
+TIM2                    5
+I2C1_ER                 6
+I2C1_EV                 7
+I2C2_ER                 8
+I2C2_EV                 9
+DMA1_Channel4           10
+DMA1_Channel5           11

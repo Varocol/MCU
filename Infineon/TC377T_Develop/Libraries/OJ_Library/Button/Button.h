@@ -24,6 +24,7 @@
 #ifndef __OJ_Button_h
 #define __OJ_Button_h
 #include "GPIO.h"
+#include "Modules.h"
 #include <algorithm>
 #include <stddef.h>
 using namespace std;
@@ -40,7 +41,7 @@ typedef enum{
     HIGH
 }Electrical_Level;
 
-class Button
+class Button : public GPIO
 {
 public:
   // ----- Constructor -----
@@ -54,6 +55,18 @@ public:
    */
   Button(PIN_enum pin, const bool activeLow = true, const bool pullupActive = true);
 
+  /**
+     * Set the Param of OneButton library.
+     * @param pin The pin to be used for input from a momentary button.
+     * @param activeLow Set to true when the input level is LOW when the button is pressed, Default is true.
+     * @param pullupActive Activate the internal pullup when available. Default is true.
+     */
+  void Set_Param(PIN_enum pin, const bool activeLow = true, const bool pullupActive = true);
+
+  /**
+     * Initialize the hardware of Button
+     */
+  void Init();
   // ----- Set runtime parameters -----
 
   /**
@@ -155,7 +168,6 @@ public:
 
 
 private:
-  GPIO gpio = GPIO();                             // GPIO Object
   unsigned int _debounceTicks = 50; // number of ticks for debounce times.
   unsigned int _clickTicks = 400;   // number of msecs before a click is detected.
   unsigned int _pressTicks = 800;   // number of msecs before a long button press is detected
@@ -163,29 +175,29 @@ private:
   int _buttonPressed;
 
   // These variables will hold functions acting as event source.
-  callbackFunction _clickFunc = NULL;
-  parameterizedCallbackFunction _paramClickFunc = NULL;
-  void *_clickFuncParam = NULL;
+  callbackFunction _clickFunc ;
+  parameterizedCallbackFunction _paramClickFunc ;
+  void *_clickFuncParam ;
 
-  callbackFunction _doubleClickFunc = NULL;
-  parameterizedCallbackFunction _paramDoubleClickFunc = NULL;
-  void *_doubleClickFuncParam = NULL;
+  callbackFunction _doubleClickFunc ;
+  parameterizedCallbackFunction _paramDoubleClickFunc ;
+  void *_doubleClickFuncParam ;
 
-  callbackFunction _multiClickFunc = NULL;
-  parameterizedCallbackFunction _paramMultiClickFunc = NULL;
-  void *_multiClickFuncParam = NULL;
+  callbackFunction _multiClickFunc ;
+  parameterizedCallbackFunction _paramMultiClickFunc ;
+  void *_multiClickFuncParam ;
 
-  callbackFunction _longPressStartFunc = NULL;
-  parameterizedCallbackFunction _paramLongPressStartFunc = NULL;
-  void *_longPressStartFuncParam = NULL;
+  callbackFunction _longPressStartFunc ;
+  parameterizedCallbackFunction _paramLongPressStartFunc ;
+  void *_longPressStartFuncParam ;
 
-  callbackFunction _longPressStopFunc = NULL;
-  parameterizedCallbackFunction _paramLongPressStopFunc = NULL;
+  callbackFunction _longPressStopFunc ;
+  parameterizedCallbackFunction _paramLongPressStopFunc ;
   void *_longPressStopFuncParam;
 
-  callbackFunction _duringLongPressFunc = NULL;
-  parameterizedCallbackFunction _paramDuringLongPressFunc = NULL;
-  void *_duringLongPressFuncParam = NULL;
+  callbackFunction _duringLongPressFunc ;
+  parameterizedCallbackFunction _paramDuringLongPressFunc ;
+  void *_duringLongPressFuncParam ;
 
   // These variables that hold information across the upcoming tick calls.
   // They are initialized once on program start and are updated every time the

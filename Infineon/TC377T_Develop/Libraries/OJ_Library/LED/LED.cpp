@@ -58,7 +58,7 @@ void LED::Set_Mode (LED_Lighting_Mode mode)
 void LED::Init ()
 {
     GPIO::Init();
-    LED_On();
+    On();
 }
 
 /*
@@ -66,7 +66,7 @@ void LED::Init ()
  * @param       null
  * @return      void
  */
-void LED::LED_On ()
+void LED::On ()
 {
     if (mode == Low_level_lighting)
     {
@@ -83,7 +83,7 @@ void LED::LED_On ()
  * @param       null
  * @return      void
  */
-void LED::LED_Off ()
+void LED::Off ()
 {
     if (mode == Low_level_lighting)
     {
@@ -100,7 +100,7 @@ void LED::LED_Off ()
  * @param       null
  * @return      void
  */
-void LED::LED_Toggle()
+void LED::Toggle()
 {
     Pin_Toggle();
 }

@@ -44,6 +44,6 @@ void core0_setup ()
 void core0_loop ()
 {
     //loop不能为空，否则会锁线程
-    rt_thread_mdelay(1);
+    platform_delay_ms(1);
 }
 

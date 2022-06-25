@@ -1,10 +1,9 @@
 #ifndef __BUTTON_FUN_H
 #define __BUTTON_FUN_H
-#include "OJ_Library.h"
-#include "rtthread.h"
+#include "Libraries.h"
+#include "Modules.h"
 void doubleclick();
 void click();
 void longclick();
-extern LED led;
 extern Button button;
 #endif  /*__BUTTON_FUN_H*/

@@ -9,6 +9,7 @@
 #define EVENT_ERROR "事件%s无法响应!\n在函数%s处无法运行"
 #define FLAG_ERROR "标志位%s无法改变!\n在函数%s处无法运行"
 #include "I2C.h"
+#include "Variable_Space.h"
 #include "USART.h"
 #include "USART_DEBUG.h"
 #include "stdio.h"

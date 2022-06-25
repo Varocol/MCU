@@ -216,9 +216,8 @@ void Buzzer::Music (const struct beep_song *song)
     Beep_Song_Decode_new_freq(song->tone, 0);
     /*提取乐曲名*/
     Beep_Song_Get_Name(song, name);
-#ifndef core1_used
-    rt_kprintf("正在播放：%s\n", name);
-#endif
+    //该方法从底层调用uart，输出更安全
+    platform_printf("正在播放：%s\n", name);
     /*获取乐曲长度*/
     len = Beep_Song_Get_Len(song);
     /*开始播放乐曲*/
@@ -228,18 +227,10 @@ void Buzzer::Music (const struct beep_song *song)
         Beep_Song_Get_Data(song, i, &data);
         Beep_Set(data.freq, song->volume);
         Beep_On();
-#ifdef  core1_used
-        systick_delay_ms(STM1,data.sound_len);
-#else
-        rt_thread_mdelay(data.sound_len);
-#endif
+        //该函数有自动获取核ID并根据需要切换定时器的功能
+        platform_delay_ms(data.sound_len);
         Beep_Off();
-#ifdef  core1_used
-        systick_delay_ms(STM1,data.nosound_len);
-#else
-        rt_thread_mdelay(data.nosound_len);
-#endif
+        platform_delay_ms(data.nosound_len);
         i++;
     }
-
 }
