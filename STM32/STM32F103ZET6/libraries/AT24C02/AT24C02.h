@@ -5,19 +5,19 @@
 #define Check_PROCESS_CONDITION   \
   if (PROCESS_CONDITION == false) \
     return;
-#define BUSY_ERROR "总线正在忙碌!\n在函数%s处无法运行"
-#define EVENT_ERROR "事件%s无法响应!\n在函数%s处无法运行"
-#define FLAG_ERROR "标志位%s无法改变!\n在函数%s处无法运行"
+#define BUSY_ERROR "总线正在忙碌!\n在方法%s处无法运行"
+#define EVENT_ERROR "事件%s无法响应!\n在方法%s处无法运行"
+#define FLAG_ERROR "标志位%s无法改变!\n在方法%s处无法运行"
 #include "I2C.h"
 #include "Variable_Space.h"
 #include "USART.h"
 #include "USART_DEBUG.h"
 #include "stdio.h"
-//AT24C02参数列表结构体
+// AT24C02参数列表结构体
 typedef struct
 {
   uint8_t AT24C02_ADDR;
-  I2C_TypeDef *I2Cx;
+  I2C I2Cx;
 } AT24C02_Param;
 
 class AT24C02

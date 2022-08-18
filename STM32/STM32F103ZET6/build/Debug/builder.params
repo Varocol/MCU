@@ -1,17 +1,17 @@
 {
-    "name": "stm32f1xx_gcc",
+    "name": "STM32F103ZET6",
     "target": "Debug",
-    "toolchain": "AC5",
-    "toolchainLocation": "D:\\Chipenvironment\\keilmdk\\ARM\\ARMCC",
-    "toolchainCfgFile": "..\\cfg\\arm.v5.model.json",
+    "toolchain": "AC6",
+    "toolchainLocation": "d:\\Chipenvironment\\keilmdk\\ARM\\ARMCLANG",
+    "toolchainCfgFile": "..\\cfg\\arm.v6.model.json",
     "buildMode": "fast|multhread",
     "showRepathOnLog": true,
     "threadNum": 16,
     "rootDir": "c:\\Users\\Varocol\\Desktop\\MCU\\STM32\\STM32F103ZET6",
     "dumpPath": "build\\Debug",
     "outDir": "build\\Debug",
-    "ram": 20480,
-    "rom": 65536,
+    "ram": 65536,
+    "rom": 524288,
     "incDirs": [
         ".eide/deps",
         "lib/cmsis",
@@ -20,6 +20,7 @@
         "hal/STM32F10x_StdPeriph_Driver/inc",
         "lib/STM32F10x_Driver",
         "lib/CMSIS",
+        "libraries",
         "libraries/Variable_Space",
         "libraries/USART",
         "libraries/TIM",
@@ -27,16 +28,17 @@
         "libraries/String",
         "libraries/SPI",
         "libraries/Servo",
+        "libraries/RTC",
         "libraries/RCC",
         "libraries/PWM",
         "libraries/NVIC",
+        "libraries/LED",
         "libraries/INTERRUPT",
         "libraries/I2C",
         "libraries/GPIO(Support Bit-Band Operations)",
+        "libraries/EXTI",
         "libraries/DMA",
-        "libraries/Buzzer",
         "libraries/AT24C02",
-        "libraries/All_Headers",
         "libraries/12864",
         "src",
         "Startup"
@@ -44,11 +46,11 @@
     "libDirs": [],
     "defines": [
         "USE_STDPERIPH_DRIVER",
-        "STM32F10X_HD",
-        "ARM_MATH_CM3"
+        "ARM_MATH_CM3",
+        "STM32F10X_HD"
     ],
     "sourceList": [
-        "Startup/startup_stm32f10x_hd.s",
+        "Startup/startup_stm32f10x_hd_FOR_AC6.s",
         "hal/STM32F10x_StdPeriph_Driver/src/misc.c",
         "hal/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c",
         "hal/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c",
@@ -76,14 +78,16 @@
         "libraries/12864/LCD_12864_Parallel.cpp",
         "libraries/12864/LCD_12864_Serial.cpp",
         "libraries/AT24C02/AT24C02.cpp",
-        "libraries/Buzzer/Buzzer.cpp",
         "libraries/DMA/DMA.cpp",
+        "libraries/EXTI/EXTI.cpp",
         "libraries/GPIO(Support Bit-Band Operations)/GPIO.cpp",
         "libraries/I2C/I2C.cpp",
         "libraries/INTERRUPT/stm32f10x_it.cpp",
+        "libraries/LED/LED.cpp",
         "libraries/NVIC/NVIC.cpp",
         "libraries/PWM/PWM.cpp",
         "libraries/RCC/RCC.cpp",
+        "libraries/RTC/RTC.cpp",
         "libraries/SPI/SPI.cpp",
         "libraries/Servo/Servo.cpp",
         "libraries/SysTick/SysTick.cpp",
@@ -94,9 +98,9 @@
         "src/main.cpp"
     ],
     "sourceParams": {},
-    "sourceParamsMtime": 1645253951147.1963,
+    "sourceParamsMtime": 1660816972119.8506,
     "options": {
-        "version": 4,
+        "version": 3,
         "beforeBuildTasks": [],
         "afterBuildTasks": [],
         "global": {
@@ -109,28 +113,31 @@
         },
         "c/cpp-compiler": {
             "optimization": "level-0",
-            "one-elf-section-per-function": true,
-            "C_FLAGS": "--diag_suppress=1 --diag_suppress=1295",
-            "CXX_FLAGS": "--diag_suppress=1 --diag_suppress=1295",
-            "warnings": "unspecified",
-            "c99-mode": true
+            "language-c": "c11",
+            "language-cpp": "c++14",
+            "link-time-optimization": true,
+            "warnings": "ac5-like-warnings"
         },
-        "asm-compiler": {},
+        "asm-compiler": {
+            "$use": "asm-auto"
+        },
         "linker": {
             "output-format": "elf",
+            "misc-controls": "--diag_suppress=L6329",
+            "link-time-optimization": true,
             "link-scatter": [
-                "\"c:/Users/Varocol/Desktop/MCU/STM32/STM32F103ZET6/build/Debug/stm32f1xx_gcc.sct\""
+                "\"c:/Users/Varocol/Desktop/MCU/STM32/STM32F103ZET6/build/Debug/STM32F103ZET6.sct\""
             ]
         }
     },
     "env": {},
     "sha": {
-        "c/cpp-defines": "175eee83f1d8af1d183672ccd9d349bd",
+        "c/cpp-defines": "72632f8237da0f489e76c59fe58daed4",
         "beforeBuildTasks": "d751713988987e9331980363e24189ce",
         "afterBuildTasks": "d751713988987e9331980363e24189ce",
         "global": "cab97363c56a7cd5c4d6d683dfcaa9f9",
-        "c/cpp-compiler": "dfae7876c1a90c0562905e65732cd552",
-        "asm-compiler": "99914b932bd37a50b983c5e7c90ae93b",
-        "linker": "1b54563c2efd3abe6b3ece9cf8221973"
+        "c/cpp-compiler": "25dd0efeb65e88067a9469751c79016d",
+        "asm-compiler": "f16bc066fd83f6b0cf6cd2b7eea65136",
+        "linker": "733e75961d1d25e2aed8a04bc0867d6b"
     }
 }

@@ -10183,3 +10183,915 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-11 16:56:31.786 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-11 16:57:11.208
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-12 09:04:38.067 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-12 09:04:51.704
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:32:19.653
+!MESSAGE Project was boosted in 4882 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:32:20.032
+!MESSAGE Include paths were discovered in 375 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:32:46.721
+!MESSAGE Project was boosted in 3852 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:32:47.008
+!MESSAGE Include paths were discovered in 283 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:39:41.824
+!MESSAGE Project was boosted in 4390 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:39:42.062
+!MESSAGE Include paths were discovered in 236 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:40:15.779
+!MESSAGE Project was boosted in 3859 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:40:16.029
+!MESSAGE Include paths were discovered in 248 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:40:49.214
+!MESSAGE Project was boosted in 4167 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-12 13:40:49.409
+!MESSAGE Include paths were discovered in 193 milliseconds.
+!SESSION 2022-07-13 09:14:37.272 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.core.resources 2 10035 2022-07-13 09:14:46.217
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-13 09:15:02.951
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-13 17:18:44.345 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-13 17:19:11.647
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:23:34.256
+!MESSAGE Project was boosted in 5951 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:23:34.697
+!MESSAGE Include paths were discovered in 435 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:24:25.234
+!MESSAGE Project was boosted in 4067 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:24:25.550
+!MESSAGE Include paths were discovered in 313 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:26:05.642
+!MESSAGE Project was boosted in 4355 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:26:06.045
+!MESSAGE Include paths were discovered in 403 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:26:24.695
+!MESSAGE Project was boosted in 3961 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-13 21:26:24.975
+!MESSAGE Include paths were discovered in 277 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 4 0 2022-07-14 08:55:20.642
+!MESSAGE 元素Platform不存在
+!STACK 1
+C Model Exception: C Model Status [元素Platform不存在]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.CContainer.buildStructure(CContainer.java:159)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:264)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:428)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:306)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:296)
+	at org.eclipse.cdt.internal.core.model.Parent.getChildren(Parent.java:57)
+	at org.eclipse.cdt.internal.core.model.CElement.accept(CElement.java:525)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.findUsedLibraryHeaders(iLLDAligner.java:608)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.process(iLLDAligner.java:198)
+	at com.infineon.aurix.buildsystem.build.booster.BoosterBuilder.build(BoosterBuilder.java:31)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2022-07-14 08:55:20.650
+!MESSAGE 元素Platform不存在
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 08:55:20.778
+!MESSAGE Project was boosted in 3679 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 08:55:20.965
+!MESSAGE Include paths were discovered in 184 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 4 0 2022-07-14 08:57:45.913
+!MESSAGE 元素Platform不存在
+!STACK 1
+C Model Exception: C Model Status [元素Platform不存在]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.CContainer.buildStructure(CContainer.java:159)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:264)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:428)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:306)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:296)
+	at org.eclipse.cdt.internal.core.model.Parent.getChildren(Parent.java:57)
+	at org.eclipse.cdt.internal.core.model.CElement.accept(CElement.java:525)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.findUsedLibraryHeaders(iLLDAligner.java:608)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.process(iLLDAligner.java:198)
+	at com.infineon.aurix.buildsystem.build.booster.BoosterBuilder.build(BoosterBuilder.java:31)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2022-07-14 08:57:45.913
+!MESSAGE 元素Platform不存在
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 08:57:46.020
+!MESSAGE Project was boosted in 3603 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 08:57:46.241
+!MESSAGE Include paths were discovered in 217 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 4 0 2022-07-14 08:59:27.860
+!MESSAGE 元素Platform不存在
+!STACK 1
+C Model Exception: C Model Status [元素Platform不存在]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.CContainer.buildStructure(CContainer.java:159)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:264)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:428)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:306)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:296)
+	at org.eclipse.cdt.internal.core.model.Parent.getChildren(Parent.java:57)
+	at org.eclipse.cdt.internal.core.model.CElement.accept(CElement.java:525)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.findUsedLibraryHeaders(iLLDAligner.java:608)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.process(iLLDAligner.java:198)
+	at com.infineon.aurix.buildsystem.build.booster.BoosterBuilder.build(BoosterBuilder.java:31)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2022-07-14 08:59:27.861
+!MESSAGE 元素Platform不存在
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 08:59:27.962
+!MESSAGE Project was boosted in 3326 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 08:59:28.172
+!MESSAGE Include paths were discovered in 209 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 4 0 2022-07-14 09:04:31.426
+!MESSAGE 元素Platform不存在
+!STACK 1
+C Model Exception: C Model Status [元素Platform不存在]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.CContainer.buildStructure(CContainer.java:159)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:264)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:428)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:306)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:296)
+	at org.eclipse.cdt.internal.core.model.Parent.getChildren(Parent.java:57)
+	at org.eclipse.cdt.internal.core.model.CElement.accept(CElement.java:525)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.findUsedLibraryHeaders(iLLDAligner.java:608)
+	at com.infineon.aurix.buildsystem.build.booster.iLLDAligner.process(iLLDAligner.java:198)
+	at com.infineon.aurix.buildsystem.build.booster.BoosterBuilder.build(BoosterBuilder.java:31)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2022-07-14 09:04:31.426
+!MESSAGE 元素Platform不存在
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:04:31.555
+!MESSAGE Project was boosted in 3897 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:04:31.743
+!MESSAGE Include paths were discovered in 186 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:22:30.527
+!MESSAGE Project was boosted in 3508 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:22:30.755
+!MESSAGE Include paths were discovered in 225 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:25:00.494
+!MESSAGE Project was boosted in 3646 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:25:00.705
+!MESSAGE Include paths were discovered in 207 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:27:01.220
+!MESSAGE Project was boosted in 3491 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 09:27:01.405
+!MESSAGE Include paths were discovered in 183 milliseconds.
+
+!ENTRY org.eclipse.cdt.ui 4 0 2022-07-14 17:34:59.261
+!MESSAGE Error in CDT UI during reconcile
+!STACK 1
+C Model Exception: C Model Status [元素BSP_Motor.cpp不存在]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(TranslationUnit.java:583)
+	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:65)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(WorkingCopy.java:365)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:79)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2022-07-14 17:34:59.262
+!MESSAGE 元素BSP_Motor.cpp不存在
+
+!ENTRY org.eclipse.cdt.ui 4 0 2022-07-14 18:00:00.668
+!MESSAGE Error in CDT UI during reconcile
+!STACK 1
+C Model Exception: C Model Status [元素MSH_FUN.cpp不存在]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(TranslationUnit.java:583)
+	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:65)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(WorkingCopy.java:365)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:79)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2022-07-14 18:00:00.668
+!MESSAGE 元素MSH_FUN.cpp不存在
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:05:21.748
+!MESSAGE Project was boosted in 3941 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:05:21.975
+!MESSAGE Include paths were discovered in 225 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:07:44.800
+!MESSAGE Project was boosted in 3585 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:07:44.998
+!MESSAGE Include paths were discovered in 196 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:08:01.161
+!MESSAGE Project was boosted in 3315 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:08:01.340
+!MESSAGE Include paths were discovered in 178 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:17:06.889
+!MESSAGE Project was boosted in 3794 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-14 18:17:07.128
+!MESSAGE Include paths were discovered in 237 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-15 09:30:15.666
+!MESSAGE Project was boosted in 3817 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-15 09:30:15.865
+!MESSAGE Include paths were discovered in 198 milliseconds.
+
+!ENTRY org.eclipse.cdt.ui 4 0 2022-07-15 09:37:00.103
+!MESSAGE Error in CDT UI during reconcile
+!STACK 1
+C Model Exception: C Model Status [元素BSP_Motor.cpp不存在]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(TranslationUnit.java:583)
+	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:65)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(WorkingCopy.java:365)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:79)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2022-07-15 09:37:00.103
+!MESSAGE 元素BSP_Motor.cpp不存在
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-15 09:44:47.211
+!MESSAGE Project was boosted in 3602 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-15 09:44:47.461
+!MESSAGE Include paths were discovered in 248 milliseconds.
+!SESSION 2022-07-17 11:12:41.253 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-17 11:13:00.877
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:14:58.186
+!MESSAGE Project was boosted in 6270 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:14:58.731
+!MESSAGE Include paths were discovered in 538 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:16:17.009
+!MESSAGE Project was boosted in 4798 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:16:17.401
+!MESSAGE Include paths were discovered in 388 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:18:29.792
+!MESSAGE Project was boosted in 4936 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:18:30.192
+!MESSAGE Include paths were discovered in 396 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:19:48.576
+!MESSAGE Project was boosted in 5173 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:19:48.989
+!MESSAGE Include paths were discovered in 412 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:20:29.857
+!MESSAGE Project was boosted in 4444 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:20:30.238
+!MESSAGE Include paths were discovered in 377 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:22:36.334
+!MESSAGE Project was boosted in 4573 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:22:36.686
+!MESSAGE Include paths were discovered in 349 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:22:55.342
+!MESSAGE Project was boosted in 4852 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:22:55.762
+!MESSAGE Include paths were discovered in 416 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:25:51.722
+!MESSAGE Project was boosted in 4987 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:25:52.053
+!MESSAGE Include paths were discovered in 330 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:27:33.231
+!MESSAGE Project was boosted in 5044 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:27:33.629
+!MESSAGE Include paths were discovered in 396 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:31:09.468
+!MESSAGE Project was boosted in 5157 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 12:31:09.832
+!MESSAGE Include paths were discovered in 362 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:04:40.959
+!MESSAGE Project was boosted in 4892 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:04:41.476
+!MESSAGE Include paths were discovered in 513 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:16:18.330
+!MESSAGE Project was boosted in 4846 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:16:18.691
+!MESSAGE Include paths were discovered in 359 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:18:17.407
+!MESSAGE Project was boosted in 4807 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:18:17.730
+!MESSAGE Include paths were discovered in 320 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:22:57.377
+!MESSAGE Project was boosted in 4779 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:22:57.784
+!MESSAGE Include paths were discovered in 404 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:25:23.727
+!MESSAGE Project was boosted in 4990 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:25:24.065
+!MESSAGE Include paths were discovered in 336 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:28:57.361
+!MESSAGE Project index is not complete, and cannot be used for boosting.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:28:57.362
+!MESSAGE Project was boosted in 1 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:28:57.718
+!MESSAGE Include paths were discovered in 353 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:37:09.482
+!MESSAGE Project was boosted in 5305 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:37:09.940
+!MESSAGE Include paths were discovered in 455 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:38:25.829
+!MESSAGE Project was boosted in 5688 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:38:26.312
+!MESSAGE Include paths were discovered in 482 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:40:37.694
+!MESSAGE Project was boosted in 4875 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:40:38.078
+!MESSAGE Include paths were discovered in 382 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:42:15.325
+!MESSAGE Project was boosted in 5079 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:42:15.705
+!MESSAGE Include paths were discovered in 378 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:43:09.566
+!MESSAGE Project was boosted in 4827 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:43:09.909
+!MESSAGE Include paths were discovered in 341 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:43:22.913
+!MESSAGE Project index is not complete, and cannot be used for boosting.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:43:22.915
+!MESSAGE Project was boosted in 1 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:43:23.267
+!MESSAGE Include paths were discovered in 350 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:44:26.632
+!MESSAGE Project was boosted in 4771 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:44:26.904
+!MESSAGE Include paths were discovered in 270 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:46:42.177
+!MESSAGE Project was boosted in 4678 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 13:46:42.551
+!MESSAGE Include paths were discovered in 372 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 15:25:23.219
+!MESSAGE Project was boosted in 4581 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-17 15:25:23.571
+!MESSAGE Include paths were discovered in 349 milliseconds.
+!SESSION 2022-07-17 16:02:02.423 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-17 16:02:23.498
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-18 11:27:44.549 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-18 11:28:02.965
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 11:30:34.414
+!MESSAGE Project was boosted in 4973 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 11:30:34.851
+!MESSAGE Include paths were discovered in 430 milliseconds.
+!SESSION 2022-07-18 12:09:12.936 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-18 12:09:41.868
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:10:10.489
+!MESSAGE Project was boosted in 10669 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:10:11.002
+!MESSAGE Include paths were discovered in 505 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:10:47.758
+!MESSAGE Project was boosted in 4081 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:10:47.985
+!MESSAGE Include paths were discovered in 225 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:12:52.045
+!MESSAGE Project index is not complete, and cannot be used for boosting.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:12:52.047
+!MESSAGE Project was boosted in 1 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:12:52.228
+!MESSAGE Include paths were discovered in 180 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:13:32.752
+!MESSAGE Project was boosted in 3521 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 12:13:32.981
+!MESSAGE Include paths were discovered in 227 milliseconds.
+!SESSION 2022-07-18 13:22:18.273 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-18 13:22:59.068
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 13:33:33.206
+!MESSAGE Project was boosted in 4908 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 13:33:33.581
+!MESSAGE Include paths were discovered in 368 milliseconds.
+!SESSION 2022-07-18 15:11:14.708 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-18 15:11:34.965
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 15:11:54.118
+!MESSAGE Project was boosted in 4512 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 15:11:54.467
+!MESSAGE Include paths were discovered in 346 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 15:15:17.282
+!MESSAGE Project was boosted in 3278 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-18 15:15:17.464
+!MESSAGE Include paths were discovered in 179 milliseconds.
+!SESSION 2022-07-20 07:09:31.577 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-20 07:09:54.295
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-20 08:56:51.705 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-20 08:57:15.647
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-21 10:36:05.866 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-21 10:37:00.172
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-21 10:44:16.127
+!MESSAGE Project was boosted in 7267 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-21 10:44:16.671
+!MESSAGE Include paths were discovered in 537 milliseconds.
+!SESSION 2022-07-21 11:57:06.844 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-21 11:57:45.778
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-21 16:12:41.828 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-21 16:13:08.021
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-21 17:21:01.658 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-21 17:21:23.583
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-21 17:22:31.545
+!MESSAGE Project was boosted in 5826 milliseconds.
+
+!ENTRY com.infineon.aurix.buildsystem 1 0 2022-07-21 17:22:31.864
+!MESSAGE Include paths were discovered in 313 milliseconds.
+!SESSION 2022-07-21 17:35:33.011 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-21 17:36:06.202
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-21 18:30:39.392 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-21 18:31:03.331
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-21 20:37:50.824 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-21 20:38:15.739
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-23 09:30:40.791 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-23 09:31:06.490
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-26 09:07:10.139 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-26 09:07:38.560
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-26 10:17:11.562 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.core.resources 2 10035 2022-07-26 10:17:24.917
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-26 10:17:51.414
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-07-30 09:43:02.025 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-30 09:43:28.490
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-08-06 08:13:47.777 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-08-06 08:14:10.928
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-08-07 11:32:43.212 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-08-07 11:33:27.481
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2022-08-10 10:51:23.561 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -perspective com.infineon.aurix.buildmanager.perspective.c
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective com.infineon.aurix.buildmanager.perspective.c
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-08-10 10:52:02.684
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Varocol'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

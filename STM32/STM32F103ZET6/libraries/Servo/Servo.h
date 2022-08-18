@@ -1,18 +1,34 @@
-#ifndef __OJ_SERVER_H
-#define __OJ_SERVER_H
-#define CURRENT_START 0.0005
-#define CURRENT_END 0.0025
-#define ANGLE_WHITH 180
+#ifndef __OJ_SERVO_H
+#define __OJ_SERVO_H
 #include "PWM.h"
+
+//舵机参数结构体
+typedef struct
+{
+    TIMx_Channelx_enum pwmch; // Servo PWM通道
+    uint32_t freq;            // Servo 驱动频率
+    double CURRENT_MAX;       // Servo 脉宽最大值(只用于记录),单位ms
+    double CURRENT_MIN;       // Servo 脉宽最小值(只用于记录),单位ms
+    double CURRENT_END;       // Servo 受控范围脉宽最大值,单位ms
+    double CURRENT_START;     // Servo 受控范围脉宽最小值,单位ms
+    double MAP_MAX;           // Servo 映射最大值
+    double MAP_MIN;           // Servo 映射最小值
+} Servo_Param;
+
 class Servo : public PWM
 {
 private:
+    Servo_Param Param;
+    double CURRENT_To_Percent(double CURRENT);
+    double MAP_TO_CURRENT(double MAP_VAL);
+    double MAP_TO_Percent(double MAP_VAL);
+
 public:
-    ~Servo();
     Servo();
-    Servo(TIMx_Channelx_Selection T_C_S, double hz, double angle);
-    double Angle_to_DutyRatio(double angle, double hz);
-    void Init();
-    void Update(TIMx_Channelx_Selection T_C_S, double hz, double angle);
+    Servo(Servo_Param Param);
+    ~Servo();
+    void Set_Servo_Param(Servo_Param Param);
+    void Turn(double MAP_VAL);
 };
-#endif
+
+#endif /*__OJ_SERVO_H*/

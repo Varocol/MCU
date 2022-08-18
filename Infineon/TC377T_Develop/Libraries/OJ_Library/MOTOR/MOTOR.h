@@ -16,7 +16,8 @@ typedef struct
         ATOM_PIN_enum pwmch2;   //MOTOR 通道2引脚
         MOTOR_Direction dir;    //MOTOR 电机转动方向
         uint32 freq;            //MOTOR 电机驱动频率
-        uint8 Speed_Max;        //MOTOR 电机速度阈值
+        uint8 Speed_Max;        //MOTOR 电机速度阈值(用占空比来表示的,范围为0~100)
+        double MAP_MAX;         //MOTOR 映射最大值
 } MOTOR_Param;
 
 class MOTOR

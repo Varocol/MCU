@@ -1,6 +1,6 @@
 #include "DMA.h"
 /**
- * @brief  DMA空构造方法
+ * @brief  DMA-空构造方法
  * @param  None
  * @retval None
  */
@@ -9,7 +9,7 @@ DMA::DMA()
 }
 
 /**
- * @brief  DMA析构函数
+ * @brief  DMA-析构方法
  * @param  None
  * @retval None
  */
@@ -18,8 +18,8 @@ DMA::~DMA()
 }
 
 /**
- * @brief  DMA构造方法
- * @param  DMAx_Param:DMA的参数列表
+ * @brief  DMA-构造方法
+ * @param  DMAx_Param   DMA的参数列表
  * @retval None
  */
 DMA::DMA(DMA_Param DMAx_Param)
@@ -28,8 +28,8 @@ DMA::DMA(DMA_Param DMAx_Param)
 }
 
 /**
- * @brief  设置DMA的参数列表
- * @param  DMAx_Param:DMA的参数列表
+ * @brief  DMA-设置DMA的参数列表
+ * @param  DMAx_Param   DMA的参数列表
  * @retval None
  */
 void DMA::Set_DMA_Param(DMA_Param DMAx_Param)
@@ -38,8 +38,8 @@ void DMA::Set_DMA_Param(DMA_Param DMAx_Param)
 }
 
 /**
- * @brief  DMA参数列表更新
- * @param  DMAx_Param:DMA的参数列表
+ * @brief  DMA-参数列表更新
+ * @param  DMAx_Param   DMA的参数列表
  * @retval None
  */
 void DMA::Update(DMA_Param DMAx_Param)
@@ -50,7 +50,17 @@ void DMA::Update(DMA_Param DMAx_Param)
 }
 
 /**
- * @brief  DMA 初始化函数
+ * @brief  DMA-用于在不是循环模式下的数据量设置
+ * @param  DMAx_Param   DMA的参数列表
+ * @retval None
+ */
+void DMA::SetCurrDataCounter(uint16_t DataNumber)
+{
+    DMA_SetCurrDataCounter(DMAx_Param.DMA_Channelx, DataNumber);
+}
+
+/**
+ * @brief  DMA-初始化方法
  * @param  None
  * @retval None
  */
@@ -65,13 +75,24 @@ void DMA::Init()
     //配置DMA中断优先级
     DMAx_Param.DMA_NVIC_Operate.Init();
     //配置DMA中断
-    DMA_ITConfig(DMAx_Param.DMA_Channelx, DMAx_Param.DMA_IT_Selection, DMAx_Param.DMA_IT_State);
+    ITConfig(DMAx_Param.DMA_IT_Selection, DMAx_Param.DMA_IT_State);
     //使能DMA
     Start();
 }
 
 /**
- * @brief  开启DMA函数(DMA使能)
+ * @brief  DMA-中断方法
+ * @param  DMA_IT       中断标志的选择
+ * @param  NewState     使能或失能
+ * @retval None
+ */
+void DMA::ITConfig(uint32_t DMA_IT, FunctionalState NewState)
+{
+    DMA_ITConfig(DMAx_Param.DMA_Channelx, DMA_IT, NewState);
+}
+
+/**
+ * @brief  DMA-开启DMA方法(DMA使能)
  * @param  None
  * @retval None
  */
@@ -81,7 +102,9 @@ void DMA::Start()
 }
 
 /**
- * @brief  关闭DMA函数(DMA失能)
+ * @brief  DMA-关闭DMA方法(DMA失能)
+ * @note   该关闭方法采用stm32官方推荐的关闭顺序,所以应当在传输完成后使用
+ *         传输还未开始不能使用
  * @param  None
  * @retval None
  */
@@ -91,9 +114,9 @@ void DMA::ShutUp()
 }
 
 /**
- * @brief  获取DMA通道所属的DMA
+ * @brief  DMA-获取DMA通道所属的DMA
  * @param
- * @retval None
+ * @retval DMA通道所属的DMAx
  */
 DMA_TypeDef *DMA::Get_DMA(DMA_Channel_TypeDef *DMA_Channelx)
 {

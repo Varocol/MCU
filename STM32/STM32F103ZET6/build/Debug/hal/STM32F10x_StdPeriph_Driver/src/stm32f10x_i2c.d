@@ -1,33 +1,28 @@
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\stm32f10x.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\lib\cmsis\core_cm3.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\lib\cmsis\cmsis_version.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\lib\cmsis\cmsis_compiler.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\lib\cmsis\cmsis_armcc.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\lib\STM32F10x_Driver\stm32f10x_conf.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\stm32f10x.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
-.\build\Debug\hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o: .\hal\STM32F10x_StdPeriph_Driver\inc\misc.h
+./build/Debug/hal/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.o: \
+  hal\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h \
+  hal\STM32F10x_StdPeriph_Driver\stm32f10x.h lib\cmsis\core_cm3.h \
+  hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
+  lib\STM32F10x_Driver\stm32f10x_conf.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h \
+  hal\STM32F10x_StdPeriph_Driver\inc\misc.h

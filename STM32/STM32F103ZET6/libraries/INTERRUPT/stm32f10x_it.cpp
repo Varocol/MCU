@@ -140,20 +140,18 @@ void SysTick_Handler(void)
 }
 void EXTI0_IRQHandler(void)
 {
-  //  if(EXTI_GetITStatus(EXTI_Line0) != RESET)
-  //  {
-  //      if(flag == Bit_SET)
-  //      {
-  //        flag = Bit_RESET;
-  //      }
-  //      else
-  //      {
-  //        flag = Bit_SET;
-  //      }
-  //  }
-  //  KEY_IN_MODE;
-  //  while(!KEY_IN);
-  //  EXTI_ClearITPendingBit(EXTI_Line0);
+  // PWR电源管理项目
+  if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+  {
+    EXTI_ClearITPendingBit(EXTI_Line0);
+  }
+  // EXTI中断项目
+  // if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+  // {
+  //   LED_1.Toggle();
+  //   printf("按下\n");
+  //   EXTI_ClearITPendingBit(EXTI_Line0);
+  // }
 }
 void TIM2_IRQHandler(void)
 {
@@ -200,12 +198,45 @@ void WWDG_IRQHandler(void)
 }
 void PVD_IRQHandler(void)
 {
+  if (EXTI_GetITStatus(EXTI_Line16) != RESET)
+  {
+    if (PWR_GetFlagStatus(PWR_FLAG_PVDO) == RESET) //高于阈值
+    {
+      printf("进入PVD中断,电压高于阈值\r\n");
+    }
+    else //低于阈值
+    {
+      printf("进入PVD中断,电压低于阈值\r\n");
+    }
+    EXTI_ClearITPendingBit(EXTI_Line16);
+  }
 }
 void TAMPER_IRQHandler(void)
 {
+  //入侵检测项目
+  if (BKP_GetITStatus() != RESET)
+  {
+    printf("入侵事件触发!\n");
+    BKP_ClearFlag();
+    BKP_ClearITPendingBit();
+  }
 }
 void RTC_IRQHandler(void)
 {
+  // RTC实时时钟项目
+  if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
+  {
+    printf("%d\n", RTC_GetCounter());
+    LED_1.Toggle();
+    RTC_WaitForLastTask();
+    RTC_ClearITPendingBit(RTC_IT_SEC);
+  }
+  else if (RTC_GetITStatus(RTC_IT_ALR) != RESET)
+  {
+    printf("闹钟事件触发!\n");
+    RTC_WaitForLastTask();
+    RTC_ClearITPendingBit(RTC_IT_ALR);
+  }
 }
 void FLASH_IRQHandler(void)
 {
@@ -233,18 +264,33 @@ void DMA1_Channel2_IRQHandler(void)
 }
 void DMA1_Channel3_IRQHandler(void)
 {
+  if (DMA_GetITStatus(DMA1_IT_TC3))
+  {
+    printf("123\n");
+    DMA_ClearITPendingBit(DMA1_IT_TC3);
+  }
 }
 void DMA1_Channel4_IRQHandler(void)
 {
+  if (DMA_GetITStatus(DMA1_IT_TC4))
+  {
+    DMA_ClearITPendingBit(DMA1_IT_TC4);
+  }
+  else if (DMA_GetITStatus(DMA1_IT_TE4))
+  {
+    printf("123\n");
+    DMA_ClearITPendingBit(DMA1_IT_TE4);
+  }
 }
 void DMA1_Channel5_IRQHandler(void)
 {
+  // DMA串口通信项目
   if (DMA_GetITStatus(DMA1_IT_TC5))
   {
     //一般发送
     // for (int i = 0; i < sizeof(ReceiveBuffer) / sizeof(char); i++)
     // {
-    //   USART_1.Send_Byte(ReceiveBuffer[i]);
+    //   USART_1.Send_Data(ReceiveBuffer[i]);
     // }
     // DMA发送
     USART1_TX_DMA.Init();
@@ -276,6 +322,23 @@ void CAN1_SCE_IRQHandler(void)
 }
 void EXTI9_5_IRQHandler(void)
 {
+  // SPI通信测试项目
+  if (EXTI_GetFlagStatus(EXTI_Line6) != RESET)
+  {
+    // USART_1.Send_String("已进入中断！\n");
+    //读取PC6
+    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6) == Bit_SET)
+    {
+      USART_1.Send_String("引脚已拉高\n");
+      SPI_2.NSS_High();
+    }
+    else if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6) == Bit_RESET)
+    {
+      USART_1.Send_String("引脚已拉低\n");
+      SPI_2.NSS_Low();
+    }
+    EXTI_ClearITPendingBit(EXTI_Line6);
+  }
 }
 void TIM1_BRK_IRQHandler(void)
 {
@@ -309,9 +372,46 @@ void I2C2_ER_IRQHandler(void)
 }
 void SPI1_IRQHandler(void)
 {
+  if (SPI_I2S_GetITStatus(SPI1, SPI_IT_MODF) != RESET)
+  {
+    printf("MODF!\n");
+  }
+  if (SPI_I2S_GetITStatus(SPI1, SPI_IT_CRCERR) != RESET)
+  {
+    printf("CRCERR!\n");
+  }
+  if (SPI_I2S_GetITStatus(SPI1, SPI_I2S_IT_OVR) != RESET)
+  {
+    printf("OVR!\n");
+  }
 }
 void SPI2_IRQHandler(void)
 {
+  if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_RXNE) != RESET)
+  {
+    printf("%c", SPI_I2S_ReceiveData(SPI2));
+    // printf("RXNE!\n");
+  }
+  if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_TXE) != RESET)
+  {
+    printf("TXE!\n");
+  }
+  if (SPI_I2S_GetITStatus(SPI2, SPI_IT_CRCERR) != RESET)
+  {
+    printf("CRCERR!\n");
+  }
+  if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_OVR) != RESET)
+  {
+    printf("OVR!\n");
+  }
+  if (SPI_I2S_GetITStatus(SPI2, SPI_IT_MODF) != RESET)
+  {
+    printf("MODF!\n");
+  }
+  if (SPI_I2S_GetITStatus(SPI2, I2S_IT_UDR) != RESET)
+  {
+    printf("UDR!\n");
+  }
 }
 void USART2_IRQHandler(void)
 {
@@ -321,6 +421,13 @@ void USART3_IRQHandler(void)
 }
 void EXTI15_10_IRQHandler(void)
 {
+  // PWR电源管理项目
+  if (EXTI_GetFlagStatus(EXTI_Line13) != RESET)
+  {
+    printf("进入睡眠模式\n");
+    __WFE();
+    EXTI_ClearITPendingBit(EXTI_Line13);
+  }
 }
 void RTCAlarm_IRQHandler(void)
 {

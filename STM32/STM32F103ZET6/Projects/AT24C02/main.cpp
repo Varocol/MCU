@@ -1,4 +1,4 @@
-#include "bsp_conf.h"
+#include "Libraries.h"
 AT24C02 ee;
 uint8_t aaa[26] =
     {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
@@ -17,7 +17,7 @@ void Setup()
     AT24C02_Param param =
         {
             0xA0,
-            I2C1};
+            I2C_1};
     USART_1.Init();
     ee = AT24C02(param);
     ee.Init();

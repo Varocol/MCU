@@ -1,7 +1,25 @@
-#include"stm32f10x.h"
-#include"bsp_led.h"
+#include "Libraries.h"
+void Setup();
+void Test();
+void End();
 int main()
 {
-     LED_GPIO_config();
-     LED_GPIO_SHINE(0.4);
+     Setup();
+     Test();
+     End();
+}
+void Setup()
+{
+     LED_1.Init();
+}
+void Test()
+{
+     while (1)
+     {
+          LED_1.Toggle();
+          SysTick_Operate::Delay_ms(250);
+     }
+}
+void End()
+{
 }

@@ -36,8 +36,103 @@ void Screen_Init ()
  * @param       null
  * @return      null
  */
-void Screen_Show_Img (uint8 *image, uint16 width, uint16 height)
+void Screen_Show_Running_Info ()
 {
-    Screen.Displayimage_032(image, width, height);
+    Screen_Draw_Line();
+    Screen_Show_FPS ();
+}
+
+/*
+ * @brief       屏幕显示图像
+ * @param       null
+ * @return      null
+ */
+void Screen_Show_Img ()
+{
+    Screen.Displayimage_032(Screen_IMG, Screen_IMG_W, Screen_IMG_H);
+}
+
+/*
+ * @brief       屏幕显示帧率
+ * @param       null
+ * @return      null
+ */
+void Screen_Show_FPS ()
+{
+    uint16 FPS_X = 100;
+    uint16 FPS_Y = 10;
+    Screen.Show_Num(FPS_X, FPS_Y, end - start ? 1000 / (end - start) : 0);
+}
+
+/*
+ * @brief       屏幕显示辅助线
+ * @param       null
+ * @return      null
+ */
+void Screen_Draw_Line ()
+{
+    if (left_findflag)  //如果左边界线存在，则画出左边界线
+    {
+        for (int i = 0; i < L_edge_count; i++)
+        {
+            Screen.Draw_Point(L_edge[i].col, L_edge[i].row, IPS_BLUE);
+        }
+    }
+    if (right_findflag)  //如果右边界线存在，则画出右边界线
+    {
+        for (int i = 0; i < R_edge_count; i++)
+        {
+            Screen.Draw_Point(R_edge[i].col, R_edge[i].row, IPS_RED);
+        }
+    }
+    if (Mid_count > 0)
+    {
+        for (int i = 0; i < Mid_count; i++)
+            Screen.Draw_Point(Mid_Line[i].col, Mid_Line[i].row, IPS_BLACK);
+    }
+    if (L_corner_flag)   //画出左拐点
+    {
+        if (L_corner_col - 2 > 0 && L_corner_row - 2 > 0 && L_corner_row + 2 < Image_W && L_corner_col + 2 < Image_W)
+        {
+            Screen.Draw_Point(L_corner_col - 2, L_corner_row - 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col - 1, L_corner_row - 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col, L_corner_row - 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col + 1, L_corner_row - 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col + 2, L_corner_row - 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col + 2, L_corner_row + 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col + 1, L_corner_row + 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col, L_corner_row + 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col - 1, L_corner_row + 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col - 2, L_corner_row + 2, IPS_RED);
+            Screen.Draw_Point(L_corner_col - 2, L_corner_row + 1, IPS_RED);
+            Screen.Draw_Point(L_corner_col - 2, L_corner_row - 1, IPS_RED);
+            Screen.Draw_Point(L_corner_col - 2, L_corner_row, IPS_RED);
+            Screen.Draw_Point(L_corner_col + 2, L_corner_row - 1, IPS_RED);
+            Screen.Draw_Point(L_corner_col + 2, L_corner_row, IPS_RED);
+            Screen.Draw_Point(L_corner_col + 2, L_corner_row + 1, IPS_RED);
+        }
+    }
+    if (R_corner_flag)   //画出右拐点
+    {
+        if (R_corner_col - 2 > 0 && R_corner_row - 2 > 0 && R_corner_row + 2 < Image_W && R_corner_col + 2 < Image_W)
+        {
+            Screen.Draw_Point(R_corner_col - 2, R_corner_row - 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col - 1, R_corner_row - 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col, R_corner_row - 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col + 1, R_corner_row - 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col + 2, R_corner_row - 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col + 2, R_corner_row + 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col + 1, R_corner_row + 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col, R_corner_row + 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col - 1, R_corner_row + 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col - 2, R_corner_row + 2, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col - 2, R_corner_row + 1, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col - 2, R_corner_row - 1, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col - 2, R_corner_row, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col + 2, R_corner_row - 1, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col + 2, R_corner_row, IPS_BLUE);
+            Screen.Draw_Point(R_corner_col + 2, R_corner_row + 1, IPS_BLUE);
+        }
+    }
 }
 

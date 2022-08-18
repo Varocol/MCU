@@ -1,4 +1,4 @@
-#include "bsp_conf.h"
+#include "Libraries.h"
 #include "bsp_led.h"
 void Delay_ms(uint32_t ms); //保留TIM2用来延时,需要搭配delay_Complete来判断延时是否完成
 bool Delay_Complete();      //延时是否完成
@@ -53,7 +53,7 @@ void Delay_ms(uint32_t ms)
           0,
           3,
           ENABLE};
-  NVIC_Operate TIM2_NVIC_Operate = NVIC_Operate(&NVIC_InitStructure);
+  NVIC_Operate TIM2_NVIC_Operate = NVIC_Operate(NVIC_InitStructure);
   TIM2_NVIC_Operate.Init();
   //设置时间
   time_ms = ms;

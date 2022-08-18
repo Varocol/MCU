@@ -43,10 +43,10 @@
 IFX_ALIGN(4)uint8 mt9v03x_image[MT9V03X_H][MT9V03X_W];
 //用于缓存原始图像
 IFX_ALIGN(4)uint8 Buffer_image[MT9V03X_H][MT9V03X_W];
-//用于存储处理完成的图像
-IFX_ALIGN(4)uint8 Result_image[MT9V03X_H][MT9V03X_W];
-//用于缓存处理中的图像
-IFX_ALIGN(4)uint8 Temp_image[MT9V03X_H][MT9V03X_W];
+////用于存储处理完成的图像
+//IFX_ALIGN(4)uint8 Result_image[MT9V03X_H][MT9V03X_W];
+////用于缓存处理中的图像
+//IFX_ALIGN(4)uint8 Temp_image[MT9V03X_H][MT9V03X_W];
 
 uint8 receive[3];
 uint8 receive_num = 0;

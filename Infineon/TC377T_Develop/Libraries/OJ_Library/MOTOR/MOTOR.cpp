@@ -77,11 +77,12 @@ void MOTOR::Init ()
  */
 void MOTOR::Run (double speed)
 {
-    if(speed > Param.Speed_Max)
+    speed = speed * 100 / Param.MAP_MAX;
+    if (speed > Param.Speed_Max)
     {
         speed = Param.Speed_Max;
     }
-    else if(speed < -Param.Speed_Max)
+    else if (speed < -Param.Speed_Max)
     {
         speed = -Param.Speed_Max;
     }

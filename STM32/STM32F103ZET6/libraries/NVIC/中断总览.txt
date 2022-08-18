@@ -83,3 +83,7 @@ I2C2_ER                 8
 I2C2_EV                 9
 DMA1_Channel4           10
 DMA1_Channel5           11
+DMA1_Channel1           12
+SPI1_IRQn               13
+SPI2_IRQn               14
+EXTI9_5_IRQn            15

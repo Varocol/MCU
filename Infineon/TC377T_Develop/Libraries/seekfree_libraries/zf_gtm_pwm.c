@@ -469,7 +469,9 @@ void gtm_pwm_stop (IfxGtm_Atom_Pwm_Driver *g_atomDriver, boolean immediate)
 //  @param      freq        PWM频率
 //  @param      duty        PWM占空比
 //  @return     IfxGtm_Atom_Pwm_Driver
-//  Sample usage:           gtm_pwm_init(ATOM0_CH7_P02_7, 50, 1000);     //ATOM 0模块的通道7 使用P02_7引脚输出PWM  PWM频率50HZ  占空比百分之1000/GTM_ATOM0_PWM_DUTY_MAX*100
+//  Sample usage:           gtm_pwm_init(ATOM0_CH7_P02_7, 50, 1000);
+//                          ATOM 0模块的通道7 使用P02_7引脚输出PWM  PWM频率50HZ
+//                          占空比百分之1000/GTM_ATOM0_PWM_DUTY_MAX*100
 //                          GTM_ATOM0_PWM_DUTY_MAX宏定义在zf_gtm_pwm.h  默认为10000
 //-------------------------------------------------------------------------------------------------------------------
 IfxGtm_Atom_Pwm_Driver gtm_pwm_get_g_atomDriver (ATOM_PIN_enum pwmch, uint32 freq, uint32 duty)

@@ -8,7 +8,7 @@
             "name": "jlink",
             "servertype": "jlink",
             "interface": "swd",
-            "executable": "build\\Debug\\stm32f1xx_gcc.elf",
+            "executable": "build\\Debug\\STM32F103ZET6.elf",
             "runToMain": true,
             "device": "STM32F103ZE (allow opt. bytes)"
         },
@@ -18,23 +18,12 @@
             "request": "launch",
             "name": "openocd",
             "servertype": "openocd",
-            "executable": "build\\Debug\\stm32f1xx_gcc.elf",
+            "executable": ".\\out\\Debug\\stm32f1_gcc.elf",
             "runToMain": true,
             "configFiles": [
-                "interface/stlink.cfg",
-                "target/stm32f1x.cfg"
+                "interface/<debugger-type>.cfg",
+                "target/<mcu-series>.cfg"
             ]
-        },
-        {
-            "cwd": "${workspaceRoot}",
-            "type": "cortex-debug",
-            "request": "launch",
-            "name": "pyocd",
-            "servertype": "pyocd",
-            "executable": "build\\Debug\\stm32f1xx_gcc.elf",
-            "runToEntryPoint": "main",
-            "targetId": "cortex_m",
-            "cmsisPack": "<CMSIS-Pack-Path>"
         }
     ]
 }

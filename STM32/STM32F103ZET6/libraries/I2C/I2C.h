@@ -4,13 +4,26 @@
 #include "NVIC.h"
 #include "GPIO.h"
 #include "RCC.h"
-//I2C引脚枚举
+/*
+                SCL     SDA
+I2C1:
+      Default:  PB6     PB7
+      Remap:    PB8     PB9
+I2C2:
+      Default:  PB10    PB11
+
+I2C 中断列表
+I2C_IT_BUF    //缓冲器中断标志
+I2C_IT_EVT    //事件中断标志
+I2C_IT_ERR    //出错中断标志
+*/
+// I2C引脚枚举
 typedef enum
 {
   I2C_Default,
   I2C1_Remap
-} I2C_Pin_Selection;
-//I2C事件列表,与stm32f10x_i2c.c中列表一致
+} I2C_Remap_enum;
+// I2C事件列表,与stm32f10x_i2c.c中列表一致
 typedef enum
 {
   // I2C_EVENT_SLAVE_TRANSMITTER_ADDRESS_MATCHED
@@ -55,16 +68,16 @@ typedef enum
   EV9 = I2C_EVENT_MASTER_MODE_ADDRESS10,
 } I2C_Event;
 
-//I2C参数列表结构体
+// I2C参数列表结构体
 typedef struct
 {
-  I2C_TypeDef *I2Cx;                         //I2Cx
-  I2C_InitTypeDef I2C_InitStructure;         //I2C初始化结构体
-  NVIC_Operate I2C_ER_NVIC_Operate;          //I2C错误中断对象
-  NVIC_Operate I2C_EV_NVIC_Operate;          //I2C事件中断对象
-  I2C_Pin_Selection I2C_Pin_Remap_Selection; //I2C引脚选择
-  FunctionalState I2C_IT_State;              //I2C中断使(失)能
-  uint16_t I2C_IT_Selection;                 //I2C中断位选择
+  I2C_TypeDef *I2Cx;                 // I2Cx
+  I2C_InitTypeDef I2C_InitStructure; // I2C初始化结构体
+  NVIC_Operate I2C_ER_NVIC_Operate;  // I2C错误中断对象
+  NVIC_Operate I2C_EV_NVIC_Operate;  // I2C事件中断对象
+  I2C_Remap_enum I2C_Pin_Remap;      // I2C引脚选择
+  FunctionalState I2C_IT_State;      // I2C中断使(失)能
+  uint16_t I2C_IT_Selection;         // I2C中断位选择
 } I2C_Param;
 
 class I2C
@@ -80,7 +93,9 @@ public:
   void Init();
   void Start();
   void ShutUp();
+  void Use_DMA(FunctionalState NewState);
   void Update(I2C_Param I2Cx_Param);
+  void ITConfig(uint16_t I2C_IT, FunctionalState NewState);
   void Set_I2C_Param(I2C_Param I2Cx_Param);
   void Generate_START(FunctionalState NewState);
   void Generate_STOP(FunctionalState NewState);

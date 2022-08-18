@@ -14,6 +14,13 @@ typedef struct
     __IO uint32_t CRL;
 } USB_TypeDef;
 
+typedef enum
+{
+    HSI,
+    HSE,
+    PLL
+} Clock_Source;
+
 #define FLITF ((FLITF_TypeDef *)0x00)
 #define SRAM ((SRAM_TypeDef *)0x00)
 #define USB ((USB_TypeDef *)0x00)
@@ -24,12 +31,14 @@ private:
 public:
     RCC_Operate();
     ~RCC_Operate();
-    static const RCC_ClocksTypeDef *Get_ClocksFreq();
+    static RCC_ClocksTypeDef Get_ClocksFreq();
     static uint32_t Get_SYSCLK_Frequency();
     static uint32_t Get_HCLK_Frequency();
     static uint32_t Get_PCLK1_Frequency();
     static uint32_t Get_PCLK2_Frequency();
     static uint32_t Get_ADCCLK_Frequency();
+    static Clock_Source Get_SYSCLKSource();
+    static void Backup_Reset();
     static void HSE_SetSysClock(uint32_t pllmul);
     static void HSI_SetSysClock(uint32_t pllmul);
     static void RCC_Config(ADC_TypeDef *ADCX, FunctionalState NewState);
@@ -55,6 +64,7 @@ public:
     static void RCC_Config(USART_TypeDef *USARTX, FunctionalState NewState);
     static void RCC_Config(USB_TypeDef *USBX, FunctionalState NewState);
     static void RCC_Config(WWDG_TypeDef *WWDGX, FunctionalState NewState);
+    static void RCC_Config(RTC_TypeDef *RTCx, FunctionalState NewState);
     static uint32_t ADCX_Convert_RCC(ADC_TypeDef *ADCX);
     static uint32_t AFIO_Convert_RCC(AFIO_TypeDef *AFIOX);
     static uint32_t BKP_Convert_RCC(BKP_TypeDef *BKPX);

@@ -1,58 +1,49 @@
 #include "AT24C02.h"
 /**
-  * @brief  AT24C02空构造方法
-  * @param  None
-  * @retval None
-  */
+ * @brief  AT24C02-空构造方法
+ * @param  None
+ * @retval None
+ */
 AT24C02::AT24C02()
 {
-    PROCESS_CONDITION = true;
 }
 
 /**
-  * @brief  AT24C02构造方法
-  * @param  AT24C02x_Param:AT24C02的参数列表
-  * @retval None
-  */
+ * @brief  AT24C02-构造方法
+ * @param  AT24C02x_Param   AT24C02的参数列表
+ * @retval None
+ */
 AT24C02::AT24C02(AT24C02_Param AT24C02x_Param)
 {
-    PROCESS_CONDITION = true;
     Set_AT24C02x_Param(AT24C02x_Param);
 }
 
 /**
-  * @brief  AT24C02析构函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  AT24C02-析构方法
+ * @param  None
+ * @retval None
+ */
 AT24C02::~AT24C02()
 {
 }
 
 /**
-  * @brief  AT24C02 初始化函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  AT24C02-初始化方法
+ * @param  None
+ * @retval None
+ */
 void AT24C02::Init()
 {
     PROCESS_CONDITION = true;
-    if (AT24C02x_Param.I2Cx == I2C1)
-    {
-        I2Cx = &I2C_1;
-    }
-    else if (AT24C02x_Param.I2Cx == I2C2)
-    {
-        I2Cx = &I2C_2;
-    }
+    I2Cx = &AT24C02x_Param.I2Cx;
     I2Cx->Init();
 }
 
 /**
-  * @brief  I2C参数列表更新
-  * @param  I2Cx_Param:I2C的参数列表
-  * @retval None
-  */
+ * @brief  AT24C02-参数列表更新
+ * @param  AT24C02x_Param   AT24C02的参数列表
+ * @retval None
+ */
 void AT24C02::Update(AT24C02_Param AT24C02x_Param)
 {
     Set_AT24C02x_Param(AT24C02x_Param);
@@ -60,21 +51,21 @@ void AT24C02::Update(AT24C02_Param AT24C02x_Param)
 }
 
 /**
-  * @brief  设置AT24C02的参数列表
-  * @param  AT24C02x_Param:AT24C02的参数列表
-  * @retval None
-  */
+ * @brief  AT24C02-设置AT24C02的参数列表
+ * @param  AT24C02x_Param   AT24C02的参数列表
+ * @retval None
+ */
 void AT24C02::Set_AT24C02x_Param(AT24C02_Param AT24C02x_Param)
 {
     this->AT24C02x_Param = AT24C02x_Param;
 }
 
 /**
-  * @brief  STM32向EERPOM发送一个字节方法
-  * @param  Data:数据
-  * @param  Byte_Addr:字地址
-  * @retval None
-   */
+ * @brief  AT24C02-STM32向EERPOM发送一个字节方法
+ * @param  Data             数据
+ * @param  Byte_Addr        字地址
+ * @retval None
+ */
 void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
 {
     //若程序有一处无法正确运行则全部终止
@@ -183,12 +174,12 @@ void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
 }
 
 /**
-  * @brief  STM32区块写AT24C02
-  * @param  Byte_Addr:字地址
-  * @param  p:用于存数据的数组
-  * @param  num:所需读的字节数
-  * @retval None
-  */
+ * @brief  AT24C02-STM32区块写AT24C02
+ * @param  Byte_Addr        字地址
+ * @param  p                用于存数据的数组
+ * @param  num              所需读的字节数
+ * @retval None
+ */
 void AT24C02::Write_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 {
     //若程序有一处无法正确运行则全部终止
@@ -208,12 +199,12 @@ void AT24C02::Write_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 }
 
 /**
-  * @brief  STM32页写AT24C02
-  * @param  Byte_Addr:字地址
-  * @param  p:用于存数据的数组
-  * @param  num:所需读的字节数
-  * @retval None
-  */
+ * @brief  AT24C02-STM32页写AT24C02
+ * @param  Byte_Addr        字地址
+ * @param  p                用于存数据的数组
+ * @param  num              所需读的字节数
+ * @retval None
+ */
 void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 {
     //若程序有一处无法正确运行则全部终止
@@ -322,12 +313,12 @@ void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 }
 
 /**
-  * @brief  STM32向EERPOM读取一个区块的数据
-  * @param  Byte_Addr:字地址
-  * @param  p:用于存数据的数组
-  * @param  num:所需读的字节数
-  * @retval None
-  */
+ * @brief  AT24C02-STM32向EERPOM读取一个区块的数据
+ * @param  Byte_Addr        字地址
+ * @param  p                用于存数据的数组
+ * @param  num              所需读的字节数
+ * @retval None
+ */
 void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 {
     //若程序有一处无法正确运行则全部终止
@@ -483,13 +474,13 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 }
 
 /**
-  * @brief  AT24C02应答查询(判忙函数)
-  * @param  None
-  * @retval None
-  */
+ * @brief  AT24C02-应答查询(判忙方法)
+ * @param  None
+ * @retval None
+ */
 void AT24C02::Check_AT24C02_Busy()
 {
-    // //第一种,野蛮法,直接检测flag位
+    //第一种,野蛮法,直接检测flag位
     // //重置EVENT_TIMEOUT
     // EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
     // do

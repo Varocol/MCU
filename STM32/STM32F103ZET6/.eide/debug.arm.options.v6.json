@@ -8,11 +8,14 @@
     },
     "c/cpp-compiler": {
         "optimization": "level-0",
-        "language-c": "c99",
-        "language-cpp": "c++11",
-        "link-time-optimization": true
+        "language-c": "c11",
+        "language-cpp": "c++14",
+        "link-time-optimization": true,
+        "warnings": "ac5-like-warnings"
     },
-    "asm-compiler": {},
+    "asm-compiler": {
+        "$use": "asm-auto"
+    },
     "linker": {
         "output-format": "elf",
         "misc-controls": "--diag_suppress=L6329"

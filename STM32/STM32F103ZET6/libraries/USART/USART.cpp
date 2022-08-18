@@ -1,131 +1,6 @@
 #include "USART.h"
-// USART_Default USART1_RX = PA10
-GPIO_InitTypeDef U1_RX_Pin_1 =
-    {
-        GPIO_Pin_10,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// USART_Default USART1_TX = PA9
-GPIO_InitTypeDef U1_TX_Pin_1 =
-    {
-        GPIO_Pin_9,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// USART1_Remap USART1_RX = PB7
-GPIO_InitTypeDef U1_RX_Pin_2 =
-    {
-        GPIO_Pin_7,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// USART1_Remap USART1_TX = PB6
-GPIO_InitTypeDef U1_TX_Pin_2 =
-    {
-        GPIO_Pin_6,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// USART2_Default USART2_RX = PA3
-GPIO_InitTypeDef U2_RX_Pin_1 =
-    {
-        GPIO_Pin_3,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// USART2_Default USART2_TX = PA2
-GPIO_InitTypeDef U2_TX_Pin_1 =
-    {
-        GPIO_Pin_2,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// USART2_Remap USART2_RX = PD6
-GPIO_InitTypeDef U2_RX_Pin_2 =
-    {
-        GPIO_Pin_6,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// USART2_Remap USART2_TX = PD5
-GPIO_InitTypeDef U2_TX_Pin_2 =
-    {
-        GPIO_Pin_5,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// USART3_Default USART3_RX = PB11
-GPIO_InitTypeDef U3_RX_Pin_1 =
-    {
-        GPIO_Pin_11,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// USART3_Default USART3_TX = PB10
-GPIO_InitTypeDef U3_TX_Pin_1 =
-    {
-        GPIO_Pin_10,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// USART3_PartialRemap USART3_RX = PC11
-GPIO_InitTypeDef U3_RX_Pin_2 =
-    {
-        GPIO_Pin_11,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// USART3_PartialRemap USART3_TX = PC10
-GPIO_InitTypeDef U3_TX_Pin_2 =
-    {
-        GPIO_Pin_10,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// USART3_FullRemap USART3_RX = PD9
-GPIO_InitTypeDef U3_RX_Pin_3 =
-    {
-        GPIO_Pin_9,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// USART3_FullRemap USART3_TX = PD8
-GPIO_InitTypeDef U3_TX_Pin_3 =
-    {
-        GPIO_Pin_8,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// UART4_Default UART4_RX = PC11
-GPIO_InitTypeDef U4_RX_Pin =
-    {
-        GPIO_Pin_11,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// UART4_Default UART4_TX = PC10
-GPIO_InitTypeDef U4_TX_Pin =
-    {
-        GPIO_Pin_10,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
-
-// UART5_Default UART4_RX = PD2
-GPIO_InitTypeDef U5_RX_Pin =
-    {
-        GPIO_Pin_2,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_IN_FLOATING};
-
-// UART5_Default UART4_TX = PC12
-GPIO_InitTypeDef U5_TX_Pin =
-    {
-        GPIO_Pin_12,
-        GPIO_Speed_50MHz,
-        GPIO_Mode_AF_PP};
 /**
- * @brief  USART空构造方法
+ * @brief  USART-空构造方法
  * @param  None
  * @retval None
  */
@@ -134,7 +9,7 @@ USART::USART()
 }
 
 /**
- * @brief  USART析构函数
+ * @brief  USART-析构方法
  * @param  None
  * @retval None
  */
@@ -143,8 +18,8 @@ USART::~USART()
 }
 
 /**
- * @brief  USART构造方法
- * @param  USARTx_Param:USART的参数列表
+ * @brief  USART-构造方法
+ * @param  USARTx_Param     USART的参数列表
  * @retval None
  */
 USART::USART(USART_Param USARTx_Param)
@@ -153,8 +28,8 @@ USART::USART(USART_Param USARTx_Param)
 }
 
 /**
- * @brief  设置USART的参数列表
- * @param  USARTx_Param:USART的参数列表
+ * @brief  USART-设置USART的参数列表
+ * @param  USARTx_Param     USART的参数列表
  * @retval None
  */
 void USART::Set_USART_Param(USART_Param USARTx_Param)
@@ -163,143 +38,137 @@ void USART::Set_USART_Param(USART_Param USARTx_Param)
 }
 
 /**
- * @brief  USART发送字节
- * @param  data:数据
+ * @brief  USART-发送字节
+ * @param  data             数据
  * @retval None
  */
-void USART::Send_Byte(uint8_t data)
+void USART::Send_Data(uint8_t data)
 {
   USART_SendData(USARTx_Param.USARTx, data);
+  //这个地方一定要同时使用,为了防止串口发送第一个数据时丢失以及最后一个数据时间不够丢失。
   while (USART_GetFlagStatus(USARTx_Param.USARTx, USART_FLAG_TXE) == RESET)
+    ;
+  while (USART_GetFlagStatus(USARTx_Param.USARTx, USART_FLAG_TC) == RESET)
     ;
 }
 
 /**
- * @brief  USART发送字符串l
- * @param  str:字符串
+ * @brief  USART-发送字符数组
+ * @param  buffer           字符数组
+ * @param  cnt              字符数组大小
  * @retval None
  */
-void USART::Send_String(uint8_t *str)
+void USART::Send_Buffer(uint8_t *buffer, uint32_t cnt)
 {
-  for (int i = 0; str[i]; i++)
+  for (uint32_t i = 0; i < cnt; i++)
   {
-    Send_Byte(str[i]);
+    Send_Data(buffer[i]);
   }
 }
 
 /**
- * @brief  USART接收字节
- * @param  None
+ * @brief  USART-发送字符串
+ * @param  str              字符串
  * @retval None
  */
-uint8_t USART::Receive_Byte()
+void USART::Send_String(const char *str)
+{
+  for (int i = 0; str[i] != '\0'; i++)
+  {
+    Send_Data(str[i]);
+  }
+}
+
+/**
+ * @brief  USART-接收字节
+ * @param  None
+ * @retval 接收缓冲器的值
+ */
+uint8_t USART::Receive_Data()
 {
   return USART_ReceiveData(USARTx_Param.USARTx);
 }
 
 /**
- * @brief  USART GPIO引脚初始化
+ * @brief  USART-GPIO引脚初始化
  * @param  None
  * @retval None
  */
 void USART::Pin_Init()
 {
-  if (USARTx_Param.USARTx_Pin_Remap_Selection == USART_Default)
-  {
-    if (USARTx_Param.USARTx == USART1)
-    {
-      GPIO *USART1_RX_1 = new GPIO(GPIOA, U1_RX_Pin_1);
-      USART1_RX_1->Init();
-      delete USART1_RX_1;
-      GPIO *USART1_TX_1 = new GPIO(GPIOA, U1_TX_Pin_1);
-      USART1_TX_1->Init();
-      delete USART1_TX_1;
-    }
-    else if (USARTx_Param.USARTx == USART2)
-    {
-      GPIO *USART2_RX_1 = new GPIO(GPIOA, U2_RX_Pin_1);
-      USART2_RX_1->Init();
-      delete USART2_RX_1;
-      GPIO *USART2_TX_1 = new GPIO(GPIOA, U2_TX_Pin_1);
-      USART2_TX_1->Init();
-      delete USART2_TX_1;
-    }
-    else if (USARTx_Param.USARTx == USART3)
-    {
-      GPIO *USART3_RX_1 = new GPIO(GPIOB, U3_RX_Pin_1);
-      USART3_RX_1->Init();
-      delete USART3_RX_1;
-      GPIO *USART3_TX_1 = new GPIO(GPIOB, U3_TX_Pin_1);
-      USART3_TX_1->Init();
-      delete USART3_TX_1;
-    }
-    else if (USARTx_Param.USARTx == UART4)
-    {
-      GPIO *UART4_RX = new GPIO(GPIOC, U4_RX_Pin);
-      UART4_RX->Init();
-      delete UART4_RX;
-      GPIO *UART4_TX = new GPIO(GPIOC, U4_TX_Pin);
-      UART4_TX->Init();
-      delete UART4_TX;
-    }
-    else if (USARTx_Param.USARTx == UART5)
-    {
-      GPIO *UART5_RX = new GPIO(GPIOD, U5_RX_Pin);
-      UART5_RX->Init();
-      delete UART5_RX;
-      GPIO *UART5_TX = new GPIO(GPIOC, U5_TX_Pin);
-      UART5_TX->Init();
-      delete UART5_TX;
-    }
-    return;
-  }
+  PIN_enum USART_RX_Pin;
+  PIN_enum USART_TX_Pin;
   RCC_Operate::RCC_Config(AFIO, ENABLE);
-
-  if (USARTx_Param.USARTx_Pin_Remap_Selection == USART1_Remap)
+  switch (USARTx_Param.USARTx_Pin_Remap)
   {
-    GPIO *USART1_RX_2 = new GPIO(GPIOB, U1_RX_Pin_2);
-    USART1_RX_2->Init();
-    delete USART1_RX_2;
-    GPIO *USART1_TX_2 = new GPIO(GPIOB, U1_TX_Pin_2);
-    USART1_TX_2->Init();
-    delete USART1_TX_2;
+  case USART1_Default:
+  {
+    USART_RX_Pin = PA10;
+    USART_TX_Pin = PA9;
+  }
+  break;
+  case USART1_Remap:
+  {
     GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
+    USART_RX_Pin = PB7;
+    USART_TX_Pin = PB6;
   }
-  else if (USARTx_Param.USARTx_Pin_Remap_Selection == USART2_Remap)
+  break;
+  case USART2_Default:
   {
-    GPIO *USART2_RX_2 = new GPIO(GPIOD, U2_RX_Pin_2);
-    USART2_RX_2->Init();
-    delete USART2_RX_2;
-    GPIO *USART2_TX_2 = new GPIO(GPIOD, U2_TX_Pin_2);
-    USART2_TX_2->Init();
-    delete USART2_TX_2;
+    USART_RX_Pin = PA3;
+    USART_TX_Pin = PA2;
+  }
+  break;
+  case USART2_Remap:
+  {
     GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
+    USART_RX_Pin = PD6;
+    USART_TX_Pin = PD5;
   }
-  else if (USARTx_Param.USARTx_Pin_Remap_Selection == USART3_PartialRemap)
+  break;
+  case USART3_Default:
   {
-    GPIO *USART3_RX_2 = new GPIO(GPIOC, U3_RX_Pin_2);
-    USART3_RX_2->Init();
-    delete USART3_RX_2;
-    GPIO *USART3_TX_2 = new GPIO(GPIOC, U3_TX_Pin_2);
-    USART3_TX_2->Init();
-    delete USART3_TX_2;
+    USART_RX_Pin = PB11;
+    USART_TX_Pin = PB10;
+  }
+  break;
+  case USART3_PartialRemap:
+  {
     GPIO_PinRemapConfig(GPIO_PartialRemap_USART3, ENABLE);
+    USART_RX_Pin = PC11;
+    USART_TX_Pin = PC10;
   }
-  else if (USARTx_Param.USARTx_Pin_Remap_Selection == USART3_FullRemap)
+  break;
+  case USART3_FullRemap:
   {
-    GPIO *USART3_RX_3 = new GPIO(GPIOD, U3_RX_Pin_3);
-    USART3_RX_3->Init();
-    delete USART3_RX_3;
-    GPIO *USART3_TX_3 = new GPIO(GPIOD, U3_TX_Pin_3);
-    USART3_TX_3->Init();
-    delete USART3_TX_3;
     GPIO_PinRemapConfig(GPIO_FullRemap_USART3, ENABLE);
+    USART_RX_Pin = PD9;
+    USART_TX_Pin = PD8;
   }
+  break;
+  case UART4_Default:
+  {
+    USART_RX_Pin = PC11;
+    USART_TX_Pin = PC10;
+  }
+  break;
+  case UART5_Default:
+  {
+    USART_RX_Pin = PD2;
+    USART_TX_Pin = PC12;
+  }
+  break;
+  }
+  GPIO USART_RX = GPIO(USART_RX_Pin, GPIO_Mode_IN_FLOATING);
+  GPIO USART_TX = GPIO(USART_TX_Pin, GPIO_Mode_AF_PP);
+  USART_RX.Init();
+  USART_TX.Init();
 }
 
 /**
- * @brief  USART参数列表更新
- * @param  USARTx_Param:USART的参数列表
+ * @brief  USART-参数列表更新
+ * @param  USARTx_Param     USART的参数列表
  * @retval None
  */
 void USART::Update(USART_Param USARTx_Param)
@@ -310,7 +179,7 @@ void USART::Update(USART_Param USARTx_Param)
 }
 
 /**
- * @brief  USART 初始化函数
+ * @brief  USART-初始化方法
  * @param  None
  * @retval None
  */
@@ -324,23 +193,36 @@ void USART::Init()
   Pin_Init();
   //配置串口
   USART_Init(USARTx_Param.USARTx, &USARTx_Param.USART_InitStructure);
+  //配置时钟
+  USART_ClockInit(USARTx_Param.USARTx, &USARTx_Param.USART_ClockInitStructure);
   //配置串口中断优先级
   USARTx_Param.USART_NVIC_Operate.Init();
   //配置串口中断
-  USART_ITConfig(USARTx_Param.USARTx, USARTx_Param.USART_IT_Selection, USARTx_Param.USART_IT_State);
+  ITConfig(USARTx_Param.USART_IT_Selection, USARTx_Param.USART_IT_State);
   //使能串口
   Start();
 }
 
 /**
- * @brief  使用DMA传输功能
- * @param  USART_DMA_Selection:使用DMA传输的引脚
- * @param  state:是否使能DMA
+ * @brief  USART-中断方法
+ * @param  USART_IT         中断标志的选择
+ * @param  NewState         使能或失能
  * @retval None
  */
-void USART::Use_DMA(USART_DMA_Selection USART_DMA_Selection, FunctionalState state)
+void USART::ITConfig(uint16_t USART_IT, FunctionalState NewState)
 {
-  switch (USART_DMA_Selection)
+  USART_ITConfig(USARTx_Param.USARTx, USART_IT, NewState);
+}
+
+/**
+ * @brief  USART-使用DMA传输功能
+ * @param  USART_DMA_enum   使用DMA传输的引脚
+ * @param  state            是否使能DMA
+ * @retval None
+ */
+void USART::Use_DMA(USART_DMA_enum USART_DMA_enum, FunctionalState state)
+{
+  switch (USART_DMA_enum)
   {
   case USART_DMA_TX:
     USART_DMACmd(USARTx_Param.USARTx, USART_DMAReq_Tx, state);
@@ -355,7 +237,7 @@ void USART::Use_DMA(USART_DMA_Selection USART_DMA_Selection, FunctionalState sta
 }
 
 /**
- * @brief  开启USART函数(USART使能)
+ * @brief  USART-开启USART方法(USART使能)
  * @param  None
  * @retval None
  */
@@ -365,7 +247,7 @@ void USART::Start()
 }
 
 /**
- * @brief  关闭USART函数(USART失能)
+ * @brief  USART-关闭USART方法(USART失能)
  * @param  None
  * @retval None
  */

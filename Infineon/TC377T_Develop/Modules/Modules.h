@@ -4,5 +4,12 @@
 #include "Sinal_Light.h"
 #include "Buttons.h"
 #include "Screen.h"
+#include "Encoder.h"
+#include "BSP_Motor.h"
+#include "BSP_Servo.h"
+#include "PID.h"
+#include "Image_Process.h"
 #include "MT9V03x.h"
-#endif
+#include "MSH_FUN.h"
+#include "Variables.h"
+#endif /*__MODULES_H*/

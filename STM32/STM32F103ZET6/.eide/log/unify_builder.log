@@ -1,8 +1,0 @@
-[2022-02-19 14:59:25]	link failed !, exit code: 1
-  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
----
-Error: L6218E: Undefined symbol main (referred from entry9a.o).
-Not enough information to list image symbols.
-Finished: 1 information, 0 warning and 1 error messages.
-
-

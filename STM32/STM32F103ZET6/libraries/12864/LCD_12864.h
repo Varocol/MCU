@@ -7,7 +7,7 @@ class LCD_12864
 private:
 public:
     virtual void Clear_DDRAM() = 0;                                                        //清屏并归址
-    virtual void Send_Byte(uchar) = 0;                                                     //发送字节,从高到低(串行模式)
+    virtual void Send_Byte(uchar byte) = 0;                                                //发送字节,从高到低(串行模式)
     virtual void Write_Cmd(uchar cmd) = 0;                                                 //写指令,RS=L,RW=L
     virtual void Write_Data(uchar data) = 0;                                               //写数据,RS=H,RW=L
     virtual void Pos(uchar x, uchar y) = 0;                                                //字符位置,以中文字符16*16点阵为单位

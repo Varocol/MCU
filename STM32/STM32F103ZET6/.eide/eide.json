@@ -1,8 +1,8 @@
 {
-  "name": "stm32f1xx_gcc",
+  "name": "STM32F103ZET6",
   "type": "ARM",
   "mode": "Debug",
-  "toolchain": "AC5",
+  "toolchain": "AC6",
   "dependenceList": [
     {
       "groupName": "custom",
@@ -17,8 +17,8 @@
           "sourceDirList": [],
           "defineList": [
             "USE_STDPERIPH_DRIVER",
-            "STM32F10X_HD",
-            "ARM_MATH_CM3"
+            "ARM_MATH_CM3",
+            "STM32F10X_HD"
           ]
         }
       ]
@@ -36,7 +36,7 @@
           "id": 1,
           "mem": {
             "startAddr": "0x20000000",
-            "size": "0x5000"
+            "size": "0x10000"
           },
           "isChecked": true,
           "noInit": false
@@ -48,7 +48,7 @@
           "id": 1,
           "mem": {
             "startAddr": "0x08000000",
-            "size": "0x10000"
+            "size": "0x80000"
           },
           "isChecked": true,
           "isStartup": true
@@ -67,15 +67,15 @@
     "./Startup"
   ],
   "excludeList": [
-    "libraries/24C02",
     "libraries/ADC",
-    "libraries/EXTI"
+    "libraries/Button",
+    "libraries/Buzzer"
   ],
   "outDir": "build",
   "deviceName": "STM32F102C8",
   "packDir": null,
   "uploadConfig": {
-    "bin": ".\\build\\Debug\\stm32f1xx_gcc.hex",
+    "bin": ".\\build\\Debug\\stm32f1_gcc.hex",
     "baseAddr": "0x08000000",
     "cpuInfo": {
       "vendor": "ST",
@@ -87,7 +87,7 @@
   },
   "miscInfo": {
     "lastBuildTime": 1608695075742,
-    "uid": "6e83419dfb79eb5019af443a25e33381"
+    "uid": "8848ae0a5caf9fee1c82ba259e8a418d"
   },
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -95,35 +95,6 @@
     "folders": []
   },
   "targets": {},
-  "version": "3.1",
-  "uploadConfigMap": {
-    "JLink": {
-      "bin": ".\\build\\Debug\\stm32f1xx_gcc.hex",
-      "baseAddr": "0x08000000",
-      "cpuInfo": {
-        "vendor": "ST",
-        "cpuName": "STM32F103ZE (allow opt. bytes)"
-      },
-      "proType": 1,
-      "speed": 8000,
-      "otherCmds": ""
-    },
-    "Custom": {
-      "bin": "",
-      "commandLine": "python ./tools/stcflash.py -p ${port} \"${programFile}\""
-    },
-    "pyOCD": {
-      "bin": "",
-      "targetName": "cortex_m",
-      "baseAddr": "0x08000000",
-      "speed": "4M",
-      "config": ".eide/debug.pyocd.yaml"
-    },
-    "OpenOCD": {
-      "bin": "",
-      "target": "stm32f1x",
-      "interface": "stlink",
-      "baseAddr": "0x08000000"
-    }
-  }
+  "version": "3.2",
+  "uploadConfigMap": {}
 }

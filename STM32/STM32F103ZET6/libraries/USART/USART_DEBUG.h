@@ -3,10 +3,10 @@
 #include "stdio.h"
 #define DEBUG_USARTx USART1
 #define DEBUG_OUT_PUT 1
-#define DEBUG_ERROR_INFO(fmt, arg...) \
+#define DEBUG_ERROR_INFO(fmt, ...) \
     if (DEBUG_OUT_PUT)             \
-    printf("<--- ERROR INFO --->\nFILE: [%s]\nLINE: [%d]\n<--- ERROR MESSAGE --->\n"fmt" \n", __FILE__, __LINE__, ##arg)
-#define DEBUG_MESSAGE_INFO(fmt, arg...) \
+    printf("<--- ERROR INFO --->\nFILE: [%s]\nLINE: [%d]\n<--- ERROR MESSAGE --->\n" fmt " \n", __FILE__, __LINE__, ##__VA_ARGS__)
+#define DEBUG_MESSAGE_INFO(fmt, ...) \
     if (DEBUG_OUT_PUT)               \
-    printf("<--- MESSAGE INFO --->\nFILE: [%s]\nLINE: [%d]\n<--- ERROR MESSAGE --->\n"fmt"\n", __FILE__, __LINE__, ##arg)
+    printf("<--- MESSAGE INFO --->\nFILE: [%s]\nLINE: [%d]\n<--- ERROR MESSAGE --->\n" fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__)
 #endif /*__OJ_USART_DEBUG_H*/

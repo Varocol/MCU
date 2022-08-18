@@ -4,7 +4,7 @@
 		<item key="showEnclosingDefinitions" value="true"/>
 	</section>
 	<section name="SearchDialog">
-		<item key="PREVIOUS_PAGE" value="org.eclipse.search.internal.ui.text.TextSearchPage"/>
+		<item key="PREVIOUS_PAGE" value="org.eclipse.cdt.ui.pdomSearchPage"/>
 	</section>
 	<section name="Search">
 		<list key="Search.processedPageIds">
@@ -32,61 +32,61 @@
 			<item key="textPattern" value="rt_kprintf"/>
 			<item key="scope" value="0"/>
 			<list key="fileNamePatterns">
-				<item value="*.png"/>
-				<item value="*.html"/>
+				<item value="*.C"/>
 				<item value="*.S"/>
-				<item value="*.shtml"/>
-				<item value="*.doc"/>
-				<item value="*.patch"/>
-				<item value="*.pincfg"/>
 				<item value="*.a"/>
-				<item value="*.c"/>
-				<item value="*.emof"/>
-				<item value="*.macrodef"/>
-				<item value="*.h"/>
-				<item value="*.bmp"/>
-				<item value="*.lib"/>
-				<item value="*.exe"/>
-				<item value="*.diff"/>
-				<item value="*.o"/>
+				<item value="*.ant"/>
+				<item value="*.asm"/>
 				<item value="*.bak"/>
-				<item value="*.so"/>
-				<item value="*.xml"/>
-				<item value="*.xmi"/>
+				<item value="*.bmp"/>
+				<item value="*.c"/>
+				<item value="*.c++"/>
 				<item value="*.cc"/>
-				<item value="*.ico"/>
 				<item value="*.cpp"/>
 				<item value="*.cxx"/>
-				<item value="*.elf"/>
-				<item value="*.ent"/>
-				<item value="*.ecore"/>
-				<item value="*.hpp"/>
-				<item value="*.hxx"/>
-				<item value="*.ant"/>
+				<item value="*.diff"/>
 				<item value="*.dll"/>
-				<item value="*.svg"/>
-				<item value="*.prefs"/>
-				<item value="*.jpeg"/>
-				<item value="*.txt"/>
-				<item value="*.pda"/>
-				<item value="*.asm"/>
-				<item value="*.obj"/>
-				<item value="*.hh"/>
-				<item value="*.c++"/>
-				<item value="*.xsd"/>
+				<item value="*.doc"/>
 				<item value="*.docx"/>
-				<item value="*.gif"/>
-				<item value="*.log"/>
-				<item value="*.e4xmi"/>
-				<item value="*.out"/>
-				<item value="*.lst"/>
-				<item value="*.mk"/>
 				<item value="*.dylib"/>
+				<item value="*.e4xmi"/>
+				<item value="*.ecore"/>
+				<item value="*.elf"/>
+				<item value="*.emof"/>
+				<item value="*.ent"/>
+				<item value="*.exe"/>
+				<item value="*.gif"/>
+				<item value="*.h"/>
+				<item value="*.hh"/>
+				<item value="*.hpp"/>
 				<item value="*.htm"/>
-				<item value="*.jpg"/>
+				<item value="*.html"/>
+				<item value="*.hxx"/>
+				<item value="*.ico"/>
 				<item value="*.inc"/>
+				<item value="*.jpeg"/>
+				<item value="*.jpg"/>
+				<item value="*.lib"/>
+				<item value="*.log"/>
+				<item value="*.lst"/>
+				<item value="*.macrodef"/>
+				<item value="*.mk"/>
+				<item value="*.o"/>
+				<item value="*.obj"/>
+				<item value="*.out"/>
+				<item value="*.patch"/>
+				<item value="*.pda"/>
+				<item value="*.pincfg"/>
+				<item value="*.png"/>
+				<item value="*.prefs"/>
 				<item value="*.properties"/>
-				<item value="*.C"/>
+				<item value="*.shtml"/>
+				<item value="*.so"/>
+				<item value="*.svg"/>
+				<item value="*.txt"/>
+				<item value="*.xmi"/>
+				<item value="*.xml"/>
+				<item value="*.xsd"/>
 			</list>
 			<list key="workingSets">
 			</list>
@@ -99,11 +99,11 @@
 		<item key="scope" value="0"/>
 	</section>
 	<section name="DialogBounds_SearchDialog">
-		<item key="DIALOG_X_ORIGIN" value="665"/>
-		<item key="DIALOG_Y_ORIGIN" value="151"/>
+		<item key="DIALOG_X_ORIGIN" value="1155"/>
+		<item key="DIALOG_Y_ORIGIN" value="206"/>
 		<item key="DIALOG_WIDTH" value="608"/>
 		<item key="DIALOG_HEIGHT" value="553"/>
-		<item key="DIALOG_FONT_NAME" value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI"/>
+		<item key="DIALOG_FONT_NAME" value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|5|0|Microsoft YaHei UI"/>
 	</section>
 	<section name="">
 		<item key="org.eclipse.search.resultpage.limit" value="1000"/>

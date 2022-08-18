@@ -1,6 +1,7 @@
 #ifndef __OJ_BUZZER_H
 #define __OJ_BUZZER_H
 #include "headfile.h"
+#include "Platform.h"
 #include "PWM.h"
 /*
    以下模板详见:

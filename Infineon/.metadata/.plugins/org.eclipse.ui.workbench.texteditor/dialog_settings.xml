@@ -6,25 +6,32 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Offset"/>
+		<item key="selection" value="SOUND_SPACE"/>
 		<list key="findhistory">
+			<item value="SOUND_SPACE"/>
+			<item value="printf"/>
+			<item value="CDF"/>
+			<item value="GPT12_T4"/>
+			<item value="GPT12_T2"/>
+			<item value="MID_LINE"/>
+			<item value="lcd_drawpoint"/>
+			<item value="image"/>
+			<item value="white_"/>
+			<item value="black_"/>
+			<item value="edge_point_ornot"/>
 			<item value="offset"/>
 			<item value="rt_kprintf"/>
 			<item value="platform"/>
 			<item value="platfrom"/>
-			<item value="platf"/>
-			<item value="= NULL"/>
-			<item value="=NULL"/>
-			<item value="0x700002d0"/>
-			<item value="button"/>
-			<item value="clickFunc"/>
-			<item value="_clickFunc"/>
-			<item value="0x80000826"/>
-			<item value="click"/>
-			<item value="Sinal"/>
-			<item value="0800"/>
 		</list>
 		<list key="replacehistory">
+			<item value="ECOUNTE_RIGHT_Tx"/>
+			<item value="ECOUNTE_LEFT_Tx"/>
+			<item value="Screen.Draw_Point"/>
+			<item value="Buffer_image"/>
+			<item value="IS_White"/>
+			<item value="IS_Black"/>
+			<item value="IS_Edge_Point"/>
 			<item value="platform_printf"/>
 			<item value=""/>
 			<item value="Gray_Max"/>

@@ -31,37 +31,45 @@ static uint32 systick_count[3];
 //  @return     void
 //  Sample usage:               无需用户调用，用户请使用h文件中的宏定义
 //-------------------------------------------------------------------------------------------------------------------
-void systick_delay(STMN_enum stmn, uint32 time, uint32 num)
+void systick_delay (STMN_enum stmn, uint32 time, uint32 num)
 {
-    if(stmn == STM0)                                                            // RTT 已占用 STM0 作为系统计时器
+    uint32 stm_clk;
+    uint32 delay_time;
+    if (stmn == STM0)                                    // RTThread 已占用STM0作为系统计时器
     {
-        if(IfxCpu_getCoreId() == IfxCpu_Id_0)                                   // 如果是在 CPU0 调用 STM0 延时 那么切换成 RTT 的延时
+        if (IfxCpu_getCoreId() == IfxCpu_Id_0)
         {
-            rt_thread_mdelay(time / 1000000);                                   // 仅支持毫秒级延时 毫秒级以下延时不生效
+            rt_thread_mdelay(num);
         }
-        else                                                                    // 如果是在 CPU1/2 调用 STM0 延时 那么切换成 STM1 的延时
+        else if (IfxCpu_getCoreId() == IfxCpu_Id_1)
         {
-            uint32 stm_clk;
-            uint32 delay_time = (uint32)(stm_clk/1000000*time/1000);
-            stm_clk = IfxStm_getFrequency(IfxStm_getAddress((IfxStm_Index)STM1));
-            while(num--)
+            stm_clk = IfxStm_getFrequency(IfxStm_getAddress((IfxStm_Index) STM1));
+            delay_time = (uint32) (stm_clk / 1000000 * time / 1000);
+            while (num--)
             {
-                IfxStm_waitTicks(IfxStm_getAddress((IfxStm_Index)STM1), delay_time);
+                IfxStm_waitTicks(IfxStm_getAddress((IfxStm_Index) STM1), delay_time);
+            }
+        }
+        else
+        {
+            stm_clk = IfxStm_getFrequency(IfxStm_getAddress((IfxStm_Index) STM2));
+            delay_time = (uint32) (stm_clk / 1000000 * time / 1000);
+            while (num--)
+            {
+                IfxStm_waitTicks(IfxStm_getAddress((IfxStm_Index) STM2), delay_time);
             }
         }
     }
-    else                                                                        // STM1/2 不受影响正常工作
+    else
     {
-        uint32 stm_clk;
-        uint32 delay_time = (uint32)(stm_clk/1000000*time/1000);
-        stm_clk = IfxStm_getFrequency(IfxStm_getAddress((IfxStm_Index)stmn));
-        while(num--)
+        stm_clk = IfxStm_getFrequency(IfxStm_getAddress((IfxStm_Index) stmn));
+        delay_time = (uint32) (stm_clk / 1000000 * time / 1000);
+        while (num--)
         {
-            IfxStm_waitTicks(IfxStm_getAddress((IfxStm_Index)stmn), delay_time);
+            IfxStm_waitTicks(IfxStm_getAddress((IfxStm_Index) stmn), delay_time);
         }
     }
 }
-
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      systick定时器启动
@@ -69,10 +77,10 @@ void systick_delay(STMN_enum stmn, uint32 time, uint32 num)
 //  @return     void
 //  Sample usage:               systick_start(STM0);//记录下当前的时间
 //-------------------------------------------------------------------------------------------------------------------
-void systick_start(STMN_enum stmn)
+void systick_start (STMN_enum stmn)
 {
 
-    systick_count[stmn] = IfxStm_getLower(IfxStm_getAddress((IfxStm_Index)stmn));
+    systick_count[stmn] = IfxStm_getLower(IfxStm_getAddress((IfxStm_Index) stmn));
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -81,14 +89,14 @@ void systick_start(STMN_enum stmn)
 //  @return    uint32           返回从开始到现在的时间(单位10ns)
 //  Sample usage:               uint32 tim = systick_getval(STM0);
 //-------------------------------------------------------------------------------------------------------------------
-uint32 systick_getval(STMN_enum stmn)
+uint32 systick_getval (STMN_enum stmn)
 {
     uint32 time;
     uint32 stm_clk;
 
-    stm_clk = IfxStm_getFrequency(IfxStm_getAddress((IfxStm_Index)stmn));
+    stm_clk = IfxStm_getFrequency(IfxStm_getAddress((IfxStm_Index) stmn));
 
-    time = IfxStm_getLower(IfxStm_getAddress((IfxStm_Index)stmn)) - systick_count[stmn];
-    time = (uint32)((uint64)time * 100000000 / stm_clk);
+    time = IfxStm_getLower(IfxStm_getAddress((IfxStm_Index) stmn)) - systick_count[stmn];
+    time = (uint32) ((uint64) time * 100000000 / stm_clk);
     return time;
 }

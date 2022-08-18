@@ -1,39 +1,39 @@
 #include "LCD_12864_Parallel.h"
 
 /**
-  * @brief  空构造函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-空构造方法
+ * @param  None
+ * @retval None
+ */
 LCD_12864_Parallel::LCD_12864_Parallel()
 {
 }
 
 /**
-  * @brief  传参构造函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-传参构造方法
+ * @param  Param        LCD12864并行参数列表
+ * @retval None
+ */
 LCD_12864_Parallel::LCD_12864_Parallel(LCD_12864_Param_Parallel Param)
 {
       Set_Param(Param);
 }
 
 /**
-  * @brief  设置参数函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-设置参数方法
+ * @param  Param        LCD12864并行参数列表
+ * @retval None
+ */
 void LCD_12864_Parallel::Set_Param(LCD_12864_Param_Parallel Param)
 {
       this->Param = Param;
 }
 
 /**
-  * @brief  更新参数函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-更新参数方法
+ * @param  Param        LCD12864并行参数列表
+ * @retval None
+ */
 void LCD_12864_Parallel::Update(LCD_12864_Param_Parallel Param)
 {
       Set_Param(Param);
@@ -41,10 +41,10 @@ void LCD_12864_Parallel::Update(LCD_12864_Param_Parallel Param)
 }
 
 /**
-  * @brief  LCD12864清除DDRAM函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-清除DDRAM方法
+ * @param  None
+ * @retval None
+ */
 void LCD_12864_Parallel::Clear_DDRAM()
 {
       Write_Cmd(0x01);
@@ -52,50 +52,50 @@ void LCD_12864_Parallel::Clear_DDRAM()
 }
 
 /**
-  * @brief  空函数(给串行用的)
-  * @param  Data:需要发送的字节
-  * @retval None
-  */
+ * @brief  LCD12864并行-空方法(给串行用的)
+ * @param  Data         需要发送的字节
+ * @retval None
+ */
 void LCD_12864_Parallel::Send_Byte(uchar Data)
 {
 }
 
 /**
-  * @brief  LCD12864写屏幕指令函数
-  * @param  cmd:指令
-  * @retval None
-  */
+ * @brief  LCD12864并行-写屏幕指令方法
+ * @param  cmd          指令
+ * @retval None
+ */
 void LCD_12864_Parallel::Write_Cmd(uchar cmd)
 {
       Check_Busy();
-      IO.Set_Port(cmd);
-      RS.Set_Pin(0);
-      RW.Set_Pin(0);
-      EN.Set_Pin(1);
-      EN.Set_Pin(0);
+      IO.Set_Port_Val(cmd);
+      RS.Set_Pin_Val(0);
+      RW.Set_Pin_Val(0);
+      EN.Set_Pin_Val(1);
+      EN.Set_Pin_Val(0);
 }
 
 /**
-  * @brief  LCD12864写屏幕数据函数
-  * @param  Data:数据
-  * @retval None
-  */
+ * @brief  LCD12864并行-写屏幕数据方法
+ * @param  Data         数据
+ * @retval None
+ */
 void LCD_12864_Parallel::Write_Data(uchar Data)
 {
       Check_Busy();
-      IO.Set_Port(Data);
-      RS.Set_Pin(1);
-      RW.Set_Pin(0);
-      EN.Set_Pin(1);
-      EN.Set_Pin(0);
+      IO.Set_Port_Val(Data);
+      RS.Set_Pin_Val(1);
+      RW.Set_Pin_Val(0);
+      EN.Set_Pin_Val(1);
+      EN.Set_Pin_Val(0);
 }
 
 /**
-  * @brief  LCD12864写位置函数
-  * @param  x:行号
-  * @param  y:列号
-  * @retval None
-  */
+ * @brief  LCD12864并行-写位置方法
+ * @param  x            行号
+ * @param  y            列号
+ * @retval None
+ */
 void LCD_12864_Parallel::Pos(uchar x, uchar y)
 {
       switch (x)
@@ -117,10 +117,10 @@ void LCD_12864_Parallel::Pos(uchar x, uchar y)
 }
 
 /**
-  * @brief  LCD12864初始化函数(含GPIO)
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-初始化方法(含GPIO)
+ * @param  None
+ * @retval None
+ */
 void LCD_12864_Parallel::Init()
 {
       Pin_Init();
@@ -133,17 +133,17 @@ void LCD_12864_Parallel::Init()
 }
 
 /**
-  * @brief  LCD12864GPIO初始化函数
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-GPIO初始化方法
+ * @param  None
+ * @retval None
+ */
 void LCD_12864_Parallel::Pin_Init()
 {
       //初始化RS RW EN IOgpio口
-      RS = GPIO(Param.GPIO_RS_PORT, Param.RS_PIN);
-      RW = GPIO(Param.GPIO_RW_PORT, Param.RW_PIN);
-      EN = GPIO(Param.GPIO_EN_PORT, Param.EN_PIN);
-      IO = GPIO(Param.GPIO_IO_PORT, GPIO_Pin_All);
+      RS = GPIO(Param.RS_PIN);
+      RW = GPIO(Param.RW_PIN);
+      EN = GPIO(Param.EN_PIN);
+      IO = GPIO(Param.IO_PIN);
       RS.IN_MODE();
       RW.IN_MODE();
       EN.IN_MODE();
@@ -155,32 +155,32 @@ void LCD_12864_Parallel::Pin_Init()
 }
 
 /**
-  * @brief  LCD12864判忙
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-判忙方法
+ * @param  None
+ * @retval None
+ */
 void LCD_12864_Parallel::Check_Busy()
 {
       uint8_t value;
-      IO.Set_Port(0xff);
-      RS.Set_Pin(0);
-      RW.Set_Pin(1);
-      EN.Set_Pin(1);
+      IO.Set_Port_Val(0xff);
+      RS.Set_Pin_Val(0);
+      RW.Set_Pin_Val(1);
+      EN.Set_Pin_Val(1);
       do
       {
             IO.IN_MODE();
             value = (uint8_t)IO.Get_Input_Port();
             IO.OUT_MODE();
       } while (value & 0x80);
-      EN.Set_Pin(0);
+      EN.Set_Pin_Val(0);
 }
 
 /**
-  * @brief  LCD12864设置CGRAM函数
-  * @param  num:编号
-  * @param  p:数据指针
-  * @retval None
-  */
+ * @brief  LCD12864并行-设置CGRAM方法
+ * @param  num          编号
+ * @param  p            数据指针
+ * @retval None
+ */
 void LCD_12864_Parallel::Set_CGRAM(uchar num, uchar *p)
 {
       uchar i, firstadd;
@@ -197,26 +197,26 @@ void LCD_12864_Parallel::Set_CGRAM(uchar num, uchar *p)
 }
 
 /**
-  * @brief  LCD1286呈现CGRAM函数
-  * @param  num:编号
-  * @param  x:行号
-  * @param  y:列号
-  * @retval None
-  */
+ * @brief  LCD12864并行-呈现CGRAM方法
+ * @param  num          编号
+ * @param  x            行号
+ * @param  y            列号
+ * @retval None
+ */
 void LCD_12864_Parallel::Display_CGRAM(uchar num, uchar x, uchar y)
 {
       Pos(x, y);
-      Write_Data(0x00); //CGRAM当作数据调用
+      Write_Data(0x00); // CGRAM当作数据调用
       Write_Data(num * 2);
 }
 
 /**
-  * @brief  LCD12864写字符串
-  * @param  p:数据指针
-  * @param  row:行号
-  * @param  col:列号
-  * @retval None
-  */
+ * @brief  LCD12864并行-写字符串
+ * @param  p            数据指针
+ * @param  row          行号
+ * @param  col          列号
+ * @retval None
+ */
 void LCD_12864_Parallel::Show_String(uchar *p, uint16_t row, uint16_t col)
 {
       uchar i;
@@ -265,10 +265,10 @@ void LCD_12864_Parallel::Show_String(uchar *p, uint16_t row, uint16_t col)
 }
 
 /**
-  * @brief  LCD12864呈现图片
-  * @param  p:数据指针
-  * @retval None
-  */
+ * @brief  LCD12864并行-呈现图片
+ * @param  p            数据指针
+ * @retval None
+ */
 void LCD_12864_Parallel::Display_Image(uchar *p)
 {
       uchar i, j;
@@ -298,14 +298,14 @@ void LCD_12864_Parallel::Display_Image(uchar *p)
 }
 
 /**
-  * @brief  LCD12864高速画矩形
-  * @param  x1:左上角横坐标
-  * @param  y1:左上角纵坐标
-  * @param  x2:右下角横坐标
-  * @param  y2:右下角纵坐标
-  * @param  flag:点的状态
-  * @retval None
-  */
+ * @brief  LCD12864并行-高速画矩形
+ * @param  x1           左上角横坐标
+ * @param  y1           左上角纵坐标
+ * @param  x2           右下角横坐标
+ * @param  y2           右下角纵坐标
+ * @param  flag         点的状态
+ * @retval None
+ */
 void LCD_12864_Parallel::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag)
 {
       uchar i, j;
@@ -355,7 +355,7 @@ void LCD_12864_Parallel::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, 
                         if (flag)
                         {
                               Write_Data(fill | Hbit);
-                              Write_Data(fill | Lbit); //GDRAM是以两个字节为单位输入的
+                              Write_Data(fill | Lbit); // GDRAM是以两个字节为单位输入的
                         }
                         else
                         {
@@ -430,14 +430,14 @@ void LCD_12864_Parallel::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, 
 }
 
 /**
-  * @brief  LCD12864低速画矩形
-  * @param  x1:左上角横坐标
-  * @param  y1:左上角纵坐标
-  * @param  x2:右下角横坐标
-  * @param  y2:右下角纵坐标
-  * @param  flag:点的状态
-  * @retval None
-  */
+ * @brief  LCD12864并行-低速画矩形
+ * @param  x1           左上角横坐标
+ * @param  y1           左上角纵坐标
+ * @param  x2           右下角横坐标
+ * @param  y2           右下角纵坐标
+ * @param  flag         点的状态
+ * @retval None
+ */
 void LCD_12864_Parallel::Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag)
 {
       uchar i, j;
@@ -449,12 +449,12 @@ void LCD_12864_Parallel::Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2
 }
 
 /**
-  * @brief  LCD12864描点
-  * @param  x:点横坐标
-  * @param  y:点纵坐标
-  * @param  flag:点的状态
-  * @retval None
-  */
+ * @brief  LCD12864并行-描点
+ * @param  x            点横坐标
+ * @param  y            点纵坐标
+ * @param  flag         点的状态
+ * @retval None
+ */
 void LCD_12864_Parallel::Draw_Point(uchar x, uchar y, uchar flag)
 {
       uchar fill = 0x80;
@@ -482,10 +482,10 @@ void LCD_12864_Parallel::Draw_Point(uchar x, uchar y, uchar flag)
 }
 
 /**
-  * @brief  LCD12864请除GDRAM
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-清除GDRAM
+ * @param  None
+ * @retval None
+ */
 void LCD_12864_Parallel::Clear_GDRAM()
 {
       uchar i, j;
@@ -514,11 +514,11 @@ void LCD_12864_Parallel::Clear_GDRAM()
 }
 
 /**
-  * @brief  LCD12864设置GDRAM地址
-  * @param  x:列号
-  * @param  y:行号
-  * @retval None
-  */
+ * @brief  LCD12864并行-设置GDRAM地址
+ * @param  x            列号
+ * @param  y            行号
+ * @retval None
+ */
 void LCD_12864_Parallel::Set_GDRAMadd(uchar x, uchar y)
 {
       Write_Cmd(y + 0x80);
@@ -526,11 +526,11 @@ void LCD_12864_Parallel::Set_GDRAMadd(uchar x, uchar y)
 }
 
 /**
-  * @brief  LCD12864读取GDRAM数据
-  * @param  x:列号
-  * @param  y:行号
-  * @retval None
-  */
+ * @brief  LCD12864并行-读取GDRAM数据
+ * @param  x            列号
+ * @param  y            行号
+ * @retval None
+ */
 void LCD_12864_Parallel::Read_GDRAM(uchar x, uchar y)
 {
       Set_GDRAMadd(x, y);
@@ -541,38 +541,38 @@ void LCD_12864_Parallel::Read_GDRAM(uchar x, uchar y)
 }
 
 /**
-  * @brief  LCD12864读取屏幕数据
-  * @param  None
-  * @retval None
-  */
-uchar LCD_12864_Parallel::Read_Data() //串口不可用
+ * @brief  LCD12864并行-读取屏幕数据
+ * @param  None
+ * @retval 屏幕数据
+ */
+uchar LCD_12864_Parallel::Read_Data() //串行不可用
 {
-      Check_Busy(); //判忙函数一定要加！！！
-      IO.Set_Port(0xff);
-      RS.Set_Pin(1); //RS=1 RW=1 E=高脉冲
-      RW.Set_Pin(1);
-      EN.Set_Pin(1);
+      Check_Busy(); //判忙方法一定要加！！！
+      IO.Set_Port_Val(0xff);
+      RS.Set_Pin_Val(1); // RS=1 RW=1 E=高脉冲
+      RW.Set_Pin_Val(1);
+      EN.Set_Pin_Val(1);
       IO.IN_MODE();
       temp = (uint8_t)IO.Get_Input_Port();
-      EN.Set_Pin(0);
+      EN.Set_Pin_Val(0);
       return temp;
 }
 
 /**
-  * @brief  空函数(给串行用的)
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-空方法(给串行用的)
+ * @param  None
+ * @retval 接收到的字节
+ */
 uchar LCD_12864_Parallel::Receive_Byte()
 {
       return 0;
 }
 
 /**
-  * @brief  空函数(给串行用的)
-  * @param  None
-  * @retval None
-  */
+ * @brief  LCD12864并行-空方法(给串行用的)
+ * @param  None
+ * @retval LCD的状态
+ */
 uchar LCD_12864_Parallel::Read_Status()
 {
       return 0;

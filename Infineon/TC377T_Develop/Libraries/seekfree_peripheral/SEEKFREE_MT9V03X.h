@@ -98,8 +98,8 @@ extern int16 MT9V03X_CFG[CONFIG_FINISH][2];
 extern uint8    mt9v03x_finish_flag;//一场图像采集完成标志位
 extern uint8    mt9v03x_image[MT9V03X_H][MT9V03X_W];
 extern uint8    Buffer_image[MT9V03X_H][MT9V03X_W];
-extern uint8    Result_image[MT9V03X_H][MT9V03X_W];
-extern uint8    Temp_image[MT9V03X_H][MT9V03X_W];
+//extern uint8    Result_image[MT9V03X_H][MT9V03X_W];
+//extern uint8    Temp_image[MT9V03X_H][MT9V03X_W];
 
 void mt9v03x_uart_callback(void);
 void set_config(UARTN_enum uartn, int16 buff[CONFIG_FINISH-1][2]);

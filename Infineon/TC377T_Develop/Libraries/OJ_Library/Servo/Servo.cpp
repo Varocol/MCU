@@ -55,8 +55,16 @@ void Servo::Set_Param (Servo_Param Param)
  */
 void Servo::Turn (double MAP_VAL)
 {
-    Set_Percent(MAP_TO_Percent(MAP_VAL));
-    PWM::Init();
+    //防止舵机转向过度
+    if (MAP_VAL < Param.MAP_MIN)
+    {
+        MAP_VAL = Param.MAP_MIN;
+    }
+    if (MAP_VAL > Param.MAP_MAX)
+    {
+        MAP_VAL = Param.MAP_MAX;
+    }
+    Update_Percent(MAP_TO_Percent(MAP_VAL));
 }
 
 /*

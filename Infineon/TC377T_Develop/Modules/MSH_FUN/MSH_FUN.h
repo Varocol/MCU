@@ -7,7 +7,7 @@ extern "C" {
 
 //保留C的接口，包含headfile.h是为了给MSH.c的MSH_CMD_EXPORT用
 long LED_Test (void);
-
+long Car_Run_Test (void);
 
 #ifdef __cplusplus
 }
