@@ -86,6 +86,8 @@ void USART::Send_String(const char *str)
  */
 uint8_t USART::Receive_Data()
 {
+  while (USART_GetFlagStatus(USARTx_Param.USARTx, USART_FLAG_RXNE) == RESET)
+    ;
   return USART_ReceiveData(USARTx_Param.USARTx);
 }
 

@@ -16,6 +16,7 @@
  */
 
 #include "Button.h"
+#include "System.h"
 // ----- Initialization and Default Values -----
 
 /**
@@ -244,7 +245,7 @@ void Button::_newState(stateMachine_t nextState)
  */
 void Button::tick(bool activeLevel)
 {
-  unsigned long now = platform_getval_ms(); // current (relative) time in msecs.
+  unsigned long now = system_time_ms(); // current (relative) time in msecs.
   unsigned long waitTime = (now - _startTime);
 
 

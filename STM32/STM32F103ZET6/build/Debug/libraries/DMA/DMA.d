@@ -1,5 +1,5 @@
-./build/Debug/libraries/DMA/DMA.o: libraries\DMA\DMA.cpp \
-  libraries\DMA\DMA.h libraries\NVIC\NVIC.h \
+./build/Debug/Libraries/DMA/DMA.o: Libraries\DMA\DMA.cpp \
+  Libraries\DMA\DMA.h Libraries\NVIC\NVIC.h \
   hal\STM32F10x_StdPeriph_Driver\stm32f10x.h lib\cmsis\core_cm3.h \
   hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
   lib\STM32F10x_Driver\stm32f10x_conf.h \
@@ -25,4 +25,4 @@
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h \
-  hal\STM32F10x_StdPeriph_Driver\inc\misc.h libraries\RCC\RCC.h
+  hal\STM32F10x_StdPeriph_Driver\inc\misc.h Libraries\RCC\RCC.h

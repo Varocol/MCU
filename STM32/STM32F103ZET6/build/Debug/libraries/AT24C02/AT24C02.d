@@ -1,5 +1,5 @@
-./build/Debug/libraries/AT24C02/AT24C02.o: libraries\AT24C02\AT24C02.cpp \
-  libraries\AT24C02\AT24C02.h libraries\I2C\I2C.h \
+./build/Debug/Libraries/AT24C02/AT24C02.o: Libraries\AT24C02\AT24C02.cpp \
+  Libraries\AT24C02\AT24C02.h Libraries\I2C\I2C.h \
   hal\STM32F10x_StdPeriph_Driver\stm32f10x.h lib\cmsis\core_cm3.h \
   hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
   lib\STM32F10x_Driver\stm32f10x_conf.h \
@@ -25,9 +25,6 @@
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h \
-  hal\STM32F10x_StdPeriph_Driver\inc\misc.h libraries\NVIC\NVIC.h \
-  libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h libraries\RCC\RCC.h \
-  libraries\Variable_Space\Variable_Space.h libraries\USART\USART.h \
-  libraries\TIM\TIM.h libraries\DMA\DMA.h libraries\SPI\SPI.h \
-  libraries\EXTI\EXTI.h libraries\LED\LED.h libraries\RTC\RTC.h \
-  libraries\String\String_CPP.h libraries\USART\USART_DEBUG.h
+  hal\STM32F10x_StdPeriph_Driver\inc\misc.h Libraries\NVIC\NVIC.h \
+  Libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h Libraries\RCC\RCC.h \
+  Libraries\DEBUG\DEBUG.h

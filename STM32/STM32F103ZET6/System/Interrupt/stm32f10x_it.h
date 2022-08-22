@@ -22,7 +22,7 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F10x_IT_H
 #define __STM32F10x_IT_H
-#include "Libraries.h" //这部分代码包含CPP所以得做隔离
+#include "Variable_Space.h" //这部分代码包含CPP所以得做隔离
 #ifdef __cplusplus
  extern "C" {
 #endif 

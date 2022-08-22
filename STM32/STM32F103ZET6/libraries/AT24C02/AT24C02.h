@@ -9,10 +9,7 @@
 #define EVENT_ERROR "事件%s无法响应!\n在方法%s处无法运行"
 #define FLAG_ERROR "标志位%s无法改变!\n在方法%s处无法运行"
 #include "I2C.h"
-#include "Variable_Space.h"
-#include "USART.h"
-#include "USART_DEBUG.h"
-#include "stdio.h"
+#include "DEBUG.h"
 // AT24C02参数列表结构体
 typedef struct
 {

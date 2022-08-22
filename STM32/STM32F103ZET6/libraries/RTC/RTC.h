@@ -2,6 +2,7 @@
 #define __OJ_RTC_H
 #include "RCC.h"
 #include "NVIC.h"
+#include "time.h"
 /*
 配置RTC过程：
     1.复位备份域(可选)
@@ -21,6 +22,10 @@
 RTC_IT_OW    //溢出中断
 RTC_IT_ALR   //闹钟中断
 RTC_IT_SEC   //秒中断
+
+RTC时间基准值：1970-1-1 00:00:00    (最小允许值)
+RTC溢出时间:   2106-2-7 06:28:15    (最大允许值)
+
 */
 typedef enum
 {
@@ -29,6 +34,8 @@ typedef enum
     RTC_CLK_HSE_Div128
 } RTC_CLK_enum;
 
+//基础初始化会使用下面所有的参数
+//而一般初始化会使用
 typedef struct
 {
     uint32_t PrescalerValue;       // RTC分频系数
@@ -54,9 +61,25 @@ public:
     void ITConfig(uint16_t RTC_IT, FunctionalState NewState);
     void EnterConfigMode();
     void ExitConfigMode();
-    void SetPrescaler(uint32_t PrescalerValue);
-    void SetCounter(uint32_t CounterValue);
-    void SetAlarm(uint32_t AlarmValue);
+    
+    static void SetPrescaler(uint32_t PrescalerValue);
+    static void SetCounter(uint32_t CounterValue);
+    static void SetAlarm(uint32_t AlarmValue);
+
+    uint32_t GetPrescaler();
+    static uint32_t GetCounter();
+    static uint32_t GetDivider();
+    static uint32_t Get_Clock_Freq();
+    static double Get_Divider_Time();
+
+    static uint32_t Get_Unix_Time();
+    static void Set_Unix_Time(uint32_t Time);
+    static tm Get_Time();
+    static void Set_Time(tm Time);
+    static void Set_TimeZone(uint8_t TimeZone);
+
+
+    void Base_Init();
     void Init();
     void Start();
     void Shutup();

@@ -1,9 +1,229 @@
-[2022-08-18 18:22:53]	[done]
+[2022-08-21 23:02:12]	compilation failed at : "c:\Users\Varocol\Desktop\MCU\STM32\STM32F103ZET6\Libraries\RTC\RTC.cpp", exit code: 1
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./Libraries/RTC/RTC.cpp:1:
+In file included from Libraries/RTC\RTC.h:6:
+In file included from System\System.h:3:
+System/Variables\Variable_Space.h:27:8: error: unknown type name 'RTC_Operate'; did you mean 'RCC_Operate'?
+extern RTC_Operate RTC_x;
+       ^~~~~~~~~~~
+       RCC_Operate
+Libraries/RCC\RCC.h:28:7: note: 'RCC_Operate' declared here
+class RCC_Operate
+      ^
+1 error generated.
+
+[2022-08-21 23:04:52]	compilation failed at : "c:\Users\Varocol\Desktop\MCU\STM32\STM32F103ZET6\src\RTC万年历.cpp", exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+./src/RTC万年历.cpp:25:28: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("-----------<C7><EB>?<D4><F1><D0><E8>?<BD><F8><D0>е?<D9><D7><F7>-----------\n");
+                           ^~~~~~~~ ~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~  ~~~~~~~~~~~~
+./src/RTC万年历.cpp:26:19: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("1.<CF><D4>????<BC><E4>                           \n");
+                  ^~~~~~~~    ~~~~~~~~
+./src/RTC万年历.cpp:27:19: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("2.<D0><U+07B8><C4>???<BC><E4>                           \n");
+                  ^~~~        ~~~~   ~~~~~~~~
+./src/RTC万年历.cpp:28:25: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("3.UNIX?<BC><E4><B4><C1>?<C6><D5>??<BC><E4>                   \n");
+                       ^~~~~~~~~~~~~~~~ ~~~~~~~~ ~~~~~~~~
+./src/RTC万年历.cpp:29:19: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("4.<C6><D5>??<BC><E4>?UNIX?<BC><E4><B4><C1>                   \n");
+                  ^~~~~~~~ ~~~~~~~~      ~~~~~~~~~~~~~~~~
+./src/RTC万年历.cpp:46:21: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+            printf("<CA><E4><C8><EB><B5><C4>?<CF><EE><D3><D0><CE><F3>,<C7><EB><D6><D8><D0><C2><CA><E4><C8><EB>!\n");
+                    ^~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./src/RTC万年历.cpp:57:24: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+    printf("-----------<CF><D4>????<BC><E4>-----------\n");
+                       ^~~~~~~~    ~~~~~~~~
+./src/RTC万年历.cpp:58:13: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+    printf("<B0><B4><CF><C2>Q<B7><B5><BB>??<A5>\n");
+            ^~~~~~~~~~~~~~~~ ~~~~~~~~~~~~  ~~~~
+./src/RTC万年历.cpp:59:5: error: use of undeclared identifier 'RTC_x'
+    RTC_x.ITConfig(RTC_IT_SEC, ENABLE);
+    ^
+./src/RTC万年历.cpp:59:20: error: use of undeclared identifier 'RTC_IT_SEC'
+    RTC_x.ITConfig(RTC_IT_SEC, ENABLE);
+                   ^
+./src/RTC万年历.cpp:59:32: error: use of undeclared identifier 'ENABLE'
+    RTC_x.ITConfig(RTC_IT_SEC, ENABLE);
+                               ^
+./src/RTC万年历.cpp:67:5: error: use of undeclared identifier 'RTC_x'
+    RTC_x.ITConfig(RTC_IT_SEC, DISABLE);
+    ^
+./src/RTC万年历.cpp:67:20: error: use of undeclared identifier 'RTC_IT_SEC'
+    RTC_x.ITConfig(RTC_IT_SEC, DISABLE);
+                   ^
+./src/RTC万年历.cpp:67:32: error: use of undeclared identifier 'DISABLE'
+    RTC_x.ITConfig(RTC_IT_SEC, DISABLE);
+                               ^
+./src/RTC万年历.cpp:71:24: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+    printf("-----------<D0><U+07B8><C4>???<BC><E4>-----------\n");
+                       ^~~~        ~~~~   ~~~~~~~~
+./src/RTC万年历.cpp:74:17: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("<C7><EB><CA><E4><C8><EB><C4><EA><B7><DD>(1970~2106):\n");
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./src/RTC万年历.cpp:75:22: error: use of undeclared identifier 'timeinfo'
+        scanf("%d", &timeinfo.tm_year);
+                     ^
+./src/RTC万年历.cpp:76:13: error: use of undeclared identifier 'timeinfo'
+        if (timeinfo.tm_year <= 2106 && timeinfo.tm_year >= 1970)
+            ^
+./src/RTC万年历.cpp:76:41: error: use of undeclared identifier 'timeinfo'
+        if (timeinfo.tm_year <= 2106 && timeinfo.tm_year >= 1970)
+                                        ^
+./src/RTC万年历.cpp:78:13: error: use of undeclared identifier 'timeinfo'
+            timeinfo.tm_year -= 1900;
+            ^
+./src/RTC万年历.cpp:81:17: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("<CA><E4><C8><EB><D3><D0><CE><F3>,<C7><EB><D6><D8><D0><C2><CA><E4><C8><EB>!\n");
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./src/RTC万年历.cpp:85:17: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("<C7><EB><CA><E4><C8><EB><D4>·<DD>(1~12):\n");
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~
+./src/RTC万年历.cpp:86:22: error: use of undeclared identifier 'timeinfo'
+        scanf("%d", &timeinfo.tm_mon);
+                     ^
+./src/RTC万年历.cpp:87:13: error: use of undeclared identifier 'timeinfo'
+        if (timeinfo.tm_mon <= 12 && timeinfo.tm_mon >= 1)
+            ^
+./src/RTC万年历.cpp:87:38: error: use of undeclared identifier 'timeinfo'
+        if (timeinfo.tm_mon <= 12 && timeinfo.tm_mon >= 1)
+                                     ^
+./src/RTC万年历.cpp:89:13: error: use of undeclared identifier 'timeinfo'
+            timeinfo.tm_mon -= 1;
+            ^
+./src/RTC万年历.cpp:92:17: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("<CA><E4><C8><EB><D3><D0><CE><F3>,<C7><EB><D6><D8><D0><C2><CA><E4><C8><EB>!\n");
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./src/RTC万年历.cpp:96:17: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
+        printf("<C7><EB><CA><E4><C8><EB><C8><D5><C6><DA>:\n");
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./src/RTC万年历.cpp:97:22: error: use of undeclared identifier 'timeinfo'
+        scanf("%d", &timeinfo.tm_mon);
+                     ^
+./src/RTC万年历.cpp:99:17: error: use of undeclared identifier 'timeinfo'
+        switch (timeinfo.tm_mon)
+                ^
+./src/RTC万年历.cpp:111:29: error: use of undeclared identifier 'timeinfo'
+            if (is_leapyear(timeinfo.tm_year + 1900))
+                            ^
+./src/RTC万年历.cpp:120:13: error: use of undeclared identifier 'timeinfo'
+        if (timeinfo.tm_mday <= day_max && timeinfo.tm_mon >= 1)
+            ^
+./src/RTC万年历.cpp:120:44: error: use of undeclared identifier 'timeinfo'
+        if (timeinfo.tm_mday <= day_max && timeinfo.tm_mon >= 1)
+                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+14 warnings and 20 errors generated.
+
+[2022-08-21 23:07:41]	compilation failed at : "c:\Users\Varocol\Desktop\MCU\STM32\STM32F103ZET6\Libraries\Button\Button.cpp", exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./Libraries/Button/Button.cpp:18:
+In file included from Libraries/Button/Button.h:27:
+In file included from System\System.h:3:
+In file included from System/Variables\Variable_Space.h:3:
+In file included from Libraries\Libraries.h:18:
+Libraries/RTC\RTC.h:76:12: error: unknown type name 'tm'
+    static tm Get_Time();
+           ^
+Libraries/RTC\RTC.h:77:26: error: unknown type name 'tm'
+    static void Set_Time(tm Time);
+                         ^
+In file included from ./Libraries/Button/Button.cpp:18:
+In file included from Libraries/Button/Button.h:27:
+In file included from System\System.h:3:
+System/Variables\Variable_Space.h:39:8: error: unknown type name 'time_t'; did you mean 'size_t'?
+extern time_t timestamp;
+       ^~~~~~
+       size_t
+d:\Chipenvironment\keilmdk\ARM\ARMCLANG\bin\..\include\stdio.h:942:18: note: 'size_t' declared here
+    using ::std::size_t;
+                 ^
+In file included from ./Libraries/Button/Button.cpp:18:
+In file included from Libraries/Button/Button.h:27:
+In file included from System\System.h:3:
+System/Variables\Variable_Space.h:40:8: error: unknown type name 'time_t'; did you mean 'size_t'?
+extern time_t system_start_time;
+       ^~~~~~
+       size_t
+d:\Chipenvironment\keilmdk\ARM\ARMCLANG\bin\..\include\stdio.h:942:18: note: 'size_t' declared here
+    using ::std::size_t;
+                 ^
+In file included from ./Libraries/Button/Button.cpp:18:
+In file included from Libraries/Button/Button.h:27:
+In file included from System\System.h:3:
+System/Variables\Variable_Space.h:41:8: error: unknown type name 'tm'
+extern tm timeinfo;
+       ^
+5 errors generated.
+
+[2022-08-21 23:08:07]	[done]
 	build successfully !
 
-[2022-08-18 18:23:10]	[done]
+[2022-08-21 23:09:21]	[done]
 	build successfully !
 
-[2022-08-18 18:30:46]	[done]
+[2022-08-21 23:09:53]	[done]
+	build successfully !
+
+[2022-08-21 23:10:30]	[done]
+	build successfully !
+
+[2022-08-21 23:10:58]	[done]
+	build successfully !
+
+[2022-08-22 07:33:38]	[done]
+	build successfully !
+
+[2022-08-22 07:35:43]	[done]
+	build successfully !
+
+[2022-08-22 07:43:29]	[done]
+	build successfully !
+
+[2022-08-22 07:44:52]	[done]
+	build successfully !
+
+[2022-08-22 09:09:41]	[done]
+	build successfully !
+
+[2022-08-22 09:36:49]	[done]
+	build successfully !
+
+[2022-08-22 09:49:35]	[done]
+	build successfully !
+
+[2022-08-22 09:52:16]	[done]
+	build successfully !
+
+[2022-08-22 09:54:05]	[done]
+	build successfully !
+
+[2022-08-22 09:55:22]	[done]
+	build successfully !
+
+[2022-08-22 09:57:00]	[done]
+	build successfully !
+
+[2022-08-22 09:59:03]	[done]
+	build successfully !
+
+[2022-08-22 10:00:43]	[done]
+	build successfully !
+
+[2022-08-22 10:03:10]	[done]
+	build successfully !
+
+[2022-08-22 10:04:39]	[done]
+	build successfully !
+
+[2022-08-22 10:14:03]	[done]
+	build successfully !
+
+[2022-08-22 10:18:42]	[done]
 	build successfully !
 

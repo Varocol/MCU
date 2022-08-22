@@ -1,90 +1,19 @@
 {
   "name": "STM32F103ZET6",
   "type": "ARM",
-  "mode": "Debug",
-  "toolchain": "AC6",
-  "dependenceList": [
-    {
-      "groupName": "custom",
-      "depList": [
-        {
-          "name": "default",
-          "incList": [
-            "./.eide/deps",
-            "./lib/cmsis"
-          ],
-          "libList": [],
-          "sourceDirList": [],
-          "defineList": [
-            "USE_STDPERIPH_DRIVER",
-            "ARM_MATH_CM3",
-            "STM32F10X_HD"
-          ]
-        }
-      ]
-    }
-  ],
-  "compileConfig": {
-    "cpuType": "Cortex-M3",
-    "floatingPointHardware": "none",
-    "useCustomScatterFile": false,
-    "scatterFilePath": "undefined",
-    "storageLayout": {
-      "RAM": [
-        {
-          "tag": "IRAM",
-          "id": 1,
-          "mem": {
-            "startAddr": "0x20000000",
-            "size": "0x10000"
-          },
-          "isChecked": true,
-          "noInit": false
-        }
-      ],
-      "ROM": [
-        {
-          "tag": "IROM",
-          "id": 1,
-          "mem": {
-            "startAddr": "0x08000000",
-            "size": "0x80000"
-          },
-          "isChecked": true,
-          "isStartup": true
-        }
-      ]
-    },
-    "options": "null"
-  },
-  "uploader": "JLink",
+  "dependenceList": [],
   "srcDirs": [
-    "./.eide/deps",
-    "./hal",
-    "./lib",
-    "./libraries",
-    "./src",
-    "./Startup"
-  ],
-  "excludeList": [
-    "libraries/ADC",
-    "libraries/Button",
-    "libraries/Buzzer"
+    ".eide/deps",
+    "hal",
+    "lib",
+    "src",
+    "Startup",
+    "System",
+    "Libraries"
   ],
   "outDir": "build",
   "deviceName": "STM32F102C8",
   "packDir": null,
-  "uploadConfig": {
-    "bin": ".\\build\\Debug\\stm32f1_gcc.hex",
-    "baseAddr": "0x08000000",
-    "cpuInfo": {
-      "vendor": "ST",
-      "cpuName": "STM32F103ZE (allow opt. bytes)"
-    },
-    "proType": 1,
-    "speed": 8000,
-    "otherCmds": ""
-  },
   "miscInfo": {
     "lastBuildTime": 1608695075742,
     "uid": "8848ae0a5caf9fee1c82ba259e8a418d"
@@ -94,7 +23,75 @@
     "files": [],
     "folders": []
   },
-  "targets": {},
-  "version": "3.2",
-  "uploadConfigMap": {}
+  "targets": {
+    "Debug": {
+      "excludeList": [
+        "libraries/ADC",
+        "libraries/Button",
+        "libraries/Buzzer"
+      ],
+      "toolchain": "AC6",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "useCustomScatterFile": false,
+        "scatterFilePath": "undefined",
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x10000"
+              },
+              "isChecked": true,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x08000000",
+                "size": "0x80000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": ".\\build\\Debug\\stm32f1_gcc.hex",
+        "baseAddr": "0x08000000",
+        "cpuInfo": {
+          "vendor": "ST",
+          "cpuName": "STM32F103ZE (allow opt. bytes)"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          ".eide/deps",
+          "lib/cmsis"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "USE_STDPERIPH_DRIVER",
+          "ARM_MATH_CM3",
+          "STM32F10X_HD"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
 }

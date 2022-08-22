@@ -226,7 +226,9 @@ void RTC_IRQHandler(void)
   // RTC实时时钟项目
   if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
   {
-    printf("%d\n", RTC_GetCounter());
+    timeinfo = RTC_Operate::Get_Time();
+    strftime(timestr, sizeof(timestr) / sizeof(char), "%Y/%m/%d %p %H:%M:%S %A %Z ", &timeinfo);
+    printf("%s\r", timestr);
     LED_1.Toggle();
     RTC_WaitForLastTask();
     RTC_ClearITPendingBit(RTC_IT_SEC);
@@ -323,7 +325,7 @@ void CAN1_SCE_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   // SPI通信测试项目
-  if (EXTI_GetFlagStatus(EXTI_Line6) != RESET)
+  if (EXTI_GetITStatus(EXTI_Line6) != RESET)
   {
     // USART_1.Send_String("已进入中断！\n");
     //读取PC6
@@ -422,7 +424,7 @@ void USART3_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   // PWR电源管理项目
-  if (EXTI_GetFlagStatus(EXTI_Line13) != RESET)
+  if (EXTI_GetITStatus(EXTI_Line13) != RESET)
   {
     printf("进入睡眠模式\n");
     __WFE();
@@ -431,6 +433,14 @@ void EXTI15_10_IRQHandler(void)
 }
 void RTCAlarm_IRQHandler(void)
 {
+  // PWR电源管理项目
+  if (EXTI_GetITStatus(EXTI_Line17) != RESET)
+  {
+    // 停止模式唤醒的时钟不足以发送串口
+    // printf("闹钟60s唤醒\n");
+    RTC_x.SetAlarm(RTC_Operate::GetCounter() + 60);
+    EXTI_ClearITPendingBit(EXTI_Line17);
+  }
 }
 void USBWakeUp_IRQHandler(void)
 {

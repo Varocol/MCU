@@ -1,6 +1,6 @@
-./build/Debug/libraries/GPIO(Support\ Bit-Band\ Operations)/GPIO.o: \
-  libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.cpp \
-  libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h \
+./build/Debug/Libraries/GPIO(Support\ Bit-Band\ Operations)/GPIO.o: \
+  Libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.cpp \
+  Libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h \
   hal\STM32F10x_StdPeriph_Driver\stm32f10x.h lib\cmsis\core_cm3.h \
   hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
   lib\STM32F10x_Driver\stm32f10x_conf.h \
@@ -26,4 +26,4 @@
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h \
-  hal\STM32F10x_StdPeriph_Driver\inc\misc.h libraries\RCC\RCC.h
+  hal\STM32F10x_StdPeriph_Driver\inc\misc.h Libraries\RCC\RCC.h

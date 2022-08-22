@@ -1,5 +1,5 @@
-./build/Debug/libraries/USART/USART.o: libraries\USART\USART.cpp \
-  libraries\USART\USART.h libraries\NVIC\NVIC.h \
+./build/Debug/Libraries/USART/USART.o: Libraries\USART\USART.cpp \
+  Libraries\USART\USART.h Libraries\NVIC\NVIC.h \
   hal\STM32F10x_StdPeriph_Driver\stm32f10x.h lib\cmsis\core_cm3.h \
   hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
   lib\STM32F10x_Driver\stm32f10x_conf.h \
@@ -26,4 +26,4 @@
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h \
   hal\STM32F10x_StdPeriph_Driver\inc\misc.h \
-  libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h libraries\RCC\RCC.h
+  Libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h Libraries\RCC\RCC.h

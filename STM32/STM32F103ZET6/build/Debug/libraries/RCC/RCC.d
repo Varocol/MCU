@@ -1,5 +1,5 @@
-./build/Debug/libraries/RCC/RCC.o: libraries\RCC\RCC.cpp \
-  libraries\RCC\RCC.h hal\STM32F10x_StdPeriph_Driver\stm32f10x.h \
+./build/Debug/Libraries/RCC/RCC.o: Libraries\RCC\RCC.cpp \
+  Libraries\RCC\RCC.h hal\STM32F10x_StdPeriph_Driver\stm32f10x.h \
   lib\cmsis\core_cm3.h hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
   lib\STM32F10x_Driver\stm32f10x_conf.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h \

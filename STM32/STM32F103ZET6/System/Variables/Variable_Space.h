@@ -1,14 +1,7 @@
 #ifndef __OJ_VARIBALE_SPACE_H
 #define __OJ_VARIBALE_SPACE_H
-#include "I2C.h"
-#include "USART.h"
-#include "TIM.h"
-#include "DMA.h"
-#include "SPI.h"
-#include "EXTI.h"
-#include "LED.h"
-#include "RTC.h"
-#include "String_CPP.h"
+#include "Libraries.h"
+
 // I2C
 extern I2C I2C_1;
 extern I2C I2C_2;
@@ -30,6 +23,9 @@ extern DMA SPI1_TX_DMA;
 extern SPI SPI_1;
 extern SPI SPI_2;
 
+// RTC
+extern RTC_Operate RTC_x;
+
 // EXTI
 extern EXTI_Operate EXTI_PC6;
 
@@ -37,6 +33,15 @@ extern EXTI_Operate EXTI_PC6;
 extern LED LED_1;
 extern LED LED_2;
 extern LED LED_3;
+
+// Button
+extern Button Key1;
+
+//系统变量
+extern time_t timestamp;
+extern time_t system_start_time;
+extern tm timeinfo;
+extern char timestr[80];
 
 // 普通变量
 extern BitAction flag;

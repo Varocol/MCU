@@ -1,7 +1,7 @@
-#ifndef __OJ_USART_DEBUG_H
-#include "stm32f10x.h"
+#ifndef __OJ_DEBUG_H
+#define __OJ_DEBUG_H
 #include "stdio.h"
-#define DEBUG_USARTx USART1
+//ÓÃÓÚµ÷ÊÔ
 #define DEBUG_OUT_PUT 1
 #define DEBUG_ERROR_INFO(fmt, ...) \
     if (DEBUG_OUT_PUT)             \
@@ -9,4 +9,5 @@
 #define DEBUG_MESSAGE_INFO(fmt, ...) \
     if (DEBUG_OUT_PUT)               \
     printf("<--- MESSAGE INFO --->\nFILE: [%s]\nLINE: [%d]\n<--- ERROR MESSAGE --->\n" fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__)
-#endif /*__OJ_USART_DEBUG_H*/
+
+#endif /*__OJ_DEBUG_H*/

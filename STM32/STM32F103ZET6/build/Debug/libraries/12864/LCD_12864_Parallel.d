@@ -1,6 +1,6 @@
-./build/Debug/libraries/12864/LCD_12864_Parallel.o: \
-  libraries\12864\LCD_12864_Parallel.cpp \
-  libraries\12864\LCD_12864_Parallel.h libraries\12864\LCD_12864.h \
+./build/Debug/Libraries/12864/LCD_12864_Parallel.o: \
+  Libraries\12864\LCD_12864_Parallel.cpp \
+  Libraries\12864\LCD_12864_Parallel.h Libraries\12864\LCD_12864.h \
   hal\STM32F10x_StdPeriph_Driver\stm32f10x.h lib\cmsis\core_cm3.h \
   hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
   lib\STM32F10x_Driver\stm32f10x_conf.h \
@@ -27,5 +27,4 @@
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h \
   hal\STM32F10x_StdPeriph_Driver\inc\misc.h \
-  libraries\String\String_CPP.h \
-  libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h libraries\RCC\RCC.h
+  Libraries\GPIO(Support\ Bit-Band\ Operations)\GPIO.h Libraries\RCC\RCC.h

@@ -1,4 +1,5 @@
 #include "Buzzer.h"
+#include "System.h"
 /**
  * @brief       蜂鸣器空构造方法
  * @param       None
@@ -53,7 +54,7 @@ void Buzzer::Beep_Off()
  * @param       volume      蜂鸣器音量
  * @retval      None
  */
-void Buzzer::Beep_Set(uint16 freq, uint8 volume)
+void Buzzer::Beep_Set(uint16_t freq, uint8_t volume)
 {
     Set_Frequency(freq);
     Set_DutyRatio(volume);
@@ -65,9 +66,9 @@ void Buzzer::Beep_Set(uint16 freq, uint8 volume)
  * @param       song        音乐结构体
  * @retval      None
  */
-uint16 Buzzer::Beep_Song_Get_Len(const struct beep_song *song)
+uint16_t Buzzer::Beep_Song_Get_Len(const struct beep_song *song)
 {
-    uint16 cnt = 0;
+    uint16_t cnt = 0;
     /* 歌曲以0x00 0x00结尾 检测结束标志*/
     while (song->data[cnt])
     {
@@ -99,9 +100,9 @@ void Buzzer::Beep_Song_Get_Name(const struct beep_song *song, char *name)
  * @param       octachord|升降八度(-2到+2) :  < 0 降几个八度; > 0 升几个八度
  * @retval      None
  */
-void Buzzer::Beep_Song_Decode_new_freq(uint8 signature, int8 octachord)
+void Buzzer::Beep_Song_Decode_new_freq(uint8_t signature, int8_t octachord)
 {
-    uint8 i, j;
+    uint8_t i, j;
     for (i = 0; i < 12; i++) // 根据调号及升降八度来生成新的频率表
     {
         j = i + signature;
@@ -136,11 +137,11 @@ void Buzzer::Beep_Song_Decode_new_freq(uint8 signature, int8 octachord)
  * @param       data            歌曲信息数组(用于存放解码后的信息)
  * @retval      None
  */
-void Buzzer::Beep_Song_Decode(uint16 tone, uint16 length, uint16 Basicspeed, struct beep_song_data *data)
+void Buzzer::Beep_Song_Decode(uint16_t tone, uint16_t length, uint16_t Basicspeed, struct beep_song_data *data)
 {
-    static const uint16 div0_len = 60.0 / Basicspeed * 1000; // 全音符的长度(ms)
-    uint16 note_len, note_sound_len, current_freq;
-    uint8 note, sharp, range, note_div, effect, dotted;
+    static const uint16_t div0_len = 60.0 / Basicspeed * 1000; // 全音符的长度(ms)
+    uint16_t note_len, note_sound_len, current_freq;
+    uint8_t note, sharp, range, note_div, effect, dotted;
 
     note = tone % 10;                                        //计算出音符
     range = tone / 10 % 10;                                  //计算出高低音
@@ -197,7 +198,7 @@ void Buzzer::Beep_Song_Decode(uint16 tone, uint16 length, uint16 Basicspeed, str
  * @param       data            歌曲信息数组(用于存放解码后的信息)
  * @retval      None
  */
-void Buzzer::Beep_Song_Get_Data(const struct beep_song *song, uint16 index, struct beep_song_data *data)
+void Buzzer::Beep_Song_Get_Data(const struct beep_song *song, uint16_t index, struct beep_song_data *data)
 {
     Beep_Song_Decode(song->data[index * 2], song->data[index * 2 + 1], song->Basicspeed, data);
 }
@@ -240,9 +241,9 @@ void Buzzer::Music(const struct beep_song *song)
         Beep_Song_Get_Data(song, i, &data);
         Beep_Set(data.freq, song->volume);
         Beep_On();
-        platform_delay_ms(data.sound_len);
+        system_delay_ms(data.sound_len);
         Beep_Off();
-        platform_delay_ms(data.nosound_len);
+        system_delay_ms(data.nosound_len);
         i++;
     }
 }

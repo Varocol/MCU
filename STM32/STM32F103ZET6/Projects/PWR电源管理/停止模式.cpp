@@ -35,6 +35,22 @@ void Setup()
     EXTI_KEY1.Init();
     //开启PWR时钟
     RCC_Operate::RCC_Config(PWR, ENABLE);
+    //通过闹钟中断(EXTI17)或事件唤醒
+    NVIC_InitTypeDef RTCALR_NVIC_InitStructure = {
+        RTCAlarm_IRQn,
+        0,
+        3,
+        ENABLE};
+    //闹钟事件的上升沿
+    EXTI_InitTypeDef RTCALR_InitStructure = {
+        EXTI_Line17,
+        EXTI_Mode_Interrupt,
+        EXTI_Trigger_Rising,
+        ENABLE};
+    EXTI_Operate EXTI_RTCALR = EXTI_Operate(RTCALR_InitStructure, NVIC_Operate(RTCALR_NVIC_InitStructure));
+    EXTI_RTCALR.Init();
+    RTC_x.Init();
+    RTC_x.SetAlarm(RTC_Operate::GetCounter() + 60);
 }
 void Test()
 {

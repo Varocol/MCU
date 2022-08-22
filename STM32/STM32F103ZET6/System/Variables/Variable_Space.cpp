@@ -367,8 +367,21 @@ SPI SPI_1 = SPI(SPI1_Param);
 // SPI2 从模式
 SPI SPI_2 = SPI(SPI2_Param);
 
-//RTC
-
+// RTC
+NVIC_InitTypeDef RTC_NVIC_InitStructure = {
+    RTC_IRQn,
+    0,
+    5,
+    ENABLE};
+RTC_Param RTCx_Param = {
+    32768,
+    1660705805,
+    1660705865,
+    RTC_CLK_LSE,
+    NVIC_Operate(RTC_NVIC_InitStructure),
+    DISABLE,
+    RTC_IT_ALR | RTC_IT_SEC};
+RTC_Operate RTC_x = RTC_Operate(RTCx_Param);
 
 // EXTI
 NVIC_InitTypeDef EXTI_PC6_NVIC_InitStructure = {
@@ -395,6 +408,15 @@ LED LED_1_B = LED(PB1, Low_level_lighting);
 LED LED_1 = LED(PB0, Low_level_lighting);
 LED LED_2 = LED(PF7, Low_level_lighting);
 LED LED_3 = LED(PF8, Low_level_lighting);
+
+//  Button
+Button Key1 = Button(PA0, false);
+
+//系统变量
+time_t system_start_time;
+time_t timestamp;
+tm timeinfo;
+char timestr[80];
 
 //普通变量区
 BitAction flag = Bit_SET;

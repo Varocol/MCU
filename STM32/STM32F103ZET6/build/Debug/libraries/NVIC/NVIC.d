@@ -1,5 +1,5 @@
-./build/Debug/libraries/NVIC/NVIC.o: libraries\NVIC\NVIC.cpp \
-  libraries\NVIC\NVIC.h hal\STM32F10x_StdPeriph_Driver\stm32f10x.h \
+./build/Debug/Libraries/NVIC/NVIC.o: Libraries\NVIC\NVIC.cpp \
+  Libraries\NVIC\NVIC.h hal\STM32F10x_StdPeriph_Driver\stm32f10x.h \
   lib\cmsis\core_cm3.h hal\STM32F10x_StdPeriph_Driver\system_stm32f10x.h \
   lib\STM32F10x_Driver\stm32f10x_conf.h \
   hal\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h \

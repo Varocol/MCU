@@ -28,19 +28,20 @@ void Setup()
     LED_1.Init();
     //初始化串口
     USART_1.Init();
-    //开启PWR时钟
-    RCC_Operate::RCC_Config(PWR, ENABLE);
+    //设置RTC唤醒
+    RTC_x.Init();
+    RTC_x.SetAlarm(RTC_Operate::GetCounter() + 10);
 }
 void Test()
 {
     printf("程序启动成功！\n");
     if (PWR_GetFlagStatus(PWR_FLAG_SB) == SET && PWR_GetFlagStatus(PWR_FLAG_WU) == SET)
     {
-        printf("待机唤醒复位\n");
+        printf("待机唤醒或闹钟复位\n");
     }
     else
     {
-        printf("非待机唤醒复位\n");
+        printf("非待机或闹钟唤醒复位\n");
     }
     LED_1.Toggle();
     SysTick_Operate::Delay_ms(1000);

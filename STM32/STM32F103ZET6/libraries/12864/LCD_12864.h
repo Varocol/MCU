@@ -1,7 +1,10 @@
 #ifndef __OJ_LCD_12864_H
 #define __OJ_LCD_12864_H
 #include "stm32f10x.h"
-#include "String_CPP.h"
+//×Ö·û´®Ïà¹Ø
+#ifndef uchar
+#define uchar unsigned char
+#endif
 class LCD_12864
 {
 private:

@@ -65,12 +65,12 @@ void Setup()
     EXTI_KEY2.Init();
 #endif
     EXTI_KEY1.Init();
+    
 }
 void Test()
 {
     while (1)
     {
-
         printf("\r\n程序正在运行...\r\n");
         LED_1.Toggle();
         SysTick_Operate::Delay_ms(1000);
