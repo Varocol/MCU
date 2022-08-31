@@ -177,9 +177,9 @@ uint32_t RTC_Operate::Get_Clock_Freq()
         // LSI 40000Hz
     case RCC_RTCCLKSource_LSI:
         return 40000;
-        // HSE 8000000Hz
+        // HSE 8000000 / 128 = 62500Hz
     case RCC_RTCCLKSource_HSE_Div128:
-        return 8000000;
+        return 62500;
     default:
         return 0;
     }

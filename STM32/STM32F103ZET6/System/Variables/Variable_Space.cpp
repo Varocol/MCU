@@ -412,6 +412,9 @@ LED LED_3 = LED(PF8, Low_level_lighting);
 //  Button
 Button Key1 = Button(PA0, false);
 
+// Buzzer
+Buzzer Beep = Buzzer(TIM1_Channel1_Default);
+
 //系统变量
 time_t system_start_time;
 time_t timestamp;

@@ -11,6 +11,7 @@
 #include "RCC.h"
 #include "DMA.h"
 #include "NVIC.h"
+#include "ADC.h"
 #include "Servo.h"
 #include "Button.h"
 #include "Buzzer.h"

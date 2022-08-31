@@ -67,7 +67,6 @@ public:
     Buzzer();
     Buzzer(TIMx_Channelx_enum pwmch);
     ~Buzzer();
-    void Init();
     void Set_Buzzer_Param(TIMx_Channelx_enum pwmch);
     void Music(const struct beep_song *song);
 };

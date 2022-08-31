@@ -196,8 +196,9 @@ uint32_t system_time_ms()
     return difftime(start_clock, clock()) * 1000;
 }
 //系统级延时,单位s
-void system_delay()
+void system_delay(uint32_t s)
 {
+    SysTick_Operate::Delay(s, (uint32_t)RCC_Operate::Get_SYSCLK_Frequency());
 }
 //系统级延时,单位ms
 void system_delay_ms(uint32_t ms)
