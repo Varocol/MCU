@@ -71,13 +71,14 @@ typedef enum
 // I2C参数列表结构体
 typedef struct
 {
-  I2C_TypeDef *I2Cx;                 // I2Cx
-  I2C_InitTypeDef I2C_InitStructure; // I2C初始化结构体
-  NVIC_Operate I2C_ER_NVIC_Operate;  // I2C错误中断对象
-  NVIC_Operate I2C_EV_NVIC_Operate;  // I2C事件中断对象
-  I2C_Remap_enum I2C_Pin_Remap;      // I2C引脚选择
-  FunctionalState I2C_IT_State;      // I2C中断使(失)能
-  uint16_t I2C_IT_Selection;         // I2C中断位选择
+  I2C_TypeDef *I2Cx;                          // I2Cx
+  I2C_InitTypeDef I2C_InitStructure;          // I2C初始化结构体
+  NVIC_InitTypeDef I2C_ER_NVIC_InitStructure; // I2C错误中断初始化结构体
+  NVIC_InitTypeDef I2C_EV_NVIC_InitStructure; // I2C事件中断初始化结构体
+  I2C_Remap_enum I2C_Pin_Remap;               // I2C引脚选择
+  uint16_t I2C_IT_Selection;                  // I2C中断位选择
+  FunctionalState I2C_IT_State;               // I2C中断使(失)能
+  FunctionalState I2C_DMA_State;              // I2CDMA使(失)能
 } I2C_Param;
 
 class I2C
@@ -91,9 +92,9 @@ public:
   ~I2C();
   void Pin_Init();
   void Init();
-  void Start();
-  void ShutUp();
-  void Use_DMA(FunctionalState NewState);
+  void Enable();
+  void Disable();
+  void DMACmd(FunctionalState NewState);
   void Update(I2C_Param I2Cx_Param);
   void ITConfig(uint16_t I2C_IT, FunctionalState NewState);
   void Set_I2C_Param(I2C_Param I2Cx_Param);
@@ -107,5 +108,10 @@ public:
   FlagStatus GetFlagStatus(uint32_t I2C_FLAG);
   void ClearFlag(uint32_t I2C_FLAG);
   void Software_Reset(FunctionalState NewState);
+
+  void RCC_Enable();
+  void RCC_Disable();
+  static void RCC_Enable(I2C_TypeDef *I2Cx);
+  static void RCC_Disable(I2C_TypeDef *I2Cx);
 };
 #endif /*__OJ_I2C_H*/

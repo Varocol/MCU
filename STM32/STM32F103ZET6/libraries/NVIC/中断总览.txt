@@ -76,8 +76,8 @@ USART2                  1
 USART3                  2
 UART4                   3
 UART5                   4
-TIM2                    5
-I2C1_ER                 6
+TIM2/ADC1               5                       
+I2C1_ER/ADC3            6
 I2C1_EV                 7
 I2C2_ER                 8
 I2C2_EV                 9

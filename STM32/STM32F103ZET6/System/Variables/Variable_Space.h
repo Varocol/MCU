@@ -5,20 +5,24 @@
 // I2C
 extern I2C I2C_1;
 extern I2C I2C_2;
+
 // USART
 extern USART USART_1;
 extern USART USART_2;
 extern USART USART_3;
 extern USART UART_4;
 extern USART UART_5;
+
 // TIM
 extern TIM TIM_2;
+
 // DMA
 extern DMA USART1_TX_DMA;
 extern DMA USART1_RX_DMA;
 extern DMA Flash_SRAM_DMA;
 extern DMA SPI2_RX_DMA;
 extern DMA SPI1_TX_DMA;
+
 // SPI
 extern SPI SPI_1;
 extern SPI SPI_2;
@@ -33,6 +37,9 @@ extern EXTI_Operate EXTI_PC6;
 extern LED LED_1;
 extern LED LED_2;
 extern LED LED_3;
+
+//ADC
+extern ADC ADC_1;
 
 // Button
 extern Button Key1;

@@ -59,13 +59,13 @@ void TIM::Pin_Init()
   //考虑到有太多情况,请自行根据需要配置引脚(CHx,CHxN,BKIN,ETR)
   // CHN (eg: TIM2 CH1 PA0 PWM输出)
   {
-    // GPIO_InitTypeDef GPIO_InitStructure =
-    //     {
-    //         GPIO_Pin_0,
-    //         GPIO_Speed_50MHz,
-    //         GPIO_Mode_AF_PP};
-    // GPIO TIM2_CH1_PA0 = GPIO(GPIOA, GPIO_InitStructure);
-    // TIM2_CH1_PA0.Init();
+      // GPIO_InitTypeDef GPIO_InitStructure =
+      //     {
+      //         GPIO_Pin_0,
+      //         GPIO_Speed_50MHz,
+      //         GPIO_Mode_AF_PP};
+      // GPIO TIM2_CH1_PA0 = GPIO(GPIOA, GPIO_InitStructure);
+      // TIM2_CH1_PA0.Init();
   }
   // CHxN
   {
@@ -150,9 +150,9 @@ void TIM::Init()
   // 配置计时器中断
   ITConfig(TIMx_Parma.TIM_IT_Selection, TIMx_Parma.TIM_IT_State);
   // NVIC配置
-  TIMx_Parma.TIM_NVIC_Operate.Init();
+  NVIC_Operate(TIMx_Parma.TIM_NVIC_InitStructure).Init();
   //开启定时器
-  Start();
+  Enable();
 }
 
 /**
@@ -171,7 +171,7 @@ void TIM::ITConfig(uint16_t TIM_IT, FunctionalState NewState)
  * @param  None
  * @retval None
  */
-void TIM::Start()
+void TIM::Enable()
 {
   TIM_Cmd(TIMx_Parma.TIMx, ENABLE);
 }
@@ -181,7 +181,7 @@ void TIM::Start()
  * @param  None
  * @retval None
  */
-void TIM::Shutup()
+void TIM::Disable()
 {
   TIM_Cmd(TIMx_Parma.TIMx, DISABLE);
 }

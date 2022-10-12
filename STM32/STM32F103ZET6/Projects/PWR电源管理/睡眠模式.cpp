@@ -1,4 +1,4 @@
-#include "Libraries.h"
+#include "System.h"
 #define sleep_mode 1
 /*
     KEY1 PA0
@@ -31,41 +31,40 @@ void Setup()
 #if sleep_mode == 0
     //使用__WFI()进入睡眠模式
     NVIC_InitTypeDef EXTI_KEY1_NVIC_InitStructure = {
-        EXTI0_IRQn,
-        0,
-        2,
-        ENABLE};
+        .NVIC_IRQChannel = EXTI0_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 2,
+        .NVIC_IRQChannelCmd = ENABLE};
     EXTI_InitTypeDef EXTI_KEY1_InitStructure = {
-        EXTI_Line0,
-        EXTI_Mode_Interrupt,
-        EXTI_Trigger_Rising,
-        ENABLE};
-    EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, NVIC_Operate(EXTI_KEY1_NVIC_InitStructure), GPIOA);
+        .EXTI_Line = EXTI_Line0,
+        .EXTI_Mode = EXTI_Mode_Interrupt,
+        .EXTI_Trigger = EXTI_Trigger_Rising,
+        .EXTI_LineCmd = ENABLE};
+    EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, EXTI_KEY1_NVIC_InitStructure, GPIOA);
 
 #elif sleep_mode == 1
     //使用__WFE()进入睡眠模式
     EXTI_InitTypeDef EXTI_KEY1_InitStructure = {
-        EXTI_Line0,
-        EXTI_Mode_Event,
-        EXTI_Trigger_Rising,
-        ENABLE};
+        .EXTI_Line = EXTI_Line0,
+        .EXTI_Mode = EXTI_Mode_Event,
+        .EXTI_Trigger = EXTI_Trigger_Rising,
+        .EXTI_LineCmd = ENABLE};
     EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, GPIOA);
 
     NVIC_InitTypeDef EXTI_KEY2_NVIC_InitStructure = {
-        EXTI15_10_IRQn,
-        0,
-        3,
-        ENABLE};
+        .NVIC_IRQChannel = EXTI15_10_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 3,
+        .NVIC_IRQChannelCmd = ENABLE};
     EXTI_InitTypeDef EXTI_KEY2_InitStructure = {
-        EXTI_Line13,
-        EXTI_Mode_Interrupt,
-        EXTI_Trigger_Rising,
-        ENABLE};
-    EXTI_Operate EXTI_KEY2 = EXTI_Operate(EXTI_KEY2_InitStructure, NVIC_Operate(EXTI_KEY2_NVIC_InitStructure), GPIOC);
+        .EXTI_Line = EXTI_Line13,
+        .EXTI_Mode = EXTI_Mode_Interrupt,
+        .EXTI_Trigger = EXTI_Trigger_Rising,
+        .EXTI_LineCmd = ENABLE};
+    EXTI_Operate EXTI_KEY2 = EXTI_Operate(EXTI_KEY2_InitStructure, EXTI_KEY2_NVIC_InitStructure, GPIOC);
     EXTI_KEY2.Init();
 #endif
     EXTI_KEY1.Init();
-    
 }
 void Test()
 {

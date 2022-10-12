@@ -188,7 +188,7 @@ void USART::Update(USART_Param USARTx_Param)
 void USART::Init()
 {
   //开启USART时钟
-  RCC_Operate::RCC_Config(USARTx_Param.USARTx, ENABLE);
+  RCC_Enable();
   // USARTx寄存器复位
   USART_DeInit(USARTx_Param.USARTx);
   //引脚初始化
@@ -198,11 +198,13 @@ void USART::Init()
   //配置时钟
   USART_ClockInit(USARTx_Param.USARTx, &USARTx_Param.USART_ClockInitStructure);
   //配置串口中断优先级
-  USARTx_Param.USART_NVIC_Operate.Init();
+  NVIC_Operate(USARTx_Param.USART_NVIC_InitStructure).Init();
   //配置串口中断
   ITConfig(USARTx_Param.USART_IT_Selection, USARTx_Param.USART_IT_State);
+  //配置DMA
+  DMACmd(USARTx_Param.USART_DMA_enum, USARTx_Param.USART_DMA_State);
   //使能串口
-  Start();
+  Enable();
 }
 
 /**
@@ -219,21 +221,21 @@ void USART::ITConfig(uint16_t USART_IT, FunctionalState NewState)
 /**
  * @brief  USART-使用DMA传输功能
  * @param  USART_DMA_enum   使用DMA传输的引脚
- * @param  state            是否使能DMA
+ * @param  NewState         是否使能DMA
  * @retval None
  */
-void USART::Use_DMA(USART_DMA_enum USART_DMA_enum, FunctionalState state)
+void USART::DMACmd(USART_DMA_enum USART_DMA_enum, FunctionalState NewState)
 {
   switch (USART_DMA_enum)
   {
   case USART_DMA_TX:
-    USART_DMACmd(USARTx_Param.USARTx, USART_DMAReq_Tx, state);
+    USART_DMACmd(USARTx_Param.USARTx, USART_DMAReq_Tx, NewState);
     break;
   case USART_DMA_RX:
-    USART_DMACmd(USARTx_Param.USARTx, USART_DMAReq_Rx, state);
+    USART_DMACmd(USARTx_Param.USARTx, USART_DMAReq_Rx, NewState);
     break;
   case USART_DMA_BOTH:
-    USART_DMACmd(USARTx_Param.USARTx, USART_DMAReq_Tx | USART_DMAReq_Rx, state);
+    USART_DMACmd(USARTx_Param.USARTx, USART_DMAReq_Tx | USART_DMAReq_Rx, NewState);
     break;
   }
 }
@@ -243,7 +245,7 @@ void USART::Use_DMA(USART_DMA_enum USART_DMA_enum, FunctionalState state)
  * @param  None
  * @retval None
  */
-void USART::Start()
+void USART::Enable()
 {
   USART_Cmd(USARTx_Param.USARTx, ENABLE);
 }
@@ -253,7 +255,47 @@ void USART::Start()
  * @param  None
  * @retval None
  */
-void USART::ShutUp()
+void USART::Disable()
 {
   USART_Cmd(USARTx_Param.USARTx, DISABLE);
+}
+
+/**
+ * @brief  USART-开启USART时钟方法
+ * @param  None
+ * @retval None
+ */
+void USART::RCC_Enable()
+{
+  RCC_Operate::RCC_Config(USARTx_Param.USARTx, ENABLE);
+}
+
+/**
+ * @brief  USART-关闭USART时钟方法
+ * @param  None
+ * @retval None
+ */
+void USART::RCC_Disable()
+{
+  RCC_Operate::RCC_Config(USARTx_Param.USARTx, DISABLE);
+}
+
+/**
+ * @brief  USART-开启USART时钟方法
+ * @param  None
+ * @retval None
+ */
+void RCC_Enable(USART_TypeDef *USARTx)
+{
+  RCC_Operate::RCC_Config(USARTx, ENABLE);
+}
+
+/**
+ * @brief  USART-关闭USART时钟方法
+ * @param  None
+ * @retval None
+ */
+void RCC_Disable(USART_TypeDef *USARTx)
+{
+  RCC_Operate::RCC_Config(USARTx, DISABLE);
 }

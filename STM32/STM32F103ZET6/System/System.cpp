@@ -1,5 +1,4 @@
 #include "System.h"
-
 /*
     USART:
         重定向printf()以及scanf()

@@ -3,6 +3,8 @@
 #include "NVIC.h"
 #include "GPIO.h"
 #include "RCC.h"
+
+// TODO USART需要补充
 /*
                 TX      RX      SCLK    nCTS    nRTS
 USART1:
@@ -89,10 +91,12 @@ typedef struct
         USART_TypeDef *USARTx;                           // USARTx
         USART_InitTypeDef USART_InitStructure;           // USART初始化结构体
         USART_ClockInitTypeDef USART_ClockInitStructure; // USART时钟初始化结构体
-        NVIC_Operate USART_NVIC_Operate;                 // USART中断对象
+        NVIC_InitTypeDef USART_NVIC_InitStructure;       // USART中断初始化结构体
         USART_Remap_enum USARTx_Pin_Remap;               // USART引脚选择
-        FunctionalState USART_IT_State;                  // USART中断使(失)能
         uint16_t USART_IT_Selection;                     // USART中断位选择
+        USART_DMA_enum USART_DMA_enum;                   // USARTDMA选择
+        FunctionalState USART_IT_State;                  // USART中断使(失)能
+        FunctionalState USART_DMA_State;                 // USARTDMA使(失)能
 } USART_Param;
 
 class USART
@@ -111,10 +115,15 @@ public:
         void Pin_Init();
         void Update(USART_Param USARTx_Param);
         void Set_USART_Param(USART_Param USARTx_Param);
-        void Use_DMA(USART_DMA_enum USART_DMA_enum, FunctionalState state);
+        void DMACmd(USART_DMA_enum USART_DMA_enum, FunctionalState NewState);
         void ITConfig(uint16_t USART_IT, FunctionalState NewState);
         void Init();
-        void Start();
-        void ShutUp();
+        void Enable();
+        void Disable();
+
+        void RCC_Enable();
+        void RCC_Disable();
+        static void RCC_Enable(USART_TypeDef *USARTx);
+        static void RCC_Disable(USART_TypeDef *USARTx);
 };
 #endif /*__OJ_USART_H*/

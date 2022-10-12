@@ -1,4 +1,4 @@
-#include "Libraries.h"
+#include "System.h"
 void Setup();
 void Test();
 void End();
@@ -29,12 +29,11 @@ void Setup()
     //≈‰÷√÷–∂œ
     NVIC_InitTypeDef Tamper_InitStructure =
         {
-            TAMPER_IRQn,
-            0,
-            1,
-            ENABLE};
-    NVIC_Operate Tamper_NVIC = NVIC_Operate(Tamper_InitStructure);
-    Tamper_NVIC.Init();
+            .NVIC_IRQChannel = TAMPER_IRQn,
+            .NVIC_IRQChannelPreemptionPriority = 0,
+            .NVIC_IRQChannelSubPriority = 1,
+            .NVIC_IRQChannelCmd = ENABLE};
+    NVIC_Operate(Tamper_InitStructure).Init();
     BKP_ITConfig(ENABLE);
     //ø™∆Ù»Î«÷ºÏ≤‚“˝Ω≈
     BKP_TamperPinCmd(ENABLE);

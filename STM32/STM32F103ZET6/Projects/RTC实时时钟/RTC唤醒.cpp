@@ -1,4 +1,4 @@
-#include "Libraries.h"
+#include "System.h"
 /*
     实验：
         正确配置RTC并输出时间,测试RTC的所有中断功能。
@@ -14,12 +14,7 @@ int main()
 }
 void Setup()
 {
-    //开启串口
-    USART_1.Init();
-    //开启信号灯
-    LED_1.Init();
-    //使用RTC类初始化
-    RTC_x.Init();
+    system_init();
 }
 void Test()
 {

@@ -212,6 +212,20 @@ void RCC_Operate::HSI_SetSysClock(uint32_t pllmul)
 }
 
 /**
+ * @brief  RCC_Operate-ADC的RCC时钟分频配置方法
+ * @param  RCC_PCLK2    ADC分频系数
+ *                      RCC_PCLK2_Div2
+ *                      RCC_PCLK2_Div4
+ *                      RCC_PCLK2_Div6
+ *                      RCC_PCLK2_Div8
+ * @retval None
+ */
+void RCC_Operate::ADC_CLKConfig(uint32_t RCC_PCLK2)
+{
+  RCC_ADCCLKConfig(RCC_PCLK2);
+}
+
+/**
  * @brief  RCC_Operate-ADC的RCC时钟一键配置方法
  * @param  ADCX         ADC外设
  * @param  NewState     状态

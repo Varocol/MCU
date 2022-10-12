@@ -41,6 +41,7 @@ public:
     static void Backup_Reset();
     static void HSE_SetSysClock(uint32_t pllmul);
     static void HSI_SetSysClock(uint32_t pllmul);
+    static void ADC_CLKConfig(uint32_t RCC_PCLK2);
     static void RCC_Config(ADC_TypeDef *ADCX, FunctionalState NewState);
     static void RCC_Config(AFIO_TypeDef *AFIOX, FunctionalState NewState);
     static void RCC_Config(BKP_TypeDef *BKPX, FunctionalState NewState);

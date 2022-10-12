@@ -13,7 +13,7 @@ public:
     void Update(NVIC_InitTypeDef &NVIC_InitStructure);
     void Set_NVIC_InitStructure(NVIC_InitTypeDef &NVIC_InitStructure);
     void Init();
-    void Start();
-    void ShutUp();
+    void Enable();
+    void Disable();
 };
 #endif /*__OJ_NVIC_H*/

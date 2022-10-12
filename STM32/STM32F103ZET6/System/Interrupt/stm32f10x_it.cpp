@@ -296,7 +296,7 @@ void DMA1_Channel5_IRQHandler(void)
     // }
     // DMA·¢ËÍ
     USART1_TX_DMA.Init();
-    USART_1.Use_DMA(USART_DMA_TX, ENABLE);
+    USART_1.DMACmd(USART_DMA_TX, ENABLE);
     DMA_ClearITPendingBit(DMA1_IT_TC5);
   }
 }

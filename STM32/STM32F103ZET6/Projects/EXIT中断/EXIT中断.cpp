@@ -1,4 +1,4 @@
-#include "Libraries.h"
+#include "System.h"
 /*
     测试：
         使用板载KEY1改变LED状态(注意！！！按键的引脚一定要配置过)
@@ -21,16 +21,16 @@ void Setup()
     GPIO KEY1 = GPIO(PA0, GPIO_Mode_IN_FLOATING);
     KEY1.Init();
     NVIC_InitTypeDef EXTI_KEY1_NVIC_InitStructure = {
-        EXTI0_IRQn,
-        0,
-        2,
-        ENABLE};
+        .NVIC_IRQChannel = EXTI0_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 2,
+        .NVIC_IRQChannelCmd = ENABLE};
     EXTI_InitTypeDef EXTI_KEY1_InitStructure = {
-        EXTI_Line0,
-        EXTI_Mode_Interrupt,
-        EXTI_Trigger_Rising,
-        ENABLE};
-    EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, NVIC_Operate(EXTI_KEY1_NVIC_InitStructure), GPIOA);
+        .NVIC_IRQChannel = EXTI_Line0,
+        .NVIC_IRQChannelPreemptionPriority = EXTI_Mode_Interrupt,
+        .NVIC_IRQChannelSubPriority = EXTI_Trigger_Rising,
+        .NVIC_IRQChannelCmd = ENABLE};
+    EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, EXTI_KEY1_NVIC_InitStructure, GPIOA);
     EXTI_KEY1.Init();
     printf("已初始化完成!\n");
 }

@@ -56,12 +56,14 @@ typedef enum
 
 typedef struct
 {
-    SPI_TypeDef *SPIx;                   // SPIx
-    SPI_InitTypeDef SPI_InitStructure;   // SPI初始化结构体
-    SPI_NSS_enum SPI_NSS;           // SPI片选引脚模式
-    NVIC_Operate SPI_NVIC_Operate;       // SPI中断对象
-    FunctionalState SPI_IT_State;        // SPI中断使(失)能
-    uint16_t SPI_IT_Selection;           // SPI中断位选择
+    SPI_TypeDef *SPIx;                       // SPIx
+    SPI_InitTypeDef SPI_InitStructure;       // SPI初始化结构体
+    SPI_NSS_enum SPI_NSS;                    // SPI片选引脚模式
+    NVIC_InitTypeDef SPI_NVIC_InitStructure; // SPI中断初始化结构体
+    uint16_t SPI_IT_Selection;               // SPI中断位选择
+    SPI_DMA_enum SPI_DMA_enum;               // SPIDMA选择
+    FunctionalState SPI_IT_State;            // SPI中断使(失)能
+    FunctionalState SPI_DMA_State;           // SPIDMA使(失)能
 } SPI_Param;
 class SPI
 {
@@ -84,15 +86,20 @@ public:
     void Set_NSS_Pin(GPIO &NSS_Soft);
     void Update(SPI_Param SPIx_Param);
     void Set_SPI_Param(SPI_Param SPIx_Param);
-    void Use_DMA(SPI_DMA_enum SPI_DMA_enum, FunctionalState NewState);
+    void DMACmd(SPI_DMA_enum SPI_DMA_enum, FunctionalState NewState);
     void ITConfig(uint8_t SPI_I2S_IT, FunctionalState NewState);
     void CalculateCRC(FunctionalState NewState);
     void ClearCRC();
     void TransmitCRC();
     uint16_t GetCRC(uint8_t SPI_CRC);
     void Init();
-    void Start();
-    void ShutUp();
+    void Enable();
+    void Disable();
+
+    void RCC_Enable();
+    void RCC_Disable();
+    static void RCC_Enable(SPI_TypeDef *SPIx);
+    static void RCC_Disable(SPI_TypeDef *SPIx);
 };
 
 #endif /*__OJ_SPI_H*/

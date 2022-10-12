@@ -80,7 +80,7 @@ void I2C::Pin_Init()
 void I2C::Init()
 {
   //开启I2C时钟
-  RCC_Operate::RCC_Config(I2Cx_Param.I2Cx, ENABLE);
+  RCC_Enable();
   // I2C寄存器复位
   I2C_DeInit(I2Cx_Param.I2Cx);
   //软件复位,用于通讯失败后复位Busy
@@ -91,12 +91,14 @@ void I2C::Init()
   //配置I2C
   I2C_Init(I2Cx_Param.I2Cx, &I2Cx_Param.I2C_InitStructure);
   //配置I2C中断优先级
-  I2Cx_Param.I2C_ER_NVIC_Operate.Init();
-  I2Cx_Param.I2C_EV_NVIC_Operate.Init();
+  NVIC_Operate(I2Cx_Param.I2C_ER_NVIC_InitStructure).Init();
+  NVIC_Operate(I2Cx_Param.I2C_EV_NVIC_InitStructure).Init();
   //配置I2C中断
   ITConfig(I2Cx_Param.I2C_IT_Selection, I2Cx_Param.I2C_IT_State);
+  //配置DMA
+  DMACmd(I2Cx_Param.I2C_DMA_State);
   //使能I2C
-  Start();
+  Enable();
 }
 
 /**
@@ -104,7 +106,7 @@ void I2C::Init()
  * @param  None
  * @retval None
  */
-void I2C::Start()
+void I2C::Enable()
 {
   I2C_Cmd(I2Cx_Param.I2Cx, ENABLE);
 }
@@ -114,7 +116,7 @@ void I2C::Start()
  * @param  None
  * @retval None
  */
-void I2C::ShutUp()
+void I2C::Disable()
 {
   I2C_Cmd(I2Cx_Param.I2Cx, DISABLE);
 }
@@ -124,7 +126,7 @@ void I2C::ShutUp()
  * @param  I2Cx_Param     I2C的参数列表
  * @retval None
  */
-void I2C::Use_DMA(FunctionalState NewState)
+void I2C::DMACmd(FunctionalState NewState)
 {
   I2C_DMACmd(I2Cx_Param.I2Cx, NewState);
 }
@@ -261,4 +263,44 @@ void I2C::ClearFlag(uint32_t I2C_FLAG)
 void I2C::Software_Reset(FunctionalState NewState)
 {
   I2C_SoftwareResetCmd(I2Cx_Param.I2Cx, NewState);
+}
+
+/**
+ * @brief  I2C-开启I2C时钟方法
+ * @param  None
+ * @retval None
+ */
+void I2C::RCC_Enable()
+{
+  RCC_Operate::RCC_Config(I2Cx_Param.I2Cx, ENABLE);
+}
+/**
+ * @brief  I2C-关闭I2C时钟方法
+ * @param  None
+ * @retval None
+ */
+
+void I2C::RCC_Disable()
+{
+  RCC_Operate::RCC_Config(I2Cx_Param.I2Cx, DISABLE);
+}
+
+/**
+ * @brief  I2C-开启I2C时钟方法
+ * @param  None
+ * @retval None
+ */
+void I2C::RCC_Enable(I2C_TypeDef *I2Cx)
+{
+  RCC_Operate::RCC_Config(I2Cx, ENABLE);
+}
+
+/**
+ * @brief  I2C-关闭I2C时钟方法
+ * @param  None
+ * @retval None
+ */
+void I2C::RCC_Disable(I2C_TypeDef *I2Cx)
+{
+  RCC_Operate::RCC_Config(I2Cx, DISABLE);
 }

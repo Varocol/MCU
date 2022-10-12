@@ -205,7 +205,7 @@ uint16_t GPIO::Get_GPIO_Pin(PIN_enum Pin)
   case 15:
     GPIO_Pin_x = GPIO_Pin_15;
     break;
-  case 17:
+  case 16:
     GPIO_Pin_x = GPIO_Pin_All;
     break;
   }
@@ -377,7 +377,7 @@ void GPIO::Update(PIN_enum Pin, GPIOMode_TypeDef Mode, BitAction Val, GPIOSpeed_
  */
 void GPIO::Init()
 {
-  Start(GPIOx);
+  RCC_Enable();
   GPIO_Init(GPIOx, &GPIOInitStructure);
   switch (GPIOInitStructure.GPIO_Mode)
   {
@@ -391,21 +391,41 @@ void GPIO::Init()
 }
 
 /**
- * @brief  GPIO-开启GPIO方法(打开时钟)
+ * @brief  GPIO-开启GPIO时钟方法
  * @param  None
  * @retval None
  */
-void GPIO::Start(GPIO_TypeDef *GPIOx)
+void GPIO::RCC_Enable()
 {
   RCC_Operate::RCC_Config(GPIOx, ENABLE);
 }
 
 /**
- * @brief  GPIO-关闭GPIO方法(关闭时钟)
+ * @brief  GPIO-关闭GPIO时钟方法
  * @param  None
  * @retval None
  */
-void GPIO::ShutUp(GPIO_TypeDef *GPIOx)
+void GPIO::RCC_Disable()
+{
+  RCC_Operate::RCC_Config(GPIOx, DISABLE);
+}
+
+/**
+ * @brief  GPIO-开启GPIO时钟方法
+ * @param  None
+ * @retval None
+ */
+void GPIO::RCC_Enable(GPIO_TypeDef *GPIOx)
+{
+  RCC_Operate::RCC_Config(GPIOx, ENABLE);
+}
+
+/**
+ * @brief  GPIO-关闭GPIO时钟方法
+ * @param  None
+ * @retval None
+ */
+void GPIO::RCC_Disable(GPIO_TypeDef *GPIOx)
 {
   RCC_Operate::RCC_Config(GPIOx, DISABLE);
 }

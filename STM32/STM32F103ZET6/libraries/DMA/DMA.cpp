@@ -67,17 +67,17 @@ void DMA::SetCurrDataCounter(uint16_t DataNumber)
 void DMA::Init()
 {
     //开启RCC时钟
-    RCC_Operate::RCC_Config(Get_DMA(DMAx_Param.DMA_Channelx), ENABLE);
+    RCC_Enable();
     // DMA寄存器复位
     DMA_DeInit(this->DMAx_Param.DMA_Channelx);
     //配置DMA
     DMA_Init(DMAx_Param.DMA_Channelx, &DMAx_Param.DMA_InitStructure);
     //配置DMA中断优先级
-    DMAx_Param.DMA_NVIC_Operate.Init();
+    NVIC_Operate(DMAx_Param.DMA_NVIC_InitStructure).Init();
     //配置DMA中断
     ITConfig(DMAx_Param.DMA_IT_Selection, DMAx_Param.DMA_IT_State);
     //使能DMA
-    Start();
+    Enable();
 }
 
 /**
@@ -96,21 +96,59 @@ void DMA::ITConfig(uint32_t DMA_IT, FunctionalState NewState)
  * @param  None
  * @retval None
  */
-void DMA::Start()
+void DMA::Enable()
 {
     DMA_Cmd(DMAx_Param.DMA_Channelx, ENABLE);
 }
 
 /**
  * @brief  DMA-关闭DMA方法(DMA失能)
- * @note   该关闭方法采用stm32官方推荐的关闭顺序,所以应当在传输完成后使用
- *         传输还未开始不能使用
  * @param  None
  * @retval None
  */
-void DMA::ShutUp()
+void DMA::Disable()
 {
     DMA_Cmd(DMAx_Param.DMA_Channelx, DISABLE);
+}
+
+/**
+ * @brief  DMA-开启DMA时钟方法
+ * @param  None
+ * @retval None
+ */
+void DMA::RCC_Enable()
+{
+    RCC_Operate::RCC_Config(Get_DMA(DMAx_Param.DMA_Channelx), ENABLE);
+}
+
+/**
+ * @brief  关闭DMA-DMA时钟方法
+ * @param  None
+ * @retval None
+ */
+void DMA::RCC_Disable()
+{
+    RCC_Operate::RCC_Config(Get_DMA(DMAx_Param.DMA_Channelx), DISABLE);
+}
+
+/**
+ * @brief  DMA-开启DMA时钟方法
+ * @param  None
+ * @retval None
+ */
+void DMA::RCC_Enable(DMA_TypeDef *DMAx)
+{
+    RCC_Operate::RCC_Config(DMAx, ENABLE);
+}
+
+/**
+ * @brief  关闭DMA-DMA时钟方法
+ * @param  None
+ * @retval None
+ */
+void DMA::RCC_Disable(DMA_TypeDef *DMAx)
+{
+    RCC_Operate::RCC_Config(DMAx, DISABLE);
 }
 
 /**

@@ -1,5 +1,5 @@
-#include "Libraries.h"
-#define TEST_MODE 5
+#include "System.h"
+#define TEST_MODE 1
 #define SPI2_RX_DR_ADDR (SPI2_BASE + 0x0C)
 #define SPI2_RX_DMA_CHANNEL DMA1_Channel4
 #define SPI2_RX_DMA_CHANNEL_IRQN DMA1_Channel4_IRQn
@@ -46,78 +46,80 @@ void Setup()
 #if TEST_MODE != 5
     //初始化DMA
     NVIC_InitTypeDef SPI2_RX_DMA_NVIC_InitStructure = {
-        SPI2_RX_DMA_CHANNEL_IRQN,
-        0,
-        10,
-        ENABLE};
+        .NVIC_IRQChannel = SPI2_RX_DMA_CHANNEL_IRQN,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 10,
+        .NVIC_IRQChannelCmd = ENABLE};
     DMA_InitTypeDef SPI2_RX_DMA_InitStructure = {
-        SPI2_RX_DR_ADDR,
-        (uint32_t)ReceiveBuffer,
-        DMA_DIR_PeripheralSRC,
-        strlen(SendBuffer) + 1,
-        DMA_PeripheralInc_Disable,
-        DMA_MemoryInc_Enable,
-        DMA_PeripheralDataSize_Byte,
-        DMA_MemoryDataSize_Byte,
-        DMA_Mode_Circular,
-        DMA_Priority_High,
-        DMA_M2M_Disable};
+        .DMA_PeripheralBaseAddr = SPI2_RX_DR_ADDR,
+        .DMA_MemoryBaseAddr = (uint32_t)ReceiveBuffer,
+        .DMA_DIR = DMA_DIR_PeripheralSRC,
+        .DMA_BufferSize = strlen(SendBuffer) + 1,
+        .DMA_PeripheralInc = DMA_PeripheralInc_Disable,
+        .DMA_MemoryInc = DMA_MemoryInc_Enable,
+        .DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte,
+        .DMA_MemoryDataSize = DMA_MemoryDataSize_Byte,
+        .DMA_Mode = DMA_Mode_Circular,
+        .DMA_Priority = DMA_Priority_High,
+        .DMA_M2M = DMA_M2M_Disable};
     DMA_Param SPI2_RX_DMA_Param = {
-        SPI2_RX_DMA_CHANNEL,
-        SPI2_RX_DMA_InitStructure,
-        NVIC_Operate(SPI2_RX_DMA_NVIC_InitStructure),
-        DISABLE,
-        DMA_IT_TC | DMA_IT_HT | DMA_IT_TE // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
+        .DMA_Channelx = SPI2_RX_DMA_CHANNEL,
+        .DMA_InitStructure = SPI2_RX_DMA_InitStructure,
+        .DMA_NVIC_InitStructure = SPI2_RX_DMA_NVIC_InitStructure,
+        .DMA_IT_Selection = DMA_IT_TC | DMA_IT_HT | DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
+        .DMA_IT_State = DISABLE,
     };
     SPI2_RX_DMA = DMA(SPI2_RX_DMA_Param);
 #endif
 #if TEST_MODE == 1
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
-        SPI1_IRQn,
-        0,
-        13,
-        ENABLE};
+        .NVIC_IRQChannel = SPI1_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 13,
+        .NVIC_IRQChannelCmd = ENABLE};
     NVIC_InitTypeDef SPI2_NVIC_InitStructure = {
-        SPI2_IRQn,
-        0,
-        14,
-        ENABLE};
+        .NVIC_IRQChannel = SPI2_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 14,
+        .NVIC_IRQChannelCmd = ENABLE};
     SPI_InitTypeDef SPI1_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Master,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Soft,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Master,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Soft,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_InitTypeDef SPI2_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Slave,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Slave,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_Param SPI1_Param = {
-        SPI1,
-        SPI1_InitStructure,
-        SPI_NSS_Master_Soft,
-        NVIC_Operate(SPI1_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI1,
+        .SPI_InitStructure = SPI1_InitStructure,
+        .SPI_NSS = SPI_NSS_Master_Soft,
+        .SPI_NVIC_InitStructure = SPI1_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_TX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = DISABLE};
     SPI_Param SPI2_Param = {
-        SPI2,
-        SPI2_InitStructure,
-        SPI_NSS_Slave_Hard,
-        NVIC_Operate(SPI2_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI2,
+        .SPI_InitStructure = SPI2_InitStructure,
+        .SPI_NSS = SPI_NSS_Slave_Hard,
+        .SPI_NVIC_InitStructure = SPI2_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_RX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = ENABLE};
     GPIO NSS_Soft = GPIO(PA4);
     SPI_1_Test = SPI(SPI1_Param);
     SPI_2_Test = SPI(SPI2_Param);
@@ -128,51 +130,53 @@ void Setup()
 #endif
 #if TEST_MODE == 2
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
-        SPI1_IRQn,
-        0,
-        13,
-        ENABLE};
+        .NVIC_IRQChannel = SPI1_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 13,
+        .NVIC_IRQChannelCmd = ENABLE};
     NVIC_InitTypeDef SPI2_NVIC_InitStructure = {
-        SPI2_IRQn,
-        0,
-        14,
-        ENABLE};
+        .NVIC_IRQChannel = SPI2_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 14,
+        .NVIC_IRQChannelCmd = ENABLE};
     SPI_InitTypeDef SPI1_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Master,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Master,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_InitTypeDef SPI2_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Slave,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Slave,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_Param SPI1_Param = {
-        SPI1,
-        SPI1_InitStructure,
-        SPI_NSS_Master_SSOE_Hard,
-        NVIC_Operate(SPI1_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI1,
+        .SPI_InitStructure = SPI1_InitStructure,
+        .SPI_NSS = SPI_NSS_Master_SSOE_Hard,
+        .SPI_NVIC_InitStructure = SPI1_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_TX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = DISABLE};
     SPI_Param SPI2_Param = {
-        SPI2,
-        SPI2_InitStructure,
-        SPI_NSS_Slave_Hard,
-        NVIC_Operate(SPI2_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI2,
+        .SPI_InitStructure = SPI2_InitStructure,
+        .SPI_NSS = SPI_NSS_Slave_Hard,
+        .SPI_NVIC_InitStructure = SPI2_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_RX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = ENABLE};
     SPI_1_Test = SPI(SPI1_Param);
     SPI_2_Test = SPI(SPI2_Param);
     SPI_2_Test.Init();
@@ -181,51 +185,53 @@ void Setup()
 #if TEST_MODE == 3
     //该模式下不开启SSOE,同时也不初始化nss硬件引脚,而是使用其他GPIO引脚来代替,类似于软件nss,有点鸡肋
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
-        SPI1_IRQn,
-        0,
-        13,
-        ENABLE};
+        .NVIC_IRQChannel = SPI1_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 13,
+        .NVIC_IRQChannelCmd = ENABLE};
     NVIC_InitTypeDef SPI2_NVIC_InitStructure = {
-        SPI2_IRQn,
-        0,
-        14,
-        ENABLE};
+        .NVIC_IRQChannel = SPI2_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 14,
+        .NVIC_IRQChannelCmd = ENABLE};
     SPI_InitTypeDef SPI1_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Master,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Master,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_InitTypeDef SPI2_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Slave,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Slave,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_Param SPI1_Param = {
-        SPI1,
-        SPI1_InitStructure,
-        SPI_NSS_Master_Hard,
-        NVIC_Operate(SPI1_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI1,
+        .SPI_InitStructure = SPI1_InitStructure,
+        .SPI_NSS = SPI_NSS_Master_Hard,
+        .SPI_NVIC_InitStructure = SPI1_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_TX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = DISABLE};
     SPI_Param SPI2_Param = {
-        SPI2,
-        SPI2_InitStructure,
-        SPI_NSS_Slave_Hard,
-        NVIC_Operate(SPI2_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI2,
+        .SPI_InitStructure = SPI2_InitStructure,
+        .SPI_NSS = SPI_NSS_Slave_Hard,
+        .SPI_NVIC_InitStructure = SPI2_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_RX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = ENABLE};
     GPIO NSS_Soft = GPIO(PC6);
     SPI_1_Test = SPI(SPI1_Param);
     SPI_2_Test = SPI(SPI2_Param);
@@ -238,50 +244,54 @@ void Setup()
     //由于软件Slave模式下的外部nss引脚不接入内部nss,所以需要使用外部中断触发修改内部nss
     //所以可能需要两个外部引脚
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
-        SPI1_IRQn,
-        0,
-        13,
-        ENABLE};
+        .NVIC_IRQChannel = SPI1_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 13,
+        .NVIC_IRQChannelCmd = ENABLE};
     NVIC_InitTypeDef SPI2_NVIC_InitStructure = {
-        SPI2_IRQn,
-        0,
-        14,
-        ENABLE};
+        .NVIC_IRQChannel = SPI2_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 14,
+        .NVIC_IRQChannelCmd = ENABLE};
     SPI_InitTypeDef SPI1_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Master,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Master,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_InitTypeDef SPI2_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Slave,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Soft,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        3};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Slave,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Soft,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 3};
     SPI_Param SPI1_Param = {
-        SPI1,
-        SPI1_InitStructure,
-        SPI_NSS_Master_SSOE_Hard,
-        NVIC_Operate(SPI1_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
+        .SPIx = SPI1,
+        .SPI_InitStructure = SPI1_InitStructure,
+        .SPI_NSS = SPI_NSS_Master_SSOE_Hard,
+        .SPI_NVIC_InitStructure = SPI1_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_TX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = DISABLE
     };
     SPI_Param SPI2_Param = {
-        SPI2,
-        SPI2_InitStructure,
-        SPI_NSS_Slave_Soft,
-        NVIC_Operate(SPI2_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
+        .SPIx = SPI2,
+        .SPI_InitStructure = SPI2_InitStructure,
+        .SPI_NSS = SPI_NSS_Slave_Soft,
+        .SPI_NVIC_InitStructure = SPI2_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_RX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = ENABLE
     };
     // GPIO NSS_Soft = GPIO(PC7);
     SPI_1_Test = SPI(SPI1_Param);
@@ -315,51 +325,53 @@ void Setup()
 #endif
 #if TEST_MODE == 5
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
-        SPI1_IRQn,
-        0,
-        13,
-        ENABLE};
+        .NVIC_IRQChannel = SPI1_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 13,
+        .NVIC_IRQChannelCmd = ENABLE};
     NVIC_InitTypeDef SPI2_NVIC_InitStructure = {
-        SPI2_IRQn,
-        0,
-        14,
-        ENABLE};
+        .NVIC_IRQChannel = SPI2_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 14,
+        .NVIC_IRQChannelCmd = ENABLE};
     SPI_InitTypeDef SPI1_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Master,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        7};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Master,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 7};
     SPI_InitTypeDef SPI2_InitStructure = {
-        SPI_Direction_2Lines_FullDuplex,
-        SPI_Mode_Slave,
-        SPI_DataSize_8b,
-        SPI_CPOL_Low,
-        SPI_CPHA_1Edge,
-        SPI_NSS_Hard,
-        SPI_BaudRatePrescaler_2,
-        SPI_FirstBit_MSB,
-        7};
+        .SPI_Direction = SPI_Direction_2Lines_FullDuplex,
+        .SPI_Mode = SPI_Mode_Slave,
+        .SPI_DataSize = SPI_DataSize_8b,
+        .SPI_CPOL = SPI_CPOL_Low,
+        .SPI_CPHA = SPI_CPHA_1Edge,
+        .SPI_NSS = SPI_NSS_Hard,
+        .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2,
+        .SPI_FirstBit = SPI_FirstBit_MSB,
+        .SPI_CRCPolynomial = 7};
     SPI_Param SPI1_Param = {
-        SPI1,
-        SPI1_InitStructure,
-        SPI_NSS_Master_SSOE_Hard,
-        NVIC_Operate(SPI1_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI1,
+        .SPI_InitStructure = SPI1_InitStructure,
+        .SPI_NSS = SPI_NSS_Master_SSOE_Hard,
+        .SPI_NVIC_InitStructure = SPI1_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_TX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = ENABLE};
     SPI_Param SPI2_Param = {
-        SPI2,
-        SPI2_InitStructure,
-        SPI_NSS_Slave_Hard,
-        NVIC_Operate(SPI2_NVIC_InitStructure),
-        DISABLE,
-        SPI_I2S_IT_ERR,
-    };
+        .SPIx = SPI2,
+        .SPI_InitStructure = SPI2_InitStructure,
+        .SPI_NSS = SPI_NSS_Slave_Hard,
+        .SPI_NVIC_InitStructure = SPI2_NVIC_InitStructure,
+        .SPI_IT_Selection = SPI_I2S_IT_ERR,
+        .SPI_DMA_enum = SPI_DMA_RX,
+        .SPI_IT_State = DISABLE,
+        .SPI_DMA_State = ENABLE};
     GPIO NSS_Soft = GPIO(PA4);
     SPI_1_Test = SPI(SPI1_Param);
     SPI_2_Test = SPI(SPI2_Param);
@@ -370,58 +382,57 @@ void Setup()
     SPI_2_Test.CalculateCRC(ENABLE);
 
     NVIC_InitTypeDef SPI2_RX_DMA_NVIC_InitStructure = {
-        SPI2_RX_DMA_CHANNEL_IRQN,
-        0,
-        10,
-        ENABLE};
+        .NVIC_IRQChannel = SPI2_RX_DMA_CHANNEL_IRQN,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 10,
+        .NVIC_IRQChannelCmd = ENABLE};
     SPI2_RX_DMA_InitStructure = {
-        SPI2_RX_DR_ADDR,
-        (uint32_t)ReceiveBuffer,
-        DMA_DIR_PeripheralSRC,
-        strlen(SendBuffer) + 1,
-        DMA_PeripheralInc_Disable,
-        DMA_MemoryInc_Enable,
-        DMA_PeripheralDataSize_Byte,
-        DMA_MemoryDataSize_Byte,
-        DMA_Mode_Normal,
-        DMA_Priority_VeryHigh,
-        DMA_M2M_Disable};
+        .DMA_PeripheralBaseAddr = SPI2_RX_DR_ADDR,
+        .DMA_MemoryBaseAddr = (uint32_t)ReceiveBuffer,
+        .DMA_DIR = DMA_DIR_PeripheralSRC,
+        .DMA_BufferSize = strlen(SendBuffer) + 1,
+        .DMA_PeripheralInc = DMA_PeripheralInc_Disable,
+        .DMA_MemoryInc = DMA_MemoryInc_Enable,
+        .DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte,
+        .DMA_MemoryDataSize = DMA_MemoryDataSize_Byte,
+        .DMA_Mode = DMA_Mode_Normal,
+        .DMA_Priority = DMA_Priority_VeryHigh,
+        .DMA_M2M = DMA_M2M_Disable};
     DMA_Param SPI2_RX_DMA_Param = {
-        SPI2_RX_DMA_CHANNEL,
-        SPI2_RX_DMA_InitStructure,
-        NVIC_Operate(SPI2_RX_DMA_NVIC_InitStructure),
-        DISABLE,
-        DMA_IT_TE // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
+        .DMA_Channelx = SPI2_RX_DMA_CHANNEL,
+        .DMA_InitStructure = SPI2_RX_DMA_InitStructure,
+        .DMA_NVIC_InitStructure = SPI2_RX_DMA_NVIC_InitStructure,
+        .DMA_IT_Selection = DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
+        .DMA_IT_State = DISABLE,
     };
     SPI2_RX_DMA = DMA(SPI2_RX_DMA_Param);
     NVIC_InitTypeDef SPI1_TX_DMA_NVIC_InitStructure = {
-        SPI1_TX_DMA_CHANNEL_IRQN,
-        0,
-        11,
-        ENABLE};
+        .NVIC_IRQChannel = SPI1_TX_DMA_CHANNEL_IRQN,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority = 11,
+        .NVIC_IRQChannelCmd = ENABLE};
     DMA_InitTypeDef SPI1_TX_DMA_InitStructure = {
-        SPI1_TX_DR_ADDR,
-        (uint32_t)SendBuffer,
-        DMA_DIR_PeripheralDST,
-        strlen(SendBuffer) + 1,
-        DMA_PeripheralInc_Disable,
-        DMA_MemoryInc_Enable,
-        DMA_PeripheralDataSize_Byte,
-        DMA_MemoryDataSize_Byte,
-        DMA_Mode_Normal,
-        DMA_Priority_High,
-        DMA_M2M_Disable};
+        .DMA_PeripheralBaseAddr = SPI1_TX_DR_ADDR,
+        .DMA_MemoryBaseAddr = (uint32_t)SendBuffer,
+        .DMA_DIR = DMA_DIR_PeripheralDST,
+        .DMA_BufferSize = strlen(SendBuffer) + 1,
+        .DMA_PeripheralInc = DMA_PeripheralInc_Disable,
+        .DMA_MemoryInc = DMA_MemoryInc_Enable,
+        .DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte,
+        .DMA_MemoryDataSize = DMA_MemoryDataSize_Byte,
+        .DMA_Mode = DMA_Mode_Normal,
+        .DMA_Priority = DMA_Priority_High,
+        .DMA_M2M = DMA_M2M_Disable};
     DMA_Param SPI1_TX_DMA_Param = {
-        SPI1_TX_DMA_CHANNEL,
-        SPI1_TX_DMA_InitStructure,
-        NVIC_Operate(SPI1_TX_DMA_NVIC_InitStructure),
-        DISABLE,
-        DMA_IT_TC | DMA_IT_HT | DMA_IT_TE};
+        .DMA_Channelx = SPI1_TX_DMA_CHANNEL,
+        .DMA_InitStructure = SPI1_TX_DMA_InitStructure,
+        .DMA_NVIC_InitStructure = SPI1_TX_DMA_NVIC_InitStructure,
+        .DMA_IT_Selection = DMA_IT_TC | DMA_IT_HT | DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
+        .DMA_IT_State = DISABLE,
+    };
     // SPI1_TX_DMA = DMA(SPI1_TX_DMA_Param);
-    // SPI_1_Test.Use_DMA(SPI_DMA_TX, ENABLE);
 #endif
     SPI2_RX_DMA.Init();
-    SPI_2_Test.Use_DMA(SPI_DMA_RX, ENABLE);
 }
 void Test()
 {

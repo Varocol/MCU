@@ -1,4 +1,4 @@
-#include "Libraries.h"
+#include "System.h"
 const char *str = "盛斯曼不讲武德啊";
 using namespace std;
 uchar image[] =
@@ -1036,10 +1036,10 @@ int main()
     //并口输入采取gpio 16位的低八位
     // LCD_12864_Param_Parallel Param =
     //     {
-    //         PA_All,
-    //         PB12,
-    //         PB13,
-    //         PB14,
+    //         .IO_PIN = PA_All,
+    //         .RS_PIN = PB12,
+    //         .RW_PIN = PB13,
+    //         .EN_PIN = PB14,
     //     };
     // LCD_12864 *my12864 = new LCD_12864_Parallel(Param);
     // my12864->Init();
@@ -1052,9 +1052,9 @@ int main()
     // delete my12864;
     LCD_12864_Param_Serial Param2 =
         {
-            PB12,
-            PB13,
-            PB14,
+            .CS_PIN = PB12,
+            .SID_PIN = PB13,
+            .SCK_PIN = PB14,
         };
     LCD_12864 *my12864 = new LCD_12864_Serial(Param2); //这个为上转型对象，所以要用指针
     my12864->Init();

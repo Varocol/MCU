@@ -3,6 +3,8 @@
 #include "stm32f10x.h"
 #include "RCC.h"
 #include "GPIO.h"
+
+//TODO 20220927(需要重写，并且与TIM合并)
 /*
 
                 Channel1    Channel2    Channel3    Channel4
@@ -14,7 +16,7 @@ TIM1: Default
                   PE9         PE11        PE13        PE14
 TIM2:
       Default
-                  PA0         PA1         PA2         PA3  
+                  PA0         PA1         PA2         PA3
       PartialRemap1
                   PA15        PB3         PA2         PA3
       PartialRemap2
@@ -40,7 +42,7 @@ TIM8:
       Default
                   PC6         PC7         PC8         PC9
 
-                  
+
 使用同一定时器不同通道时要注意:
 1、各个通道的频率相同,且由最后一次配置通道的频率操作决定(频率由ARR控制,而定时器的ARR只有一个)
 2、各个通道的占空比可以不同,这个由CCRx控制(x = 1,2,3,4)所以各路占空比由自己的CCRx决定
@@ -185,19 +187,21 @@ private:
   TIM_TypeDef *TIMx;
   double Frequency;
   double DutyRatio;
+
 public:
   PWM();
+  ~PWM();
   PWM(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double DutyRatio);
   void Pin_Init();
   void Init();
-  void Start();
-  void ShutUp();
   void Set_PWM_Param(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double DutyRatio);
   void Update(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double DutyRatio);
   void Set_TIMx_Channelx_enum(TIMx_Channelx_enum TIMx_Channelx);
   void Set_Frequency(double Frequency);
   void Set_DutyRatio(double DutyRatio);
-  ~PWM();
+
+  void Enable();
+  void Disable();
 };
 
 #endif /*__OJ_PWM_H*/

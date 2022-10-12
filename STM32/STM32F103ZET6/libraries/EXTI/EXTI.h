@@ -29,7 +29,7 @@ class EXTI_Operate
 private:
     EXTI_Init_Type Init_Type = EXTI_Init_None;
     EXTI_InitTypeDef EXTI_InitStructure;
-    NVIC_Operate EXTI_NVIC_Operate;
+    NVIC_InitTypeDef EXTI_NVIC_InitStructure;
     GPIO_TypeDef *GPIOx;
     uint8_t GPIO_2_GPIO_PortSource(GPIO_TypeDef *GPIOx);
     uint8_t EXTI_2_GPIO_PinSource(uint32_t EXTI_Linex);
@@ -38,22 +38,22 @@ public:
     EXTI_Operate();
     ~EXTI_Operate();
     EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure);
-    EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate);
+    EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure);
     EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPIOx);
-    EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate, GPIO_TypeDef *GPIOx);
+    EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx);
     void Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure);
-    void Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate);
+    void Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure);
     void Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPIOx);
-    void Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate, GPIO_TypeDef *GPIOx);
+    void Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx);
     void Update(EXTI_InitTypeDef EXTI_InitStructure);
-    void Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate);
+    void Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure);
     void Update(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPIOx);
-    void Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate, GPIO_TypeDef *GPIOx);
+    void Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx);
     void GenerateSWInterrupt();
     void ClearFlag();
     void Init();
-    void Start();
-    void ShutUp();
+    void Enable();
+    void Disable();
 };
 
 #endif /*__OJ_EXIT_H*/

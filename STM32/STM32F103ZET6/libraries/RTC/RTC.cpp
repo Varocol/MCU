@@ -292,7 +292,7 @@ void RTC_Operate::Base_Init()
         RCC_RTCCLKConfig(RCC_RTCCLKSource_HSE_Div128);
     }
     //使能RTC时钟
-    Start();
+    RCC_Enable();
     //等待RTC时钟同步
     RTC_WaitForSynchro();
     //进入配置模式
@@ -306,7 +306,7 @@ void RTC_Operate::Base_Init()
     //退出配置模式
     ExitConfigMode();
     //配置NVIC
-    RTCx_Param.RTC_NVIC_Operate.Init();
+    NVIC_Operate(RTCx_Param.RTC_NVIC_InitStructure).Init();
     //配置中断
     ITConfig(RTCx_Param.RTC_IT_Selection, RTCx_Param.RTC_IT_State);
 }
@@ -363,11 +363,11 @@ void RTC_Operate::Init()
         RCC_RTCCLKConfig(RCC_RTCCLKSource_HSE_Div128);
     }
     //使能RTC时钟
-    Start();
+    RCC_Enable();
     //等待RTC时钟同步
     RTC_WaitForSynchro();
     //配置NVIC
-    RTCx_Param.RTC_NVIC_Operate.Init();
+    NVIC_Operate(RTCx_Param.RTC_NVIC_InitStructure).Init();
     //配置中断
     ITConfig(RTCx_Param.RTC_IT_Selection, RTCx_Param.RTC_IT_State);
 }
@@ -377,7 +377,7 @@ void RTC_Operate::Init()
  * @param  None
  * @retval None
  */
-void RTC_Operate::Start()
+void RTC_Operate::RCC_Enable()
 {
     RCC_Operate::RCC_Config(RTC, ENABLE);
 }
@@ -387,7 +387,7 @@ void RTC_Operate::Start()
  * @param  None
  * @retval None
  */
-void RTC_Operate::Shutup()
+void RTC_Operate::RCC_Disable()
 {
     RCC_Operate::RCC_Config(RTC, DISABLE);
 }

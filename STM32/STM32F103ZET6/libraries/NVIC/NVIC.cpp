@@ -56,7 +56,7 @@ void NVIC_Operate::Init()
   * @param  None
   * @retval None
   */
-void NVIC_Operate::Start()
+void NVIC_Operate::Enable()
 {
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   Init();
@@ -66,7 +66,7 @@ void NVIC_Operate::Start()
   * @param  None
   * @retval None
   */
-void NVIC_Operate::ShutUp()
+void NVIC_Operate::Disable()
 {
   NVIC_InitStructure.NVIC_IRQChannelCmd = DISABLE;
   Init();

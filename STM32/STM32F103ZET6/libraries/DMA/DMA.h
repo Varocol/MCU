@@ -26,11 +26,11 @@ DMA_IT_TE   //传输错误标志
 */
 typedef struct
 {
-    DMA_Channel_TypeDef *DMA_Channelx; // DMA_Channelx
-    DMA_InitTypeDef DMA_InitStructure; // DMA初始化结构体
-    NVIC_Operate DMA_NVIC_Operate;     // DMA中断对象
-    FunctionalState DMA_IT_State;      // DMA中断使(失)能
-    uint32_t DMA_IT_Selection;         // DMA中断位选择
+    DMA_Channel_TypeDef *DMA_Channelx;       // DMA_Channelx
+    DMA_InitTypeDef DMA_InitStructure;       // DMA初始化结构体
+    NVIC_InitTypeDef DMA_NVIC_InitStructure; // DMA中断初始化结构体
+    uint32_t DMA_IT_Selection;               // DMA中断位选择
+    FunctionalState DMA_IT_State;            // DMA中断使(失)能
 } DMA_Param;
 class DMA
 {
@@ -47,7 +47,12 @@ public:
     void ITConfig(uint32_t DMA_IT, FunctionalState NewState);
     void SetCurrDataCounter(uint16_t DataNumber);
     void Init();
-    void Start();
-    void ShutUp();
+    void Enable();
+    void Disable();
+
+    void RCC_Enable();
+    void RCC_Disable();
+    static void RCC_Enable(DMA_TypeDef *DMAx);
+    static void RCC_Disable(DMA_TypeDef *DMAx);
 };
 #endif /*_OJ_DMA_h*/

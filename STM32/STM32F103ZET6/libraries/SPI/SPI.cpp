@@ -275,13 +275,13 @@ void SPI::Set_NSS_Val(uint8_t BitVal)
             //否则如果SSOE=1,此时引脚不受GPIO控制,若SSOE=0,则下一次硬件无法再次控制此引脚)
             if (BitVal & 0x01)
             {
-                ShutUp();
+                Disable();
                 NSS.Set_Pin_Val(1);
             }
             //输入模式下,开启SSOE,引脚自动拉低
             else
             {
-                Start();
+                Enable();
             }
         }
         else if (SPI_NSS_Mode == SPI_NSS_Master_Hard)
@@ -329,21 +329,21 @@ void SPI::Set_SPI_Param(SPI_Param SPIx_Param)
 /**
  * @brief  SPI-使用DMA传输功能
  * @param  SPI_DMA_enum 使用DMA传输的引脚
- * @param  state        是否使能DMA
+ * @param  NewState     是否使能DMA
  * @retval None
  */
-void SPI::Use_DMA(SPI_DMA_enum SPI_DMA_enum, FunctionalState state)
+void SPI::DMACmd(SPI_DMA_enum SPI_DMA_enum, FunctionalState NewState)
 {
     switch (SPI_DMA_enum)
     {
     case SPI_DMA_TX:
-        SPI_I2S_DMACmd(SPIx_Param.SPIx, SPI_I2S_DMAReq_Tx, state);
+        SPI_I2S_DMACmd(SPIx_Param.SPIx, SPI_I2S_DMAReq_Tx, NewState);
         break;
     case SPI_DMA_RX:
-        SPI_I2S_DMACmd(SPIx_Param.SPIx, SPI_I2S_DMAReq_Rx, state);
+        SPI_I2S_DMACmd(SPIx_Param.SPIx, SPI_I2S_DMAReq_Rx, NewState);
         break;
     case SPI_DMA_BOTH:
-        SPI_I2S_DMACmd(SPIx_Param.SPIx, SPI_I2S_DMAReq_Tx | SPI_I2S_DMAReq_Rx, state);
+        SPI_I2S_DMACmd(SPIx_Param.SPIx, SPI_I2S_DMAReq_Tx | SPI_I2S_DMAReq_Rx, NewState);
         break;
     }
 }
@@ -435,7 +435,7 @@ uint16_t SPI::GetCRC(uint8_t SPI_CRC)
 void SPI::Init()
 {
     //开启SPI时钟
-    RCC_Operate::RCC_Config(SPIx_Param.SPIx, ENABLE);
+    RCC_Enable();
     // SPIx寄存器复位
     SPI_I2S_DeInit(SPIx_Param.SPIx);
     //引脚初始化
@@ -443,7 +443,7 @@ void SPI::Init()
     //配置SPI
     SPI_Init(SPIx_Param.SPIx, &SPIx_Param.SPI_InitStructure);
     //配置SPI中断优先级
-    SPIx_Param.SPI_NVIC_Operate.Init();
+    NVIC_Operate(SPIx_Param.SPI_NVIC_InitStructure).Init();
     //配置SPI中断
     ITConfig(SPIx_Param.SPI_IT_Selection, SPIx_Param.SPI_IT_State);
     //配置为NSS硬件模式的输出模式(ssoe=1,ssm=0)
@@ -451,8 +451,10 @@ void SPI::Init()
     {
         SPI_SSOutputCmd(SPIx_Param.SPIx, ENABLE);
     }
+    //配置DMA
+    DMACmd(SPIx_Param.SPI_DMA_enum, SPIx_Param.SPI_DMA_State);
     //使能SPI
-    Start();
+    Enable();
 }
 
 /**
@@ -460,7 +462,7 @@ void SPI::Init()
  * @param  None
  * @retval None
  */
-void SPI::Start()
+void SPI::Enable()
 {
     SPI_Cmd(SPIx_Param.SPIx, ENABLE);
 }
@@ -470,7 +472,7 @@ void SPI::Start()
  * @param  None
  * @retval None
  */
-void SPI::ShutUp()
+void SPI::Disable()
 {
     uint16_t SPI_Direction = SPIx_Param.SPI_InitStructure.SPI_Direction;
     //在主或从模式下的全双工模式(BIDIMODE=0，RXONLY=0)
@@ -506,4 +508,44 @@ void SPI::ShutUp()
         //最后一个数据由外部代码读出
     }
     SPI_Cmd(SPIx_Param.SPIx, DISABLE);
+}
+
+/**
+ * @brief  SPI-开启SPI时钟
+ * @param  None
+ * @retval None
+ */
+void SPI::RCC_Enable()
+{
+    RCC_Operate::RCC_Config(SPIx_Param.SPIx, ENABLE);
+}
+
+/**
+ * @brief  SPI-关闭SPI时钟
+ * @param  None
+ * @retval None
+ */
+void SPI::RCC_Disable()
+{
+    RCC_Operate::RCC_Config(SPIx_Param.SPIx, DISABLE);
+}
+
+/**
+ * @brief  SPI-开启SPI时钟
+ * @param  None
+ * @retval None
+ */
+void RCC_Enable(SPI_TypeDef *SPIx)
+{
+    RCC_Operate::RCC_Config(SPIx, ENABLE);
+}
+
+/**
+ * @brief  SPI-关闭SPI时钟
+ * @param  None
+ * @retval None
+ */
+void RCC_Disable(SPI_TypeDef *SPIx)
+{
+    RCC_Operate::RCC_Config(SPIx, DISABLE);
 }

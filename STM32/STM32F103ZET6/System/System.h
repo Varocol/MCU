@@ -1,8 +1,8 @@
 #ifndef __OJ_PLATFORM_H
 #define __OJ_PLATFORM_H
 #include "Variable_Space.h"
+#include "stm32f10x_it.h"
 #include <cstdio>
-#include <string>
 using namespace std;
 
 //平台指定的外设(用于重定向C底层函数)

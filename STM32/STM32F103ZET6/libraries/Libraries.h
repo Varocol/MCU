@@ -2,7 +2,6 @@
 #define __OJ_LIBS_H
 #include "string.h"
 #include "stm32f10x.h"
-#include "stm32f10x_it.h"
 #include "core_cm3.h"
 #include "SysTick.h"
 #include "TIM.h"

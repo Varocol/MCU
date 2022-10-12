@@ -38,13 +38,13 @@ typedef enum
 //而一般初始化会使用
 typedef struct
 {
-    uint32_t PrescalerValue;       // RTC分频系数
-    uint32_t CounterValue;         // RTC计数器值
-    uint32_t AlarmValue;           // RTC闹钟值
-    RTC_CLK_enum RTC_CLK;          // RTC时钟选择
-    NVIC_Operate RTC_NVIC_Operate; // RTC中断对象
-    FunctionalState RTC_IT_State;  // RTC中断使(失)能
-    uint32_t RTC_IT_Selection;     // RTC中断位选择
+    uint32_t PrescalerValue;                 // RTC分频系数
+    uint32_t CounterValue;                   // RTC计数器值
+    uint32_t AlarmValue;                     // RTC闹钟值
+    RTC_CLK_enum RTC_CLK;                    // RTC时钟选择
+    NVIC_InitTypeDef RTC_NVIC_InitStructure; // RTC中断初始化结构体
+    uint32_t RTC_IT_Selection;               // RTC中断位选择
+    FunctionalState RTC_IT_State;            // RTC中断使(失)能
 } RTC_Param;
 
 class RTC_Operate
@@ -61,7 +61,7 @@ public:
     void ITConfig(uint16_t RTC_IT, FunctionalState NewState);
     void EnterConfigMode();
     void ExitConfigMode();
-    
+
     static void SetPrescaler(uint32_t PrescalerValue);
     static void SetCounter(uint32_t CounterValue);
     static void SetAlarm(uint32_t AlarmValue);
@@ -78,11 +78,10 @@ public:
     static void Set_Time(tm Time);
     static void Set_TimeZone(uint8_t TimeZone);
 
-
     void Base_Init();
     void Init();
-    void Start();
-    void Shutup();
+    void RCC_Enable();
+    void RCC_Disable();
 };
 
 #endif /*__OJ_RTC_H*/

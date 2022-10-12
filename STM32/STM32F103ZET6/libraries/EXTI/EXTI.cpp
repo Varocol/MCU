@@ -116,13 +116,13 @@ EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure)
 
 /**
  * @brief  EXTI-构造方法2
- * @param  EXTI_InitStructure   EXTI初始化结构体
- * @param  EXTI_NVIC_Operate    NVIC中断对象
+ * @param  EXTI_InitStructure         EXTI初始化结构体
+ * @param  EXTI_NVIC_InitStructure    NVIC中断初始化结构体
  * @retval None
  */
-EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate)
+EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure)
 {
-    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_Operate);
+    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_InitStructure);
 }
 
 /**
@@ -138,14 +138,14 @@ EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GP
 
 /**
  * @brief  EXTI-构造方法4
- * @param  EXTI_InitStructure   EXTI初始化结构体
- * @param  EXTI_NVIC_Operate    NVIC中断对象
- * @param  GPIOx                GPIO端口
+ * @param  EXTI_InitStructure         EXTI初始化结构体
+ * @param  EXTI_NVIC_InitStructure    NVIC中断初始化结构体
+ * @param  GPIOx                      GPIO端口
  * @retval None
  */
-EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate, GPIO_TypeDef *GPIOx)
+EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx)
 {
-    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_Operate, GPIOx);
+    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_InitStructure, GPIOx);
 }
 
 /**
@@ -161,14 +161,14 @@ void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure)
 
 /**
  * @brief  EXTI-设置EXTI的参数列表2
- * @param  EXTI_InitStructure   EXTI初始化结构体
- * @param  EXTI_NVIC_Operate    NVIC中断对象
+ * @param  EXTI_InitStructure           EXTI初始化结构体
+ * @param  EXTI_NVIC_InitStructure      NVIC中断初始化结构体
  * @retval None
  */
-void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate)
+void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure)
 {
     this->EXTI_InitStructure = EXTI_InitStructure;
-    this->EXTI_NVIC_Operate = EXTI_NVIC_Operate;
+    this->EXTI_NVIC_InitStructure = EXTI_NVIC_InitStructure;
     this->Init_Type = EXTI_16_20_Intterupt;
 }
 
@@ -187,15 +187,15 @@ void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, GPIO_Type
 
 /**
  * @brief  EXTI-设置EXTI的参数列表4
- * @param  EXTI_InitStructure   EXTI初始化结构体
- * @param  EXTI_NVIC_Operate    NVIC中断对象
- * @param  GPIOx                GPIO端口
+ * @param  EXTI_InitStructure           EXTI初始化结构体
+ * @param  EXTI_NVIC_InitStructure      NVIC中断初始化结构体
+ * @param  GPIOx                        GPIO端口
  * @retval None
  */
-void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate, GPIO_TypeDef *GPIOx)
+void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx)
 {
     this->EXTI_InitStructure = EXTI_InitStructure;
-    this->EXTI_NVIC_Operate = EXTI_NVIC_Operate;
+    this->EXTI_NVIC_InitStructure = EXTI_NVIC_InitStructure;
     this->GPIOx = GPIOx;
     this->Init_Type = EXTI_0_15_Intterupt;
 }
@@ -213,13 +213,13 @@ void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure)
 
 /**
  * @brief  EXTI-更新EXTI的参数列表2
- * @param  EXTI_InitStructure   EXTI初始化结构体
- * @param  EXTI_NVIC_Operate    NVIC中断对象
+ * @param  EXTI_InitStructure         EXTI初始化结构体
+ * @param  EXTI_NVIC_InitStructure    NVIC中断初始化结构体
  * @retval None
  */
-void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate)
+void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure)
 {
-    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_Operate);
+    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_InitStructure);
     Init();
 }
 
@@ -237,14 +237,14 @@ void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPI
 
 /**
  * @brief  EXTI-更新EXTI的参数列表4
- * @param  EXTI_InitStructure   EXTI初始化结构体
- * @param  EXTI_NVIC_Operate    NVIC中断对象
- * @param  GPIOx                GPIO端口
+ * @param  EXTI_InitStructure         EXTI初始化结构体
+ * @param  EXTI_NVIC_InitStructure    NVIC中断初始化结构体
+ * @param  GPIOx                      GPIO端口
  * @retval None
  */
-void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Operate EXTI_NVIC_Operate, GPIO_TypeDef *GPIOx)
+void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx)
 {
-    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_Operate, GPIOx);
+    Set_EXTI_Param(EXTI_InitStructure, EXTI_NVIC_InitStructure, GPIOx);
     Init();
 }
 
@@ -291,10 +291,10 @@ void EXTI_Operate::Init()
     //配置EXTI中断优先级
     if (Init_Type == EXTI_16_20_Intterupt || Init_Type == EXTI_0_15_Intterupt)
     {
-        EXTI_NVIC_Operate.Init();
+        NVIC_Operate(EXTI_NVIC_InitStructure).Init();
     }
     //开启EXTI(由于EXTI比较特殊,所以下面的方法自带EXTI初始化)
-    Start();
+    Enable();
 }
 
 /**
@@ -302,7 +302,7 @@ void EXTI_Operate::Init()
  * @param  None
  * @retval None
  */
-void EXTI_Operate::Start()
+void EXTI_Operate::Enable()
 {
     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
     EXTI_Init(&EXTI_InitStructure);
@@ -313,7 +313,7 @@ void EXTI_Operate::Start()
  * @param  None
  * @retval None
  */
-void EXTI_Operate::ShutUp()
+void EXTI_Operate::Disable()
 {
     EXTI_InitStructure.EXTI_LineCmd = DISABLE;
     EXTI_Init(&EXTI_InitStructure);

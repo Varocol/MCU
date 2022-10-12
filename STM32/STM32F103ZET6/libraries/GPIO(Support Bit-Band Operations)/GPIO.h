@@ -123,12 +123,13 @@ typedef enum
     PG14,
     PG15,
     PG_All,
+    Pin_None
 } PIN_enum;
 class GPIO
 {
 private:
     PIN_enum Pin;
-    BitAction Val = Bit_RESET;
+    BitAction Val;
     GPIO_TypeDef *GPIOx;
     GPIO_InitTypeDef GPIOInitStructure;
 
@@ -167,8 +168,11 @@ public:
     void Update(PIN_enum Pin, GPIOMode_TypeDef Mode = GPIO_Mode_Out_PP, BitAction Val = Bit_RESET, GPIOSpeed_TypeDef Speed = GPIO_Speed_50MHz);
 
     void Init();
-    static void Start(GPIO_TypeDef *GPIOx);
-    static void ShutUp(GPIO_TypeDef *GPIOx);
+
+    void RCC_Enable();
+    void RCC_Disable();
+    static void RCC_Enable(GPIO_TypeDef *GPIOx);
+    static void RCC_Disable(GPIO_TypeDef *GPIOx);
 };
 #define GPIOA_ODR_Addr (GPIOA_BASE + 12) // 0X4001080C
 #define GPIOB_ODR_Addr (GPIOB_BASE + 12) // 0X40010C0C

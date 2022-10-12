@@ -1,4 +1,4 @@
-#include "Libraries.h"
+#include "System.h"
 /*
     实验:
         配置PVD监控功能,实现PVD中断(如果想要使用PVD事件,可以看看AFIO寄存器的EVENTOUT,用于输出高脉冲信号)。
@@ -29,16 +29,16 @@ void Setup()
     PWR_PVDCmd(ENABLE);
     //配置EXTI16线的中断
     NVIC_InitTypeDef EXTI_PVD_NVIC_InitStructure = {
-        PVD_IRQn,
-        0,
-        2,
-        ENABLE};
+        .NVIC_IRQChannel = PVD_IRQn,
+        .NVIC_IRQChannelPreemptionPriority = 0,
+        .NVIC_IRQChannelSubPriority= 2,
+        .NVIC_IRQChannelCmd = ENABLE};
     EXTI_InitTypeDef EXTI_PVD_InitStructure = {
-        EXTI_Line16,
-        EXTI_Mode_Interrupt,
-        EXTI_Trigger_Rising_Falling,
-        ENABLE};
-    EXTI_Operate EXTI_PVD = EXTI_Operate(EXTI_PVD_InitStructure, NVIC_Operate(EXTI_PVD_NVIC_InitStructure));
+        .EXTI_Line = EXTI_Line16,
+        .EXTI_Mode = EXTI_Mode_Interrupt,
+        .EXTI_Trigger = EXTI_Trigger_Rising_Falling,
+        .EXTI_LineCmd = ENABLE};
+    EXTI_Operate EXTI_PVD = EXTI_Operate(EXTI_PVD_InitStructure, EXTI_PVD_NVIC_InitStructure);
     EXTI_PVD.Init();
 }
 void Test()

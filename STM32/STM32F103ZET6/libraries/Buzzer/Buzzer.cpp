@@ -35,7 +35,7 @@ Buzzer::~Buzzer()
  */
 void Buzzer::Beep_On()
 {
-    Start();
+    Enable();
 }
 
 /**
@@ -45,7 +45,7 @@ void Buzzer::Beep_On()
  */
 void Buzzer::Beep_Off()
 {
-    ShutUp();
+    Disable();
 }
 
 /**

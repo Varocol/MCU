@@ -392,27 +392,7 @@ void PWM::Init()
         TIM_OC4Init(TIMx, &TIM_OCInitStructure);
         break;
     }
-    Start();
-}
-
-/**
- * @brief  PWM-开启PWM方法
- * @param  None
- * @retval None
- */
-void PWM::Start()
-{
-    TIM_Cmd(TIMx, ENABLE);
-}
-
-/**
- * @brief  PWM-关闭PWM方法
- * @param  None
- * @retval None
- */
-void PWM::ShutUp()
-{
-    TIM_Cmd(TIMx, DISABLE);
+    Enable();
 }
 
 /**
@@ -473,4 +453,24 @@ void PWM::Set_Frequency(double Frequency)
 void PWM::Set_DutyRatio(double DutyRatio)
 {
     this->DutyRatio = DutyRatio;
+}
+
+/**
+ * @brief  PWM-开启PWM方法
+ * @param  None
+ * @retval None
+ */
+void PWM::Enable()
+{
+    RCC_Operate::RCC_Config(TIMx, ENABLE);
+}
+
+/**
+ * @brief  PWM-关闭PWM方法
+ * @param  None
+ * @retval None
+ */
+void PWM::Disable()
+{
+    RCC_Operate::RCC_Config(TIMx, DISABLE);
 }
