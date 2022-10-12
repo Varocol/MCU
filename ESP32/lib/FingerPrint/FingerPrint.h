@@ -35,6 +35,7 @@ uint16_t FingerPrint_Delete();
 void FingerPrint_ShowList();
 void FingerPrint_Alert();
 void FingerPrint_ClearDB();
+String FingerPrint_GetDataJson();
 
 //子函数
 void FingerPrint_ShowParameters();

@@ -107,6 +107,7 @@ void FingerPrint_Init()
     }
     PLATFORM_SERIAL.println("<---------------------------------------->");
 }
+
 /**
  * @author  @Varocol
  * @brief   获取模块参数并通过串口显示
@@ -150,6 +151,7 @@ void FingerPrint_ShowParameters()
         PLATFORM_SERIAL.println("密码测试失败");
     }
 }
+
 /**
  * @author  @Varocol
  * @brief   状态解析
@@ -218,6 +220,7 @@ const char *FingerPrint_AnalyzeStatus(uint16_t status_code)
         return "未知的状态";
     }
 }
+
 /**
  * @author  @Varocol
  * @brief   指纹录入(如果已有指纹则不录入)
@@ -232,7 +235,10 @@ uint16_t FingerPrint_Enroll()
     PLATFORM_SERIAL.println("等待手指放置...");
     //等待手指放下
     while (PLATFORM_FINGER.getImage() == FINGERPRINT_NOFINGER)
-        ;
+    {
+        delay(1);
+    }
+
     //检查指纹是否已存在指纹库
     if (PLATFORM_FINGER.autoIdentify() == FINGERPRINT_OK)
     {
@@ -296,7 +302,9 @@ uint16_t FingerPrint_Enroll()
 
             //等待手指拿开
             while (PLATFORM_FINGER.getImage() != FINGERPRINT_NOFINGER)
-                ;
+            {
+                delay(1);
+            }
 
             PLATFORM_SERIAL.println("重新放下同一根手指");
         }
@@ -339,6 +347,7 @@ uint16_t FingerPrint_Enroll()
     PLATFORM_SERIAL.println("<---------------------------------->");
     return status;
 }
+
 /**
  * @author  @Varocol
  * @brief   指纹删除
@@ -397,6 +406,8 @@ uint16_t FingerPrint_Delete()
                 PLATFORM_SERIAL.println("删除ID" + el + "成功");
             }
         }
+        //更新指纹索引表
+        FingerPrint_GetIndexTable();
         //更新存储文件的索引表
         FingerPrint_WriteList();
     }
@@ -407,6 +418,7 @@ uint16_t FingerPrint_Delete()
     return status;
     PLATFORM_SERIAL.println("<---------------------------------->");
 }
+
 /**
  * @author  @Varocol
  * @brief   指纹ID查找
@@ -442,6 +454,7 @@ uint16_t FingerPrint_IDSearch()
     PLATFORM_SERIAL.println("<---------------------------------->");
     return status;
 }
+
 /**
  * @author  @Varocol
  * @brief   指纹查找(通过指纹搜索)
@@ -455,7 +468,9 @@ uint16_t FingerPrint_Search()
     PLATFORM_SERIAL.println("等待手指放置...");
     //等待手指放下
     while (PLATFORM_FINGER.getImage() == FINGERPRINT_NOFINGER)
-        ;
+    {
+        delay(1);
+    }
 #if FINGER_AUTOIDENTIFY
     // 直接搜索
     status = PLATFORM_FINGER.autoIdentify();
@@ -503,6 +518,7 @@ uint16_t FingerPrint_Search()
     }
     return status;
 }
+
 /**
  * @author  @Varocol
  * @brief   指纹查找(通过学号搜索)
@@ -517,7 +533,7 @@ void FingerPrint_NumSearch(vector<String> &data)
     //查找有无该学号的指纹
     for (uint16_t el : PLATFORM_FINGER.IndexTable)
     {
-        if (finger_data[String(el)][finger_keys.school_id] == num)
+        if (finger_data[String(el)][finger_keys.school_id].as<String>() == num)
         {
             data.push_back(String(el));
         }
@@ -543,6 +559,7 @@ void FingerPrint_LoadList()
     if (time_limit == 0)
     {
         PLATFORM_SERIAL.println("SPIFFS文件系统无法打开");
+        return;
     }
     else
     {
@@ -551,10 +568,8 @@ void FingerPrint_LoadList()
     PLATFORM_SERIAL.println("从文件系统加载数据");
     //加载文件
     finger_file = SPIFFS.open(FINGER_DATA_PATH, "r", true);
-    String txt = finger_file.readString();
-    PLATFORM_SERIAL.println(txt);
     DynamicJsonDocument tmp(2048);
-    DeserializationError error = deserializeJson(tmp, txt);
+    DeserializationError error = deserializeJson(tmp, finger_file.readString());
     // JSON反序列化获取数据
     if (error)
     {
@@ -563,18 +578,18 @@ void FingerPrint_LoadList()
     }
     else
     {
-        //与索引表合并(先要获取索引表)
-        for (uint16_t el : PLATFORM_FINGER.IndexTable)
-        {
-            String school_id = tmp[String(el)][finger_keys.school_id].as<String>();
-            if (school_id.isEmpty())
-            {
-                school_id = FINGER_KEYDEFAULTVALUE;
-            }
-            finger_data[String(el)][finger_keys.school_id] = school_id;
-            finger_data[String(el)][finger_keys.operations_cnt] = tmp[String(el)][finger_keys.operations_cnt].as<uint32_t>();
-        }
         PLATFORM_SERIAL.println("数据加载成功");
+    }
+    //与索引表合并(先要获取索引表)
+    for (uint16_t el : PLATFORM_FINGER.IndexTable)
+    {
+        String school_id = tmp[String(el)][finger_keys.school_id].as<String>();
+        if (school_id == "null")
+        {
+            school_id = FINGER_KEYDEFAULTVALUE;
+        }
+        finger_data[String(el)][finger_keys.school_id] = school_id;
+        finger_data[String(el)][finger_keys.operations_cnt] = tmp[String(el)][finger_keys.operations_cnt].as<uint32_t>();
     }
     //关闭文件
     finger_file.close();
@@ -601,6 +616,7 @@ void FingerPrint_WriteList()
     if (time_limit == 0)
     {
         PLATFORM_SERIAL.println("SPIFFS文件系统无法打开");
+        return;
     }
     else
     {
@@ -612,7 +628,6 @@ void FingerPrint_WriteList()
     String output;
     serializeJson(finger_data, output);
     finger_file.print(output);
-    PLATFORM_SERIAL.println(output);
     //关闭文件
     finger_file.close();
     PLATFORM_SERIAL.println("数据写入成功");
@@ -707,12 +722,26 @@ void FingerPrint_ClearDB()
     if (time_limit == 0)
     {
         PLATFORM_SERIAL.println("指纹库删除失败");
+        return;
     }
-    else
-    {
-        PLATFORM_SERIAL.println("指纹库删除成功");
-        //删除学号等信息
-        finger_data.clear();
-    }
+    PLATFORM_SERIAL.println("指纹库删除成功");
+    //删除学号等信息
+    finger_data.clear();
+    FingerPrint_GetIndexTable();
     FingerPrint_WriteList();
+}
+
+/**
+ * @author  @Varocol
+ * @brief   获取数据JSON包
+ * @param   None
+ * @return  None
+ */
+String FingerPrint_GetDataJson()
+{
+    PLATFORM_SERIAL.println("获取数据JSON包");
+    FingerPrint_LoadList();
+    String result;
+    serializeJson(finger_data, result);
+    return result;
 }

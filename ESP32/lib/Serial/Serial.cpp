@@ -18,7 +18,9 @@ void Serial_Init()
 String ReadOption()
 {
     while (!PLATFORM_SERIAL.available())
-        ;
+    {
+        delay(1);
+    }
     String data = PLATFORM_SERIAL.readString();
     PLATFORM_SERIAL.println(data);
     return data;

@@ -38,7 +38,7 @@ void System_Menu()
         "%d.指纹删除\n"
         "%d.指纹修改\n"
         "%d.指纹列表\n"
-        "%d.指纹库清空\n",
+        "%d.指纹库清空\n"
         "%d.格式化SPIFFS文件系统\n",
         Enroll,
         Search,
