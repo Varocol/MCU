@@ -94,7 +94,7 @@ void System_NoOption()
  */
 void Store_Init()
 {
-    PLATFORM_SERIAL.println("<-------------文件系统初始化------------->");
+    PLATFORM_SERIAL.println("<-------------检测文件系统------------->");
     PLATFORM_SERIAL.print("打开SPIFFS");
     uint8_t time_limit = FINGER_TIMELIMIT;
     while (!SPIFFS.begin() && time_limit)

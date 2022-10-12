@@ -29,6 +29,7 @@ typedef struct
 
 extern DynamicJsonDocument finger_data;
 extern FingerPrint_Param fingerprint_param;
+extern HardwareSerial mySerial;
 extern AS608_Fingerprint Finger;
 extern Serial_Param serial_param;
 extern File finger_file;

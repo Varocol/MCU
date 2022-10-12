@@ -8,9 +8,8 @@
 void FingerPrint_Init()
 {
     PLATFORM_SERIAL.println("<-------------指纹模块初始化------------->");
-    //设置引脚(初始化已设置)
-    //开启串口
-    PLATFORM_FINGER.begin(fingerprint_param.SoftwareBaudrate);
+    //设置引脚
+    mySerial.begin(fingerprint_param.SoftwareBaudrate, SERIAL_8N1, fingerprint_param.Rx, fingerprint_param.Tx);
     //验证密码
     if (PLATFORM_FINGER.verifyPassword())
     {
@@ -237,13 +236,15 @@ uint16_t FingerPrint_Enroll()
     //检查指纹是否已存在指纹库
     if (PLATFORM_FINGER.autoIdentify() == FINGERPRINT_OK)
     {
+        String school_id = finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.school_id].as<String>();
+        uint32_t operations_cnt = finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.operations_cnt].as<uint32_t>();
         PLATFORM_SERIAL.printf(
             "指纹库已有该指纹\n"
             "[指纹ID:%d|匹配度:%d|学号:%s|搜索次数:%d]\n",
             PLATFORM_FINGER.fingerID,
             PLATFORM_FINGER.confidence,
-            finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.school_id].as<String>().c_str(),
-            finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.operations_cnt].as<uint32_t>());
+            school_id.c_str(),
+            operations_cnt);
         PLATFORM_SERIAL.println("<---------------------------------->");
         return status;
     }
@@ -278,14 +279,15 @@ uint16_t FingerPrint_Enroll()
             //查找模板1是否已存在指纹库
             if ((status = PLATFORM_FINGER.fingerFastSearch()) == FINGERPRINT_OK)
             {
-                FingerPrint_UpdateList();
+                String school_id = finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.school_id].as<String>();
+                uint32_t operations_cnt = finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.operations_cnt].as<uint32_t>();
                 PLATFORM_SERIAL.printf(
                     "指纹库已有该指纹\n"
                     "[指纹ID:%d|匹配度:%d|学号:%s|搜索次数:%d]\n",
                     PLATFORM_FINGER.fingerID,
                     PLATFORM_FINGER.confidence,
-                    finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.school_id].as<String>().c_str(),
-                    finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.operations_cnt].as<uint32_t>());
+                    school_id.c_str(),
+                    operations_cnt);
                 PLATFORM_SERIAL.println("<---------------------------------->");
                 return status;
             }
@@ -330,6 +332,8 @@ uint16_t FingerPrint_Enroll()
     JsonObject property = finger_data.createNestedObject(String(pos));
     property[finger_keys.school_id] = num;
     property[finger_keys.operations_cnt] = 0;
+    //更新指纹索引表
+    FingerPrint_GetIndexTable();
     //更新存储文件的索引表
     FingerPrint_WriteList();
     PLATFORM_SERIAL.println("<---------------------------------->");
@@ -475,13 +479,17 @@ uint16_t FingerPrint_Search()
     //找到指纹
     if (status == FINGERPRINT_OK)
     {
+        String school_id = finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.school_id].as<String>();
+        uint32_t operations_cnt = finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.operations_cnt].as<uint32_t>();
         PLATFORM_SERIAL.printf(
             "找到指纹\n"
             "[指纹ID:%d|匹配度:%d|学号:%s|搜索次数:%d]\n",
             PLATFORM_FINGER.fingerID,
             PLATFORM_FINGER.confidence,
-            finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.school_id].as<String>().c_str(),
-            finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.operations_cnt].as<uint32_t>());
+            school_id.c_str(),
+            operations_cnt);
+        finger_data[String(PLATFORM_FINGER.fingerID)][finger_keys.operations_cnt] = operations_cnt + 1;
+        FingerPrint_WriteList();
     }
     //没有该指纹
     else if (status == FINGERPRINT_NOTFOUND)
@@ -524,6 +532,22 @@ void FingerPrint_NumSearch(vector<String> &data)
  */
 void FingerPrint_LoadList()
 {
+    PLATFORM_SERIAL.print("打开SPIFFS文件系统");
+    uint8_t time_limit = FINGER_TIMELIMIT;
+    while (!SPIFFS.begin() && time_limit)
+    {
+        PLATFORM_SERIAL.print("...");
+        time_limit--;
+    }
+    PLATFORM_SERIAL.println();
+    if (time_limit == 0)
+    {
+        PLATFORM_SERIAL.println("SPIFFS文件系统无法打开");
+    }
+    else
+    {
+        PLATFORM_SERIAL.println("SPIFFS文件系统打开成功");
+    }
     PLATFORM_SERIAL.println("从文件系统加载数据");
     //加载文件
     finger_file = SPIFFS.open(FINGER_DATA_PATH, "r", true);
@@ -554,6 +578,8 @@ void FingerPrint_LoadList()
     }
     //关闭文件
     finger_file.close();
+    //关闭文件系统
+    SPIFFS.end();
 }
 
 /**
@@ -564,7 +590,22 @@ void FingerPrint_LoadList()
  */
 void FingerPrint_WriteList()
 {
-    PLATFORM_SERIAL.println("向文件系统写入数据");
+    PLATFORM_SERIAL.print("打开SPIFFS文件系统");
+    uint8_t time_limit = FINGER_TIMELIMIT;
+    while (!SPIFFS.begin() && time_limit)
+    {
+        PLATFORM_SERIAL.print("...");
+        time_limit--;
+    }
+    PLATFORM_SERIAL.println();
+    if (time_limit == 0)
+    {
+        PLATFORM_SERIAL.println("SPIFFS文件系统无法打开");
+    }
+    else
+    {
+        PLATFORM_SERIAL.println("SPIFFS文件系统打开成功");
+    }
     //写入文件
     finger_file = SPIFFS.open(FINGER_DATA_PATH, "w", true);
     // JSON序列化存储数据
@@ -575,6 +616,8 @@ void FingerPrint_WriteList()
     //关闭文件
     finger_file.close();
     PLATFORM_SERIAL.println("数据写入成功");
+    //关闭文件系统
+    SPIFFS.end();
 }
 
 /**

@@ -23,7 +23,7 @@ FingerPrint_Param fingerprint_param = {
     .Baudrate = FINGERPRINT_BAUDRATE_9600,
     .PacketSize = FINGERPRINT_PACKET_SIZE_256,
     .SecurityLevel = FINGERPRINT_SECURITY_LEVEL_1};
-SoftwareSerial mySerial(fingerprint_param.Rx, fingerprint_param.Tx);
+HardwareSerial mySerial(2);
 AS608_Fingerprint Finger(&mySerial);
 
 //串口变量区
