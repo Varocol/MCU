@@ -3,15 +3,15 @@
     "beforeBuildTasks": [],
     "afterBuildTasks": [],
     "global": {
-        "use-microLIB": true,
         "output-debug-info": "enable"
     },
     "c/cpp-compiler": {
         "optimization": "level-0",
         "language-c": "c11",
-        "language-cpp": "c++14",
+        "language-cpp": "c++11",
         "link-time-optimization": true,
-        "warnings": "ac5-like-warnings"
+        "warnings": "ac5-like-warnings",
+        "one-elf-section-per-function": true
     },
     "asm-compiler": {
         "$use": "asm-auto"

@@ -3,7 +3,6 @@
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [
-    ".eide/deps",
     "hal",
     "lib",
     "src",
@@ -35,7 +34,7 @@
         "cpuType": "Cortex-M3",
         "floatingPointHardware": "none",
         "useCustomScatterFile": false,
-        "scatterFilePath": "undefined",
+        "scatterFilePath": "<YOUR_SCATTER_FILE>.sct",
         "storageLayout": {
           "RAM": [
             {
@@ -66,7 +65,7 @@
       },
       "uploader": "JLink",
       "uploadConfig": {
-        "bin": ".\\build\\Debug\\stm32f1_gcc.hex",
+        "bin": ".\\build\\Debug\\STM32F103ZET6.hex",
         "baseAddr": "0x08000000",
         "cpuInfo": {
           "vendor": "ST",

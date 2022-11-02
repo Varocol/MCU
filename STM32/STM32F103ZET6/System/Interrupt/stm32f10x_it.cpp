@@ -178,10 +178,10 @@ void USART1_IRQHandler(void)
 {
   // if (USART_GetITStatus(USART1, USART_IT_RXNE))
   // {
-  //实验二
+  // 实验二
   // receivedata = USART_1.ReceiveByte();
   // USART_1.SendByte(receivedata);
-  //实验三
+  // 实验三
   // if((uint8_t)receivedata == '1')
   // {
   // PBout(12) = 0;
@@ -200,11 +200,11 @@ void PVD_IRQHandler(void)
 {
   if (EXTI_GetITStatus(EXTI_Line16) != RESET)
   {
-    if (PWR_GetFlagStatus(PWR_FLAG_PVDO) == RESET) //高于阈值
+    if (PWR_GetFlagStatus(PWR_FLAG_PVDO) == RESET) // 高于阈值
     {
       printf("进入PVD中断,电压高于阈值\r\n");
     }
-    else //低于阈值
+    else // 低于阈值
     {
       printf("进入PVD中断,电压低于阈值\r\n");
     }
@@ -213,7 +213,7 @@ void PVD_IRQHandler(void)
 }
 void TAMPER_IRQHandler(void)
 {
-  //入侵检测项目
+  // 入侵检测项目
   if (BKP_GetITStatus() != RESET)
   {
     printf("入侵事件触发!\n");
@@ -289,12 +289,12 @@ void DMA1_Channel5_IRQHandler(void)
   // DMA串口通信项目
   if (DMA_GetITStatus(DMA1_IT_TC5))
   {
-    //一般发送
-    // for (int i = 0; i < sizeof(ReceiveBuffer) / sizeof(char); i++)
-    // {
-    //   USART_1.Send_Data(ReceiveBuffer[i]);
-    // }
-    // DMA发送
+    // 一般发送
+    //  for (int i = 0; i < sizeof(ReceiveBuffer) / sizeof(char); i++)
+    //  {
+    //    USART_1.Send_Data(ReceiveBuffer[i]);
+    //  }
+    //  DMA发送
     USART1_TX_DMA.Init();
     USART_1.DMACmd(USART_DMA_TX, ENABLE);
     DMA_ClearITPendingBit(DMA1_IT_TC5);
@@ -328,7 +328,7 @@ void EXTI9_5_IRQHandler(void)
   if (EXTI_GetITStatus(EXTI_Line6) != RESET)
   {
     // USART_1.Send_String("已进入中断！\n");
-    //读取PC6
+    // 读取PC6
     if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6) == Bit_SET)
     {
       USART_1.Send_String("引脚已拉高\n");
@@ -362,6 +362,32 @@ void TIM4_IRQHandler(void)
 }
 void I2C1_EV_IRQHandler(void)
 {
+  // I2C中转项目
+  // 判断触发来源
+  if (I2C_GetITStatus(I2C1, I2C_IT_SB) == SET)
+  {
+    printf("[I2C1]:起始位已发送\n");
+  }
+  else if (I2C_GetITStatus(I2C1, I2C_IT_ADDR) == SET)
+  {
+    printf("[I2C1]:地址已匹配\n");
+  }
+  else if (I2C_GetITStatus(I2C1, I2C_IT_ADDR) == SET)
+  {
+
+  }
+  // 判断是否为从机模式
+  if (I2C_GetFlagStatus(I2C1, I2C_FLAG_MSL) == SET)
+  {
+    DEBUG_ERROR_INFO("[I2C1]:当前状态不为从机模式");
+    return;
+  }
+  // 通讯超时
+  if (I2C_GetFlagStatus(I2C1, I2C_FLAG_TIMEOUT) == SET)
+  {
+    DEBUG_ERROR_INFO("[I2C1]:通讯超时");
+  }
+  // 检测
 }
 void I2C1_ER_IRQHandler(void)
 {

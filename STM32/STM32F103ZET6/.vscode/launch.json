@@ -9,21 +9,8 @@
             "servertype": "jlink",
             "interface": "swd",
             "executable": "build\\Debug\\STM32F103ZET6.elf",
-            "runToMain": true,
+            "runToEntryPoint": "main",
             "device": "STM32F103ZE (allow opt. bytes)"
-        },
-        {
-            "cwd": "${workspaceRoot}",
-            "type": "cortex-debug",
-            "request": "launch",
-            "name": "openocd",
-            "servertype": "openocd",
-            "executable": ".\\out\\Debug\\stm32f1_gcc.elf",
-            "runToMain": true,
-            "configFiles": [
-                "interface/<debugger-type>.cfg",
-                "target/<mcu-series>.cfg"
-            ]
         }
     ]
 }

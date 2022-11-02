@@ -38,7 +38,7 @@ extern LED LED_1;
 extern LED LED_2;
 extern LED LED_3;
 
-//ADC
+// ADC
 extern ADC ADC_1;
 
 // Button
@@ -47,7 +47,7 @@ extern Button Key1;
 // Buzzer
 extern Buzzer Beep;
 
-//系统变量
+// 系统变量
 extern time_t timestamp;
 extern time_t system_start_time;
 extern tm timeinfo;

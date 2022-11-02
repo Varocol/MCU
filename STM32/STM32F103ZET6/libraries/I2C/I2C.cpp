@@ -34,10 +34,10 @@ I2C::~I2C()
  */
 void I2C::Pin_Init()
 {
-  //若硬件方面没有给予高电平可以考虑内部上拉(IN_MODE)
+  // 若硬件方面没有给予高电平可以考虑内部上拉(IN_MODE)
   GPIO I2C_SCL = GPIO();
   GPIO I2C_SDA = GPIO();
-  //对SCL和SDA线先上拉,后开漏
+  // 对SCL和SDA线先上拉,后开漏
   if (I2Cx_Param.I2C_Pin_Remap == I2C1_Remap && I2Cx_Param.I2Cx == I2C1)
   {
     RCC_Operate::RCC_Config(AFIO, ENABLE);
@@ -79,25 +79,22 @@ void I2C::Pin_Init()
  */
 void I2C::Init()
 {
-  //开启I2C时钟
+  // 开启I2C时钟
   RCC_Enable();
   // I2C寄存器复位
   I2C_DeInit(I2Cx_Param.I2Cx);
-  //软件复位,用于通讯失败后复位Busy
+  // 软件复位,用于通讯失败后复位Busy
   Software_Reset(ENABLE);
   Software_Reset(DISABLE);
-  //引脚初始化
+  // 引脚初始化
   Pin_Init();
-  //配置I2C
+  // 配置I2C
   I2C_Init(I2Cx_Param.I2Cx, &I2Cx_Param.I2C_InitStructure);
-  //配置I2C中断优先级
-  NVIC_Operate(I2Cx_Param.I2C_ER_NVIC_InitStructure).Init();
-  NVIC_Operate(I2Cx_Param.I2C_EV_NVIC_InitStructure).Init();
-  //配置I2C中断
+  // 配置I2C中断
   ITConfig(I2Cx_Param.I2C_IT_Selection, I2Cx_Param.I2C_IT_State);
-  //配置DMA
+  // 配置DMA
   DMACmd(I2Cx_Param.I2C_DMA_State);
-  //使能I2C
+  // 使能I2C
   Enable();
 }
 
@@ -123,7 +120,7 @@ void I2C::Disable()
 
 /**
  * @brief  I2C-使能/失能DMA传输
- * @param  I2Cx_Param     I2C的参数列表
+ * @param  NewState       使能或失能
  * @retval None
  */
 void I2C::DMACmd(FunctionalState NewState)
@@ -151,6 +148,11 @@ void I2C::Update(I2C_Param I2Cx_Param)
  */
 void I2C::ITConfig(uint16_t I2C_IT, FunctionalState NewState)
 {
+  I2Cx_Param.I2C_ER_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
+  I2Cx_Param.I2C_EV_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
+  // 配置I2C中断优先级
+  NVIC_Operate(I2Cx_Param.I2C_ER_NVIC_InitStructure).Init();
+  NVIC_Operate(I2Cx_Param.I2C_EV_NVIC_InitStructure).Init();
   I2C_ITConfig(I2Cx_Param.I2Cx, I2C_IT, NewState);
 }
 
@@ -257,12 +259,22 @@ void I2C::ClearFlag(uint32_t I2C_FLAG)
 
 /**
  * @brief  I2C-软件复位(可以避免因为前一次通讯失败后Busy位一直置1)
- * @param  None
+ * @param  NewState       使能或失能
  * @retval None
  */
 void I2C::Software_Reset(FunctionalState NewState)
 {
   I2C_SoftwareResetCmd(I2Cx_Param.I2Cx, NewState);
+}
+
+/**
+ * @brief  I2C-禁止时钟延长
+ * @param  NewState       使能或失能
+ * @retval None
+ */
+void I2C::StretchClockCmd(FunctionalState NewState)
+{
+  I2C_StretchClockCmd(I2Cx_Param.I2Cx, NewState);
 }
 
 /**

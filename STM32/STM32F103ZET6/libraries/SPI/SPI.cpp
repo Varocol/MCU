@@ -115,19 +115,19 @@ void SPI::Pin_Init()
     GPIO SCK = GPIO();
     GPIO MOSI = GPIO();
     GPIO MISO = GPIO();
-    //初始化软件NSS
+    // 初始化软件NSS
     if (SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Soft)
     {
         NSS.Init();
     }
 
-    //初始化主模式下 硬件NSS SSOE=0,SSM=0 即输入模式(此时使用软件引脚)
+    // 初始化主模式下 硬件NSS SSOE=0,SSM=0 即输入模式(此时使用软件引脚)
     if (SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Hard && SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master && SPIx_Param.SPI_NSS == SPI_NSS_Master_Hard)
     {
         NSS.Init();
     }
 
-    //以下初始化SCK MOSI MISO和硬件NSS
+    // 以下初始化SCK MOSI MISO和硬件NSS
     if (SPIx_Param.SPIx == SPI1)
     {
         if (SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master)
@@ -247,15 +247,15 @@ void SPI::Set_NSS_Val(uint8_t BitVal)
     uint16_t SPI_MODE = SPIx_Param.SPI_InitStructure.SPI_Mode;
     uint16_t SPI_NSS = SPIx_Param.SPI_InitStructure.SPI_NSS;
     uint8_t SPI_NSS_Mode = SPIx_Param.SPI_NSS;
-    //软件 主模式(主要被使用)
+    // 软件 主模式(主要被使用)
     if (SPI_MODE == SPI_Mode_Master && SPI_NSS == SPI_NSS_Soft)
     {
         NSS.Set_Pin_Val(BitVal);
     }
-    //软件 从模式(基本用不到)
+    // 软件 从模式(基本用不到)
     else if (SPI_MODE == SPI_Mode_Slave && SPI_NSS == SPI_NSS_Soft)
     {
-        //取最后一位
+        // 取最后一位
         if (BitVal & 0x01)
         {
             SPI_NSSInternalSoftwareConfig(SPIx_Param.SPIx, SPI_NSSInternalSoft_Set);
@@ -265,20 +265,20 @@ void SPI::Set_NSS_Val(uint8_t BitVal)
             SPI_NSSInternalSoftwareConfig(SPIx_Param.SPIx, SPI_NSSInternalSoft_Reset);
         }
     }
-    //硬件 主模式输入模式(ssoe = 0,ssm = 0),NSS对象为外部设置的空闲GPIO对象
-    //硬件 主模式输出模式(ssoe = 1,ssm = 0),NSS对象为对应硬件NSS引脚的GPIO对象
+    // 硬件 主模式输入模式(ssoe = 0,ssm = 0),NSS对象为外部设置的空闲GPIO对象
+    // 硬件 主模式输出模式(ssoe = 1,ssm = 0),NSS对象为对应硬件NSS引脚的GPIO对象
     else if (SPI_MODE == SPI_Mode_Master && SPI_NSS == SPI_NSS_Hard)
     {
         if (SPI_NSS_Mode == SPI_NSS_Master_SSOE_Hard)
         {
-            //输出模式下,关闭SPI,并拉高NSS引脚(Stm32的bug,一定要关闭SPI后这个引脚才能释放
-            //否则如果SSOE=1,此时引脚不受GPIO控制,若SSOE=0,则下一次硬件无法再次控制此引脚)
+            // 输出模式下,关闭SPI,并拉高NSS引脚(Stm32的bug,一定要关闭SPI后这个引脚才能释放
+            // 否则如果SSOE=1,此时引脚不受GPIO控制,若SSOE=0,则下一次硬件无法再次控制此引脚)
             if (BitVal & 0x01)
             {
                 Disable();
                 NSS.Set_Pin_Val(1);
             }
-            //输入模式下,开启SSOE,引脚自动拉低
+            // 输入模式下,开启SSOE,引脚自动拉低
             else
             {
                 Enable();
@@ -356,6 +356,9 @@ void SPI::DMACmd(SPI_DMA_enum SPI_DMA_enum, FunctionalState NewState)
  */
 void SPI::ITConfig(uint8_t SPI_I2S_IT, FunctionalState NewState)
 {
+    // 配置SPI中断优先级
+    SPIx_Param.SPI_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
+    NVIC_Operate(SPIx_Param.SPI_NVIC_InitStructure).Init();
     SPI_I2S_ITConfig(SPIx_Param.SPIx, SPI_I2S_IT, NewState);
 }
 
@@ -368,7 +371,7 @@ void SPI::CalculateCRC(FunctionalState NewState)
 {
     FunctionalState SPI_State;
     uint16_t CR1_SPE_Set = ((uint16_t)0x0040);
-    //获取SPI状态
+    // 获取SPI状态
     if (SPIx_Param.SPIx->CR1 & CR1_SPE_Set)
     {
         SPI_State = ENABLE;
@@ -391,7 +394,7 @@ void SPI::ClearCRC()
 {
     FunctionalState SPI_State;
     uint16_t CR1_SPE_Set = ((uint16_t)0x0040);
-    //获取SPI状态
+    // 获取SPI状态
     if (SPIx_Param.SPIx->CR1 & CR1_SPE_Set)
     {
         SPI_State = ENABLE;
@@ -434,26 +437,24 @@ uint16_t SPI::GetCRC(uint8_t SPI_CRC)
  */
 void SPI::Init()
 {
-    //开启SPI时钟
+    // 开启SPI时钟
     RCC_Enable();
     // SPIx寄存器复位
     SPI_I2S_DeInit(SPIx_Param.SPIx);
-    //引脚初始化
+    // 引脚初始化
     Pin_Init();
-    //配置SPI
+    // 配置SPI
     SPI_Init(SPIx_Param.SPIx, &SPIx_Param.SPI_InitStructure);
-    //配置SPI中断优先级
-    NVIC_Operate(SPIx_Param.SPI_NVIC_InitStructure).Init();
-    //配置SPI中断
+    // 配置SPI中断
     ITConfig(SPIx_Param.SPI_IT_Selection, SPIx_Param.SPI_IT_State);
-    //配置为NSS硬件模式的输出模式(ssoe=1,ssm=0)
+    // 配置为NSS硬件模式的输出模式(ssoe=1,ssm=0)
     if (SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master && SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Hard && SPIx_Param.SPI_NSS == SPI_NSS_Master_SSOE_Hard)
     {
         SPI_SSOutputCmd(SPIx_Param.SPIx, ENABLE);
     }
-    //配置DMA
+    // 配置DMA
     DMACmd(SPIx_Param.SPI_DMA_enum, SPIx_Param.SPI_DMA_State);
-    //使能SPI
+    // 使能SPI
     Enable();
 }
 
@@ -475,37 +476,37 @@ void SPI::Enable()
 void SPI::Disable()
 {
     uint16_t SPI_Direction = SPIx_Param.SPI_InitStructure.SPI_Direction;
-    //在主或从模式下的全双工模式(BIDIMODE=0，RXONLY=0)
+    // 在主或从模式下的全双工模式(BIDIMODE=0，RXONLY=0)
     if (SPI_Direction == SPI_Direction_2Lines_FullDuplex)
     {
-        //等待RXNE=1并接收最后一个数据
+        // 等待RXNE=1并接收最后一个数据
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        //等待TXE=1
+        // 等待TXE=1
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        //等待BSY=0
+        // 等待BSY=0
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_BSY) == SET)
             ;
     }
-    //在主或从模式下的单向只发送模式(BIDIMODE=0，RXONLY=0)或双向的发送模式(BIDIMODE=1，BIDIOE=1)
-    //单向只发送重复上面,所以只写双向的发送模式
+    // 在主或从模式下的单向只发送模式(BIDIMODE=0，RXONLY=0)或双向的发送模式(BIDIMODE=1，BIDIOE=1)
+    // 单向只发送重复上面,所以只写双向的发送模式
     else if (SPI_Direction == SPI_Direction_1Line_Tx)
     {
-        //等待TXE=1
+        // 等待TXE=1
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        //等待BSY=0
+        // 等待BSY=0
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_BSY) == SET)
             ;
     }
-    //在主模式下的单向只接收模式(MSTR=1，BIDIMODE=0，RXONLY=1)或双向的接收模式(MSTR=1，BIDIMODE=1，BIDIOE=0)
+    // 在主模式下的单向只接收模式(MSTR=1，BIDIMODE=0，RXONLY=1)或双向的接收模式(MSTR=1，BIDIMODE=1，BIDIOE=0)
     else if (SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master && (SPI_Direction == SPI_Direction_2Lines_RxOnly || SPI_Direction == SPI_Direction_1Line_Rx))
     {
-        //等待最后一个RXNE=1
+        // 等待最后一个RXNE=1
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        //最后一个数据由外部代码读出
+        // 最后一个数据由外部代码读出
     }
     SPI_Cmd(SPIx_Param.SPIx, DISABLE);
 }
@@ -535,7 +536,7 @@ void SPI::RCC_Disable()
  * @param  None
  * @retval None
  */
-void RCC_Enable(SPI_TypeDef *SPIx)
+void SPI::RCC_Enable(SPI_TypeDef *SPIx)
 {
     RCC_Operate::RCC_Config(SPIx, ENABLE);
 }
@@ -545,7 +546,7 @@ void RCC_Enable(SPI_TypeDef *SPIx)
  * @param  None
  * @retval None
  */
-void RCC_Disable(SPI_TypeDef *SPIx)
+void SPI::RCC_Disable(SPI_TypeDef *SPIx)
 {
     RCC_Operate::RCC_Config(SPIx, DISABLE);
 }

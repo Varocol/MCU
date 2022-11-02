@@ -108,6 +108,7 @@ public:
   FlagStatus GetFlagStatus(uint32_t I2C_FLAG);
   void ClearFlag(uint32_t I2C_FLAG);
   void Software_Reset(FunctionalState NewState);
+  void StretchClockCmd(FunctionalState NewState);
 
   void RCC_Enable();
   void RCC_Disable();

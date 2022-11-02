@@ -9,6 +9,8 @@ using namespace std;
 #define PLATFORM_USART USART_1
 #define PLATFORM_LED LED_1
 #define PLATFORM_RTC RTC_x
+#define PLATFORM_I2C I2C_1
+
 
 void tzset(uint8_t);
 

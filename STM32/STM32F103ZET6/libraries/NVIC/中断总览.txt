@@ -86,4 +86,4 @@ DMA1_Channel5           11
 DMA1_Channel1           12
 SPI1_IRQn               13
 SPI2_IRQn               14
-EXTI9_5_IRQn            15
+EXTI9_5_IRQn            15 DMA1_Channel1_IRQn       15

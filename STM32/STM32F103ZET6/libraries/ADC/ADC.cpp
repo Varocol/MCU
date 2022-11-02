@@ -67,6 +67,8 @@ void ADC::DMACmd(FunctionalState NewState)
  */
 void ADC::ITConfig(uint16_t ADC_IT, FunctionalState NewState)
 {
+    ADCx_Param.ADC_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
+    NVIC_Operate(ADCx_Param.ADC_NVIC_InitStructure).Init();
     ADC_ITConfig(ADCx_Param.ADCx, ADC_IT, NewState);
 }
 
@@ -174,15 +176,15 @@ void ADC::Pin_Init()
  */
 void ADC::Init()
 {
-    //开启ADC时钟
+    // 开启ADC时钟
     RCC_Enable();
-    //配置ADC工作时钟
+    // 配置ADC工作时钟
     RCC_Operate::ADC_CLKConfig(ADCx_Param.ADC_Base_InitStructure.RCC_PCLK2_Divx);
     // ADCx寄存器复位
     ADC_DeInit(ADCx_Param.ADCx);
-    //引脚初始化
+    // 引脚初始化
     Pin_Init();
-    //基础初始化ADC
+    // 基础初始化ADC
     uint8_t listsize = ADCx_Param.ADC_RegularChannel_InitStructure.ADC_Channellist.size();
     ADC_InitTypeDef ADC_InitStructure = {
         .ADC_Mode = ADCx_Param.ADC_Base_InitStructure.ADC_Mode,
@@ -192,41 +194,43 @@ void ADC::Init()
         .ADC_DataAlign = ADCx_Param.ADC_Base_InitStructure.ADC_DataAlign,
         .ADC_NbrOfChannel = listsize};
     ADC_Init(ADCx_Param.ADCx, &ADC_InitStructure);
-    //配置规则通道序号和采样时间
+    // 配置规则通道序号和采样时间
     for (ADC_Channel_ConInfo it : ADCx_Param.ADC_RegularChannel_InitStructure.ADC_Channellist)
     {
         ADC_RegularChannelConfig(ADCx_Param.ADCx, it.ADC_Channel, it.Rank, it.ADC_SampleTime);
     }
-    //配置注入通道序列长度
+    // 配置注入通道序列长度
     ADC_InjectedSequencerLengthConfig(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_Channellist.size());
     for (ADC_Channel_ConInfo it : ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_Channellist)
     {
         ADC_InjectedChannelConfig(ADCx_Param.ADCx, it.ADC_Channel, it.Rank, it.ADC_SampleTime);
     }
-    //配置注入通道的自动注入
+    // 配置注入通道的自动注入
     ADC_AutoInjectedConvCmd(ADCx_Param.ADCx, ADCx_Param.ADC_Base_InitStructure.ADC_JAuto);
-    //配置间断模式
+    // 配置间断模式
     ADC_DiscModeCmd(ADCx_Param.ADCx, ADCx_Param.ADC_RegularChannel_InitStructure.ADC_DiscMode);
     ADC_InjectedDiscModeCmd(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_DiscMode);
     ADC_DiscModeChannelCountConfig(ADCx_Param.ADCx, ADCx_Param.ADC_Base_InitStructure.ADC_DiscModeNumber);
-    //配置规则通道外部触发
-    //由于在ADC_Init里已经配置了触发使能,所以不需要配置
+    // 配置规则通道外部触发
+    // 由于在ADC_Init里已经配置了触发使能,所以不需要配置
     ADC_ExternalTrigConvCmd(ADCx_Param.ADCx, ADCx_Param.ADC_RegularChannel_InitStructure.ADC_ExternalTrig);
-    //配置注入通道外部触发
+    // 配置注入通道外部触发
     ADC_ExternalTrigInjectedConvCmd(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_ExternalTrig);
     ADC_ExternalTrigInjectedConvConfig(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_ExternalTrigConv);
-    //配置DMA
+    // 配置DMA
     DMACmd(ADCx_Param.ADC_DMA_State);
-    //将ADC从睡眠模式唤醒
+    // 配置中断
+    ITConfig(ADCx_Param.ADC_IT_Selection, ADCx_Param.ADC_IT_State);
+    // 将ADC从睡眠模式唤醒
     Enable();
-    //初始化ADC校准寄存器
+    // 初始化ADC校准寄存器
     ADC_ResetCalibration(ADCx_Param.ADCx);
-    //等待校准寄存器初始化完成
+    // 等待校准寄存器初始化完成
     while (ADC_GetResetCalibrationStatus(ADCx_Param.ADCx))
         ;
     // ADC开始校准
     ADC_StartCalibration(ADCx_Param.ADCx);
-    //等待校准完成
+    // 等待校准完成
     while (ADC_GetCalibrationStatus(ADCx_Param.ADCx))
         ;
 }

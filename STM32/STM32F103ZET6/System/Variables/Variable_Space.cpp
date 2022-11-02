@@ -59,10 +59,10 @@ I2C_Param I2C2_Param = {
     .I2C_DMA_State = DISABLE};
 
 // I2C1 400KHz 主发送器
-I2C I2C_1 = I2C(I2C1_Param);
+I2C I2C_1(I2C1_Param);
 
 // I2C2 400KHz 主发送器
-I2C I2C_2 = I2C(I2C2_Param);
+I2C I2C_2(I2C2_Param);
 
 // USART
 USART_InitTypeDef USART1_InitStructure = {
@@ -182,15 +182,15 @@ USART_Param UART5_Param = {
     .USART_DMA_State = DISABLE};
 
 // USART1 波特率115200 能收能发
-USART USART_1 = USART(USART1_Param);
+USART USART_1(USART1_Param);
 // USART2 波特率115200 能收能发
-USART USART_2 = USART(USART2_Param);
+USART USART_2(USART2_Param);
 // USART3 波特率115200 能收能发
-USART USART_3 = USART(USART3_Param);
+USART USART_3(USART3_Param);
 // USART4 波特率115200 能收能发(实际上应该是UART4)
-USART UART_4 = USART(UART4_Param);
+USART UART_4(UART4_Param);
 // USART5 波特率115200 能收能发(实际上应该是UART5)
-USART UART_5 = USART(UART5_Param);
+USART UART_5(UART5_Param);
 
 // TIM
 // TIM基本参数初始化结构体
@@ -237,7 +237,7 @@ TIM_Parma TIM2_Parma = {
     .TIM_IT_State = ENABLE};
 
 // TIM2
-TIM TIM_2 = TIM(TIM2_Parma);
+TIM TIM_2(TIM2_Parma);
 
 // DMA
 //以USART示范DMA
@@ -375,9 +375,9 @@ SPI_Param SPI2_Param = {
     .SPI_DMA_State = DISABLE};
 
 // SPI1 主模式
-SPI SPI_1 = SPI(SPI1_Param);
+SPI SPI_1(SPI1_Param);
 // SPI2 从模式
-SPI SPI_2 = SPI(SPI2_Param);
+SPI SPI_2(SPI2_Param);
 
 // RTC
 NVIC_InitTypeDef RTC_NVIC_InitStructure = {
@@ -414,12 +414,12 @@ EXTI_Operate EXTI_PC6 = EXTI_Operate(EXTI_PC6_InitStructure, EXTI_PC6_NVIC_InitS
 // LED1_BLUE    PB1(没用)
 // LED2         PF7
 // LED3         PF8
-LED LED_1_R = LED(PB5, Low_level_lighting);
-LED LED_1_G = LED(PB0, Low_level_lighting);
-LED LED_1_B = LED(PB1, Low_level_lighting);
-LED LED_1 = LED(PB0, Low_level_lighting);
-LED LED_2 = LED(PF7, Low_level_lighting);
-LED LED_3 = LED(PF8, Low_level_lighting);
+LED LED_1_R(PB5, Low_level_lighting);
+LED LED_1_G(PB0, Low_level_lighting);
+LED LED_1_B(PB1, Low_level_lighting);
+LED LED_1(PB0, Low_level_lighting);
+LED LED_2(PF7, Low_level_lighting);
+LED LED_3(PF8, Low_level_lighting);
 
 // ADC
 NVIC_InitTypeDef ADC1_NVIC_InitStructure = {
@@ -468,13 +468,13 @@ ADC_Param ADC1_Param = {
     .ADC_IT_Selection = ADC_IT_EOC,
     .ADC_IT_State = ENABLE,
     .ADC_DMA_State = DISABLE};
-ADC ADC_1 = ADC(ADC1_Param);
+ADC ADC_1(ADC1_Param);
 
 //  Button
-Button Key1 = Button(PA0, false);
+Button Key1(PA0, false);
 
 // Buzzer
-Buzzer Beep = Buzzer(TIM1_Channel1_Default);
+Buzzer Beep(TIM1_Channel1_Default);
 
 //系统变量
 time_t system_start_time;
@@ -501,3 +501,4 @@ char ReceiveBuffer[500];
 const char FlashBuffer[] =
     "NFBZMOMGEYGJSDWTDYHHCXLGOREVYXGOGPAWTSULKQSFQHHYSQOSWZTUNXDZTZZDRQFWJLFGGNAOJNLLBTWXTSFOALZDYGYUMTHZQTGBEQPPFGYACDPFKVWQWBCPZH";
 char SRAMBuffer[127];
+

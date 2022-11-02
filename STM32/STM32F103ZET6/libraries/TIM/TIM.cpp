@@ -56,8 +56,8 @@ void TIM::Update(TIM_Parma TIMx_Parma)
  */
 void TIM::Pin_Init()
 {
-  //考虑到有太多情况,请自行根据需要配置引脚(CHx,CHxN,BKIN,ETR)
-  // CHN (eg: TIM2 CH1 PA0 PWM输出)
+  // 考虑到有太多情况,请自行根据需要配置引脚(CHx,CHxN,BKIN,ETR)
+  //  CHN (eg: TIM2 CH1 PA0 PWM输出)
   {
       // GPIO_InitTypeDef GPIO_InitStructure =
       //     {
@@ -98,7 +98,7 @@ void TIM::Base_Init()
  */
 void TIM::OC_Init()
 {
-  //配置OC通道
+  // 配置OC通道
   switch (TIMx_Parma.OCx)
   {
   case OC1:
@@ -137,21 +137,19 @@ void TIM::Init()
   RCC_Operate::RCC_Config(TIMx_Parma.TIMx, ENABLE);
   // TIMx寄存器复位
   TIM_DeInit(TIMx_Parma.TIMx);
-  //配置所需引脚
+  // 配置所需引脚
   Pin_Init();
-  //配置基本参数
+  // 配置基本参数
   Base_Init();
-  //配置通道参数
+  // 配置通道参数
   OC_Init();
-  //配置IC参数
+  // 配置IC参数
   IC_Init();
-  //清除计时器中断标志位
+  // 清除计时器中断标志位
   TIM_ClearFlag(TIMx_Parma.TIMx, TIM_FLAG_Update);
   // 配置计时器中断
   ITConfig(TIMx_Parma.TIM_IT_Selection, TIMx_Parma.TIM_IT_State);
-  // NVIC配置
-  NVIC_Operate(TIMx_Parma.TIM_NVIC_InitStructure).Init();
-  //开启定时器
+  // 开启定时器
   Enable();
 }
 
@@ -163,6 +161,9 @@ void TIM::Init()
  */
 void TIM::ITConfig(uint16_t TIM_IT, FunctionalState NewState)
 {
+  // NVIC配置
+  TIMx_Parma.TIM_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
+  NVIC_Operate(TIMx_Parma.TIM_NVIC_InitStructure).Init();
   TIM_ITConfig(TIMx_Parma.TIMx, TIM_IT, NewState);
 }
 
