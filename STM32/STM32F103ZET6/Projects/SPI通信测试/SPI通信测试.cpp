@@ -39,12 +39,12 @@ int main()
 }
 void Setup()
 {
-    //初始化串口
+    // 初始化串口
     USART_1.Init();
-    //初始化信号灯
+    // 初始化信号灯
     LED_1.Init();
 #if TEST_MODE != 5
-    //初始化DMA
+    // 初始化DMA
     NVIC_InitTypeDef SPI2_RX_DMA_NVIC_InitStructure = {
         .NVIC_IRQChannel = SPI2_RX_DMA_CHANNEL_IRQN,
         .NVIC_IRQChannelPreemptionPriority = 0,
@@ -183,7 +183,7 @@ void Setup()
     SPI_1_Test.Init();
 #endif
 #if TEST_MODE == 3
-    //该模式下不开启SSOE,同时也不初始化nss硬件引脚,而是使用其他GPIO引脚来代替,类似于软件nss,有点鸡肋
+    // 该模式下不开启SSOE,同时也不初始化nss硬件引脚,而是使用其他GPIO引脚来代替,类似于软件nss,有点鸡肋
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
         .NVIC_IRQChannel = SPI1_IRQn,
         .NVIC_IRQChannelPreemptionPriority = 0,
@@ -240,9 +240,9 @@ void Setup()
     SPI_1_Test.Init();
 #endif
 #if TEST_MODE == 4
-    //该模式下不开启SSOE,同时也不初始化nss硬件引脚,而是使用其他GPIO引脚来代替,类似于软件nss,有点鸡肋
-    //由于软件Slave模式下的外部nss引脚不接入内部nss,所以需要使用外部中断触发修改内部nss
-    //所以可能需要两个外部引脚
+    // 该模式下不开启SSOE,同时也不初始化nss硬件引脚,而是使用其他GPIO引脚来代替,类似于软件nss,有点鸡肋
+    // 由于软件Slave模式下的外部nss引脚不接入内部nss,所以需要使用外部中断触发修改内部nss
+    // 所以可能需要两个外部引脚
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
         .NVIC_IRQChannel = SPI1_IRQn,
         .NVIC_IRQChannelPreemptionPriority = 0,
@@ -281,8 +281,7 @@ void Setup()
         .SPI_IT_Selection = SPI_I2S_IT_ERR,
         .SPI_DMA_enum = SPI_DMA_TX,
         .SPI_IT_State = DISABLE,
-        .SPI_DMA_State = DISABLE
-    };
+        .SPI_DMA_State = DISABLE};
     SPI_Param SPI2_Param = {
         .SPIx = SPI2,
         .SPI_InitStructure = SPI2_InitStructure,
@@ -291,37 +290,36 @@ void Setup()
         .SPI_IT_Selection = SPI_I2S_IT_ERR,
         .SPI_DMA_enum = SPI_DMA_RX,
         .SPI_IT_State = DISABLE,
-        .SPI_DMA_State = ENABLE
-    };
+        .SPI_DMA_State = ENABLE};
     // GPIO NSS_Soft = GPIO(PC7);
     SPI_1_Test = SPI(SPI1_Param);
     SPI_2_Test = SPI(SPI2_Param);
     // SPI_1_Test.Set_NSS_Pin(NSS_Soft);
     SPI_2_Test.Init();
     SPI_1_Test.Init();
-    //将SPI_2_Test赋给SPI_2使得SPI_2_Test能够被中断函数使用
+    // 将SPI_2_Test赋给SPI_2使得SPI_2_Test能够被中断函数使用
     SPI_2 = SPI_2_Test;
-    //初始化GPIO PC6,为了方便读取引脚信号
+    // 初始化GPIO PC6,为了方便读取引脚信号
     GPIO Read_Pin = GPIO(PC6);
     Read_Pin.OUT_MODE();
-    //初始化外部中断
+    // 初始化外部中断
     EXTI_PC6.Init();
     printf("初始化完成！\n");
-    //片选拉高使得有下降沿
-    // SPI_1_Test.NSS_High();
-    //由于新增了官方推荐的SPI关闭方法,所以不再使用上面的方式拉高
-    //因为SSOE模式下引脚拉高需要关闭SPI,而这个关闭应该在spi传输时使用
+    // 片选拉高使得有下降沿
+    //  SPI_1_Test.NSS_High();
+    // 由于新增了官方推荐的SPI关闭方法,所以不再使用上面的方式拉高
+    // 因为SSOE模式下引脚拉高需要关闭SPI,而这个关闭应该在spi传输时使用
     Read_Pin.Pin_High();
     Read_Pin.IN_MODE();
-    //测试引脚电平变化
-    // while (1)
-    // {
-    //     SPI_1_Test.NSS_Low();
-    //     SysTick_Operate::Delay_ms(1000);
-    //     LED_1.Toggle();
-    //     SPI_1_Test.NSS_High();
-    //     SysTick_Operate::Delay_ms(1000);
-    // }
+    // 测试引脚电平变化
+    //  while (1)
+    //  {
+    //      SPI_1_Test.NSS_Low();
+    //      SysTick_Operate::Delay_ms(1000);
+    //      LED_1.Toggle();
+    //      SPI_1_Test.NSS_High();
+    //      SysTick_Operate::Delay_ms(1000);
+    //  }
 #endif
 #if TEST_MODE == 5
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
@@ -439,45 +437,45 @@ void Test()
 #if TEST_MODE != 5
     while (1)
     {
-        //片选拉低
+        // 片选拉低
         SPI_1_Test.NSS_Low();
-        //发送单个数据
-        // SPI_1_Test.Send_Data('1');
-        // printf("测试一:接收单个字节 %c\n", SPI_2_Test.Receive_Data());
-        //发送多个数据
-        //由于SPI1发送大量数据,所以使用DMA验证
-        //清空接收缓冲区
+        // 发送单个数据
+        //  SPI_1_Test.Send_Data('1');
+        //  printf("测试一:接收单个字节 %c\n", SPI_2_Test.Receive_Data());
+        // 发送多个数据
+        // 由于SPI1发送大量数据,所以使用DMA验证
+        // 清空接收缓冲区
         memset(ReceiveBuffer, 0, sizeof(ReceiveBuffer));
         SPI_1_Test.Send_Buffer((uint8_t *)SendBuffer, strlen(SendBuffer) + 1);
         printf("测试一:接收字符串\n%s\n", ReceiveBuffer);
-        //延时
+        // 延时
         SysTick_Operate::Delay_ms(250);
         LED_1.Toggle();
         SPI_1_Test.NSS_High();
-        //二次延时使得电平变化更明显
+        // 二次延时使得电平变化更明显
         SysTick_Operate::Delay_ms(250);
     }
 #else
     while (1)
     {
-        //片选拉低
+        // 片选拉低
         SPI_1_Test.NSS_Low();
-        //发送多个数据
-        //由于SPI1发送大量数据,所以使用DMA验证
-        //清空接收缓冲区
+        // 发送多个数据
+        // 由于SPI1发送大量数据,所以使用DMA验证
+        // 清空接收缓冲区
         memset(ReceiveBuffer, 0, sizeof(ReceiveBuffer));
-        //由于使用DMA传输CRC会占用一定的空间,导致指针直接从尾指向头,从而导致下一次数据错位,所以复位DMA
-        //需要注意的是这个初始化需要多初始化一次,不知道为什么反正两次就好使
+        // 由于使用DMA传输CRC会占用一定的空间,导致指针直接从尾指向头,从而导致下一次数据错位,所以复位DMA
+        // 需要注意的是这个初始化需要多初始化一次,不知道为什么反正两次就好使
         SPI2_RX_DMA.Init();
         SPI2_RX_DMA.Init();
-        //开启SPI1_TX DMA通道
-        // SPI1_TX_DMA.Init();
+        // 开启SPI1_TX DMA通道
+        //  SPI1_TX_DMA.Init();
         SPI_1_Test.Send_Buffer((uint8_t *)SendBuffer, strlen(SendBuffer) + 1);
-        //等待SPI2_RX DMA传输完成
+        // 等待SPI2_RX DMA传输完成
         while (DMA_GetFlagStatus(DMA1_FLAG_TC4) == RESET)
             ;
         printf("SPI1 CRC:%d\n\n", SPI_1_Test.GetCRC(SPI_CRC_Tx));
-        //判断是否校验成功
+        // 判断是否校验成功
         if (SPI_I2S_GetFlagStatus(SPI2, SPI_FLAG_CRCERR) == RESET)
         {
             printf("测试一:接收字符串\n%s\n", (uint8_t *)ReceiveBuffer);
@@ -490,11 +488,11 @@ void Test()
         // CRC寄存器清零
         SPI_1_Test.ClearCRC();
         SPI_2_Test.ClearCRC();
-        //延时
+        // 延时
         SysTick_Operate::Delay_ms(500);
         LED_1.Toggle();
         SPI_1_Test.NSS_High();
-        //二次延时使得电平变化更明显
+        // 二次延时使得电平变化更明显
         SysTick_Operate::Delay_ms(500);
     }
 #endif

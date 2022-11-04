@@ -5,6 +5,7 @@
 #include "RCC.h"
 #include "DMA.h"
 #include <queue>
+using namespace std;
 // TODO USART需要补充
 /*
                 TX      RX      SCLK    nCTS    nRTS
@@ -106,38 +107,13 @@ private:
         USART_Param USARTx_Param;
 
         // DMA 消息队列 UART5不支持
-        static queue<uint8_t *> USART1_DMA_Data_Queue; // USART1消息队列
-        static queue<uint8_t *> USART2_DMA_Data_Queue; // USART2消息队列
-        static queue<uint8_t *> USART3_DMA_Data_Queue; // USART3消息队列
-        static queue<uint8_t *> USART4_DMA_Data_Queue; // USART4消息队列
-        // 内置默认DMA配置参数
-        // USART1_DMA 通道中断子优先级 15
-        // USART2_DMA 通道中断子优先级 14
-        // USART3_DMA 通道中断子优先级 13
-        // UART4_DMA  通道中断子优先级 12
-        DMA_InitTypeDef USART_TX_DMA_InitStructure = {
-            .DMA_PeripheralBaseAddr = NULL,
-            .DMA_MemoryBaseAddr = NULL,
-            .DMA_DIR = DMA_DIR_PeripheralDST,
-            .DMA_BufferSize = NULL,
-            .DMA_PeripheralInc = DMA_PeripheralInc_Disable,
-            .DMA_MemoryInc = DMA_MemoryInc_Enable,
-            .DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte,
-            .DMA_MemoryDataSize = DMA_MemoryDataSize_Byte,
-            .DMA_Mode = DMA_Mode_Normal,
-            .DMA_Priority = DMA_Priority_High,
-            .DMA_M2M = DMA_M2M_Disable};
-        NVIC_InitTypeDef USART_TX_DMA_NVIC_InitStructure = {
-            .NVIC_IRQChannel = NULL,
-            .NVIC_IRQChannelPreemptionPriority = NULL,
-            .NVIC_IRQChannelSubPriority = NULL,
-            .NVIC_IRQChannelCmd = ENABLE};
-        DMA_Param USART_TX_DMA_Param = {
-            .DMA_Channelx = NULL,
-            .DMA_InitStructure = USART_TX_DMA_InitStructure,
-            .DMA_NVIC_InitStructure = USART_TX_DMA_NVIC_InitStructure,
-            .DMA_IT_Selection = DMA_IT_TC | DMA_IT_HT | DMA_IT_TE,
-            .DMA_IT_State = ENABLE};
+        static queue<vector<uint8_t>> USART1_DMA_Data_Queue; // USART1消息队列
+        static queue<vector<uint8_t>> USART2_DMA_Data_Queue; // USART2消息队列
+        static queue<vector<uint8_t>> USART3_DMA_Data_Queue; // USART3消息队列
+        static queue<vector<uint8_t>> UART4_DMA_Data_Queue;  // UART4 消息队列
+
+        static queue<vector<uint8_t>> *Get_USART_DMA_Data_Queue(USART_TypeDef *USARTx);
+        static void DMA_Setup(USART_TypeDef *USARTx);
 
 public:
         USART();
@@ -162,13 +138,14 @@ public:
         void RCC_Enable();
         void RCC_Disable();
 
-        // DMA管理
-        void DMA_Init();
-        void DMA_Disable();
-        void DMA_Enable();
-
         static void RCC_Enable(USART_TypeDef *USARTx);
         static void RCC_Disable(USART_TypeDef *USARTx);
+
+        // DMA管理
+        static bool DMA_Config_Check(USART_TypeDef *USARTx);
+        static void DMA_Queue_Stop(USART_TypeDef *USARTx);
+        static void DMA_Queue_Start(USART_TypeDef *USARTx);
+        static void DMA_Queue_Remove(USART_TypeDef *USARTx);
 
         // DMA专用
         static uint32_t Get_DR_ADDR(USART_TypeDef *USARTx);

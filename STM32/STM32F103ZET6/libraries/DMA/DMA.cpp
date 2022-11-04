@@ -211,7 +211,7 @@ DMA_Channel_TypeDef *DMA::Get_DMA_Channel(DMA_Perip_enum perip)
 
 /**
  * @brief  DMA-获取DMA中断IRQn
- * @param  DMAx_Channelx        外设枚举
+ * @param  DMAx_Channelx        DMA通道
  * @retval DMA通道对应的IRQn
  */
 uint8_t DMA::Get_DMAx_Channelx_IRQn(DMA_Channel_TypeDef *DMAx_Channelx)
@@ -261,4 +261,15 @@ uint8_t DMA::Get_DMAx_Channelx_IRQn(DMA_Channel_TypeDef *DMAx_Channelx)
         return DMA2_Channel4_5_IRQn;
     }
     return 0;
+}
+
+/**
+ * @brief  DMA-检测DMA通道是否在工作
+ * @param  DMAx_Channelx        DMA通道
+ * @retval DMA通道是否在工作
+ */
+bool DMA::Check_DMAx_Channelx(DMA_Channel_TypeDef *DMAx_Channelx)
+{
+    assert_param(IS_DMA_ALL_PERIPH(DMAx_Channelx));
+    return DMAx_Channelx->CCR & DMA_CCR1_EN;
 }

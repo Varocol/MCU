@@ -80,8 +80,8 @@ public:
 
     void Base_Init();
     void Init();
-    void RCC_Enable();
-    void RCC_Disable();
+    static void RCC_Enable();
+    static void RCC_Disable();
 };
 
 #endif /*__OJ_RTC_H*/

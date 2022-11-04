@@ -133,5 +133,6 @@ public:
     static void RCC_Disable(DMA_TypeDef *DMAx);
     static DMA_Channel_TypeDef *Get_DMA_Channel(DMA_Perip_enum perip);
     static uint8_t Get_DMAx_Channelx_IRQn(DMA_Channel_TypeDef *DMAx_Channelx);
+    static bool Check_DMAx_Channelx(DMA_Channel_TypeDef *DMAx_Channelx);
 };
 #endif /*_OJ_DMA_h*/

@@ -47,6 +47,7 @@ void SPI::Send_Data(uint16_t data)
  */
 void SPI::Send_Buffer(uint8_t *buffer, uint32_t cnt)
 {
+    assert_param(IS_SPI_ALL_PERIPH(SPIx_Param.SPIx));
     FunctionalState CRC_State;
     uint16_t CR1_CRCEN_Set = 0x2000;
     if (SPIx_Param.SPIx->CR1 & CR1_CRCEN_Set)
@@ -75,6 +76,7 @@ void SPI::Send_Buffer(uint8_t *buffer, uint32_t cnt)
  */
 void SPI::Send_Buffer(uint16_t *buffer, uint32_t cnt)
 {
+    assert_param(IS_SPI_ALL_PERIPH(SPIx_Param.SPIx));
     FunctionalState CRC_State;
     uint16_t CR1_CRCEN_Set = 0x2000;
     if (SPIx_Param.SPIx->CR1 & CR1_CRCEN_Set)
@@ -369,6 +371,7 @@ void SPI::ITConfig(uint8_t SPI_I2S_IT, FunctionalState NewState)
  */
 void SPI::CalculateCRC(FunctionalState NewState)
 {
+    assert_param(IS_SPI_ALL_PERIPH(SPIx_Param.SPIx));
     FunctionalState SPI_State;
     uint16_t CR1_SPE_Set = ((uint16_t)0x0040);
     // 获取SPI状态
@@ -392,6 +395,7 @@ void SPI::CalculateCRC(FunctionalState NewState)
  */
 void SPI::ClearCRC()
 {
+    assert_param(IS_SPI_ALL_PERIPH(SPIx_Param.SPIx));
     FunctionalState SPI_State;
     uint16_t CR1_SPE_Set = ((uint16_t)0x0040);
     // 获取SPI状态

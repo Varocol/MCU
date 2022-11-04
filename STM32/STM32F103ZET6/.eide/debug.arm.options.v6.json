@@ -11,7 +11,8 @@
         "language-cpp": "c++11",
         "link-time-optimization": true,
         "warnings": "ac5-like-warnings",
-        "one-elf-section-per-function": true
+        "one-elf-section-per-function": true,
+        "misc-controls": "-Wno-error=armcc-pragma-import -Wno-error=armcc-pragma-arm"
     },
     "asm-compiler": {
         "$use": "asm-auto"

@@ -7,8 +7,8 @@
     "lib",
     "src",
     "Startup",
-    "System",
-    "Libraries"
+    "libraries",
+    "System"
   ],
   "outDir": "build",
   "deviceName": "STM32F102C8",
@@ -24,11 +24,7 @@
   },
   "targets": {
     "Debug": {
-      "excludeList": [
-        "libraries/ADC",
-        "libraries/Button",
-        "libraries/Buzzer"
-      ],
+      "excludeList": [],
       "toolchain": "AC6",
       "compileConfig": {
         "cpuType": "Cortex-M3",

@@ -274,14 +274,25 @@ void DMA1_Channel3_IRQHandler(void)
 }
 void DMA1_Channel4_IRQHandler(void)
 {
-  if (DMA_GetITStatus(DMA1_IT_TC4))
+  // USART_DMA项目
+  if (USART::DMA_Config_Check(USART1))
   {
-    DMA_ClearITPendingBit(DMA1_IT_TC4);
-  }
-  else if (DMA_GetITStatus(DMA1_IT_TE4))
-  {
-    printf("123\n");
-    DMA_ClearITPendingBit(DMA1_IT_TE4);
+    if (DMA_GetITStatus(DMA1_IT_HT4))
+    {
+      DMA_ClearITPendingBit(DMA1_IT_HT4);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TC4))
+    {
+      USART::DMA_Queue_Remove(USART1);
+      USART::DMA_Queue_Start(USART1);
+      DMA_ClearITPendingBit(DMA1_IT_TC4);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TE4))
+    {
+      printf("[USART1]:DMA消息队列传输错误!\n");
+      USART::DMA_Queue_Stop(USART1);
+      DMA_ClearITPendingBit(DMA1_IT_TE4);
+    }
   }
 }
 void DMA1_Channel5_IRQHandler(void)
@@ -374,7 +385,6 @@ void I2C1_EV_IRQHandler(void)
   }
   else if (I2C_GetITStatus(I2C1, I2C_IT_ADDR) == SET)
   {
-
   }
   // 判断是否为从机模式
   if (I2C_GetFlagStatus(I2C1, I2C_FLAG_MSL) == SET)
