@@ -1,7 +1,7 @@
 #include "RCC.h"
 
 /**
- * @brief  RCC_Operate-¹¹Ôì·½·¨
+ * @brief  RCC_Operate-æ„é€ æ–¹æ³•
  * @retval None
  */
 RCC_Operate::RCC_Operate()
@@ -9,7 +9,7 @@ RCC_Operate::RCC_Operate()
 }
 
 /**
- * @brief  RCC_Operate-Îö¹¹·½·¨
+ * @brief  RCC_Operate-ææ„æ–¹æ³•
  * @retval None
  */
 RCC_Operate::~RCC_Operate()
@@ -17,9 +17,9 @@ RCC_Operate::~RCC_Operate()
 }
 
 /**
- * @brief  RCC_Operate-»ñÈ¡RCCÊ±ÖÓĞÅÏ¢·½·¨
+ * @brief  RCC_Operate-è·å–RCCæ—¶é’Ÿä¿¡æ¯æ–¹æ³•
  * @param  None
- * @retval RCCÊ±ÖÓĞÅÏ¢
+ * @retval RCCæ—¶é’Ÿä¿¡æ¯
  */
 RCC_ClocksTypeDef RCC_Operate::Get_ClocksFreq()
 {
@@ -29,9 +29,9 @@ RCC_ClocksTypeDef RCC_Operate::Get_ClocksFreq()
 }
 
 /**
- * @brief  RCC_Operate-»ñÈ¡ÏµÍ³Ê±ÖÓ·½·¨
+ * @brief  RCC_Operate-è·å–ç³»ç»Ÿæ—¶é’Ÿæ–¹æ³•
  * @param  None
- * @retval ÏµÍ³Ê±ÖÓÆµÂÊ
+ * @retval ç³»ç»Ÿæ—¶é’Ÿé¢‘ç‡
  */
 uint32_t RCC_Operate::Get_SYSCLK_Frequency()
 {
@@ -41,9 +41,9 @@ uint32_t RCC_Operate::Get_SYSCLK_Frequency()
 }
 
 /**
- * @brief  RCC_Operate-»ñÈ¡AHB×ÜÏßÊ±ÖÓ·½·¨
+ * @brief  RCC_Operate-è·å–AHBæ€»çº¿æ—¶é’Ÿæ–¹æ³•
  * @param  None
- * @retval AHB×ÜÏßÊ±ÖÓÆµÂÊ
+ * @retval AHBæ€»çº¿æ—¶é’Ÿé¢‘ç‡
  */
 uint32_t RCC_Operate::Get_HCLK_Frequency()
 {
@@ -53,9 +53,9 @@ uint32_t RCC_Operate::Get_HCLK_Frequency()
 }
 
 /**
- * @brief  RCC_Operate-»ñÈ¡APB1ÍâÉèÊ±ÖÓ·½·¨
+ * @brief  RCC_Operate-è·å–APB1å¤–è®¾æ—¶é’Ÿæ–¹æ³•
  * @param  None
- * @retval APB1ÍâÉèÊ±ÖÓÆµÂÊ
+ * @retval APB1å¤–è®¾æ—¶é’Ÿé¢‘ç‡
  */
 uint32_t RCC_Operate::Get_PCLK1_Frequency()
 {
@@ -65,9 +65,9 @@ uint32_t RCC_Operate::Get_PCLK1_Frequency()
 }
 
 /**
- * @brief  RCC_Operate-»ñÈ¡APB2ÍâÉèÊ±ÖÓ·½·¨
+ * @brief  RCC_Operate-è·å–APB2å¤–è®¾æ—¶é’Ÿæ–¹æ³•
  * @param  None
- * @retval APB2ÍâÉèÊ±ÖÓÆµÂÊ
+ * @retval APB2å¤–è®¾æ—¶é’Ÿé¢‘ç‡
  */
 uint32_t RCC_Operate::Get_PCLK2_Frequency()
 {
@@ -77,9 +77,9 @@ uint32_t RCC_Operate::Get_PCLK2_Frequency()
 }
 
 /**
- * @brief  RCC_Operate-»ñÈ¡ADCÊ±ÖÓ·½·¨
+ * @brief  RCC_Operate-è·å–ADCæ—¶é’Ÿæ–¹æ³•
  * @param  None
- * @retval ADCÊ±ÖÓÆµÂÊ
+ * @retval ADCæ—¶é’Ÿé¢‘ç‡
  */
 uint32_t RCC_Operate::Get_ADCCLK_Frequency()
 {
@@ -89,9 +89,9 @@ uint32_t RCC_Operate::Get_ADCCLK_Frequency()
 }
 
 /**
- * @brief  RCC_Operate-»ñÈ¡ÏµÍ³Ê±ÖÓÔ´
+ * @brief  RCC_Operate-è·å–ç³»ç»Ÿæ—¶é’Ÿæº
  * @param  None
- * @retval Ê±ÖÓÔ´
+ * @retval æ—¶é’Ÿæº
  */
 Clock_Source RCC_Operate::Get_SYSCLKSource()
 {
@@ -109,8 +109,8 @@ Clock_Source RCC_Operate::Get_SYSCLKSource()
 }
 
 /**
- * @brief  RCC_Operate-±¸·İÓò¸´Î»
- *         ¸´Î»µÄ¶ÔÏó°üÀ¨BKPµÄÊı¾İ¼Ä´æÆ÷,RTCµÄCNT,PRL,ALR¼Ä´æÆ÷,ÒÔ¼°RCCµÄRCC_BDCR¼Ä´æÆ÷
+ * @brief  RCC_Operate-å¤‡ä»½åŸŸå¤ä½
+ *         å¤ä½çš„å¯¹è±¡åŒ…æ‹¬BKPçš„æ•°æ®å¯„å­˜å™¨,RTCçš„CNT,PRL,ALRå¯„å­˜å™¨,ä»¥åŠRCCçš„RCC_BDCRå¯„å­˜å™¨
  * @param  None
  * @retval
  */
@@ -120,40 +120,40 @@ void RCC_Operate::Backup_Reset()
 }
 
 /**
- * @brief  RCC_Operate-Íâ²¿¸ßËÙÊ±ÖÓHSEÅäÖÃÏµÍ³Ê±ÖÓ·½·¨
- * @param  pllmul       PLL¼Ä´æÆ÷±¶ÆµÒò×Ó(2-16,Ò»°ãÎª9)
+ * @brief  RCC_Operate-å¤–éƒ¨é«˜é€Ÿæ—¶é’ŸHSEé…ç½®ç³»ç»Ÿæ—¶é’Ÿæ–¹æ³•
+ * @param  pllmul       PLLå¯„å­˜å™¨å€é¢‘å› å­(2-16,ä¸€èˆ¬ä¸º9)
  * @retval None
  */
 void RCC_Operate::HSE_SetSysClock(uint32_t pllmul)
 {
   __IO uint32_t HSEStartUpStatus = 0;
-  //¸´Î»rccÍâÉè
+  //å¤ä½rccå¤–è®¾
   RCC_DeInit();
-  //Ê¹ÄÜHSE£¬¿ªÆôÍâ²¿¾§Õñ
+  //ä½¿èƒ½HSEï¼Œå¼€å¯å¤–éƒ¨æ™¶æŒ¯
   RCC_HSEConfig(RCC_HSE_ON);
-  //µÈ´ıHSEÎÈ¶¨Æô¶¯
+  //ç­‰å¾…HSEç¨³å®šå¯åŠ¨
   HSEStartUpStatus = RCC_WaitForHSEStartUp();
-  // HSEÎÈ¶¨ºó¼ÌĞøÉèÖÃ
+  // HSEç¨³å®šåç»§ç»­è®¾ç½®
   if (HSEStartUpStatus == SUCCESS)
   {
     FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
     FLASH_SetLatency(FLASH_Latency_2);
-    // AHBÔ¤·ÖÆµÒò×ÓÉèÖÃÎ»1·ÖÆµ
+    // AHBé¢„åˆ†é¢‘å› å­è®¾ç½®ä½1åˆ†é¢‘
     RCC_HCLKConfig(RCC_SYSCLK_Div1);
-    // APB2Ô¤·ÖÆµÒò×ÓÉèÖÃÎª1·ÖÆµ
+    // APB2é¢„åˆ†é¢‘å› å­è®¾ç½®ä¸º1åˆ†é¢‘
     RCC_PCLK2Config(RCC_HCLK_Div1);
-    // APB1Ô¤·ÖÆµÒò×ÓÉèÖÃÎ»2·ÖÆµ
+    // APB1é¢„åˆ†é¢‘å› å­è®¾ç½®ä½2åˆ†é¢‘
     RCC_PCLK1Config(RCC_HCLK_Div2);
-    //ÉèÖÃPLLÊ±ÖÓÁãÀ´Ô´ÎªHSE,ÉèÖÃPLL±¶ÆµÒò×Ó
+    //è®¾ç½®PLLæ—¶é’Ÿé›¶æ¥æºä¸ºHSE,è®¾ç½®PLLå€é¢‘å› å­
     RCC_PLLConfig(RCC_PLLSource_HSE_Div1, pllmul);
-    //¿ªÆôpll
+    //å¼€å¯pll
     RCC_PLLCmd(ENABLE);
-    //µÈ´ıPLLÎÈ¶¨
+    //ç­‰å¾…PLLç¨³å®š
     while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
       ;
-    //µ±PLLÎÈ¶¨Ö®ºó£¬°ÉpllÊ±ÖÓÇĞ»»ÎªÏµÍ³Ê±ÖÓ
+    //å½“PLLç¨³å®šä¹‹åï¼Œå§pllæ—¶é’Ÿåˆ‡æ¢ä¸ºç³»ç»Ÿæ—¶é’Ÿ
     RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
-    //¶ÁÈ¡Ê±ÖÓÇĞ»»×´Ì¬Î»£¬È·±£PLLCLK±»Ñ¡ÎªÏµÍ³Ê±ÖÓ
+    //è¯»å–æ—¶é’Ÿåˆ‡æ¢çŠ¶æ€ä½ï¼Œç¡®ä¿PLLCLKè¢«é€‰ä¸ºç³»ç»Ÿæ—¶é’Ÿ
     while (RCC_GetSYSCLKSource() != 0x08)
       ;
   }
@@ -166,40 +166,40 @@ void RCC_Operate::HSE_SetSysClock(uint32_t pllmul)
 }
 
 /**
- * @brief  RCC_Operate-ÄÚ²¿¸ßËÙÊ±ÖÓHSIÅäÖÃÏµÍ³Ê±ÖÓ·½·¨
- * @param  pllmul       PLL¼Ä´æÆ÷±¶ÆµÒò×Ó(2-16)
+ * @brief  RCC_Operate-å†…éƒ¨é«˜é€Ÿæ—¶é’ŸHSIé…ç½®ç³»ç»Ÿæ—¶é’Ÿæ–¹æ³•
+ * @param  pllmul       PLLå¯„å­˜å™¨å€é¢‘å› å­(2-16)
  * @retval None
  */
 void RCC_Operate::HSI_SetSysClock(uint32_t pllmul)
 {
   __IO uint32_t HSIStartUpStatus = 0;
-  //¸´Î»rccÍâÉè
+  //å¤ä½rccå¤–è®¾
   RCC_DeInit();
-  //Ê¹ÄÜHSI
+  //ä½¿èƒ½HSI
   RCC_HSICmd(ENABLE);
-  //µÈ´ıHSIÎÈ¶¨Æô¶¯
+  //ç­‰å¾…HSIç¨³å®šå¯åŠ¨
   HSIStartUpStatus = RCC->CR & RCC_CR_HSIRDY;
-  // HSIÎÈ¶¨ºó¼ÌĞøÉèÖÃ
+  // HSIç¨³å®šåç»§ç»­è®¾ç½®
   if (HSIStartUpStatus == RCC_CR_HSIRDY)
   {
     FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
     FLASH_SetLatency(FLASH_Latency_2);
-    // AHBÔ¤·ÖÆµÒò×ÓÉèÖÃÎ»1·ÖÆµ
+    // AHBé¢„åˆ†é¢‘å› å­è®¾ç½®ä½1åˆ†é¢‘
     RCC_HCLKConfig(RCC_SYSCLK_Div1);
-    // APB2Ô¤·ÖÆµÒò×ÓÉèÖÃÎª1·ÖÆµ
+    // APB2é¢„åˆ†é¢‘å› å­è®¾ç½®ä¸º1åˆ†é¢‘
     RCC_PCLK2Config(RCC_HCLK_Div1);
-    // APB1Ô¤·ÖÆµÒò×ÓÉèÖÃÎ»2·ÖÆµ
+    // APB1é¢„åˆ†é¢‘å› å­è®¾ç½®ä½2åˆ†é¢‘
     RCC_PCLK1Config(RCC_HCLK_Div2);
-    //ÉèÖÃPLLÊ±ÖÓÁãÀ´Ô´ÎªHSI,ÉèÖÃPLL±¶ÆµÒò×Ó
+    //è®¾ç½®PLLæ—¶é’Ÿé›¶æ¥æºä¸ºHSI,è®¾ç½®PLLå€é¢‘å› å­
     RCC_PLLConfig(RCC_PLLSource_HSI_Div2, pllmul);
-    //¿ªÆôpll
+    //å¼€å¯pll
     RCC_PLLCmd(ENABLE);
-    //µÈ´ıPLLÎÈ¶¨
+    //ç­‰å¾…PLLç¨³å®š
     while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
       ;
-    //µ±PLLÎÈ¶¨Ö®ºó£¬°ÉpllÊ±ÖÓÇĞ»»ÎªÏµÍ³Ê±ÖÓ
+    //å½“PLLç¨³å®šä¹‹åï¼Œå§pllæ—¶é’Ÿåˆ‡æ¢ä¸ºç³»ç»Ÿæ—¶é’Ÿ
     RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
-    //¶ÁÈ¡Ê±ÖÓÇĞ»»×´Ì¬Î»£¬È·±£PLLCLK±»Ñ¡ÎªÏµÍ³Ê±ÖÓ
+    //è¯»å–æ—¶é’Ÿåˆ‡æ¢çŠ¶æ€ä½ï¼Œç¡®ä¿PLLCLKè¢«é€‰ä¸ºç³»ç»Ÿæ—¶é’Ÿ
     while (RCC_GetSYSCLKSource() != 0x08)
       ;
   }
@@ -212,8 +212,8 @@ void RCC_Operate::HSI_SetSysClock(uint32_t pllmul)
 }
 
 /**
- * @brief  RCC_Operate-ADCµÄRCCÊ±ÖÓ·ÖÆµÅäÖÃ·½·¨
- * @param  RCC_PCLK2    ADC·ÖÆµÏµÊı
+ * @brief  RCC_Operate-ADCçš„RCCæ—¶é’Ÿåˆ†é¢‘é…ç½®æ–¹æ³•
+ * @param  RCC_PCLK2    ADCåˆ†é¢‘ç³»æ•°
  *                      RCC_PCLK2_Div2
  *                      RCC_PCLK2_Div4
  *                      RCC_PCLK2_Div6
@@ -226,9 +226,9 @@ void RCC_Operate::ADC_CLKConfig(uint32_t RCC_PCLK2)
 }
 
 /**
- * @brief  RCC_Operate-ADCµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  ADCX         ADCÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-ADCçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  ADCX         ADCå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(ADC_TypeDef *ADCX, FunctionalState NewState)
@@ -239,9 +239,9 @@ void RCC_Operate::RCC_Config(ADC_TypeDef *ADCX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-AFIOµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  AFIOX        AFIOÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-AFIOçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  AFIOX        AFIOå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(AFIO_TypeDef *AFIOX, FunctionalState NewState)
@@ -251,9 +251,9 @@ void RCC_Operate::RCC_Config(AFIO_TypeDef *AFIOX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-BKPµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  BKPX         BKPÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-BKPçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  BKPX         BKPå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(BKP_TypeDef *BKPX, FunctionalState NewState)
@@ -263,9 +263,9 @@ void RCC_Operate::RCC_Config(BKP_TypeDef *BKPX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-CANµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  CANX         CANÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-CANçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  CANX         CANå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(CAN_TypeDef *CANX, FunctionalState NewState)
@@ -276,9 +276,9 @@ void RCC_Operate::RCC_Config(CAN_TypeDef *CANX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-CRCµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  CRCX         CRCÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-CRCçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  CRCX         CRCå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(CRC_TypeDef *CRCX, FunctionalState NewState)
@@ -288,9 +288,9 @@ void RCC_Operate::RCC_Config(CRC_TypeDef *CRCX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-DACµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  DACX         DACÍâÉè
- * @param  NewState:    ×´Ì¬
+ * @brief  RCC_Operate-DACçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  DACX         DACå¤–è®¾
+ * @param  NewState:    çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(DAC_TypeDef *DACX, FunctionalState NewState)
@@ -300,9 +300,9 @@ void RCC_Operate::RCC_Config(DAC_TypeDef *DACX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-DMAµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  DMAX         DMAÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-DMAçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  DMAX         DMAå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(DMA_TypeDef *DMAX, FunctionalState NewState)
@@ -312,9 +312,9 @@ void RCC_Operate::RCC_Config(DMA_TypeDef *DMAX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-FLITFµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  FLITFX       FLITFÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-FLITFçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  FLITFX       FLITFå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(FLITF_TypeDef *FLITFX, FunctionalState NewState)
@@ -324,9 +324,9 @@ void RCC_Operate::RCC_Config(FLITF_TypeDef *FLITFX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank1µÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  FSMC_Bank1   FSMCµÄBank1´¢´æ¿é
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-FSMC_Bank1çš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  FSMC_Bank1   FSMCçš„Bank1å‚¨å­˜å—
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(FSMC_Bank1_TypeDef *FSMC_Bank1X, FunctionalState NewState)
@@ -336,9 +336,9 @@ void RCC_Operate::RCC_Config(FSMC_Bank1_TypeDef *FSMC_Bank1X, FunctionalState Ne
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank2µÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  FSMC_Bank2   FSMCµÄBank2´¢´æ¿é
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-FSMC_Bank2çš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  FSMC_Bank2   FSMCçš„Bank2å‚¨å­˜å—
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(FSMC_Bank2_TypeDef *FSMC_Bank2X, FunctionalState NewState)
@@ -348,9 +348,9 @@ void RCC_Operate::RCC_Config(FSMC_Bank2_TypeDef *FSMC_Bank2X, FunctionalState Ne
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank3µÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  FSMC_Bank3   FSMCµÄBank3´¢´æ¿é
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-FSMC_Bank3çš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  FSMC_Bank3   FSMCçš„Bank3å‚¨å­˜å—
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(FSMC_Bank3_TypeDef *FSMC_Bank3X, FunctionalState NewState)
@@ -360,9 +360,9 @@ void RCC_Operate::RCC_Config(FSMC_Bank3_TypeDef *FSMC_Bank3X, FunctionalState Ne
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank4µÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  FSMC_Bank4   FSMCµÄBank4´¢´æ¿é
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-FSMC_Bank4çš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  FSMC_Bank4   FSMCçš„Bank4å‚¨å­˜å—
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(FSMC_Bank4_TypeDef *FSMC_Bank4X, FunctionalState NewState)
@@ -372,9 +372,9 @@ void RCC_Operate::RCC_Config(FSMC_Bank4_TypeDef *FSMC_Bank4X, FunctionalState Ne
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank1EµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  FSMC_Bank1E  FSMCµÄBank1E´¢´æ¿é
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-FSMC_Bank1Eçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  FSMC_Bank1E  FSMCçš„Bank1Eå‚¨å­˜å—
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(FSMC_Bank1E_TypeDef *FSMC_Bank1EX, FunctionalState NewState)
@@ -384,9 +384,9 @@ void RCC_Operate::RCC_Config(FSMC_Bank1E_TypeDef *FSMC_Bank1EX, FunctionalState 
 }
 
 /**
- * @brief  RCC_Operate-GPIOµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  GPIOX        GPIOÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-GPIOçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  GPIOX        GPIOå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(GPIO_TypeDef *GPIOX, FunctionalState NewState)
@@ -397,9 +397,9 @@ void RCC_Operate::RCC_Config(GPIO_TypeDef *GPIOX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-I2CµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  I2CX         I2CÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-I2Cçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  I2CX         I2Cå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(I2C_TypeDef *I2CX, FunctionalState NewState)
@@ -410,9 +410,9 @@ void RCC_Operate::RCC_Config(I2C_TypeDef *I2CX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-PWRµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  PWRX         PWRÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-PWRçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  PWRX         PWRå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(PWR_TypeDef *PWRX, FunctionalState NewState)
@@ -422,9 +422,9 @@ void RCC_Operate::RCC_Config(PWR_TypeDef *PWRX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-SDIOµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  SDIOX        SDIOÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-SDIOçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  SDIOX        SDIOå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(SDIO_TypeDef *SDIOX, FunctionalState NewState)
@@ -434,9 +434,9 @@ void RCC_Operate::RCC_Config(SDIO_TypeDef *SDIOX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-SPIµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  SPIX         SPIÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-SPIçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  SPIX         SPIå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(SPI_TypeDef *SPIX, FunctionalState NewState)
@@ -454,9 +454,9 @@ void RCC_Operate::RCC_Config(SPI_TypeDef *SPIX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-SRAMµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  SRAMX        SRAMÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-SRAMçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  SRAMX        SRAMå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(SRAM_TypeDef *SRAMX, FunctionalState NewState)
@@ -466,9 +466,9 @@ void RCC_Operate::RCC_Config(SRAM_TypeDef *SRAMX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-TIMµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  TIMX         TIMÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-TIMçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  TIMX         TIMå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(TIM_TypeDef *TIMX, FunctionalState NewState)
@@ -486,9 +486,9 @@ void RCC_Operate::RCC_Config(TIM_TypeDef *TIMX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-USARTµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  USARTX       USARTÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-USARTçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  USARTX       USARTå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(USART_TypeDef *USARTX, FunctionalState NewState)
@@ -506,9 +506,9 @@ void RCC_Operate::RCC_Config(USART_TypeDef *USARTX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-USBµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  USBX         USBÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-USBçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  USBX         USBå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(USB_TypeDef *USBX, FunctionalState NewState)
@@ -518,9 +518,9 @@ void RCC_Operate::RCC_Config(USB_TypeDef *USBX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-WWDGµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  WWDGX        WWDGÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-WWDGçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  WWDGX        WWDGå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(WWDG_TypeDef *WWDGX, FunctionalState NewState)
@@ -530,9 +530,9 @@ void RCC_Operate::RCC_Config(WWDG_TypeDef *WWDGX, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-RTCµÄRCCÊ±ÖÓÒ»¼üÅäÖÃ·½·¨
- * @param  RTCx         RTCÍâÉè
- * @param  NewState     ×´Ì¬
+ * @brief  RCC_Operate-RTCçš„RCCæ—¶é’Ÿä¸€é”®é…ç½®æ–¹æ³•
+ * @param  RTCx         RTCå¤–è®¾
+ * @param  NewState     çŠ¶æ€
  * @retval None
  */
 void RCC_Operate::RCC_Config(RTC_TypeDef *RTCx, FunctionalState NewState)
@@ -542,9 +542,9 @@ void RCC_Operate::RCC_Config(RTC_TypeDef *RTCx, FunctionalState NewState)
 }
 
 /**
- * @brief  RCC_Operate-ADCÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  ADCX         ÓÃ»§ÊäÈëµÄADC
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_APB2Periph_ADCX,·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-ADCæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  ADCX         ç”¨æˆ·è¾“å…¥çš„ADC
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_APB2Periph_ADCX,å¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::ADCX_Convert_RCC(ADC_TypeDef *ADCX)
 {
@@ -567,9 +567,9 @@ uint32_t RCC_Operate::ADCX_Convert_RCC(ADC_TypeDef *ADCX)
 }
 
 /**
- * @brief  RCC_Operate-AFIOÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  AFIOX        ÓÃ»§ÊäÈëµÄAFIO
- * @retval ·µ»ØRCC_APB2Periph_AFIO¡£
+ * @brief  RCC_Operate-AFIOæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  AFIOX        ç”¨æˆ·è¾“å…¥çš„AFIO
+ * @retval è¿”å›RCC_APB2Periph_AFIOã€‚
  */
 uint32_t RCC_Operate::AFIO_Convert_RCC(AFIO_TypeDef *AFIOX)
 {
@@ -577,9 +577,9 @@ uint32_t RCC_Operate::AFIO_Convert_RCC(AFIO_TypeDef *AFIOX)
 }
 
 /**
- * @brief  RCC_Operate-BKPÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  BKPX         ÓÃ»§ÊäÈëµÄBKP
- * @retval ·µ»ØRCC_APB1Periph_BKP¡£
+ * @brief  RCC_Operate-BKPæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  BKPX         ç”¨æˆ·è¾“å…¥çš„BKP
+ * @retval è¿”å›RCC_APB1Periph_BKPã€‚
  */
 uint32_t RCC_Operate::BKP_Convert_RCC(BKP_TypeDef *BKPX)
 {
@@ -587,9 +587,9 @@ uint32_t RCC_Operate::BKP_Convert_RCC(BKP_TypeDef *BKPX)
 }
 
 /**
- * @brief  RCC_Operate-CANÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  CANX         ÓÃ»§ÊäÈëµÄCAN
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_APB1Periph_CANX,·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-CANæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  CANX         ç”¨æˆ·è¾“å…¥çš„CAN
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_APB1Periph_CANX,å¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::CAN_Convert_RCC(CAN_TypeDef *CANX)
 {
@@ -608,9 +608,9 @@ uint32_t RCC_Operate::CAN_Convert_RCC(CAN_TypeDef *CANX)
 }
 
 /**
- * @brief  RCC_Operate-CRCÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  CRCX         ÓÃ»§ÊäÈëµÄCRC
- * @retval ·µ»ØRCC_AHBPeriph_CRC¡£
+ * @brief  RCC_Operate-CRCæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  CRCX         ç”¨æˆ·è¾“å…¥çš„CRC
+ * @retval è¿”å›RCC_AHBPeriph_CRCã€‚
  */
 uint32_t RCC_Operate::CRC_Convert_RCC(CRC_TypeDef *CRCX)
 {
@@ -618,9 +618,9 @@ uint32_t RCC_Operate::CRC_Convert_RCC(CRC_TypeDef *CRCX)
 }
 
 /**
- * @brief  RCC_Operate-DACÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  DACX         ÓÃ»§ÊäÈëµÄDAC
- * @retval ·µ»ØRCC_APB1Periph_DAC¡£
+ * @brief  RCC_Operate-DACæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  DACX         ç”¨æˆ·è¾“å…¥çš„DAC
+ * @retval è¿”å›RCC_APB1Periph_DACã€‚
  */
 uint32_t RCC_Operate::DAC_Convert_RCC(DAC_TypeDef *DACX)
 {
@@ -628,9 +628,9 @@ uint32_t RCC_Operate::DAC_Convert_RCC(DAC_TypeDef *DACX)
 }
 
 /**
- * @brief  RCC_Operate-DMAÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  DMAX         ÓÃ»§ÊäÈëµÄDMA
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_AHBPeriph_DMAX,·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-DMAæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  DMAX         ç”¨æˆ·è¾“å…¥çš„DMA
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_AHBPeriph_DMAX,å¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::DMA_Convert_RCC(DMA_TypeDef *DMAX)
 {
@@ -649,9 +649,9 @@ uint32_t RCC_Operate::DMA_Convert_RCC(DMA_TypeDef *DMAX)
 }
 
 /**
- * @brief  RCC_Operate-FLITFÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  FLITFX       ÓÃ»§ÊäÈëµÄFLITF
- * @retval ·µ»ØRCC_AHBPeriph_FLITF¡£
+ * @brief  RCC_Operate-FLITFæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  FLITFX       ç”¨æˆ·è¾“å…¥çš„FLITF
+ * @retval è¿”å›RCC_AHBPeriph_FLITFã€‚
  */
 uint32_t RCC_Operate::FLITF_Convert_RCC(FLITF_TypeDef *FLITFX)
 {
@@ -659,9 +659,9 @@ uint32_t RCC_Operate::FLITF_Convert_RCC(FLITF_TypeDef *FLITFX)
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank1Ó³ÉäRCCÊ±ÖÓ·½·¨
- * @param  FSMC_Bank1X  ÓÃ»§ÊäÈëµÄFSMC_Bank1
- * @retval ·µ»ØRRCC_AHBPeriph_FSMC¡£
+ * @brief  RCC_Operate-FSMC_Bank1æ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  FSMC_Bank1X  ç”¨æˆ·è¾“å…¥çš„FSMC_Bank1
+ * @retval è¿”å›RRCC_AHBPeriph_FSMCã€‚
  */
 uint32_t RCC_Operate::FSMC_Bank1_Convert_RCC(FSMC_Bank1_TypeDef *FSMC_Bank1X)
 {
@@ -669,9 +669,9 @@ uint32_t RCC_Operate::FSMC_Bank1_Convert_RCC(FSMC_Bank1_TypeDef *FSMC_Bank1X)
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank2Ó³ÉäRCCÊ±ÖÓ·½·¨
- * @param  FSMC_Bank2X  ÓÃ»§ÊäÈëµÄFSMC_Bank2
- * @retval ·µ»ØRCC_AHBPeriph_FSMC¡£
+ * @brief  RCC_Operate-FSMC_Bank2æ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  FSMC_Bank2X  ç”¨æˆ·è¾“å…¥çš„FSMC_Bank2
+ * @retval è¿”å›RCC_AHBPeriph_FSMCã€‚
  */
 uint32_t RCC_Operate::FSMC_Bank2_Convert_RCC(FSMC_Bank2_TypeDef *FSMC_Bank2X)
 {
@@ -679,9 +679,9 @@ uint32_t RCC_Operate::FSMC_Bank2_Convert_RCC(FSMC_Bank2_TypeDef *FSMC_Bank2X)
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank3Ó³ÉäRCCÊ±ÖÓ·½·¨
- * @param  FSMC_Bank3X  ÓÃ»§ÊäÈëµÄFSMC_Bank3
- * @retval ·µ»ØRCC_AHBPeriph_FSMC¡£
+ * @brief  RCC_Operate-FSMC_Bank3æ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  FSMC_Bank3X  ç”¨æˆ·è¾“å…¥çš„FSMC_Bank3
+ * @retval è¿”å›RCC_AHBPeriph_FSMCã€‚
  */
 uint32_t RCC_Operate::FSMC_Bank3_Convert_RCC(FSMC_Bank3_TypeDef *FSMC_Bank3X)
 {
@@ -689,9 +689,9 @@ uint32_t RCC_Operate::FSMC_Bank3_Convert_RCC(FSMC_Bank3_TypeDef *FSMC_Bank3X)
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank4Ó³ÉäRCCÊ±ÖÓ·½·¨
- * @param  FSMC_Bank4X  ÓÃ»§ÊäÈëµÄFSMC_Bank4
- * @retval ·µ»ØRCC_AHBPeriph_FSMC¡£
+ * @brief  RCC_Operate-FSMC_Bank4æ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  FSMC_Bank4X  ç”¨æˆ·è¾“å…¥çš„FSMC_Bank4
+ * @retval è¿”å›RCC_AHBPeriph_FSMCã€‚
  */
 uint32_t RCC_Operate::FSMC_Bank4_Convert_RCC(FSMC_Bank4_TypeDef *FSMC_Bank4X)
 {
@@ -699,9 +699,9 @@ uint32_t RCC_Operate::FSMC_Bank4_Convert_RCC(FSMC_Bank4_TypeDef *FSMC_Bank4X)
 }
 
 /**
- * @brief  RCC_Operate-FSMC_Bank1EÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  FSMC_Bank1EX ÓÃ»§ÊäÈëµÄFSMC_Bank1E
- * @retval ·µ»ØRCC_AHBPeriph_FSMC¡£
+ * @brief  RCC_Operate-FSMC_Bank1Eæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  FSMC_Bank1EX ç”¨æˆ·è¾“å…¥çš„FSMC_Bank1E
+ * @retval è¿”å›RCC_AHBPeriph_FSMCã€‚
  */
 uint32_t RCC_Operate::FSMC_Bank1E_Convert_RCC(FSMC_Bank1E_TypeDef *FSMC_Bank1EX)
 {
@@ -709,9 +709,9 @@ uint32_t RCC_Operate::FSMC_Bank1E_Convert_RCC(FSMC_Bank1E_TypeDef *FSMC_Bank1EX)
 }
 
 /**
- * @brief  RCC_Operate-GPIOÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  GPIOX        ÓÃ»§ÊäÈëµÄGPIO
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_APB2Periph_GPIOX,·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-GPIOæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  GPIOX        ç”¨æˆ·è¾“å…¥çš„GPIO
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_APB2Periph_GPIOX,å¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::GPIOX_Convert_RCC(GPIO_TypeDef *GPIOX)
 {
@@ -750,9 +750,9 @@ uint32_t RCC_Operate::GPIOX_Convert_RCC(GPIO_TypeDef *GPIOX)
 }
 
 /**
- * @brief  RCC_Operate-I2CÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  I2CX         ÓÃ»§ÊäÈëµÄI2C
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_APB1Periph_I2CX,·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-I2Cæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  I2CX         ç”¨æˆ·è¾“å…¥çš„I2C
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_APB1Periph_I2CX,å¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::I2CX_Convert_RCC(I2C_TypeDef *I2CX)
 {
@@ -771,9 +771,9 @@ uint32_t RCC_Operate::I2CX_Convert_RCC(I2C_TypeDef *I2CX)
 }
 
 /**
- * @brief  RCC_Operate-PWRÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  PWRX         ÓÃ»§ÊäÈëµÄPWR
- * @retval ·µ»ØRCC_APB1Periph_PWR¡£
+ * @brief  RCC_Operate-PWRæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  PWRX         ç”¨æˆ·è¾“å…¥çš„PWR
+ * @retval è¿”å›RCC_APB1Periph_PWRã€‚
  */
 uint32_t RCC_Operate::PWRX_Convert_RCC(PWR_TypeDef *PWRX)
 {
@@ -781,9 +781,9 @@ uint32_t RCC_Operate::PWRX_Convert_RCC(PWR_TypeDef *PWRX)
 }
 
 /**
- * @brief  RCC_Operate-SDIOÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  SDIOX        ÓÃ»§ÊäÈëµÄSDIO
- * @retval ·µ»ØRCC_AHBPeriph_SDIO¡£
+ * @brief  RCC_Operate-SDIOæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  SDIOX        ç”¨æˆ·è¾“å…¥çš„SDIO
+ * @retval è¿”å›RCC_AHBPeriph_SDIOã€‚
  */
 uint32_t RCC_Operate::SDIOX_Convert_RCC(SDIO_TypeDef *SDIOX)
 {
@@ -791,9 +791,9 @@ uint32_t RCC_Operate::SDIOX_Convert_RCC(SDIO_TypeDef *SDIOX)
 }
 
 /**
- * @brief  RCC_Operate-SPIÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  SPIX         ÓÃ»§ÊäÈëµÄSPI
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_APB1Periph_SPIX|RCC_APB2Periph_SPIX·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-SPIæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  SPIX         ç”¨æˆ·è¾“å…¥çš„SPI
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_APB1Periph_SPIX|RCC_APB2Periph_SPIXå¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::SPIX_Convert_RCC(SPI_TypeDef *SPIX)
 {
@@ -816,9 +816,9 @@ uint32_t RCC_Operate::SPIX_Convert_RCC(SPI_TypeDef *SPIX)
 }
 
 /**
- * @brief  RCC_Operate-SRAMÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  SRAMX        ÓÃ»§ÊäÈëµÄSRAM
- * @retval ·µ»ØRCC_AHBPeriph_SRAM¡£
+ * @brief  RCC_Operate-SRAMæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  SRAMX        ç”¨æˆ·è¾“å…¥çš„SRAM
+ * @retval è¿”å›RCC_AHBPeriph_SRAMã€‚
  */
 uint32_t RCC_Operate::SRAMX_Convert_RCC(SRAM_TypeDef *SRAMX)
 {
@@ -826,9 +826,9 @@ uint32_t RCC_Operate::SRAMX_Convert_RCC(SRAM_TypeDef *SRAMX)
 }
 
 /**
- * @brief  RCC_Operate-TIMÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  TIMX         ÓÃ»§ÊäÈëµÄTIM
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_APB1Periph_TIMX|RCC_APB2Periph_TIMX,·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-TIMæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  TIMX         ç”¨æˆ·è¾“å…¥çš„TIM
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_APB1Periph_TIMX|RCC_APB2Periph_TIMX,å¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::TIMX_Convert_RCC(TIM_TypeDef *TIMX)
 {
@@ -871,9 +871,9 @@ uint32_t RCC_Operate::TIMX_Convert_RCC(TIM_TypeDef *TIMX)
 }
 
 /**
- * @brief  RCC_Operate-USARTÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  USARTX       ÓÃ»§ÊäÈëµÄUSART
- * @retval Èç¹û²ÎÊıÕıÈ·,Ôò·µ»ØRCC_APB2Periph_USARTX|RCC_APB1Periph_USARTX,·ñÔò·µ»Ø0¡£
+ * @brief  RCC_Operate-USARTæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  USARTX       ç”¨æˆ·è¾“å…¥çš„USART
+ * @retval å¦‚æœå‚æ•°æ­£ç¡®,åˆ™è¿”å›RCC_APB2Periph_USARTX|RCC_APB1Periph_USARTX,å¦åˆ™è¿”å›0ã€‚
  */
 uint32_t RCC_Operate::USARTX_Convert_RCC(USART_TypeDef *USARTX)
 {
@@ -904,9 +904,9 @@ uint32_t RCC_Operate::USARTX_Convert_RCC(USART_TypeDef *USARTX)
 }
 
 /**
- * @brief  RCC_Operate-USBÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  USBX         ÓÃ»§ÊäÈëµÄUSB
- * @retval ·µ»ØRCC_APB1Periph_USB¡£
+ * @brief  RCC_Operate-USBæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  USBX         ç”¨æˆ·è¾“å…¥çš„USB
+ * @retval è¿”å›RCC_APB1Periph_USBã€‚
  */
 uint32_t RCC_Operate::USBX_Convert_RCC(USB_TypeDef *USBX)
 {
@@ -914,9 +914,9 @@ uint32_t RCC_Operate::USBX_Convert_RCC(USB_TypeDef *USBX)
 }
 
 /**
- * @brief  RCC_Operate-WWDGÓ³ÉäRCCÊ±ÖÓ·½·¨
- * @param  WWDGX        ÓÃ»§ÊäÈëµÄWWDG
- * @retval ·µ»ØRCC_APB1Periph_WWDG¡£
+ * @brief  RCC_Operate-WWDGæ˜ å°„RCCæ—¶é’Ÿæ–¹æ³•
+ * @param  WWDGX        ç”¨æˆ·è¾“å…¥çš„WWDG
+ * @retval è¿”å›RCC_APB1Periph_WWDGã€‚
  */
 uint32_t RCC_Operate::WWDGX_Convert_RCC(WWDG_TypeDef *WWDGX)
 {

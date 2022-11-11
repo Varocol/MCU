@@ -22,7 +22,7 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F10x_IT_H
 #define __STM32F10x_IT_H
-#include "Variable_Space.h" //Õâ²¿·Ö´úÂë°üº¬CPPËùÒÔµÃ×ö¸ôÀë
+#include "System.h" //è¿™éƒ¨åˆ†ä»£ç åŒ…å«CPPæ‰€ä»¥å¾—åšéš”ç¦»
 #ifdef __cplusplus
  extern "C" {
 #endif 

@@ -24,32 +24,37 @@ void Setup()
 }
 void Test()
 {
-    // ee.Write_Byte(0, 'z');
-    ee.Write_Buffer(255, aaa, 26);
-    if (ee.PROCESS_CONDITION)
+    while (1)
     {
-        printf("·¢ËÍ³É¹¦!\n·¢ËÍµÄ×Ö½ÚÎª:\n");
-        for (int i = 0; i < 26; i++)
-        {
-            printf("%c\n", aaa[i]);
-        }
+        ee.Write_Byte(0, 'z');
+        SysTick_Operate::Delay_ms(1000);
+        printf("1");
     }
-    ee.Read_Buffer(255, list, 26);
-    if (ee.PROCESS_CONDITION)
-    {
-        printf("½ÓÊÕ³É¹¦!\n½ÓÊÕµÄ×Ö½ÚÎª:\n");
-    }
-    if (!ee.PROCESS_CONDITION)
-    {
-        printf("I2CÍ¨Ñ¶Ê§°Ü!\n");
-    }
-    else
-    {
-        for (int i = 0; i < 26; i++)
-        {
-            printf("%c\n", list[i]);
-        }
-    }
+    // ee.Write_Buffer(255, aaa, 26);
+    // if (ee.PROCESS_CONDITION)
+    // {
+    //     printf("å‘é€æˆåŠŸ!\nå‘é€çš„å­—èŠ‚ä¸º:\n");
+    //     for (int i = 0; i < 26; i++)
+    //     {
+    //         printf("%c\n", aaa[i]);
+    //     }
+    // }
+    // ee.Read_Buffer(255, list, 26);
+    // if (ee.PROCESS_CONDITION)
+    // {
+    //     printf("æŽ¥æ”¶æˆåŠŸ!\næŽ¥æ”¶çš„å­—èŠ‚ä¸º:\n");
+    // }
+    // if (!ee.PROCESS_CONDITION)
+    // {
+    //     printf("I2Cé€šè®¯å¤±è´¥!\n");
+    // }
+    // else
+    // {
+    //     for (int i = 0; i < 26; i++)
+    //     {
+    //         printf("%c\n", list[i]);
+    //     }
+    // }
 }
 void End()
 {

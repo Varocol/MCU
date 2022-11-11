@@ -136,7 +136,7 @@ private:
 public:
     GPIO();
     ~GPIO();
-    //ÕâÑùÅÅÁÐÊÇ°´ÕÕÊ¹ÓÃÆµÂÊÅÅµÄ
+    //è¿™æ ·æŽ’åˆ—æ˜¯æŒ‰ç…§ä½¿ç”¨é¢‘çŽ‡æŽ’çš„
     GPIO(PIN_enum Pin, GPIOMode_TypeDef Mode = GPIO_Mode_Out_PP, BitAction Val = Bit_RESET, GPIOSpeed_TypeDef Speed = GPIO_Speed_50MHz);
     void Set_Pin(PIN_enum Pin);
     void Set_Val(BitAction Val);
@@ -194,24 +194,24 @@ public:
 #define MEM_ADDR(addr) *((volatile unsigned long *)(addr))
 #define BIT_ADDR(addr, bitnum) MEM_ADDR(BITBAND(addr, bitnum))
 
-#define PAout(n) BIT_ADDR(GPIOA_ODR_Addr, n) //Êä³ö
-#define PAin(n) BIT_ADDR(GPIOA_IDR_Addr, n)  //ÊäÈë
+#define PAout(n) BIT_ADDR(GPIOA_ODR_Addr, n) //è¾“å‡º
+#define PAin(n) BIT_ADDR(GPIOA_IDR_Addr, n)  //è¾“å…¥
 
-#define PBout(n) BIT_ADDR(GPIOB_ODR_Addr, n) //Êä³ö
-#define PBin(n) BIT_ADDR(GPIOB_IDR_Addr, n)  //ÊäÈë
+#define PBout(n) BIT_ADDR(GPIOB_ODR_Addr, n) //è¾“å‡º
+#define PBin(n) BIT_ADDR(GPIOB_IDR_Addr, n)  //è¾“å…¥
 
-#define PCout(n) BIT_ADDR(GPIOC_ODR_Addr, n) //Êä³ö
-#define PCin(n) BIT_ADDR(GPIOC_IDR_Addr, n)  //ÊäÈë
+#define PCout(n) BIT_ADDR(GPIOC_ODR_Addr, n) //è¾“å‡º
+#define PCin(n) BIT_ADDR(GPIOC_IDR_Addr, n)  //è¾“å…¥
 
-#define PDout(n) BIT_ADDR(GPIOD_ODR_Addr, n) //Êä³ö
-#define PDin(n) BIT_ADDR(GPIOD_IDR_Addr, n)  //ÊäÈë
+#define PDout(n) BIT_ADDR(GPIOD_ODR_Addr, n) //è¾“å‡º
+#define PDin(n) BIT_ADDR(GPIOD_IDR_Addr, n)  //è¾“å…¥
 
-#define PEout(n) BIT_ADDR(GPIOE_ODR_Addr, n) //Êä³ö
-#define PEin(n) BIT_ADDR(GPIOE_IDR_Addr, n)  //ÊäÈë
+#define PEout(n) BIT_ADDR(GPIOE_ODR_Addr, n) //è¾“å‡º
+#define PEin(n) BIT_ADDR(GPIOE_IDR_Addr, n)  //è¾“å…¥
 
-#define PFout(n) BIT_ADDR(GPIOF_ODR_Addr, n) //Êä³ö
-#define PFin(n) BIT_ADDR(GPIOF_IDR_Addr, n)  //ÊäÈë
+#define PFout(n) BIT_ADDR(GPIOF_ODR_Addr, n) //è¾“å‡º
+#define PFin(n) BIT_ADDR(GPIOF_IDR_Addr, n)  //è¾“å…¥
 
-#define PGout(n) BIT_ADDR(GPIOG_ODR_Addr, n) //Êä³ö
-#define PGin(n) BIT_ADDR(GPIOG_IDR_Addr, n)  //ÊäÈë
+#define PGout(n) BIT_ADDR(GPIOG_ODR_Addr, n) //è¾“å‡º
+#define PGin(n) BIT_ADDR(GPIOG_IDR_Addr, n)  //è¾“å…¥
 #endif                                       /* __OJ_GPIO_H*/

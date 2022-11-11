@@ -1,7 +1,7 @@
 #include "System.h"
 /*
-    ÊµÑé£º
-        ÑéÖ¤Í£Ö¹Ä£Ê½¡£Ê¹ÓÃ°´¼üÖĞ¶Ï»½ĞÑĞ¾Æ¬£¬²¢ÅäÖÃ»½ĞÑºóµÄÊ±ÖÓ¡£
+    å®éªŒï¼š
+        éªŒè¯åœæ­¢æ¨¡å¼ã€‚ä½¿ç”¨æŒ‰é”®ä¸­æ–­å”¤é†’èŠ¯ç‰‡ï¼Œå¹¶é…ç½®å”¤é†’åçš„æ—¶é’Ÿã€‚
 */
 void Setup();
 void Test();
@@ -14,11 +14,11 @@ int main()
 }
 void Setup()
 {
-    //³õÊ¼»¯µÆ
+    //åˆå§‹åŒ–ç¯
     LED_1.Init();
-    //³õÊ¼»¯´®¿Ú
+    //åˆå§‹åŒ–ä¸²å£
     USART_1.Init();
-    //³õÊ¼»¯KEY1Òı½Å¼°ÖĞ¶Ï
+    //åˆå§‹åŒ–KEY1å¼•è„šåŠä¸­æ–­
     GPIO KEY1 = GPIO(PA0, GPIO_Mode_IN_FLOATING);
     KEY1.Init();
     NVIC_InitTypeDef EXTI_KEY1_NVIC_InitStructure = {
@@ -33,15 +33,15 @@ void Setup()
         .EXTI_LineCmd = ENABLE};
     EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, EXTI_KEY1_NVIC_InitStructure, GPIOA);
     EXTI_KEY1.Init();
-    //¿ªÆôPWRÊ±ÖÓ
+    //å¼€å¯PWRæ—¶é’Ÿ
     RCC_Operate::RCC_Config(PWR, ENABLE);
-    //Í¨¹ıÄÖÖÓÖĞ¶Ï(EXTI17)»òÊÂ¼ş»½ĞÑ
+    //é€šè¿‡é—¹é’Ÿä¸­æ–­(EXTI17)æˆ–äº‹ä»¶å”¤é†’
     NVIC_InitTypeDef RTCALR_NVIC_InitStructure = {
         .NVIC_IRQChannel = RTCAlarm_IRQn,
         .NVIC_IRQChannelPreemptionPriority = 0,
         .NVIC_IRQChannelSubPriority = 3,
         .NVIC_IRQChannelCmd = ENABLE};
-    //ÄÖÖÓÊÂ¼şµÄÉÏÉıÑØ
+    //é—¹é’Ÿäº‹ä»¶çš„ä¸Šå‡æ²¿
     EXTI_InitTypeDef RTCALR_InitStructure = {
         .EXTI_Line = EXTI_Line17,
         .EXTI_Mode = EXTI_Mode_Interrupt,
@@ -56,35 +56,35 @@ void Test()
 {
     while (1)
     {
-        printf("³ÌĞòÕıÔÚÔËĞĞ...\n");
+        printf("ç¨‹åºæ­£åœ¨è¿è¡Œ...\n");
         LED_1.Toggle();
         SysTick_Operate::Delay_ms(500);
         LED_1.Toggle();
         SysTick_Operate::Delay_ms(500);
-        printf("½øÈëÍ£Ö¹Ä£Ê½\n");
+        printf("è¿›å…¥åœæ­¢æ¨¡å¼\n");
         PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
         RCC_ClocksTypeDef wakeup_config = RCC_Operate::Get_ClocksFreq();
         Clock_Source wakeup_source = RCC_Operate::Get_SYSCLKSource();
         RCC_Operate::HSE_SetSysClock(RCC_PLLMul_9);
         RCC_ClocksTypeDef normal_config = RCC_Operate::Get_ClocksFreq();
         Clock_Source normal_source = RCC_Operate::Get_SYSCLKSource();
-        printf("»½ĞÑºóÊ±ÖÓÆµÂÊ:\n"
+        printf("å”¤é†’åæ—¶é’Ÿé¢‘ç‡:\n"
                "SYSTICK:%d\n"
                "HCLK:%d\n"
                "PCLK1:%d\n"
                "PCLK2:%d\n"
-               "Ê±ÖÓÔ´(0:HSI,1:HSE,2:PLL):%d\n",
+               "æ—¶é’Ÿæº(0:HSI,1:HSE,2:PLL):%d\n",
                wakeup_config.SYSCLK_Frequency,
                wakeup_config.HCLK_Frequency,
                wakeup_config.PCLK1_Frequency,
                wakeup_config.PCLK2_Frequency,
                wakeup_source);
-        printf("ÅäÖÃºóÊ±ÖÓÆµÂÊ:\n"
+        printf("é…ç½®åæ—¶é’Ÿé¢‘ç‡:\n"
                "SYSTICK:%d\n"
                "HCLK:%d\n"
                "PCLK1:%d\n"
                "PCLK2:%d\n"
-               "Ê±ÖÓÔ´(0:HSI,1:HSE,2:PLL):%d\n",
+               "æ—¶é’Ÿæº(0:HSI,1:HSE,2:PLL):%d\n",
                normal_config.SYSCLK_Frequency,
                normal_config.HCLK_Frequency,
                normal_config.PCLK1_Frequency,

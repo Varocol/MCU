@@ -5,12 +5,12 @@
 #define Check_PROCESS_CONDITION   \
   if (PROCESS_CONDITION == false) \
     return;
-#define BUSY_ERROR "��������æµ!\n�ڷ���%s���޷�����"
-#define EVENT_ERROR "�¼�%s�޷���Ӧ!\n�ڷ���%s���޷�����"
-#define FLAG_ERROR "��־λ%s�޷��ı�!\n�ڷ���%s���޷�����"
+#define BUSY_ERROR "总线正在忙碌!\n在方法%s处无法运行"
+#define EVENT_ERROR "事件%s无法响应!\n在方法%s处无法运行"
+#define FLAG_ERROR "标志位%s无法改变!\n在方法%s处无法运行"
 #include "I2C.h"
 #include "DEBUG.h"
-// AT24C02�����б��ṹ��
+// AT24C02参数列表结构体
 typedef struct
 {
   uint8_t AT24C02_ADDR;

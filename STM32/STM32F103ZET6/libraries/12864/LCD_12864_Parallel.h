@@ -2,51 +2,51 @@
 #define __OJ_LCD_12864_PARALLEL_H
 #include "LCD_12864.h"
 #include "GPIO.h"
-//12864²¢ĞĞ²ÎÊı
+//12864å¹¶è¡Œå‚æ•°
 typedef struct
 {
-  PIN_enum IO_PIN;            //²¢ĞĞ8Î»Êı¾İ¶Ë¿Ú
-  PIN_enum RS_PIN;            //RSÒı½Å
-  PIN_enum RW_PIN;            //RWÒı½Å
-  PIN_enum EN_PIN;            //ENÒı½Å
+  PIN_enum IO_PIN;            //å¹¶è¡Œ8ä½æ•°æ®ç«¯å£
+  PIN_enum RS_PIN;            //RSå¼•è„š
+  PIN_enum RW_PIN;            //RWå¼•è„š
+  PIN_enum EN_PIN;            //ENå¼•è„š
 } LCD_12864_Param_Parallel;
 
 class LCD_12864_Parallel : public LCD_12864
 {
 private:
   LCD_12864_Param_Parallel Param;
-  GPIO RS; //ÃüÁîºÍÊı¾İÑ¡Ôñ
-  GPIO RW; //¶ÁĞ´Ñ¡Ôñ
-  GPIO EN; //Ê±ÖÓÏßs
-  GPIO IO; //IOÊı¾İ¿Ú
+  GPIO RS; //å‘½ä»¤å’Œæ•°æ®é€‰æ‹©
+  GPIO RW; //è¯»å†™é€‰æ‹©
+  GPIO EN; //æ—¶é’Ÿçº¿s
+  GPIO IO; //IOæ•°æ®å£
   uchar temp, Hbit, Lbit;
 
 public:
   LCD_12864_Parallel();
-  LCD_12864_Parallel(LCD_12864_Param_Parallel Param);                                //¹¹Ôì·½·¨,´«²Î
-  void Set_Param(LCD_12864_Param_Parallel Param);                                    //ÉèÖÃ²ÎÊı
-  void Update(LCD_12864_Param_Parallel Param);                                       //¸üĞÂ
-  virtual void Clear_DDRAM();                                                        //ÇåÆÁ²¢¹éÖ·
-  virtual void Send_Byte(uchar byte);                                                //·¢ËÍ×Ö½Ú,´Ó¸ßµ½µÍ(´®ĞĞÄ£Ê½)
-  virtual void Write_Cmd(uchar cmd);                                                 //Ğ´Ö¸Áî,RS=L,RW=L
-  virtual void Write_Data(uchar data);                                               //Ğ´Êı¾İ,RS=H,RW=L
-  virtual void Pos(uchar x, uchar y);                                                //×Ö·ûÎ»ÖÃ,ÒÔÖĞÎÄ×Ö·û16*16µãÕóÎªµ¥Î»
-  virtual void Init();                                                               //³õÊ¼»¯,ÉèÖÃ²¢¿Ú(ÓĞĞ©ĞÍºÅµÄ12864·Ö×óÓÒÆÁ)
-  virtual void Pin_Init();                                                           //GPIO³õÊ¼»¯
-  virtual void Check_Busy();                                                         //ÅĞ¶Ï12864ÊÇ·ñÔÚÃ¦,Ò»¶¨ÒªÓĞ,·ñÔò¿ÉÄÜµ¼ÖÂÊı¾İ¶ªÊ§
-  virtual void Set_CGRAM(uchar num, uchar *p);                                       //Ğ´ÈëCGRAM
-  virtual void Display_CGRAM(uchar num, uchar x, uchar y);                           //ÏÔÊ¾CGRAM
-  virtual void Show_String(uchar *p, uint16_t row, uint16_t col);                    //ÔÚÖ¸¶¨Î»ÖÃÏÔÊ¾×Ö·û´®,²»ÄÜ°ÑvscodeÀïÃæÏÔÊ¾µÄºº×ÖËùÕ¼Î»Êıµ±×÷Êµ¼ÊÎ»Êı£¡£¡£¡ÖĞÎÄ¾ÍÊÇÕ¼2¸ö×Ö½ÚµÄ
-  virtual void Display_Image(uchar *p);                                              //GDRAM»æÍ¼Ä£Ê½
-  virtual void Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag);   //ÒÔÁ½¸ö×Ö½Ú»æÖÆ¾ØĞÎ(¿ÉÄÜĞ§ÂÊÂÔ¸ß)
-  virtual void Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag); //ÒÔµã»æÖÆ¾ØĞÎ
-  virtual void Draw_Point(uchar x, uchar y, uchar flag);                             //»­µã
-  virtual void Clear_GDRAM();                                                        //Çå¿ÕGDRAM
-  virtual void Read_GDRAM(uchar x, uchar y);                                         //¶ÁÈ¡GDRAMÊı¾İ
-  virtual void Set_GDRAMadd(uchar x, uchar y);                                       //ÉèÖÃGDRAMµÄµØÖ·
-  virtual uchar Read_Data();                                                         //¶ÁÊı¾İ,RS=H,RW=H(´®ĞĞ²»Ö§³Ö¶ÁÈ¡ÆÁÄ»Êı¾İ)
-  virtual uchar Receive_Byte();                                                      //¶ÁÈ¡×Ö½Ú,´Ó¸ßµ½µÍ(´®ĞĞÄ£Ê½)
-  virtual uchar Read_Status();                                                       //¶Á×´Ì¬,RS=L,RW=H
+  LCD_12864_Parallel(LCD_12864_Param_Parallel Param);                                //æ„é€ æ–¹æ³•,ä¼ å‚
+  void Set_Param(LCD_12864_Param_Parallel Param);                                    //è®¾ç½®å‚æ•°
+  void Update(LCD_12864_Param_Parallel Param);                                       //æ›´æ–°
+  virtual void Clear_DDRAM();                                                        //æ¸…å±å¹¶å½’å€
+  virtual void Send_Byte(uchar byte);                                                //å‘é€å­—èŠ‚,ä»é«˜åˆ°ä½(ä¸²è¡Œæ¨¡å¼)
+  virtual void Write_Cmd(uchar cmd);                                                 //å†™æŒ‡ä»¤,RS=L,RW=L
+  virtual void Write_Data(uchar data);                                               //å†™æ•°æ®,RS=H,RW=L
+  virtual void Pos(uchar x, uchar y);                                                //å­—ç¬¦ä½ç½®,ä»¥ä¸­æ–‡å­—ç¬¦16*16ç‚¹é˜µä¸ºå•ä½
+  virtual void Init();                                                               //åˆå§‹åŒ–,è®¾ç½®å¹¶å£(æœ‰äº›å‹å·çš„12864åˆ†å·¦å³å±)
+  virtual void Pin_Init();                                                           //GPIOåˆå§‹åŒ–
+  virtual void Check_Busy();                                                         //åˆ¤æ–­12864æ˜¯å¦åœ¨å¿™,ä¸€å®šè¦æœ‰,å¦åˆ™å¯èƒ½å¯¼è‡´æ•°æ®ä¸¢å¤±
+  virtual void Set_CGRAM(uchar num, uchar *p);                                       //å†™å…¥CGRAM
+  virtual void Display_CGRAM(uchar num, uchar x, uchar y);                           //æ˜¾ç¤ºCGRAM
+  virtual void Show_String(uchar *p, uint16_t row, uint16_t col);                    //åœ¨æŒ‡å®šä½ç½®æ˜¾ç¤ºå­—ç¬¦ä¸²,ä¸èƒ½æŠŠvscodeé‡Œé¢æ˜¾ç¤ºçš„æ±‰å­—æ‰€å ä½æ•°å½“ä½œå®é™…ä½æ•°ï¼ï¼ï¼ä¸­æ–‡å°±æ˜¯å 2ä¸ªå­—èŠ‚çš„
+  virtual void Display_Image(uchar *p);                                              //GDRAMç»˜å›¾æ¨¡å¼
+  virtual void Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag);   //ä»¥ä¸¤ä¸ªå­—èŠ‚ç»˜åˆ¶çŸ©å½¢(å¯èƒ½æ•ˆç‡ç•¥é«˜)
+  virtual void Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag); //ä»¥ç‚¹ç»˜åˆ¶çŸ©å½¢
+  virtual void Draw_Point(uchar x, uchar y, uchar flag);                             //ç”»ç‚¹
+  virtual void Clear_GDRAM();                                                        //æ¸…ç©ºGDRAM
+  virtual void Read_GDRAM(uchar x, uchar y);                                         //è¯»å–GDRAMæ•°æ®
+  virtual void Set_GDRAMadd(uchar x, uchar y);                                       //è®¾ç½®GDRAMçš„åœ°å€
+  virtual uchar Read_Data();                                                         //è¯»æ•°æ®,RS=H,RW=H(ä¸²è¡Œä¸æ”¯æŒè¯»å–å±å¹•æ•°æ®)
+  virtual uchar Receive_Byte();                                                      //è¯»å–å­—èŠ‚,ä»é«˜åˆ°ä½(ä¸²è¡Œæ¨¡å¼)
+  virtual uchar Read_Status();                                                       //è¯»çŠ¶æ€,RS=L,RW=H
 };
 
 #endif /*__OJ_LCD_12864_PARALLEL_H*/

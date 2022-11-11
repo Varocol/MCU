@@ -1,17 +1,17 @@
 #include "USART.h"
 #include "stdio.h"
-// C++µÄstatic¾²Ì¬³ÉÔ±ĞèÒªÔÚÆäËûµØ·½³õÊ¼»¯,¼Ç×¡ÔÚ.hÎÄ¼ş²»Ö§³Ö¸³Öµ,ËùÒÔ²»ÒªÔÚ.hÄÚ³õÊ¼»¯
+// C++çš„staticé™æ€æˆå‘˜éœ€è¦åœ¨å…¶ä»–åœ°æ–¹åˆå§‹åŒ–,è®°ä½åœ¨.hæ–‡ä»¶ä¸æ”¯æŒèµ‹å€¼,æ‰€ä»¥ä¸è¦åœ¨.hå†…åˆå§‹åŒ–
 
-queue<vector<uint8_t>> USART::USART1_DMA_Data_Queue; // USART1ÏûÏ¢¶ÓÁĞ
-queue<vector<uint8_t>> USART::USART2_DMA_Data_Queue; // USART2ÏûÏ¢¶ÓÁĞ
-queue<vector<uint8_t>> USART::USART3_DMA_Data_Queue; // USART3ÏûÏ¢¶ÓÁĞ
-queue<vector<uint8_t>> USART::UART4_DMA_Data_Queue;  // UART4 ÏûÏ¢¶ÓÁĞ
+queue<vector<uint8_t>> USART::USART1_DMA_Data_Queue; // USART1æ¶ˆæ¯é˜Ÿåˆ—
+queue<vector<uint8_t>> USART::USART2_DMA_Data_Queue; // USART2æ¶ˆæ¯é˜Ÿåˆ—
+queue<vector<uint8_t>> USART::USART3_DMA_Data_Queue; // USART3æ¶ˆæ¯é˜Ÿåˆ—
+queue<vector<uint8_t>> USART::UART4_DMA_Data_Queue;  // UART4 æ¶ˆæ¯é˜Ÿåˆ—
 
-// ÄÚÖÃDMAÄ¬ÈÏÅäÖÃ²ÎÊı
-// USART1_DMA Í¨µÀÖĞ¶Ï×ÓÓÅÏÈ¼¶ 15
-// USART2_DMA Í¨µÀÖĞ¶Ï×ÓÓÅÏÈ¼¶ 14
-// USART3_DMA Í¨µÀÖĞ¶Ï×ÓÓÅÏÈ¼¶ 13
-// UART4_DMA  Í¨µÀÖĞ¶Ï×ÓÓÅÏÈ¼¶ 12
+// å†…ç½®DMAé»˜è®¤é…ç½®å‚æ•°
+// USART1_DMA é€šé“ä¸­æ–­å­ä¼˜å…ˆçº§ 15
+// USART2_DMA é€šé“ä¸­æ–­å­ä¼˜å…ˆçº§ 14
+// USART3_DMA é€šé“ä¸­æ–­å­ä¼˜å…ˆçº§ 13
+// UART4_DMA  é€šé“ä¸­æ–­å­ä¼˜å…ˆçº§ 12
 DMA_InitTypeDef USART_TX_DMA_Default_InitStructure = {
     .DMA_PeripheralBaseAddr = NULL,
     .DMA_MemoryBaseAddr = NULL,
@@ -36,8 +36,137 @@ DMA_Param USART_TX_DMA_Default_Param = {
     .DMA_IT_Selection = DMA_IT_TC | DMA_IT_TE, // DMA_IT_HT | DMA_IT_TC | DMA_IT_TE
     .DMA_IT_State = ENABLE};
 
+void (*USART1_Handler)(void);
+void (*USART2_Handler)(void);
+void (*USART3_Handler)(void);
+void (*UART4_Handler)(void);
+void (*UART5_Handler)(void);
+
+
 /**
- * @brief  USART-¿Õ¹¹Ôì·½·¨
+ * @brief  USART1_TXå¯¹åº”çš„DMAé€šé“çš„ä¸­æ–­å¤„ç†
+ *         ç”¨äºç»´æŠ¤æ¶ˆæ¯é˜Ÿåˆ—
+ * @param  None
+ * @retval None
+ */
+void USART1_TX_DMA_Handler()
+{
+  // DMA1_Channel4
+  if (USART::DMA_Config_Check(USART1))
+  {
+    if (DMA_GetITStatus(DMA1_IT_HT4))
+    {
+      DMA_ClearITPendingBit(DMA1_IT_HT4);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TC4))
+    {
+      USART::DMA_Queue_Remove(USART1);
+      USART::DMA_Queue_Start(USART1);
+      DMA_ClearITPendingBit(DMA1_IT_TC4);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TE4))
+    {
+      printf("[USART1]:DMAæ¶ˆæ¯é˜Ÿåˆ—ä¼ è¾“é”™è¯¯!\n");
+      USART::DMA_Queue_Stop(USART1);
+      DMA_ClearITPendingBit(DMA1_IT_TE4);
+    }
+  }
+}
+
+/**
+ * @brief  USART2_TXå¯¹åº”çš„DMAé€šé“çš„ä¸­æ–­å¤„ç†
+ *         ç”¨äºç»´æŠ¤æ¶ˆæ¯é˜Ÿåˆ—
+ * @param  None
+ * @retval None
+ */
+void USART2_TX_DMA_Handler()
+{
+  // DMA1_Channel7
+  if (USART::DMA_Config_Check(USART2))
+  {
+    if (DMA_GetITStatus(DMA1_IT_HT7))
+    {
+      DMA_ClearITPendingBit(DMA1_IT_HT7);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TC7))
+    {
+      USART::DMA_Queue_Remove(USART2);
+      USART::DMA_Queue_Start(USART2);
+      DMA_ClearITPendingBit(DMA1_IT_TC7);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TE7))
+    {
+      printf("[USART2]:DMAæ¶ˆæ¯é˜Ÿåˆ—ä¼ è¾“é”™è¯¯!\n");
+      USART::DMA_Queue_Stop(USART2);
+      DMA_ClearITPendingBit(DMA1_IT_TE7);
+    }
+  }
+}
+
+/**
+ * @brief  USART3_TXå¯¹åº”çš„DMAé€šé“çš„ä¸­æ–­å¤„ç†
+ *         ç”¨äºç»´æŠ¤æ¶ˆæ¯é˜Ÿåˆ—
+ * @param  None
+ * @retval None
+ */
+void USART3_TX_DMA_Handler()
+{
+  // DMA1_Channel2
+  if (USART::DMA_Config_Check(USART3))
+  {
+    if (DMA_GetITStatus(DMA1_IT_HT2))
+    {
+      DMA_ClearITPendingBit(DMA1_IT_HT2);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TC2))
+    {
+      USART::DMA_Queue_Remove(USART3);
+      USART::DMA_Queue_Start(USART3);
+      DMA_ClearITPendingBit(DMA1_IT_TC2);
+    }
+    else if (DMA_GetITStatus(DMA1_IT_TE2))
+    {
+      printf("[USART3]:DMAæ¶ˆæ¯é˜Ÿåˆ—ä¼ è¾“é”™è¯¯!\n");
+      USART::DMA_Queue_Stop(USART3);
+      DMA_ClearITPendingBit(DMA1_IT_TE2);
+    }
+  }
+}
+
+/**
+ * @brief  UART4_TXå¯¹åº”çš„DMAé€šé“çš„ä¸­æ–­å¤„ç†
+ *         ç”¨äºç»´æŠ¤æ¶ˆæ¯é˜Ÿåˆ—
+ * @param  None
+ * @retval None
+ */
+void UART4_TX_DMA_Handler()
+{
+  // DMA2_Channel5
+  // æ³¨:DMA2_Channel4_5_IRQ
+  if (USART::DMA_Config_Check(UART4))
+  {
+    if (DMA_GetITStatus(DMA2_IT_HT5))
+    {
+      DMA_ClearITPendingBit(DMA2_IT_HT5);
+    }
+    else if (DMA_GetITStatus(DMA2_IT_TC5))
+    {
+      USART::DMA_Queue_Remove(UART4);
+      USART::DMA_Queue_Start(UART4);
+      DMA_ClearITPendingBit(DMA2_IT_TC5);
+    }
+    else if (DMA_GetITStatus(DMA2_IT_TE5))
+    {
+      printf("[UART4]:DMAæ¶ˆæ¯é˜Ÿåˆ—ä¼ è¾“é”™è¯¯!\n");
+      USART::DMA_Queue_Stop(UART4);
+      DMA_ClearITPendingBit(DMA2_IT_TE5);
+    }
+  }
+}
+
+
+/**
+ * @brief  USART-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -46,7 +175,7 @@ USART::USART()
 }
 
 /**
- * @brief  USART-Îö¹¹·½·¨
+ * @brief  USART-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -55,8 +184,8 @@ USART::~USART()
 }
 
 /**
- * @brief  USART-¹¹Ôì·½·¨
- * @param  USARTx_Param     USARTµÄ²ÎÊıÁĞ±í
+ * @brief  USART-æ„é€ æ–¹æ³•
+ * @param  USARTx_Param     USARTçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 USART::USART(USART_Param USARTx_Param)
@@ -65,8 +194,8 @@ USART::USART(USART_Param USARTx_Param)
 }
 
 /**
- * @brief  USART-ÉèÖÃUSARTµÄ²ÎÊıÁĞ±í
- * @param  USARTx_Param     USARTµÄ²ÎÊıÁĞ±í
+ * @brief  USART-è®¾ç½®USARTçš„å‚æ•°åˆ—è¡¨
+ * @param  USARTx_Param     USARTçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void USART::Set_USART_Param(USART_Param USARTx_Param)
@@ -75,14 +204,14 @@ void USART::Set_USART_Param(USART_Param USARTx_Param)
 }
 
 /**
- * @brief  USART-·¢ËÍ×Ö½Ú
- * @param  data             Êı¾İ
+ * @brief  USART-å‘é€å­—èŠ‚
+ * @param  data             æ•°æ®
  * @retval None
  */
 void USART::Send_Data(uint8_t data)
 {
   USART_SendData(USARTx_Param.USARTx, data);
-  // Õâ¸öµØ·½Ò»¶¨ÒªÍ¬Ê±Ê¹ÓÃ,ÎªÁË·ÀÖ¹´®¿Ú·¢ËÍµÚÒ»¸öÊı¾İÊ±¶ªÊ§ÒÔ¼°×îºóÒ»¸öÊı¾İÊ±¼ä²»¹»¶ªÊ§¡£
+  // è¿™ä¸ªåœ°æ–¹ä¸€å®šè¦åŒæ—¶ä½¿ç”¨,ä¸ºäº†é˜²æ­¢ä¸²å£å‘é€ç¬¬ä¸€ä¸ªæ•°æ®æ—¶ä¸¢å¤±ä»¥åŠæœ€åä¸€ä¸ªæ•°æ®æ—¶é—´ä¸å¤Ÿä¸¢å¤±ã€‚
   while (USART_GetFlagStatus(USARTx_Param.USARTx, USART_FLAG_TXE) == RESET)
     ;
   while (USART_GetFlagStatus(USARTx_Param.USARTx, USART_FLAG_TC) == RESET)
@@ -90,9 +219,9 @@ void USART::Send_Data(uint8_t data)
 }
 
 /**
- * @brief  USART-·¢ËÍ×Ö·ûÊı×é
- * @param  buffer           ×Ö·ûÊı×é
- * @param  cnt              ×Ö·ûÊı×é´óĞ¡
+ * @brief  USART-å‘é€å­—ç¬¦æ•°ç»„
+ * @param  buffer           å­—ç¬¦æ•°ç»„
+ * @param  cnt              å­—ç¬¦æ•°ç»„å¤§å°
  * @retval None
  */
 void USART::Send_Buffer(uint8_t *buffer, uint32_t cnt)
@@ -104,8 +233,8 @@ void USART::Send_Buffer(uint8_t *buffer, uint32_t cnt)
 }
 
 /**
- * @brief  USART-·¢ËÍ×Ö·û´®
- * @param  str              ×Ö·û´®
+ * @brief  USART-å‘é€å­—ç¬¦ä¸²
+ * @param  str              å­—ç¬¦ä¸²
  * @retval None
  */
 void USART::Send_String(const char *str)
@@ -117,77 +246,76 @@ void USART::Send_String(const char *str)
 }
 
 /**
- * @brief  USART-Ê¹ÓÃDMAµ¥´Î·¢ËÍ×Ö½Ú
- * @param  data             Êı¾İ(UART5ÎŞ·¨Ê¹ÓÃ)
+ * @brief  USART-ä½¿ç”¨DMAå•æ¬¡å‘é€å­—èŠ‚
+ * @param  data             æ•°æ®(UART5æ— æ³•ä½¿ç”¨)
  * @retval None
  */
 void USART::Send_Data_DMA(uint8_t data)
 {
   if (USARTx_Param.USARTx != UART5)
   {
-    // »ñÈ¡DMAÏûÏ¢¶ÓÁĞ
+    // è·å–DMAæ¶ˆæ¯é˜Ÿåˆ—
     queue<vector<uint8_t>> *Data_Queue = Get_USART_DMA_Data_Queue(USARTx_Param.USARTx);
-    // ²åÈëDMAÏûÏ¢¶ÓÁĞ
+    // æ’å…¥DMAæ¶ˆæ¯é˜Ÿåˆ—
     Data_Queue->push(vector<uint8_t>{data});
-    // ¼ì²âDMAÍ¨µÀÊÇ·ñÔÚ¹¤×÷
+    // æ£€æµ‹DMAé€šé“æ˜¯å¦åœ¨å·¥ä½œ
     if (DMA_Config_Check(USARTx_Param.USARTx) == false)
     {
-      // Èç¹û²»ÔÚ¹¤×÷ÔòÈÃÆä¹¤×÷
+      // å¦‚æœä¸åœ¨å·¥ä½œåˆ™è®©å…¶å·¥ä½œ
       DMA_Queue_Start(USARTx_Param.USARTx);
     }
   }
 }
 
 /**
- * @brief  USART-Ê¹ÓÃDMAµ¥´Î·¢ËÍ×Ö·ûÊı×é
- * @param  buffer           ×Ö·ûÊı×é
- * @param  cnt              ×Ö·ûÊı×é´óĞ¡
+ * @brief  USART-ä½¿ç”¨DMAå•æ¬¡å‘é€å­—ç¬¦æ•°ç»„
+ * @param  buffer           å­—ç¬¦æ•°ç»„
+ * @param  cnt              å­—ç¬¦æ•°ç»„å¤§å°
  * @retval None
  */
 void USART::Send_Buffer_DMA(uint8_t *buffer, uint32_t cnt)
 {
   if (USARTx_Param.USARTx != UART5)
   {
-    // »ñÈ¡DMAÏûÏ¢¶ÓÁĞ
+    // è·å–DMAæ¶ˆæ¯é˜Ÿåˆ—
     queue<vector<uint8_t>> *Data_Queue = Get_USART_DMA_Data_Queue(USARTx_Param.USARTx);
-    // ²åÈëDMAÏûÏ¢¶ÓÁĞ
+    // æ’å…¥DMAæ¶ˆæ¯é˜Ÿåˆ—
     Data_Queue->push(vector<uint8_t>(buffer, buffer + cnt));
-    // ¼ì²âDMAÍ¨µÀÊÇ·ñÔÚ¹¤×÷
+    // æ£€æµ‹DMAé€šé“æ˜¯å¦åœ¨å·¥ä½œ
     if (DMA_Config_Check(USARTx_Param.USARTx) == false)
     {
-      // Èç¹û²»ÔÚ¹¤×÷ÔòÈÃÆä¹¤×÷
+      // å¦‚æœä¸åœ¨å·¥ä½œåˆ™è®©å…¶å·¥ä½œ
       DMA_Queue_Start(USARTx_Param.USARTx);
     }
   }
 }
 
 /**
- * @brief  USART-Ê¹ÓÃDMAµ¥´Î·¢ËÍ×Ö·û´®
- * @param  str              ×Ö·û´®
+ * @brief  USART-ä½¿ç”¨DMAå•æ¬¡å‘é€å­—ç¬¦ä¸²
+ * @param  str              å­—ç¬¦ä¸²
  * @retval None
  */
 void USART::Send_String_DMA(const char *str)
 {
   if (USARTx_Param.USARTx != UART5)
   {
-    // »ñÈ¡DMAÏûÏ¢¶ÓÁĞ
+    // è·å–DMAæ¶ˆæ¯é˜Ÿåˆ—
     queue<vector<uint8_t>> *Data_Queue = Get_USART_DMA_Data_Queue(USARTx_Param.USARTx);
-    // ²åÈëDMAÏûÏ¢¶ÓÁĞ
+    // æ’å…¥DMAæ¶ˆæ¯é˜Ÿåˆ—
     Data_Queue->push(vector<uint8_t>(str, str + strlen(str)));
-    printf("%d", strlen(str));
-    // ¼ì²âDMAÍ¨µÀÊÇ·ñÔÚ¹¤×÷
+    // æ£€æµ‹DMAé€šé“æ˜¯å¦åœ¨å·¥ä½œ
     if (DMA_Config_Check(USARTx_Param.USARTx) == false)
     {
-      // Èç¹û²»ÔÚ¹¤×÷ÔòÈÃÆä¹¤×÷
+      // å¦‚æœä¸åœ¨å·¥ä½œåˆ™è®©å…¶å·¥ä½œ
       DMA_Queue_Start(USARTx_Param.USARTx);
     }
   }
 }
 
 /**
- * @brief  USART-½ÓÊÕ×Ö½Ú
+ * @brief  USART-æ¥æ”¶å­—èŠ‚
  * @param  None
- * @retval ½ÓÊÕ»º³åÆ÷µÄÖµ
+ * @retval æ¥æ”¶ç¼“å†²å™¨çš„å€¼
  */
 uint8_t USART::Receive_Data()
 {
@@ -197,7 +325,7 @@ uint8_t USART::Receive_Data()
 }
 
 /**
- * @brief  USART-GPIOÒı½Å³õÊ¼»¯
+ * @brief  USART-GPIOå¼•è„šåˆå§‹åŒ–
  * @param  None
  * @retval None
  */
@@ -274,8 +402,8 @@ void USART::Pin_Init()
 }
 
 /**
- * @brief  USART-²ÎÊıÁĞ±í¸üĞÂ
- * @param  USARTx_Param     USARTµÄ²ÎÊıÁĞ±í
+ * @brief  USART-å‚æ•°åˆ—è¡¨æ›´æ–°
+ * @param  USARTx_Param     USARTçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void USART::Update(USART_Param USARTx_Param)
@@ -286,48 +414,48 @@ void USART::Update(USART_Param USARTx_Param)
 }
 
 /**
- * @brief  USART-³õÊ¼»¯·½·¨
+ * @brief  USART-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void USART::Init()
 {
-  // ¿ªÆôUSARTÊ±ÖÓ
+  // å¼€å¯USARTæ—¶é’Ÿ
   RCC_Enable();
-  // USARTx¼Ä´æÆ÷¸´Î»
+  // USARTxå¯„å­˜å™¨å¤ä½
   USART_DeInit(USARTx_Param.USARTx);
-  // Òı½Å³õÊ¼»¯
+  // å¼•è„šåˆå§‹åŒ–
   Pin_Init();
-  // ÅäÖÃ´®¿Ú
+  // é…ç½®ä¸²å£
   USART_Init(USARTx_Param.USARTx, &USARTx_Param.USART_InitStructure);
-  // ÅäÖÃÊ±ÖÓ
+  // é…ç½®æ—¶é’Ÿ
   USART_ClockInit(USARTx_Param.USARTx, &USARTx_Param.USART_ClockInitStructure);
-  // ÅäÖÃ´®¿ÚÖĞ¶Ï
+  // é…ç½®ä¸²å£ä¸­æ–­
   ITConfig(USARTx_Param.USART_IT_Selection, USARTx_Param.USART_IT_State);
-  // ÅäÖÃDMA
+  // é…ç½®DMA
   DMACmd(USARTx_Param.USART_DMA_enum, USARTx_Param.USART_DMA_State);
-  // Ê¹ÄÜ´®¿Ú
+  // ä½¿èƒ½ä¸²å£
   Enable();
 }
 
 /**
- * @brief  USART-ÖĞ¶Ï·½·¨
- * @param  USART_IT         ÖĞ¶Ï±êÖ¾µÄÑ¡Ôñ
- * @param  NewState         Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  USART-ä¸­æ–­æ–¹æ³•
+ * @param  USART_IT         ä¸­æ–­æ ‡å¿—çš„é€‰æ‹©
+ * @param  NewState         ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void USART::ITConfig(uint16_t USART_IT, FunctionalState NewState)
 {
-  // ÅäÖÃ´®¿ÚÖĞ¶ÏÓÅÏÈ¼¶
+  // é…ç½®ä¸²å£ä¸­æ–­ä¼˜å…ˆçº§
   USARTx_Param.USART_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
   NVIC_Operate(USARTx_Param.USART_NVIC_InitStructure).Init();
   USART_ITConfig(USARTx_Param.USARTx, USART_IT, NewState);
 }
 
 /**
- * @brief  USART-Ê¹ÓÃDMA´«Êä¹¦ÄÜ(UART5²»Ö§³Ö)
- * @param  USART_DMA_enum   Ê¹ÓÃDMA´«ÊäµÄÒı½Å
- * @param  NewState         ÊÇ·ñÊ¹ÄÜDMA
+ * @brief  USART-ä½¿ç”¨DMAä¼ è¾“åŠŸèƒ½(UART5ä¸æ”¯æŒ)
+ * @param  USART_DMA_enum   ä½¿ç”¨DMAä¼ è¾“çš„å¼•è„š
+ * @param  NewState         æ˜¯å¦ä½¿èƒ½DMA
  * @retval None
  */
 void USART::DMACmd(USART_DMA_enum USART_DMA_enum, FunctionalState NewState)
@@ -350,54 +478,54 @@ void USART::DMACmd(USART_DMA_enum USART_DMA_enum, FunctionalState NewState)
 }
 
 /**
- * @brief  USART-ÄÚÖÃDMA²ÎÊı¼ì²é
+ * @brief  USART-å†…ç½®DMAå‚æ•°æ£€æŸ¥
  * @param  None
- * @retval DMA²ÎÊıÊÇ·ñÕıÈ·
+ * @retval DMAå‚æ•°æ˜¯å¦æ­£ç¡®
  */
 bool USART::DMA_Config_Check(USART_TypeDef *USARTx)
 {
   assert_param(IS_USART_ALL_PERIPH(USARTx));
-  // ¼ì²âUSART¶ÔÓ¦DMAÊÇ·ñ´¦ÓÚ¿ªÆô×´Ì¬
+  // æ£€æµ‹USARTå¯¹åº”DMAæ˜¯å¦å¤„äºå¼€å¯çŠ¶æ€
   bool flag1 = DMA::Check_DMAx_Channelx(Get_DMA_Channel(USARTx, USART_DMA_TX));
-  // ¼ì²âUSART¶ÔÓ¦DMAÍ¨µÀµÄÍâÉèµØÖ·Ô´ÊÇ·ñÕıÈ·
+  // æ£€æµ‹USARTå¯¹åº”DMAé€šé“çš„å¤–è®¾åœ°å€æºæ˜¯å¦æ­£ç¡®
   bool flag2 = Get_DMA_Channel(USARTx, USART_DMA_TX)->CPAR == Get_DR_ADDR(USARTx);
-  // ¼ì²âUSART DMA_TXÎ»ÊÇ·ñ´ò¿ª
+  // æ£€æµ‹USART DMA_TXä½æ˜¯å¦æ‰“å¼€
   bool flag3 = USARTx->CR3 & USART_DMAReq_Tx;
   return flag1 && flag2 && flag3;
 }
 
 /**
- * @brief  USART-ÄÚÖÃDMAÏûÏ¢¶ÓÁĞÍ£Ö¹¹¤×÷
+ * @brief  USART-å†…ç½®DMAæ¶ˆæ¯é˜Ÿåˆ—åœæ­¢å·¥ä½œ
  * @param  None
- * @retval DMA²ÎÊıÊÇ·ñÕıÈ·
+ * @retval DMAå‚æ•°æ˜¯å¦æ­£ç¡®
  */
 void USART::DMA_Queue_Stop(USART_TypeDef *USARTx)
 {
   assert_param(IS_USART_ALL_PERIPH(USARTx));
-  // ¹Ø±ÕDMAÎ»
+  // å…³é—­DMAä½
   USART_DMACmd(USARTx, USART_DMAReq_Tx, DISABLE);
-  // ¹Ø±ÕDMAÍ¨µÀ
+  // å…³é—­DMAé€šé“
   DMA_Cmd(Get_DMA_Channel(USARTx, USART_DMA_TX), DISABLE);
 }
 
 /**
- * @brief  USART-ÄÚÖÃDMAÏûÏ¢¶ÓÁĞ¿ªÊ¼¹¤×÷,Í¬Ê±×°ÈëÊı¾İ
+ * @brief  USART-å†…ç½®DMAæ¶ˆæ¯é˜Ÿåˆ—å¼€å§‹å·¥ä½œ,åŒæ—¶è£…å…¥æ•°æ®
  * @param  None
- * @retval DMA²ÎÊıÊÇ·ñÕıÈ·
+ * @retval DMAå‚æ•°æ˜¯å¦æ­£ç¡®
  */
 void USART::DMA_Queue_Start(USART_TypeDef *USARTx)
 {
   assert_param(IS_USART_ALL_PERIPH(USARTx));
   queue<vector<uint8_t>> *Data_Queue = Get_USART_DMA_Data_Queue(USARTx);
-  // Èç¹û¶ÓÁĞ´æÔÚ
+  // å¦‚æœé˜Ÿåˆ—å­˜åœ¨
   if (Data_Queue != nullptr)
   {
-    // Èç¹û¶ÓÁĞÎª¿Õ,ÔòÖÃDMAÏûÏ¢¶ÓÁĞÎª¿ÕÏĞ
+    // å¦‚æœé˜Ÿåˆ—ä¸ºç©º,åˆ™ç½®DMAæ¶ˆæ¯é˜Ÿåˆ—ä¸ºç©ºé—²
     if (Data_Queue->empty())
     {
       DMA_Queue_Stop(USARTx);
     }
-    // ·ñÔòÅäÖÃDMA
+    // å¦åˆ™é…ç½®DMA
     else
     {
       DMA_Setup(USARTx);
@@ -406,7 +534,7 @@ void USART::DMA_Queue_Start(USART_TypeDef *USARTx)
 }
 
 /**
- * @brief  USART-¿ªÆôUSART·½·¨(USARTÊ¹ÄÜ)
+ * @brief  USART-å¼€å¯USARTæ–¹æ³•(USARTä½¿èƒ½)
  * @param  None
  * @retval None
  */
@@ -416,7 +544,7 @@ void USART::Enable()
 }
 
 /**
- * @brief  USART-¹Ø±ÕUSART·½·¨(USARTÊ§ÄÜ)
+ * @brief  USART-å…³é—­USARTæ–¹æ³•(USARTå¤±èƒ½)
  * @param  None
  * @retval None
  */
@@ -426,7 +554,7 @@ void USART::Disable()
 }
 
 /**
- * @brief  USART-¿ªÆôUSARTÊ±ÖÓ·½·¨
+ * @brief  USART-å¼€å¯USARTæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -436,7 +564,7 @@ void USART::RCC_Enable()
 }
 
 /**
- * @brief  USART-¹Ø±ÕUSARTÊ±ÖÓ·½·¨
+ * @brief  USART-å…³é—­USARTæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -446,7 +574,7 @@ void USART::RCC_Disable()
 }
 
 /**
- * @brief  USART-¿ªÆôUSARTÊ±ÖÓ·½·¨
+ * @brief  USART-å¼€å¯USARTæ—¶é’Ÿæ–¹æ³•
  * @param  USARTx     USARTx
  * @retval None
  */
@@ -456,7 +584,7 @@ void USART::RCC_Enable(USART_TypeDef *USARTx)
 }
 
 /**
- * @brief  USART-¹Ø±ÕUSARTÊ±ÖÓ·½·¨
+ * @brief  USART-å…³é—­USARTæ—¶é’Ÿæ–¹æ³•
  * @param  USARTx     USARTx
  * @retval None
  */
@@ -466,7 +594,7 @@ void USART::RCC_Disable(USART_TypeDef *USARTx)
 }
 
 /**
- * @brief  USART-»ñÈ¡DR¼Ä´æÆ÷µÄµØÖ·
+ * @brief  USART-è·å–DRå¯„å­˜å™¨çš„åœ°å€
  * @param  USARTx     USARTx
  * @retval USARTx_Base + 0x04
  */
@@ -496,10 +624,10 @@ uint32_t USART::Get_DR_ADDR(USART_TypeDef *USARTx)
 }
 
 /**
- * @brief  USART-»ñÈ¡USART¶ÔÓ¦µÄDMAÍ¨µÀ
+ * @brief  USART-è·å–USARTå¯¹åº”çš„DMAé€šé“
  * @param  USARTx             USARTx
- * @param  USART_DMA_enum     USART_DMA_enumÃ¶¾Ù
- * @retval USART¶ÔÓ¦µÄDMAÍ¨µÀ
+ * @param  USART_DMA_enum     USART_DMA_enumæšä¸¾
+ * @retval USARTå¯¹åº”çš„DMAé€šé“
  */
 DMA_Channel_TypeDef *USART::Get_DMA_Channel(USART_TypeDef *USARTx, USART_DMA_enum USART_DMA)
 {
@@ -551,9 +679,9 @@ DMA_Channel_TypeDef *USART::Get_DMA_Channel(USART_TypeDef *USARTx, USART_DMA_enu
 }
 
 /**
- * @brief  USART-»ñÈ¡USART¶ÔÓ¦µÄDMAÏûÏ¢¶ÓÁĞ
+ * @brief  USART-è·å–USARTå¯¹åº”çš„DMAæ¶ˆæ¯é˜Ÿåˆ—
  * @param  None
- * @retval USART¶ÔÓ¦µÄDMAÏûÏ¢¶ÓÁĞ
+ * @retval USARTå¯¹åº”çš„DMAæ¶ˆæ¯é˜Ÿåˆ—
  */
 queue<vector<uint8_t>> *USART::Get_USART_DMA_Data_Queue(USART_TypeDef *USARTx)
 {
@@ -577,15 +705,15 @@ queue<vector<uint8_t>> *USART::Get_USART_DMA_Data_Queue(USART_TypeDef *USARTx)
 }
 
 /**
- * @brief  USART-ÉèÖÃDMA
+ * @brief  USART-è®¾ç½®DMA
  * @param  USARTx             USARTx
  * @retval None
  */
 void USART::DMA_Setup(USART_TypeDef *USARTx)
 {
-  // »ñÈ¡DMAÏûÏ¢¶ÓÁĞ
+  // è·å–DMAæ¶ˆæ¯é˜Ÿåˆ—
   queue<vector<uint8_t>> *USART_DMA_Data_Queue = Get_USART_DMA_Data_Queue(USARTx);
-  // Èç¹ûÏûÏ¢¶ÓÁĞ²»´æÔÚ»òÕßÏûÏ¢¶ÓÁĞÎª¿ÕÔò·µ»Ø
+  // å¦‚æœæ¶ˆæ¯é˜Ÿåˆ—ä¸å­˜åœ¨æˆ–è€…æ¶ˆæ¯é˜Ÿåˆ—ä¸ºç©ºåˆ™è¿”å›
   if (USART_DMA_Data_Queue == nullptr || USART_DMA_Data_Queue->empty())
   {
     return;
@@ -613,26 +741,53 @@ void USART::DMA_Setup(USART_TypeDef *USARTx)
   }
   DMA_Param.DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t) & *(USART_DMA_Data_Queue->front().begin());
   DMA_Param.DMA_InitStructure.DMA_BufferSize = USART_DMA_Data_Queue->front().size();
-  // ¿ªÆôDMAÎ»
+  // æŒ‚è½½DMAä¸­æ–­å‡½æ•°
+  DMA_MAP_FUNC(USARTx);
+  // å¼€å¯DMAä½
   USART_DMACmd(USARTx, USART_DMAReq_Tx, ENABLE);
-  // ³õÊ¼»¯DMA
+  // åˆå§‹åŒ–DMA
   DMA(DMA_Param).Init();
 }
 
 /**
- * @brief  USART-ÒÆ³ı¶ÓÊ×ÒÑ·¢ËÍµÄÊı¾İ
+ * @brief  USART-ç§»é™¤é˜Ÿé¦–å·²å‘é€çš„æ•°æ®
  * @param  USARTx             USARTx
- * @retval USART¶ÔÓ¦µÄDMAÏûÏ¢¶ÓÁĞ
+ * @retval None
  */
 void USART::DMA_Queue_Remove(USART_TypeDef *USARTx)
 {
-  // »ñÈ¡DMAÏûÏ¢¶ÓÁĞ
+  // è·å–DMAæ¶ˆæ¯é˜Ÿåˆ—
   queue<vector<uint8_t>> *USART_DMA_Data_Queue = Get_USART_DMA_Data_Queue(USARTx);
-  // Èç¹ûÏûÏ¢¶ÓÁĞ²»´æÔÚ»òÕßÏûÏ¢¶ÓÁĞÎª¿ÕÔò·µ»Ø
+  // å¦‚æœæ¶ˆæ¯é˜Ÿåˆ—ä¸å­˜åœ¨æˆ–è€…æ¶ˆæ¯é˜Ÿåˆ—ä¸ºç©ºåˆ™è¿”å›
   if (USART_DMA_Data_Queue == nullptr || USART_DMA_Data_Queue->empty())
   {
     return;
   }
-  // ÒÆ³ı¶ÓÊ×ÔªËØ
+  // ç§»é™¤é˜Ÿé¦–å…ƒç´ 
   USART_DMA_Data_Queue->pop();
+}
+
+/**
+ * @brief  USART-æŒ‚è½½USARTå¯¹åº”çš„DMAä¸­æ–­å‡½æ•°
+ * @param  USARTx             USARTx
+ * @retval None
+ */
+void USART::DMA_MAP_FUNC(USART_TypeDef *USARTx)
+{
+  if (USARTx == USART1)
+  {
+    DMA1_Channel4_Handler = USART1_TX_DMA_Handler;
+  }
+  else if (USARTx == USART2)
+  {
+    DMA1_Channel7_Handler = USART2_TX_DMA_Handler;
+  }
+  else if (USARTx == USART3)
+  {
+    DMA1_Channel2_Handler = USART3_TX_DMA_Handler;
+  }
+  else if (USARTx == UART4)
+  {
+    DMA2_Channel4_5_Handler = UART4_TX_DMA_Handler;
+  }
 }

@@ -6,7 +6,7 @@
 #include "DMA.h"
 #include <queue>
 using namespace std;
-// TODO USARTĞèÒª²¹³ä
+// TODO USARTéœ€è¦è¡¥å……
 /*
                 TX      RX      SCLK    nCTS    nRTS
 USART1:
@@ -33,17 +33,17 @@ UART5:
         Default:
                 PC12    PD2
 
-ÖĞ¶Ï±êÖ¾Î»ÁĞ±í
-USART_IT_CTS:   //CTS±êÖ¾
-USART_IT_LBD    //¶Ï¿ª±êÖ¾
-USART_IT_TXE    //·¢ËÍÊı¾İ¼Ä´æÆ÷¿Õ±êÖ¾
-USART_IT_TC     //·¢ËÍÍê³É±êÖ¾
-USART_IT_RXNE   //½ÓÊÕÊı¾İ¾ÍĞ÷¿É¶Á±êÖ¾
-USART_IT_IDLE   //¼ì²âµ½¿ÕÏĞÏßÂ·±êÖ¾
-USART_IT_PE     //ÆæÅ¼¼ìÑé´í±êÖ¾
-USART_IT_ERR    //´íÎóÖĞ¶Ï±êÖ¾
+ä¸­æ–­æ ‡å¿—ä½åˆ—è¡¨
+USART_IT_CTS:   //CTSæ ‡å¿—
+USART_IT_LBD    //æ–­å¼€æ ‡å¿—
+USART_IT_TXE    //å‘é€æ•°æ®å¯„å­˜å™¨ç©ºæ ‡å¿—
+USART_IT_TC     //å‘é€å®Œæˆæ ‡å¿—
+USART_IT_RXNE   //æ¥æ”¶æ•°æ®å°±ç»ªå¯è¯»æ ‡å¿—
+USART_IT_IDLE   //æ£€æµ‹åˆ°ç©ºé—²çº¿è·¯æ ‡å¿—
+USART_IT_PE     //å¥‡å¶æ£€éªŒé”™æ ‡å¿—
+USART_IT_ERR    //é”™è¯¯ä¸­æ–­æ ‡å¿—
 */
-// ²¨ÌØÂÊÃ¶¾Ù
+// æ³¢ç‰¹ç‡æšä¸¾
 typedef enum
 {
         USART_BAUDRATE_110 = 110,
@@ -66,7 +66,7 @@ typedef enum
         USART_BAUDRATE_7812500 = 7812500
 } USART_BAUDRATE;
 
-// USARTÒı½ÅÃ¶¾Ù
+// USARTå¼•è„šæšä¸¾
 typedef enum
 {
         USART1_Default,
@@ -87,18 +87,18 @@ typedef enum
         USART_DMA_BOTH
 } USART_DMA_enum;
 
-// USART²ÎÊıÁĞ±í½á¹¹Ìå
+// USARTå‚æ•°åˆ—è¡¨ç»“æ„ä½“
 typedef struct
 {
         USART_TypeDef *USARTx;                           // USARTx
-        USART_InitTypeDef USART_InitStructure;           // USART³õÊ¼»¯½á¹¹Ìå
-        USART_ClockInitTypeDef USART_ClockInitStructure; // USARTÊ±ÖÓ³õÊ¼»¯½á¹¹Ìå
-        NVIC_InitTypeDef USART_NVIC_InitStructure;       // USARTÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
-        USART_Remap_enum USARTx_Pin_Remap;               // USARTÒı½ÅÑ¡Ôñ
-        uint16_t USART_IT_Selection;                     // USARTÖĞ¶ÏÎ»Ñ¡Ôñ
-        USART_DMA_enum USART_DMA_enum;                   // USARTDMAÑ¡Ôñ
-        FunctionalState USART_IT_State;                  // USARTÖĞ¶ÏÊ¹(Ê§)ÄÜ
-        FunctionalState USART_DMA_State;                 // USARTDMAÊ¹(Ê§)ÄÜ
+        USART_InitTypeDef USART_InitStructure;           // USARTåˆå§‹åŒ–ç»“æ„ä½“
+        USART_ClockInitTypeDef USART_ClockInitStructure; // USARTæ—¶é’Ÿåˆå§‹åŒ–ç»“æ„ä½“
+        NVIC_InitTypeDef USART_NVIC_InitStructure;       // USARTä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+        USART_Remap_enum USARTx_Pin_Remap;               // USARTå¼•è„šé€‰æ‹©
+        uint16_t USART_IT_Selection;                     // USARTä¸­æ–­ä½é€‰æ‹©
+        USART_DMA_enum USART_DMA_enum;                   // USARTDMAé€‰æ‹©
+        FunctionalState USART_IT_State;                  // USARTä¸­æ–­ä½¿(å¤±)èƒ½
+        FunctionalState USART_DMA_State;                 // USARTDMAä½¿(å¤±)èƒ½
 } USART_Param;
 
 class USART
@@ -106,11 +106,11 @@ class USART
 private:
         USART_Param USARTx_Param;
 
-        // DMA ÏûÏ¢¶ÓÁĞ UART5²»Ö§³Ö
-        static queue<vector<uint8_t>> USART1_DMA_Data_Queue; // USART1ÏûÏ¢¶ÓÁĞ
-        static queue<vector<uint8_t>> USART2_DMA_Data_Queue; // USART2ÏûÏ¢¶ÓÁĞ
-        static queue<vector<uint8_t>> USART3_DMA_Data_Queue; // USART3ÏûÏ¢¶ÓÁĞ
-        static queue<vector<uint8_t>> UART4_DMA_Data_Queue;  // UART4 ÏûÏ¢¶ÓÁĞ
+        // DMA æ¶ˆæ¯é˜Ÿåˆ— UART5ä¸æ”¯æŒ
+        static queue<vector<uint8_t>> USART1_DMA_Data_Queue; // USART1æ¶ˆæ¯é˜Ÿåˆ—
+        static queue<vector<uint8_t>> USART2_DMA_Data_Queue; // USART2æ¶ˆæ¯é˜Ÿåˆ—
+        static queue<vector<uint8_t>> USART3_DMA_Data_Queue; // USART3æ¶ˆæ¯é˜Ÿåˆ—
+        static queue<vector<uint8_t>> UART4_DMA_Data_Queue;  // UART4 æ¶ˆæ¯é˜Ÿåˆ—
 
         static queue<vector<uint8_t>> *Get_USART_DMA_Data_Queue(USART_TypeDef *USARTx);
         static void DMA_Setup(USART_TypeDef *USARTx);
@@ -141,14 +141,22 @@ public:
         static void RCC_Enable(USART_TypeDef *USARTx);
         static void RCC_Disable(USART_TypeDef *USARTx);
 
-        // DMA¹ÜÀí
+        // DMAç®¡ç†
         static bool DMA_Config_Check(USART_TypeDef *USARTx);
         static void DMA_Queue_Stop(USART_TypeDef *USARTx);
         static void DMA_Queue_Start(USART_TypeDef *USARTx);
         static void DMA_Queue_Remove(USART_TypeDef *USARTx);
+        static void DMA_MAP_FUNC(USART_TypeDef *USARTx);
 
-        // DMA×¨ÓÃ
+        // DMAä¸“ç”¨
         static uint32_t Get_DR_ADDR(USART_TypeDef *USARTx);
         static DMA_Channel_TypeDef *Get_DMA_Channel(USART_TypeDef *USARTx, USART_DMA_enum USART_DMA);
 };
+
+extern void (*USART1_Handler)(void);
+extern void (*USART2_Handler)(void);
+extern void (*USART3_Handler)(void);
+extern void (*UART4_Handler)(void);
+extern void (*UART5_Handler)(void);
+
 #endif /*__OJ_USART_H*/

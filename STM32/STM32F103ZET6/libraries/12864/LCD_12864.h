@@ -1,7 +1,7 @@
 #ifndef __OJ_LCD_12864_H
 #define __OJ_LCD_12864_H
 #include "stm32f10x.h"
-//×Ö·û´®Ïà¹Ø
+//å­—ç¬¦ä¸²ç›¸å…³
 #ifndef uchar
 #define uchar unsigned char
 #endif
@@ -9,27 +9,27 @@ class LCD_12864
 {
 private:
 public:
-    virtual void Clear_DDRAM() = 0;                                                        //ÇåÆÁ²¢¹éÖ·
-    virtual void Send_Byte(uchar byte) = 0;                                                //·¢ËÍ×Ö½Ú,´Ó¸ßµ½µÍ(´®ĞĞÄ£Ê½)
-    virtual void Write_Cmd(uchar cmd) = 0;                                                 //Ğ´Ö¸Áî,RS=L,RW=L
-    virtual void Write_Data(uchar data) = 0;                                               //Ğ´Êı¾İ,RS=H,RW=L
-    virtual void Pos(uchar x, uchar y) = 0;                                                //×Ö·ûÎ»ÖÃ,ÒÔÖĞÎÄ×Ö·û16*16µãÕóÎªµ¥Î»
-    virtual void Init() = 0;                                                               //³õÊ¼»¯,ÉèÖÃ²¢¿Ú(ÓĞĞ©ĞÍºÅµÄ12864·Ö×óÓÒÆÁ)
-    virtual void Pin_Init() = 0;                                                           //GPIO³õÊ¼»¯
-    virtual void Check_Busy() = 0;                                                         //ÅĞ¶Ï12864ÊÇ·ñÔÚÃ¦,Ò»¶¨ÒªÓĞ,·ñÔò¿ÉÄÜµ¼ÖÂÊı¾İ¶ªÊ§
-    virtual void Set_CGRAM(uchar num, uchar *p) = 0;                                       //Ğ´ÈëCGRAM
-    virtual void Display_CGRAM(uchar num, uchar x, uchar y) = 0;                           //ÏÔÊ¾CGRAM
-    virtual void Show_String(uchar *p, uint16_t row, uint16_t col) = 0;                    //ÔÚÖ¸¶¨Î»ÖÃÏÔÊ¾×Ö·û´®,²»ÄÜ°ÑvscodeÀïÃæÏÔÊ¾µÄºº×ÖËùÕ¼Î»Êıµ±×÷Êµ¼ÊÎ»Êı£¡£¡£¡ÖĞÎÄ¾ÍÊÇÕ¼2¸ö×Ö½ÚµÄ
-    virtual void Display_Image(uchar *p) = 0;                                              //GDRAM»æÍ¼Ä£Ê½
-    virtual void Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag) = 0;   //ÒÔÁ½¸ö×Ö½Ú»æÖÆ¾ØĞÎ(¿ÉÄÜĞ§ÂÊÂÔ¸ß)
-    virtual void Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag) = 0; //ÒÔµã»æÖÆ¾ØĞÎ
-    virtual void Draw_Point(uchar x, uchar y, uchar flag) = 0;                             //»­µã
-    virtual void Clear_GDRAM() = 0;                                                        //Çå¿ÕGDRAM
-    virtual void Read_GDRAM(uchar x, uchar y) = 0;                                         //¶ÁÈ¡GDRAMÊı¾İ
-    virtual void Set_GDRAMadd(uchar x, uchar y) = 0;                                       //ÉèÖÃGDRAMµÄµØÖ·
-    virtual uchar Read_Data() = 0;                                                         //¶ÁÊı¾İ,RS=H,RW=H(´®ĞĞ²»Ö§³Ö¶ÁÈ¡ÆÁÄ»Êı¾İ)
-    virtual uchar Receive_Byte() = 0;                                                      //¶ÁÈ¡×Ö½Ú,´Ó¸ßµ½µÍ(´®ĞĞÄ£Ê½)
-    virtual uchar Read_Status() = 0;                                                       //¶Á×´Ì¬,RS=L,RW=H
+    virtual void Clear_DDRAM() = 0;                                                        //æ¸…å±å¹¶å½’å€
+    virtual void Send_Byte(uchar byte) = 0;                                                //å‘é€å­—èŠ‚,ä»é«˜åˆ°ä½(ä¸²è¡Œæ¨¡å¼)
+    virtual void Write_Cmd(uchar cmd) = 0;                                                 //å†™æŒ‡ä»¤,RS=L,RW=L
+    virtual void Write_Data(uchar data) = 0;                                               //å†™æ•°æ®,RS=H,RW=L
+    virtual void Pos(uchar x, uchar y) = 0;                                                //å­—ç¬¦ä½ç½®,ä»¥ä¸­æ–‡å­—ç¬¦16*16ç‚¹é˜µä¸ºå•ä½
+    virtual void Init() = 0;                                                               //åˆå§‹åŒ–,è®¾ç½®å¹¶å£(æœ‰äº›å‹å·çš„12864åˆ†å·¦å³å±)
+    virtual void Pin_Init() = 0;                                                           //GPIOåˆå§‹åŒ–
+    virtual void Check_Busy() = 0;                                                         //åˆ¤æ–­12864æ˜¯å¦åœ¨å¿™,ä¸€å®šè¦æœ‰,å¦åˆ™å¯èƒ½å¯¼è‡´æ•°æ®ä¸¢å¤±
+    virtual void Set_CGRAM(uchar num, uchar *p) = 0;                                       //å†™å…¥CGRAM
+    virtual void Display_CGRAM(uchar num, uchar x, uchar y) = 0;                           //æ˜¾ç¤ºCGRAM
+    virtual void Show_String(uchar *p, uint16_t row, uint16_t col) = 0;                    //åœ¨æŒ‡å®šä½ç½®æ˜¾ç¤ºå­—ç¬¦ä¸²,ä¸èƒ½æŠŠvscodeé‡Œé¢æ˜¾ç¤ºçš„æ±‰å­—æ‰€å ä½æ•°å½“ä½œå®é™…ä½æ•°ï¼ï¼ï¼ä¸­æ–‡å°±æ˜¯å 2ä¸ªå­—èŠ‚çš„
+    virtual void Display_Image(uchar *p) = 0;                                              //GDRAMç»˜å›¾æ¨¡å¼
+    virtual void Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag) = 0;   //ä»¥ä¸¤ä¸ªå­—èŠ‚ç»˜åˆ¶çŸ©å½¢(å¯èƒ½æ•ˆç‡ç•¥é«˜)
+    virtual void Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag) = 0; //ä»¥ç‚¹ç»˜åˆ¶çŸ©å½¢
+    virtual void Draw_Point(uchar x, uchar y, uchar flag) = 0;                             //ç”»ç‚¹
+    virtual void Clear_GDRAM() = 0;                                                        //æ¸…ç©ºGDRAM
+    virtual void Read_GDRAM(uchar x, uchar y) = 0;                                         //è¯»å–GDRAMæ•°æ®
+    virtual void Set_GDRAMadd(uchar x, uchar y) = 0;                                       //è®¾ç½®GDRAMçš„åœ°å€
+    virtual uchar Read_Data() = 0;                                                         //è¯»æ•°æ®,RS=H,RW=H(ä¸²è¡Œä¸æ”¯æŒè¯»å–å±å¹•æ•°æ®)
+    virtual uchar Receive_Byte() = 0;                                                      //è¯»å–å­—èŠ‚,ä»é«˜åˆ°ä½(ä¸²è¡Œæ¨¡å¼)
+    virtual uchar Read_Status() = 0;                                                       //è¯»çŠ¶æ€,RS=L,RW=H
 };
 
 #endif /*__OJ_LCD_12864_H*/

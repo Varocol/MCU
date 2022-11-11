@@ -6,7 +6,7 @@
 #include <vector>
 using std::vector;
 /*
-ADCÒı½Å:
+ADCå¼•è„š:
             ADC1                ADC2                ADC3
 CH0         PA0                 PA0                 PA0
 CH1         PA1                 PA1                 PA1
@@ -24,40 +24,40 @@ CH12        PC2                 PC2                 PC2
 CH13        PC3                 PC3                 PC3
 CH14        PC4                 PC4                 VSS
 CH15        PC5                 PC5                 VSS
-CH16        ÄÚ²¿ÎÂ¶È´«¸ĞÆ÷       VSS                 VSS
+CH16        å†…éƒ¨æ¸©åº¦ä¼ æ„Ÿå™¨       VSS                 VSS
 CH17        REFINT              VSS                 VSS
 
-ADC1/ADC2 ¹æÔòÍ¨µÀÍâ²¿´¥·¢
-TIM1_CC1ÊÂ¼ş
-TIM1_CC2ÊÂ¼ş
-TIM1_CC3ÊÂ¼ş
-TIM2_CC2ÊÂ¼ş
-TIM3_TRGOÊÂ¼ş
-TIM4_CC4ÊÂ¼ş
-EXTI11/TIM8_TRGOÊÂ¼ş
+ADC1/ADC2 è§„åˆ™é€šé“å¤–éƒ¨è§¦å‘
+TIM1_CC1äº‹ä»¶
+TIM1_CC2äº‹ä»¶
+TIM1_CC3äº‹ä»¶
+TIM2_CC2äº‹ä»¶
+TIM3_TRGOäº‹ä»¶
+TIM4_CC4äº‹ä»¶
+EXTI11/TIM8_TRGOäº‹ä»¶
 SWSTART
 
-ADC1/ADC2 ×¢ÈëÍ¨µÀÍâ²¿´¥·¢
-TIM1_TRGOÊÂ¼ş
-TIM1_CC4ÊÂ¼ş
-TIM2_TRGOÊÂ¼ş
-TIM2_CC1ÊÂ¼ş
-TIM3_CC4ÊÂ¼ş
-TIM4_TRGOÊÂ¼ş
-EXTI15/TIM8_CC4ÊÂ¼ş
+ADC1/ADC2 æ³¨å…¥é€šé“å¤–éƒ¨è§¦å‘
+TIM1_TRGOäº‹ä»¶
+TIM1_CC4äº‹ä»¶
+TIM2_TRGOäº‹ä»¶
+TIM2_CC1äº‹ä»¶
+TIM3_CC4äº‹ä»¶
+TIM4_TRGOäº‹ä»¶
+EXTI15/TIM8_CC4äº‹ä»¶
 JSWSTART
 
-ADC3 ¹æÔòÍ¨µÀÍâ²¿´¥·¢
-TIM3_CC1ÊÂ¼ş
-TIM2_CC3ÊÂ¼ş
-TIM1_CC3ÊÂ¼ş
-TIM8_CC1ÊÂ¼ş
-TIM8_TRGOÊÂ¼ş
-TIM5_CC1ÊÂ¼ş
-TIM5_CC3ÊÂ¼ş
+ADC3 è§„åˆ™é€šé“å¤–éƒ¨è§¦å‘
+TIM3_CC1äº‹ä»¶
+TIM2_CC3äº‹ä»¶
+TIM1_CC3äº‹ä»¶
+TIM8_CC1äº‹ä»¶
+TIM8_TRGOäº‹ä»¶
+TIM5_CC1äº‹ä»¶
+TIM5_CC3äº‹ä»¶
 SWSTART
 
-ADC3 ×¢ÈëÍ¨µÀÍâ²¿´¥·¢
+ADC3 æ³¨å…¥é€šé“å¤–éƒ¨è§¦å‘
 TIM1_TRGO
 TIM1_CC4
 TIM4_CC3
@@ -67,51 +67,51 @@ TIM5_TRGO
 TIM5_CC4
 JSWSTART
 
-ÖĞ¶Ï±êÖ¾Î»ÁĞ±í
-ADC_IT_AWD      //ÉèÖÃÁËÄ£Äâ¿´ÃÅ¹·×´Ì¬Î»
-ADC_IT_EOC      //¹æÔò×é×ª»»½áÊø
-ADC_IT_JEOC     //×¢Èë×é×ª»»½áÊø
+ä¸­æ–­æ ‡å¿—ä½åˆ—è¡¨
+ADC_IT_AWD      //è®¾ç½®äº†æ¨¡æ‹Ÿçœ‹é—¨ç‹—çŠ¶æ€ä½
+ADC_IT_EOC      //è§„åˆ™ç»„è½¬æ¢ç»“æŸ
+ADC_IT_JEOC     //æ³¨å…¥ç»„è½¬æ¢ç»“æŸ
 
-ÓÉÓÚ´Ë¿â½«ËùÓĞµÄ¹¦ÄÜÈ«²¿¿¼ÂÇ½øÈ¥,ËùÒÔ²ÎÊıÅäÖÃÂÔÎ¢¸´ÔÓ
+ç”±äºæ­¤åº“å°†æ‰€æœ‰çš„åŠŸèƒ½å…¨éƒ¨è€ƒè™‘è¿›å»,æ‰€ä»¥å‚æ•°é…ç½®ç•¥å¾®å¤æ‚
 */
 
 typedef struct
 {
-    uint8_t ADC_Channel;    // ADCÍ¨µÀ
-    uint8_t Rank;           // ADCÍ¨µÀ×ª»»ĞòºÅ(ÅÅÔÚÁĞ±íµÚ¼¸¸ö×ª»»)1-16
-    uint8_t ADC_SampleTime; // ADCÍ¨µÀ²ÉÑùÊ±¼ä
+    uint8_t ADC_Channel;    // ADCé€šé“
+    uint8_t Rank;           // ADCé€šé“è½¬æ¢åºå·(æ’åœ¨åˆ—è¡¨ç¬¬å‡ ä¸ªè½¬æ¢)1-16
+    uint8_t ADC_SampleTime; // ADCé€šé“é‡‡æ ·æ—¶é—´
 } ADC_Channel_ConInfo;
 
 typedef struct
 {
-    vector<ADC_Channel_ConInfo> ADC_Channellist; // ADCÍ¨µÀÁĞ±í
-    uint32_t ADC_ExternalTrigConv;               // ADCÍâ²¿´¥·¢Ìõ¼şÑ¡Ôñ
-    FunctionalState ADC_DiscMode;                // ADC¼ä¶ÏÄ£Ê½Ê¹ÄÜ(Ê§ÄÜ)
-    FunctionalState ADC_ExternalTrig;            // ADCÍâ²¿´¥·¢Ê¹ÄÜ(Ê§ÄÜ)
+    vector<ADC_Channel_ConInfo> ADC_Channellist; // ADCé€šé“åˆ—è¡¨
+    uint32_t ADC_ExternalTrigConv;               // ADCå¤–éƒ¨è§¦å‘æ¡ä»¶é€‰æ‹©
+    FunctionalState ADC_DiscMode;                // ADCé—´æ–­æ¨¡å¼ä½¿èƒ½(å¤±èƒ½)
+    FunctionalState ADC_ExternalTrig;            // ADCå¤–éƒ¨è§¦å‘ä½¿èƒ½(å¤±èƒ½)
 
 } ADC_Channel_InitTypeDef;
 
 typedef struct
 {
-    uint32_t RCC_PCLK2_Divx;                // ADC×ª»»Ê±ÖÓ·ÖÆµÅäÖÃ(²»³¬¹ı14MHz)
-    uint8_t ADC_DiscModeNumber;             // ADC¼ä¶ÏÄ£Ê½×ª»»Í¨µÀ¸öÊı(1-8)
-    uint32_t ADC_DataAlign;                 // ADCÊı¾İ¶ÔÆë¸ñÊ½(×ó¶ÔÆë»òÕßÓÒ¶ÔÆë)
-    uint32_t ADC_Mode;                      // ADCÄ£Ê½Ñ¡Ôñ(×Ü¹²10ÖÖ)
-    FunctionalState ADC_JAuto;              // ADC×Ô¶¯×¢ÈëÊ¹Ê¹(Ê§)ÄÜ
-    FunctionalState ADC_ContinuousConvMode; // ADCÁ¬Ğø×ª»»Ä£Ê½Ê¹(Ê§)ÄÜ
-    FunctionalState ADC_ScanConvMode;       // ADCÉ¨ÃèÄ£Ê½Ê¹(Ê§)ÄÜ
+    uint32_t RCC_PCLK2_Divx;                // ADCè½¬æ¢æ—¶é’Ÿåˆ†é¢‘é…ç½®(ä¸è¶…è¿‡14MHz)
+    uint8_t ADC_DiscModeNumber;             // ADCé—´æ–­æ¨¡å¼è½¬æ¢é€šé“ä¸ªæ•°(1-8)
+    uint32_t ADC_DataAlign;                 // ADCæ•°æ®å¯¹é½æ ¼å¼(å·¦å¯¹é½æˆ–è€…å³å¯¹é½)
+    uint32_t ADC_Mode;                      // ADCæ¨¡å¼é€‰æ‹©(æ€»å…±10ç§)
+    FunctionalState ADC_JAuto;              // ADCè‡ªåŠ¨æ³¨å…¥ä½¿ä½¿(å¤±)èƒ½
+    FunctionalState ADC_ContinuousConvMode; // ADCè¿ç»­è½¬æ¢æ¨¡å¼ä½¿(å¤±)èƒ½
+    FunctionalState ADC_ScanConvMode;       // ADCæ‰«ææ¨¡å¼ä½¿(å¤±)èƒ½
 } ADC_Base_InitTypeDef;
 
 typedef struct
 {
     ADC_TypeDef *ADCx;                                         // ADCx
-    ADC_Base_InitTypeDef ADC_Base_InitStructure;               // ADC»ù´¡³õÊ¼»¯½á¹¹Ìå
-    ADC_Channel_InitTypeDef ADC_RegularChannel_InitStructure;  // ADC¹æÔòÍ¨µÀ³õÊ¼»¯½á¹¹Ìå
-    ADC_Channel_InitTypeDef ADC_InjectedChannel_InitStructure; // ADC×¢ÈëÍ¨µÀ³õÊ¼»¯½á¹¹Ìå
-    NVIC_InitTypeDef ADC_NVIC_InitStructure;                   // ADCÖĞ¶Ï½á¹¹Ìå
-    uint32_t ADC_IT_Selection;                                 // ADCÖĞ¶ÏÎ»Ñ¡Ôñ
-    FunctionalState ADC_IT_State;                              // ADCÖĞ¶ÏÊ¹(Ê§)ÄÜ
-    FunctionalState ADC_DMA_State;                             // ADCDMAÊ¹(Ê§)ÄÜ
+    ADC_Base_InitTypeDef ADC_Base_InitStructure;               // ADCåŸºç¡€åˆå§‹åŒ–ç»“æ„ä½“
+    ADC_Channel_InitTypeDef ADC_RegularChannel_InitStructure;  // ADCè§„åˆ™é€šé“åˆå§‹åŒ–ç»“æ„ä½“
+    ADC_Channel_InitTypeDef ADC_InjectedChannel_InitStructure; // ADCæ³¨å…¥é€šé“åˆå§‹åŒ–ç»“æ„ä½“
+    NVIC_InitTypeDef ADC_NVIC_InitStructure;                   // ADCä¸­æ–­ç»“æ„ä½“
+    uint32_t ADC_IT_Selection;                                 // ADCä¸­æ–­ä½é€‰æ‹©
+    FunctionalState ADC_IT_State;                              // ADCä¸­æ–­ä½¿(å¤±)èƒ½
+    FunctionalState ADC_DMA_State;                             // ADCDMAä½¿(å¤±)èƒ½
 } ADC_Param;
 
 class ADC
@@ -144,5 +144,8 @@ public:
     static void RCC_Enable(ADC_TypeDef *ADCx);
     static void RCC_Disable(ADC_TypeDef *ADCx);
 };
+
+extern void (*ADC1_2_Handler)(void);
+extern void (*ADC3_Handler)(void);
 
 #endif /*__OJ_ADC_H*/

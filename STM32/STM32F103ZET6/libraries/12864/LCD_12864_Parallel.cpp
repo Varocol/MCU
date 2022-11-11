@@ -1,7 +1,7 @@
 #include "LCD_12864_Parallel.h"
 
 /**
- * @brief  LCD12864²¢ĞĞ-¿Õ¹¹Ôì·½·¨
+ * @brief  LCD12864å¹¶è¡Œ-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -10,8 +10,8 @@ LCD_12864_Parallel::LCD_12864_Parallel()
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-´«²Î¹¹Ôì·½·¨
- * @param  Param        LCD12864²¢ĞĞ²ÎÊıÁĞ±í
+ * @brief  LCD12864å¹¶è¡Œ-ä¼ å‚æ„é€ æ–¹æ³•
+ * @param  Param        LCD12864å¹¶è¡Œå‚æ•°åˆ—è¡¨
  * @retval None
  */
 LCD_12864_Parallel::LCD_12864_Parallel(LCD_12864_Param_Parallel Param)
@@ -20,8 +20,8 @@ LCD_12864_Parallel::LCD_12864_Parallel(LCD_12864_Param_Parallel Param)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-ÉèÖÃ²ÎÊı·½·¨
- * @param  Param        LCD12864²¢ĞĞ²ÎÊıÁĞ±í
+ * @brief  LCD12864å¹¶è¡Œ-è®¾ç½®å‚æ•°æ–¹æ³•
+ * @param  Param        LCD12864å¹¶è¡Œå‚æ•°åˆ—è¡¨
  * @retval None
  */
 void LCD_12864_Parallel::Set_Param(LCD_12864_Param_Parallel Param)
@@ -30,8 +30,8 @@ void LCD_12864_Parallel::Set_Param(LCD_12864_Param_Parallel Param)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-¸üĞÂ²ÎÊı·½·¨
- * @param  Param        LCD12864²¢ĞĞ²ÎÊıÁĞ±í
+ * @brief  LCD12864å¹¶è¡Œ-æ›´æ–°å‚æ•°æ–¹æ³•
+ * @param  Param        LCD12864å¹¶è¡Œå‚æ•°åˆ—è¡¨
  * @retval None
  */
 void LCD_12864_Parallel::Update(LCD_12864_Param_Parallel Param)
@@ -41,7 +41,7 @@ void LCD_12864_Parallel::Update(LCD_12864_Param_Parallel Param)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-Çå³ıDDRAM·½·¨
+ * @brief  LCD12864å¹¶è¡Œ-æ¸…é™¤DDRAMæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -52,8 +52,8 @@ void LCD_12864_Parallel::Clear_DDRAM()
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-¿Õ·½·¨(¸ø´®ĞĞÓÃµÄ)
- * @param  Data         ĞèÒª·¢ËÍµÄ×Ö½Ú
+ * @brief  LCD12864å¹¶è¡Œ-ç©ºæ–¹æ³•(ç»™ä¸²è¡Œç”¨çš„)
+ * @param  Data         éœ€è¦å‘é€çš„å­—èŠ‚
  * @retval None
  */
 void LCD_12864_Parallel::Send_Byte(uchar Data)
@@ -61,8 +61,8 @@ void LCD_12864_Parallel::Send_Byte(uchar Data)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-Ğ´ÆÁÄ»Ö¸Áî·½·¨
- * @param  cmd          Ö¸Áî
+ * @brief  LCD12864å¹¶è¡Œ-å†™å±å¹•æŒ‡ä»¤æ–¹æ³•
+ * @param  cmd          æŒ‡ä»¤
  * @retval None
  */
 void LCD_12864_Parallel::Write_Cmd(uchar cmd)
@@ -76,8 +76,8 @@ void LCD_12864_Parallel::Write_Cmd(uchar cmd)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-Ğ´ÆÁÄ»Êı¾İ·½·¨
- * @param  Data         Êı¾İ
+ * @brief  LCD12864å¹¶è¡Œ-å†™å±å¹•æ•°æ®æ–¹æ³•
+ * @param  Data         æ•°æ®
  * @retval None
  */
 void LCD_12864_Parallel::Write_Data(uchar Data)
@@ -91,9 +91,9 @@ void LCD_12864_Parallel::Write_Data(uchar Data)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-Ğ´Î»ÖÃ·½·¨
- * @param  x            ĞĞºÅ
- * @param  y            ÁĞºÅ
+ * @brief  LCD12864å¹¶è¡Œ-å†™ä½ç½®æ–¹æ³•
+ * @param  x            è¡Œå·
+ * @param  y            åˆ—å·
  * @retval None
  */
 void LCD_12864_Parallel::Pos(uchar x, uchar y)
@@ -117,7 +117,7 @@ void LCD_12864_Parallel::Pos(uchar x, uchar y)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-³õÊ¼»¯·½·¨(º¬GPIO)
+ * @brief  LCD12864å¹¶è¡Œ-åˆå§‹åŒ–æ–¹æ³•(å«GPIO)
  * @param  None
  * @retval None
  */
@@ -133,13 +133,13 @@ void LCD_12864_Parallel::Init()
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-GPIO³õÊ¼»¯·½·¨
+ * @brief  LCD12864å¹¶è¡Œ-GPIOåˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void LCD_12864_Parallel::Pin_Init()
 {
-      //³õÊ¼»¯RS RW EN IOgpio¿Ú
+      //åˆå§‹åŒ–RS RW EN IOgpioå£
       RS = GPIO(Param.RS_PIN);
       RW = GPIO(Param.RW_PIN);
       EN = GPIO(Param.EN_PIN);
@@ -155,7 +155,7 @@ void LCD_12864_Parallel::Pin_Init()
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-ÅĞÃ¦·½·¨
+ * @brief  LCD12864å¹¶è¡Œ-åˆ¤å¿™æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -176,45 +176,45 @@ void LCD_12864_Parallel::Check_Busy()
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-ÉèÖÃCGRAM·½·¨
- * @param  num          ±àºÅ
- * @param  p            Êı¾İÖ¸Õë
+ * @brief  LCD12864å¹¶è¡Œ-è®¾ç½®CGRAMæ–¹æ³•
+ * @param  num          ç¼–å·
+ * @param  p            æ•°æ®æŒ‡é’ˆ
  * @retval None
  */
 void LCD_12864_Parallel::Set_CGRAM(uchar num, uchar *p)
 {
       uchar i, firstadd;
-      Write_Cmd(0x34); //À©³äÖ¸Áî¼¯
-      Write_Cmd(0x02); //µÚ13Ìõ,ÔÊĞíÉèÖÃCGRAMµØÖ·
-      Write_Cmd(0x30); //»Øµ½»ù±¾Ö¸Áî¼¯
+      Write_Cmd(0x34); //æ‰©å……æŒ‡ä»¤é›†
+      Write_Cmd(0x02); //ç¬¬13æ¡,å…è®¸è®¾ç½®CGRAMåœ°å€
+      Write_Cmd(0x30); //å›åˆ°åŸºæœ¬æŒ‡ä»¤é›†
       firstadd = (0x40 | num << 4);
       for (i = 0; i < 16; i++)
       {
-            Write_Cmd(firstadd + i); //ÉèÖÃ×İ×ø±ê
+            Write_Cmd(firstadd + i); //è®¾ç½®çºµåæ ‡
             Write_Data(p[i * 2]);
             Write_Data(p[i * 2 + 1]);
       }
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-³ÊÏÖCGRAM·½·¨
- * @param  num          ±àºÅ
- * @param  x            ĞĞºÅ
- * @param  y            ÁĞºÅ
+ * @brief  LCD12864å¹¶è¡Œ-å‘ˆç°CGRAMæ–¹æ³•
+ * @param  num          ç¼–å·
+ * @param  x            è¡Œå·
+ * @param  y            åˆ—å·
  * @retval None
  */
 void LCD_12864_Parallel::Display_CGRAM(uchar num, uchar x, uchar y)
 {
       Pos(x, y);
-      Write_Data(0x00); // CGRAMµ±×÷Êı¾İµ÷ÓÃ
+      Write_Data(0x00); // CGRAMå½“ä½œæ•°æ®è°ƒç”¨
       Write_Data(num * 2);
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-Ğ´×Ö·û´®
- * @param  p            Êı¾İÖ¸Õë
- * @param  row          ĞĞºÅ
- * @param  col          ÁĞºÅ
+ * @brief  LCD12864å¹¶è¡Œ-å†™å­—ç¬¦ä¸²
+ * @param  p            æ•°æ®æŒ‡é’ˆ
+ * @param  row          è¡Œå·
+ * @param  col          åˆ—å·
  * @retval None
  */
 void LCD_12864_Parallel::Show_String(uchar *p, uint16_t row, uint16_t col)
@@ -265,14 +265,14 @@ void LCD_12864_Parallel::Show_String(uchar *p, uint16_t row, uint16_t col)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-³ÊÏÖÍ¼Æ¬
- * @param  p            Êı¾İÖ¸Õë
+ * @brief  LCD12864å¹¶è¡Œ-å‘ˆç°å›¾ç‰‡
+ * @param  p            æ•°æ®æŒ‡é’ˆ
  * @retval None
  */
 void LCD_12864_Parallel::Display_Image(uchar *p)
 {
       uchar i, j;
-      Write_Cmd(0x34); //À©³äÖ¸Áî¼¯,»æÍ¼Ä£Ê½¹Ø
+      Write_Cmd(0x34); //æ‰©å……æŒ‡ä»¤é›†,ç»˜å›¾æ¨¡å¼å…³
       for (i = 0; i < 32; i++)
       {
             Write_Cmd(0x80 + i);
@@ -298,12 +298,12 @@ void LCD_12864_Parallel::Display_Image(uchar *p)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-¸ßËÙ»­¾ØĞÎ
- * @param  x1           ×óÉÏ½Çºá×ø±ê
- * @param  y1           ×óÉÏ½Ç×İ×ø±ê
- * @param  x2           ÓÒÏÂ½Çºá×ø±ê
- * @param  y2           ÓÒÏÂ½Ç×İ×ø±ê
- * @param  flag         µãµÄ×´Ì¬
+ * @brief  LCD12864å¹¶è¡Œ-é«˜é€Ÿç”»çŸ©å½¢
+ * @param  x1           å·¦ä¸Šè§’æ¨ªåæ ‡
+ * @param  y1           å·¦ä¸Šè§’çºµåæ ‡
+ * @param  x2           å³ä¸‹è§’æ¨ªåæ ‡
+ * @param  y2           å³ä¸‹è§’çºµåæ ‡
+ * @param  flag         ç‚¹çš„çŠ¶æ€
  * @retval None
  */
 void LCD_12864_Parallel::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag)
@@ -315,7 +315,7 @@ void LCD_12864_Parallel::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, 
       fill = 0xFF;
       k = x1 % 16 ? x1 + 16 - x1 % 16 : x1;
       k = x2 % 16 == 15 ? (x2 + 1 - k) / 16 : (x2 - x2 % 16 - k) / 16;
-      Write_Cmd(0x36); //À©³äÖ¸Áî¼¯,»æÍ¼Ä£Ê½¿ª(²»ÓÃ¹Ø±ÕÁËÔÙ¿ª,·ñÔò»áÆµÉÁ)
+      Write_Cmd(0x36); //æ‰©å……æŒ‡ä»¤é›†,ç»˜å›¾æ¨¡å¼å¼€(ä¸ç”¨å…³é—­äº†å†å¼€,å¦åˆ™ä¼šé¢‘é—ª)
       for (i = 0; i <= y2 - y1; i++)
       {
             y = (y1 + i) % 32;
@@ -355,7 +355,7 @@ void LCD_12864_Parallel::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, 
                         if (flag)
                         {
                               Write_Data(fill | Hbit);
-                              Write_Data(fill | Lbit); // GDRAMÊÇÒÔÁ½¸ö×Ö½ÚÎªµ¥Î»ÊäÈëµÄ
+                              Write_Data(fill | Lbit); // GDRAMæ˜¯ä»¥ä¸¤ä¸ªå­—èŠ‚ä¸ºå•ä½è¾“å…¥çš„
                         }
                         else
                         {
@@ -430,12 +430,12 @@ void LCD_12864_Parallel::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, 
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-µÍËÙ»­¾ØĞÎ
- * @param  x1           ×óÉÏ½Çºá×ø±ê
- * @param  y1           ×óÉÏ½Ç×İ×ø±ê
- * @param  x2           ÓÒÏÂ½Çºá×ø±ê
- * @param  y2           ÓÒÏÂ½Ç×İ×ø±ê
- * @param  flag         µãµÄ×´Ì¬
+ * @brief  LCD12864å¹¶è¡Œ-ä½é€Ÿç”»çŸ©å½¢
+ * @param  x1           å·¦ä¸Šè§’æ¨ªåæ ‡
+ * @param  y1           å·¦ä¸Šè§’çºµåæ ‡
+ * @param  x2           å³ä¸‹è§’æ¨ªåæ ‡
+ * @param  y2           å³ä¸‹è§’çºµåæ ‡
+ * @param  flag         ç‚¹çš„çŠ¶æ€
  * @retval None
  */
 void LCD_12864_Parallel::Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag)
@@ -449,10 +449,10 @@ void LCD_12864_Parallel::Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-Ãèµã
- * @param  x            µãºá×ø±ê
- * @param  y            µã×İ×ø±ê
- * @param  flag         µãµÄ×´Ì¬
+ * @brief  LCD12864å¹¶è¡Œ-æç‚¹
+ * @param  x            ç‚¹æ¨ªåæ ‡
+ * @param  y            ç‚¹çºµåæ ‡
+ * @param  flag         ç‚¹çš„çŠ¶æ€
  * @retval None
  */
 void LCD_12864_Parallel::Draw_Point(uchar x, uchar y, uchar flag)
@@ -468,7 +468,7 @@ void LCD_12864_Parallel::Draw_Point(uchar x, uchar y, uchar flag)
             if (flag)
                   Write_Data(Lbit | fill >> (x % 16 - 8));
             else
-                  Write_Data(Lbit & (~(fill >> (x % 16 - 8)))); //'~'ÓÅÏÈ¼¶´óÓÚ'>>'£¡£¡£¡
+                  Write_Data(Lbit & (~(fill >> (x % 16 - 8)))); //'~'ä¼˜å…ˆçº§å¤§äº'>>'ï¼ï¼ï¼
       }
       else
       {
@@ -482,14 +482,14 @@ void LCD_12864_Parallel::Draw_Point(uchar x, uchar y, uchar flag)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-Çå³ıGDRAM
+ * @brief  LCD12864å¹¶è¡Œ-æ¸…é™¤GDRAM
  * @param  None
  * @retval None
  */
 void LCD_12864_Parallel::Clear_GDRAM()
 {
       uchar i, j;
-      Write_Cmd(0x36); //À©³äÖ¸Áî¼¯,»æÍ¼Ä£Ê½¹Ø
+      Write_Cmd(0x36); //æ‰©å……æŒ‡ä»¤é›†,ç»˜å›¾æ¨¡å¼å…³
       for (i = 0; i < 32; i++)
       {
             Write_Cmd(0x80 + i);
@@ -514,9 +514,9 @@ void LCD_12864_Parallel::Clear_GDRAM()
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-ÉèÖÃGDRAMµØÖ·
- * @param  x            ÁĞºÅ
- * @param  y            ĞĞºÅ
+ * @brief  LCD12864å¹¶è¡Œ-è®¾ç½®GDRAMåœ°å€
+ * @param  x            åˆ—å·
+ * @param  y            è¡Œå·
  * @retval None
  */
 void LCD_12864_Parallel::Set_GDRAMadd(uchar x, uchar y)
@@ -526,9 +526,9 @@ void LCD_12864_Parallel::Set_GDRAMadd(uchar x, uchar y)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-¶ÁÈ¡GDRAMÊı¾İ
- * @param  x            ÁĞºÅ
- * @param  y            ĞĞºÅ
+ * @brief  LCD12864å¹¶è¡Œ-è¯»å–GDRAMæ•°æ®
+ * @param  x            åˆ—å·
+ * @param  y            è¡Œå·
  * @retval None
  */
 void LCD_12864_Parallel::Read_GDRAM(uchar x, uchar y)
@@ -541,15 +541,15 @@ void LCD_12864_Parallel::Read_GDRAM(uchar x, uchar y)
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-¶ÁÈ¡ÆÁÄ»Êı¾İ
+ * @brief  LCD12864å¹¶è¡Œ-è¯»å–å±å¹•æ•°æ®
  * @param  None
- * @retval ÆÁÄ»Êı¾İ
+ * @retval å±å¹•æ•°æ®
  */
-uchar LCD_12864_Parallel::Read_Data() //´®ĞĞ²»¿ÉÓÃ
+uchar LCD_12864_Parallel::Read_Data() //ä¸²è¡Œä¸å¯ç”¨
 {
-      Check_Busy(); //ÅĞÃ¦·½·¨Ò»¶¨Òª¼Ó£¡£¡£¡
+      Check_Busy(); //åˆ¤å¿™æ–¹æ³•ä¸€å®šè¦åŠ ï¼ï¼ï¼
       IO.Set_Port_Val(0xff);
-      RS.Set_Pin_Val(1); // RS=1 RW=1 E=¸ßÂö³å
+      RS.Set_Pin_Val(1); // RS=1 RW=1 E=é«˜è„‰å†²
       RW.Set_Pin_Val(1);
       EN.Set_Pin_Val(1);
       IO.IN_MODE();
@@ -559,9 +559,9 @@ uchar LCD_12864_Parallel::Read_Data() //´®ĞĞ²»¿ÉÓÃ
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-¿Õ·½·¨(¸ø´®ĞĞÓÃµÄ)
+ * @brief  LCD12864å¹¶è¡Œ-ç©ºæ–¹æ³•(ç»™ä¸²è¡Œç”¨çš„)
  * @param  None
- * @retval ½ÓÊÕµ½µÄ×Ö½Ú
+ * @retval æ¥æ”¶åˆ°çš„å­—èŠ‚
  */
 uchar LCD_12864_Parallel::Receive_Byte()
 {
@@ -569,9 +569,9 @@ uchar LCD_12864_Parallel::Receive_Byte()
 }
 
 /**
- * @brief  LCD12864²¢ĞĞ-¿Õ·½·¨(¸ø´®ĞĞÓÃµÄ)
+ * @brief  LCD12864å¹¶è¡Œ-ç©ºæ–¹æ³•(ç»™ä¸²è¡Œç”¨çš„)
  * @param  None
- * @retval LCDµÄ×´Ì¬
+ * @retval LCDçš„çŠ¶æ€
  */
 uchar LCD_12864_Parallel::Read_Status()
 {

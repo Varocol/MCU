@@ -1,7 +1,7 @@
 #include "SysTick.h"
 #include "core_cm3.h"
 /**
- * @brief  SysTick_Operate-¹¹Ôì·½·¨
+ * @brief  SysTick_Operate-æ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -10,7 +10,7 @@ SysTick_Operate::SysTick_Operate()
 }
 
 /**
- * @brief  SysTick_Operate-Îö¹¹·½·¨
+ * @brief  SysTick_Operate-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -19,8 +19,8 @@ SysTick_Operate::~SysTick_Operate()
 }
 
 /**
- * @brief  SysTick_Operate-ºÁÃë¼¶ÑÓÊ±·½·¨(µÎ´ğ¶¨Ê±Æ÷×¼È·¶¨Ê±Ê±ÖÓ×îµÍãĞÖµÎª:24MHZ)
- * @param  ms           ºÁÃëÊı
+ * @brief  SysTick_Operate-æ¯«ç§’çº§å»¶æ—¶æ–¹æ³•(æ»´ç­”å®šæ—¶å™¨å‡†ç¡®å®šæ—¶æ—¶é’Ÿæœ€ä½é˜ˆå€¼ä¸º:24MHZ)
+ * @param  ms           æ¯«ç§’æ•°
  * @retval None
  */
 void SysTick_Operate::Delay_ms(uint32_t ms)
@@ -36,8 +36,8 @@ void SysTick_Operate::Delay_ms(uint32_t ms)
 }
 
 /**
- * @brief  SysTick_Operate-Î¢Ãë¼¶ÑÓÊ±·½·¨(µÎ´ğ¶¨Ê±Æ÷×¼È·¶¨Ê±Ê±ÖÓ×îµÍãĞÖµÎª:24MHZ)
- * @param  us           Î¢ÃëÊı
+ * @brief  SysTick_Operate-å¾®ç§’çº§å»¶æ—¶æ–¹æ³•(æ»´ç­”å®šæ—¶å™¨å‡†ç¡®å®šæ—¶æ—¶é’Ÿæœ€ä½é˜ˆå€¼ä¸º:24MHZ)
+ * @param  us           å¾®ç§’æ•°
  * @retval None
  */
 void SysTick_Operate::Delay_us(uint32_t us)
@@ -54,9 +54,9 @@ void SysTick_Operate::Delay_us(uint32_t us)
 }
 
 /**
- * @brief  SysTick_Operate-×Ô¶¨ÒåÑÓÊ±·½·¨
- * @param  count        Ñ­»·´ÎÊı
- * @param  ticks        Ã¿´ÎÑ­»·Ëù¼ÆµÄÊı(Ã¿´Î¼ÆÊı1/SYSCLKÊ±¼ä)
+ * @brief  SysTick_Operate-è‡ªå®šä¹‰å»¶æ—¶æ–¹æ³•
+ * @param  count        å¾ªç¯æ¬¡æ•°
+ * @param  ticks        æ¯æ¬¡å¾ªç¯æ‰€è®¡çš„æ•°(æ¯æ¬¡è®¡æ•°1/SYSCLKæ—¶é—´)
  * @retval None
  */
 void SysTick_Operate::Delay(uint32_t count, uint32_t ticks)

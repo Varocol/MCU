@@ -1,7 +1,9 @@
 #include "RTC.h"
 #include "System.h"
+void (*RTC_Handler)(void);
+void (*RTCAlarm_Handler)(void);
 /**
- * @brief  RTC_Operate-¿Õ¹¹Ôì·½·¨
+ * @brief  RTC_Operate-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -10,7 +12,7 @@ RTC_Operate::RTC_Operate()
 }
 
 /**
- * @brief  RTC_Operate-Îö¹¹·½·¨
+ * @brief  RTC_Operate-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -19,8 +21,8 @@ RTC_Operate::~RTC_Operate()
 }
 
 /**
- * @brief  RTC_Operate-¹¹Ôì·½·¨
- * @param  RTCx_Param   RTCµÄ²ÎÊıÁĞ±í
+ * @brief  RTC_Operate-æ„é€ æ–¹æ³•
+ * @param  RTCx_Param   RTCçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 RTC_Operate::RTC_Operate(RTC_Param RTCx_Param)
@@ -29,8 +31,8 @@ RTC_Operate::RTC_Operate(RTC_Param RTCx_Param)
 }
 
 /**
- * @brief  RTC_Operate-ÉèÖÃRTCµÄ²ÎÊıÁĞ±í
- * @param  RTCx_Param   RTCµÄ²ÎÊıÁĞ±í
+ * @brief  RTC_Operate-è®¾ç½®RTCçš„å‚æ•°åˆ—è¡¨
+ * @param  RTCx_Param   RTCçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void RTC_Operate::Update(RTC_Param RTCx_Param)
@@ -40,8 +42,8 @@ void RTC_Operate::Update(RTC_Param RTCx_Param)
 }
 
 /**
- * @brief  RTC_Operate-²ÎÊıÁĞ±í¸üĞÂ
- * @param  RTCx_Param   RTCµÄ²ÎÊıÁĞ±í
+ * @brief  RTC_Operate-å‚æ•°åˆ—è¡¨æ›´æ–°
+ * @param  RTCx_Param   RTCçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void RTC_Operate::Set_RTC_Param(RTC_Param RTCx_Param)
@@ -50,22 +52,22 @@ void RTC_Operate::Set_RTC_Param(RTC_Param RTCx_Param)
 }
 
 /**
- * @brief  RTC_Operate-ÖĞ¶Ï·½·¨
- * @param  RTC_IT       ÖĞ¶Ï±êÖ¾µÄÑ¡Ôñ
- * @param  NewState     Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  RTC_Operate-ä¸­æ–­æ–¹æ³•
+ * @param  RTC_IT       ä¸­æ–­æ ‡å¿—çš„é€‰æ‹©
+ * @param  NewState     ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void RTC_Operate::ITConfig(uint16_t RTC_IT, FunctionalState NewState)
 {
     RTCx_Param.RTC_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
-    // ÅäÖÃNVIC
+    // é…ç½®NVIC
     NVIC_Operate(RTCx_Param.RTC_NVIC_InitStructure).Init();
     RTC_WaitForLastTask();
     RTC_ITConfig(RTC_IT, NewState);
 }
 
 /**
- * @brief  RTC_Operate-½øÈëRTCÅäÖÃÄ£Ê½
+ * @brief  RTC_Operate-è¿›å…¥RTCé…ç½®æ¨¡å¼
  * @param  None
  * @retval None
  */
@@ -76,7 +78,7 @@ void RTC_Operate::EnterConfigMode()
 }
 
 /**
- * @brief  RTC_Operate-ÍË³öRTCÅäÖÃÄ£Ê½
+ * @brief  RTC_Operate-é€€å‡ºRTCé…ç½®æ¨¡å¼
  * @param  None
  * @retval None
  */
@@ -87,8 +89,8 @@ void RTC_Operate::ExitConfigMode()
 }
 
 /**
- * @brief  RTC_Operate-ÉèÖÃRTC·ÖÆµÏµÊı(²»ÄÜÉèÖÃÀà²ÎÊıÖĞµÄ·ÖÆµÖµ)
- * @param  PrescalerValue           ·ÖÆµÏµÊı
+ * @brief  RTC_Operate-è®¾ç½®RTCåˆ†é¢‘ç³»æ•°(ä¸èƒ½è®¾ç½®ç±»å‚æ•°ä¸­çš„åˆ†é¢‘å€¼)
+ * @param  PrescalerValue           åˆ†é¢‘ç³»æ•°
  * @retval None
  */
 void RTC_Operate::SetPrescaler(uint32_t PrescalerValue)
@@ -98,8 +100,8 @@ void RTC_Operate::SetPrescaler(uint32_t PrescalerValue)
 }
 
 /**
- * @brief  RTC_Operate-ÉèÖÃRTC¼ÆÊıÆ÷Öµ(²»ÄÜÉèÖÃÀà²ÎÊıÖĞµÄ¼ÆÊıÆ÷Öµ)
- * @param  CounterValue             ¼ÆÊıÆ÷Öµ
+ * @brief  RTC_Operate-è®¾ç½®RTCè®¡æ•°å™¨å€¼(ä¸èƒ½è®¾ç½®ç±»å‚æ•°ä¸­çš„è®¡æ•°å™¨å€¼)
+ * @param  CounterValue             è®¡æ•°å™¨å€¼
  * @retval None
  */
 void RTC_Operate::SetCounter(uint32_t CounterValue)
@@ -109,8 +111,8 @@ void RTC_Operate::SetCounter(uint32_t CounterValue)
 }
 
 /**
- * @brief  RTC_Operate-ÉèÖÃRTCÄÖÖÓÖµ(²»ÄÜÉèÖÃÀà²ÎÊıÖĞµÄÄÖÖÓÖµ)
- * @param  AlarmValue               ÄÖÖÓÖµ
+ * @brief  RTC_Operate-è®¾ç½®RTCé—¹é’Ÿå€¼(ä¸èƒ½è®¾ç½®ç±»å‚æ•°ä¸­çš„é—¹é’Ÿå€¼)
+ * @param  AlarmValue               é—¹é’Ÿå€¼
  * @retval None
  */
 void RTC_Operate::SetAlarm(uint32_t AlarmValue)
@@ -120,13 +122,13 @@ void RTC_Operate::SetAlarm(uint32_t AlarmValue)
 }
 
 /**
- * @brief  RTC_Operate-»ñÈ¡·ÖÆµÏµÊı
- *         ×¢Òâ£º
- *         ÓÉÓÚ·ÖÆµ¼Ä´æÆ÷ÎŞ·¨¶ÁÈ¡,ËùÒÔ¸Ã·½·¨Ö»·µ»ØÓÃÓÚÉèÖÃRTCµÄRTC²ÎÊıÖµ,
- *         ÈôĞèÒª»ñÈ¡Êµ¼ÊµÄ·ÖÆµÖµ,ĞèÒªÊ¹ÓÃÃëÂö³åASOS¡¢RTCÊ±ÖÓÔ´ÆµÂÊÒÔ¼°¶¨Ê±Æ÷²âÁ¿µÃ³ö,
- *         Èç¹ûÏĞÂé·³¿ÉÒÔÖ±½ÓÉèÖÃ·ÖÆµÏµÊı,Ê¹Æä±äÎªÒ»¸öÈ·¶¨Öµ¡£
+ * @brief  RTC_Operate-è·å–åˆ†é¢‘ç³»æ•°
+ *         æ³¨æ„ï¼š
+ *         ç”±äºåˆ†é¢‘å¯„å­˜å™¨æ— æ³•è¯»å–,æ‰€ä»¥è¯¥æ–¹æ³•åªè¿”å›ç”¨äºè®¾ç½®RTCçš„RTCå‚æ•°å€¼,
+ *         è‹¥éœ€è¦è·å–å®é™…çš„åˆ†é¢‘å€¼,éœ€è¦ä½¿ç”¨ç§’è„‰å†²ASOSã€RTCæ—¶é’Ÿæºé¢‘ç‡ä»¥åŠå®šæ—¶å™¨æµ‹é‡å¾—å‡º,
+ *         å¦‚æœé—²éº»çƒ¦å¯ä»¥ç›´æ¥è®¾ç½®åˆ†é¢‘ç³»æ•°,ä½¿å…¶å˜ä¸ºä¸€ä¸ªç¡®å®šå€¼ã€‚
  * @param  None
- * @retval ·ÖÆµÏµÊı
+ * @retval åˆ†é¢‘ç³»æ•°
  */
 uint32_t RTC_Operate::GetPrescaler()
 {
@@ -134,7 +136,7 @@ uint32_t RTC_Operate::GetPrescaler()
 }
 
 /**
- * @brief  RTC_Operate-»ñÈ¡¼ÆÊıÖµ
+ * @brief  RTC_Operate-è·å–è®¡æ•°å€¼
  * @param  None
  * @retval CounterValue
  */
@@ -144,7 +146,7 @@ uint32_t RTC_Operate::GetCounter()
 }
 
 /**
- * @brief  RTC_Operate-»ñÈ¡ÓàÊıÖµ
+ * @brief  RTC_Operate-è·å–ä½™æ•°å€¼
  * @param  None
  * @retval DividerValue
  */
@@ -154,9 +156,9 @@ uint32_t RTC_Operate::GetDivider()
 }
 
 /**
- * @brief  RTC_Operate-»ñÈ¡Ğ¡ÊıµãÊ±¼ä(Í¨¹ıÓàÊı¼Ä´æÆ÷×ª»»µÃµ½)
+ * @brief  RTC_Operate-è·å–å°æ•°ç‚¹æ—¶é—´(é€šè¿‡ä½™æ•°å¯„å­˜å™¨è½¬æ¢å¾—åˆ°)
  * @param  None
- * @retval Ğ¡ÊıµãÊ±¼ä
+ * @retval å°æ•°ç‚¹æ—¶é—´
  */
 double RTC_Operate::Get_Divider_Time()
 {
@@ -165,9 +167,9 @@ double RTC_Operate::Get_Divider_Time()
 }
 
 /**
- * @brief  RTC_Operate-»ñÈ¡RTCÊ±ÖÓÆµÂÊ
+ * @brief  RTC_Operate-è·å–RTCæ—¶é’Ÿé¢‘ç‡
  * @param  None
- * @retval RTCÊ±ÖÓÆµÂÊ
+ * @retval RTCæ—¶é’Ÿé¢‘ç‡
  */
 uint32_t RTC_Operate::Get_Clock_Freq()
 {
@@ -189,9 +191,9 @@ uint32_t RTC_Operate::Get_Clock_Freq()
 }
 
 /**
- * @brief  RTC_Operate-»ñÈ¡UNIXÊ±¼ä
+ * @brief  RTC_Operate-è·å–UNIXæ—¶é—´
  * @param  None
- * @retval UNIXÊ±¼ä
+ * @retval UNIXæ—¶é—´
  */
 uint32_t RTC_Operate::Get_Unix_Time()
 {
@@ -199,8 +201,8 @@ uint32_t RTC_Operate::Get_Unix_Time()
 }
 
 /**
- * @brief  RTC_Operate-RTCÉèÖÃUNIXÊ±¼ä
- * @param  Time         UNIXÊ±¼ä
+ * @brief  RTC_Operate-RTCè®¾ç½®UNIXæ—¶é—´
+ * @param  Time         UNIXæ—¶é—´
  * @retval None
  */
 void RTC_Operate::Set_Unix_Time(uint32_t Time)
@@ -209,23 +211,23 @@ void RTC_Operate::Set_Unix_Time(uint32_t Time)
 }
 
 /**
- * @brief  RTC_Operate-Í¨¹ıRTCµÄÊ±¼ä´Á»ñÈ¡µ±Ç°Ê±ÇøµÄÊ±¼ä
+ * @brief  RTC_Operate-é€šè¿‡RTCçš„æ—¶é—´æˆ³è·å–å½“å‰æ—¶åŒºçš„æ—¶é—´
  * @param  None
- * @retval RTCÊ±¼ä
+ * @retval RTCæ—¶é—´
  */
 tm RTC_Operate::Get_Time()
 {
     time_t T;
     tm temp;
     time(&T);
-    // Ê¹ÓÃ¸ü°²È«µÄ_localtime_r¼õÉÙÄÚ´æ·ÖÅä
+    // ä½¿ç”¨æ›´å®‰å…¨çš„_localtime_rå‡å°‘å†…å­˜åˆ†é…
     _localtime_r(&T, &temp);
     return temp;
 }
 
 /**
- * @brief  RTC_Operate-ÉèÖÃRTCÊ±¼ä
- * @param  Time         ĞèÒªÉèÖÃµÄÊ±¼ä(ÊäÈëµÄÊ±¼äÖ»ÄÜ´óÓÚ»òµÈÓÚUNIXÊ±¼ä²¢Ğ¡ÓÚ»òµÈÓÚÒç³öÊ±¼ä)
+ * @brief  RTC_Operate-è®¾ç½®RTCæ—¶é—´
+ * @param  Time         éœ€è¦è®¾ç½®çš„æ—¶é—´(è¾“å…¥çš„æ—¶é—´åªèƒ½å¤§äºæˆ–ç­‰äºUNIXæ—¶é—´å¹¶å°äºæˆ–ç­‰äºæº¢å‡ºæ—¶é—´)
  * @retval None
  */
 void RTC_Operate::Set_Time(tm Time)
@@ -234,8 +236,8 @@ void RTC_Operate::Set_Time(tm Time)
 }
 
 /**
- * @brief  RTC_Operate-ÉèÖÃRTCÊ±Çø
- * @param  Time         ĞèÒªÉèÖÃµÄÊ±Çø(0~23)
+ * @brief  RTC_Operate-è®¾ç½®RTCæ—¶åŒº
+ * @param  Time         éœ€è¦è®¾ç½®çš„æ—¶åŒº(0~23)
  * @retval None
  */
 void RTC_Operate::Set_TimeZone(uint8_t Time)
@@ -244,135 +246,135 @@ void RTC_Operate::Set_TimeZone(uint8_t Time)
 }
 
 /**
- * @brief  RTC_Operate-RTC»ù±¾³õÊ¼»¯(½¨ÒéÔÚÕû»úµôµç,¼´±¸·İÓòÍêÈ«¸´Î»Ê±Ê¹ÓÃ,Ò²¿ÉÒÔÀí½âÎªÖØĞÂÉèÖÃRTCÊ±Ê¹ÓÃ)
+ * @brief  RTC_Operate-RTCåŸºæœ¬åˆå§‹åŒ–(å»ºè®®åœ¨æ•´æœºæ‰ç”µ,å³å¤‡ä»½åŸŸå®Œå…¨å¤ä½æ—¶ä½¿ç”¨,ä¹Ÿå¯ä»¥ç†è§£ä¸ºé‡æ–°è®¾ç½®RTCæ—¶ä½¿ç”¨)
  * @param  None
  * @retval None
  */
 void RTC_Operate::Base_Init()
 {
-    // ¸´Î»±¸·İÓò(½«Õû¸ö±¸·İÓò¸´Î»,°üÀ¨bkpÊı¾İÒÔ¼°RTC¼ÆÊıÆ÷µÈ)
-    //  BKP_DeInit();»ò
+    // å¤ä½å¤‡ä»½åŸŸ(å°†æ•´ä¸ªå¤‡ä»½åŸŸå¤ä½,åŒ…æ‹¬bkpæ•°æ®ä»¥åŠRTCè®¡æ•°å™¨ç­‰)
+    //  BKP_DeInit();æˆ–
     //  RCC_Operate::Backup_Reset();
-    // ¿ªÆôPWRºÍBKPÊ±ÖÓ
+    // å¼€å¯PWRå’ŒBKPæ—¶é’Ÿ
     RCC_Operate::RCC_Config(PWR, ENABLE);
     RCC_Operate::RCC_Config(BKP, ENABLE);
-    // ÔÊĞí·ÃÎÊBKPÇøÓò(¸´Î»ºóÕû¸ö±¸·İÓò±»Ëø,ĞèÒª¿ªÆô·ÃÎÊ)
+    // å…è®¸è®¿é—®BKPåŒºåŸŸ(å¤ä½åæ•´ä¸ªå¤‡ä»½åŸŸè¢«é”,éœ€è¦å¼€å¯è®¿é—®)
     PWR_BackupAccessCmd(ENABLE);
-    // ¸ù¾İËùÑ¡Ê±ÖÓÅäÖÃÊ±ÖÓÔ´
+    // æ ¹æ®æ‰€é€‰æ—¶é’Ÿé…ç½®æ—¶é’Ÿæº
     if (RTCx_Param.RTC_CLK == RTC_CLK_LSE)
     {
-        // ¿ªÆôĞèÒª¸øRTCÌá¹©ĞÅºÅÔ´µÄÊ±ÖÓ
+        // å¼€å¯éœ€è¦ç»™RTCæä¾›ä¿¡å·æºçš„æ—¶é’Ÿ
         RCC_LSEConfig(RCC_LSE_ON);
-        // µÈ´ıÊ±ÖÓÔ´¾ÍĞ÷
+        // ç­‰å¾…æ—¶é’Ÿæºå°±ç»ª
         while (RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
             ;
-        // ÅäÖÃRTCÊ±ÖÓÔ´Ñ¡Ôñ(Ò»°ãÑ¡ÔñLSE,ÒòÎªLSE´¦ÔÚ±¸·İÓòÖĞ,ÓÉVBat¹©µç,ËùÒÔ¿ÉÒÔ³ÖĞøÌá¹©ĞÅºÅ)
+        // é…ç½®RTCæ—¶é’Ÿæºé€‰æ‹©(ä¸€èˆ¬é€‰æ‹©LSE,å› ä¸ºLSEå¤„åœ¨å¤‡ä»½åŸŸä¸­,ç”±VBatä¾›ç”µ,æ‰€ä»¥å¯ä»¥æŒç»­æä¾›ä¿¡å·)
         RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
     }
-    // ¸ÃÊ±ÖÓÔ´²»ÔÚ±¸·İÓòÄÚ,¹©µçÖ»ÄÜVDD¹©
+    // è¯¥æ—¶é’Ÿæºä¸åœ¨å¤‡ä»½åŸŸå†…,ä¾›ç”µåªèƒ½VDDä¾›
     else if (RTCx_Param.RTC_CLK == RTC_CLK_LSI)
     {
-        // ¿ªÆôĞèÒª¸øRTCÌá¹©ĞÅºÅÔ´µÄÊ±ÖÓ
+        // å¼€å¯éœ€è¦ç»™RTCæä¾›ä¿¡å·æºçš„æ—¶é’Ÿ
         RCC_LSICmd(ENABLE);
-        // µÈ´ıÊ±ÖÓÔ´¾ÍĞ÷
+        // ç­‰å¾…æ—¶é’Ÿæºå°±ç»ª
         while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
             ;
-        // ÅäÖÃRTCÊ±ÖÓÔ´Ñ¡Ôñ(Ò»°ãÑ¡ÔñLSE,ÒòÎªLSE´¦ÔÚ±¸·İÓòÖĞ,ÓÉVBat¹©µç,ËùÒÔ¿ÉÒÔ³ÖĞøÌá¹©ĞÅºÅ)
+        // é…ç½®RTCæ—¶é’Ÿæºé€‰æ‹©(ä¸€èˆ¬é€‰æ‹©LSE,å› ä¸ºLSEå¤„åœ¨å¤‡ä»½åŸŸä¸­,ç”±VBatä¾›ç”µ,æ‰€ä»¥å¯ä»¥æŒç»­æä¾›ä¿¡å·)
         RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
     }
-    // ¸ÃÊ±ÖÓÔ´²»ÔÚ±¸·İÓòÄÚ,¹©µçÖ»ÄÜVDD¹©
+    // è¯¥æ—¶é’Ÿæºä¸åœ¨å¤‡ä»½åŸŸå†…,ä¾›ç”µåªèƒ½VDDä¾›
     else if (RTCx_Param.RTC_CLK == RTC_CLK_HSE_Div128)
     {
-        // ¿ªÆôĞèÒª¸øRTCÌá¹©ĞÅºÅÔ´µÄÊ±ÖÓ
+        // å¼€å¯éœ€è¦ç»™RTCæä¾›ä¿¡å·æºçš„æ—¶é’Ÿ
         RCC_HSEConfig(RCC_HSE_ON);
-        // µÈ´ıÊ±ÖÓÔ´¾ÍĞ÷
+        // ç­‰å¾…æ—¶é’Ÿæºå°±ç»ª
         if (RCC_WaitForHSEStartUp() == ERROR)
         {
             while (1)
                 ;
         }
-        // ÅäÖÃRTCÊ±ÖÓÔ´Ñ¡Ôñ(Ò»°ãÑ¡ÔñLSE,ÒòÎªLSE´¦ÔÚ±¸·İÓòÖĞ,ÓÉVBat¹©µç,ËùÒÔ¿ÉÒÔ³ÖĞøÌá¹©ĞÅºÅ)
+        // é…ç½®RTCæ—¶é’Ÿæºé€‰æ‹©(ä¸€èˆ¬é€‰æ‹©LSE,å› ä¸ºLSEå¤„åœ¨å¤‡ä»½åŸŸä¸­,ç”±VBatä¾›ç”µ,æ‰€ä»¥å¯ä»¥æŒç»­æä¾›ä¿¡å·)
         RCC_RTCCLKConfig(RCC_RTCCLKSource_HSE_Div128);
     }
-    // Ê¹ÄÜRTCÊ±ÖÓ
+    // ä½¿èƒ½RTCæ—¶é’Ÿ
     RCC_Enable();
-    // µÈ´ıRTCÊ±ÖÓÍ¬²½
+    // ç­‰å¾…RTCæ—¶é’ŸåŒæ­¥
     RTC_WaitForSynchro();
-    // ½øÈëÅäÖÃÄ£Ê½
+    // è¿›å…¥é…ç½®æ¨¡å¼
     EnterConfigMode();
-    // ÉèÖÃRTC·ÖÆµÏµÊı
+    // è®¾ç½®RTCåˆ†é¢‘ç³»æ•°
     SetPrescaler(RTCx_Param.PrescalerValue);
-    // ÉèÖÃRTC¼ÆÊıÖµ
+    // è®¾ç½®RTCè®¡æ•°å€¼
     SetCounter(RTCx_Param.CounterValue);
-    // ÉèÖÃRTCÄÖÖÓÖµ
+    // è®¾ç½®RTCé—¹é’Ÿå€¼
     SetAlarm(RTCx_Param.AlarmValue);
-    // ÍË³öÅäÖÃÄ£Ê½
+    // é€€å‡ºé…ç½®æ¨¡å¼
     ExitConfigMode();
-    // ÅäÖÃÖĞ¶Ï
+    // é…ç½®ä¸­æ–­
     ITConfig(RTCx_Param.RTC_IT_Selection, RTCx_Param.RTC_IT_State);
 }
 
 /**
- * @brief  RTC_Operate-RTCÓÃÓÚ·ÃÎÊÖµµÄ¹¦ÄÜĞÔ³õÊ¼»¯(²»ĞŞ¸ÄPRL¡¢CNT¡¢ALR)
+ * @brief  RTC_Operate-RTCç”¨äºè®¿é—®å€¼çš„åŠŸèƒ½æ€§åˆå§‹åŒ–(ä¸ä¿®æ”¹PRLã€CNTã€ALR)
  * @param  None
  * @retval None
  */
 void RTC_Operate::Init()
 {
-    // ¸´Î»±¸·İÓò(½«Õû¸ö±¸·İÓò¸´Î»,°üÀ¨bkpÊı¾İÒÔ¼°RTC¼ÆÊıÆ÷µÈ)
-    //  BKP_DeInit();»ò
+    // å¤ä½å¤‡ä»½åŸŸ(å°†æ•´ä¸ªå¤‡ä»½åŸŸå¤ä½,åŒ…æ‹¬bkpæ•°æ®ä»¥åŠRTCè®¡æ•°å™¨ç­‰)
+    //  BKP_DeInit();æˆ–
     //  RCC_Operate::Backup_Reset();
-    // ¿ªÆôPWRºÍBKPÊ±ÖÓ
+    // å¼€å¯PWRå’ŒBKPæ—¶é’Ÿ
     RCC_Operate::RCC_Config(PWR, ENABLE);
     RCC_Operate::RCC_Config(BKP, ENABLE);
-    // ÔÊĞí·ÃÎÊBKPÇøÓò(¸´Î»ºóÕû¸ö±¸·İÓò±»Ëø,ĞèÒª¿ªÆô·ÃÎÊ)
+    // å…è®¸è®¿é—®BKPåŒºåŸŸ(å¤ä½åæ•´ä¸ªå¤‡ä»½åŸŸè¢«é”,éœ€è¦å¼€å¯è®¿é—®)
     PWR_BackupAccessCmd(ENABLE);
-    // ¸ù¾İËùÑ¡Ê±ÖÓÅäÖÃÊ±ÖÓÔ´
+    // æ ¹æ®æ‰€é€‰æ—¶é’Ÿé…ç½®æ—¶é’Ÿæº
     if (RTCx_Param.RTC_CLK == RTC_CLK_LSE)
     {
-        // ¿ªÆôĞèÒª¸øRTCÌá¹©ĞÅºÅÔ´µÄÊ±ÖÓ
+        // å¼€å¯éœ€è¦ç»™RTCæä¾›ä¿¡å·æºçš„æ—¶é’Ÿ
         RCC_LSEConfig(RCC_LSE_ON);
-        // µÈ´ıÊ±ÖÓÔ´¾ÍĞ÷
+        // ç­‰å¾…æ—¶é’Ÿæºå°±ç»ª
         while (RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
             ;
-        // ÅäÖÃRTCÊ±ÖÓÔ´Ñ¡Ôñ(Ò»°ãÑ¡ÔñLSE,ÒòÎªLSE´¦ÔÚ±¸·İÓòÖĞ,ÓÉVBat¹©µç,ËùÒÔ¿ÉÒÔ³ÖĞøÌá¹©ĞÅºÅ)
+        // é…ç½®RTCæ—¶é’Ÿæºé€‰æ‹©(ä¸€èˆ¬é€‰æ‹©LSE,å› ä¸ºLSEå¤„åœ¨å¤‡ä»½åŸŸä¸­,ç”±VBatä¾›ç”µ,æ‰€ä»¥å¯ä»¥æŒç»­æä¾›ä¿¡å·)
         RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
     }
-    // ¸ÃÊ±ÖÓÔ´²»ÔÚ±¸·İÓòÄÚ,¹©µçÖ»ÄÜVDD¹©
+    // è¯¥æ—¶é’Ÿæºä¸åœ¨å¤‡ä»½åŸŸå†…,ä¾›ç”µåªèƒ½VDDä¾›
     else if (RTCx_Param.RTC_CLK == RTC_CLK_LSI)
     {
-        // ¿ªÆôĞèÒª¸øRTCÌá¹©ĞÅºÅÔ´µÄÊ±ÖÓ
+        // å¼€å¯éœ€è¦ç»™RTCæä¾›ä¿¡å·æºçš„æ—¶é’Ÿ
         RCC_LSICmd(ENABLE);
-        // µÈ´ıÊ±ÖÓÔ´¾ÍĞ÷
+        // ç­‰å¾…æ—¶é’Ÿæºå°±ç»ª
         while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
             ;
-        // ÅäÖÃRTCÊ±ÖÓÔ´Ñ¡Ôñ(Ò»°ãÑ¡ÔñLSE,ÒòÎªLSE´¦ÔÚ±¸·İÓòÖĞ,ÓÉVBat¹©µç,ËùÒÔ¿ÉÒÔ³ÖĞøÌá¹©ĞÅºÅ)
+        // é…ç½®RTCæ—¶é’Ÿæºé€‰æ‹©(ä¸€èˆ¬é€‰æ‹©LSE,å› ä¸ºLSEå¤„åœ¨å¤‡ä»½åŸŸä¸­,ç”±VBatä¾›ç”µ,æ‰€ä»¥å¯ä»¥æŒç»­æä¾›ä¿¡å·)
         RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
     }
-    // ¸ÃÊ±ÖÓÔ´²»ÔÚ±¸·İÓòÄÚ,¹©µçÖ»ÄÜVDD¹©
+    // è¯¥æ—¶é’Ÿæºä¸åœ¨å¤‡ä»½åŸŸå†…,ä¾›ç”µåªèƒ½VDDä¾›
     else if (RTCx_Param.RTC_CLK == RTC_CLK_HSE_Div128)
     {
-        // ¿ªÆôĞèÒª¸øRTCÌá¹©ĞÅºÅÔ´µÄÊ±ÖÓ
+        // å¼€å¯éœ€è¦ç»™RTCæä¾›ä¿¡å·æºçš„æ—¶é’Ÿ
         RCC_HSEConfig(RCC_HSE_ON);
-        // µÈ´ıÊ±ÖÓÔ´¾ÍĞ÷
+        // ç­‰å¾…æ—¶é’Ÿæºå°±ç»ª
         if (RCC_WaitForHSEStartUp() == ERROR)
         {
             while (1)
                 ;
         }
-        // ÅäÖÃRTCÊ±ÖÓÔ´Ñ¡Ôñ(Ò»°ãÑ¡ÔñLSE,ÒòÎªLSE´¦ÔÚ±¸·İÓòÖĞ,ÓÉVBat¹©µç,ËùÒÔ¿ÉÒÔ³ÖĞøÌá¹©ĞÅºÅ)
+        // é…ç½®RTCæ—¶é’Ÿæºé€‰æ‹©(ä¸€èˆ¬é€‰æ‹©LSE,å› ä¸ºLSEå¤„åœ¨å¤‡ä»½åŸŸä¸­,ç”±VBatä¾›ç”µ,æ‰€ä»¥å¯ä»¥æŒç»­æä¾›ä¿¡å·)
         RCC_RTCCLKConfig(RCC_RTCCLKSource_HSE_Div128);
     }
-    // Ê¹ÄÜRTCÊ±ÖÓ
+    // ä½¿èƒ½RTCæ—¶é’Ÿ
     RCC_Enable();
-    // µÈ´ıRTCÊ±ÖÓÍ¬²½
+    // ç­‰å¾…RTCæ—¶é’ŸåŒæ­¥
     RTC_WaitForSynchro();
-    // ÅäÖÃÖĞ¶Ï
+    // é…ç½®ä¸­æ–­
     ITConfig(RTCx_Param.RTC_IT_Selection, RTCx_Param.RTC_IT_State);
 }
 
 /**
- * @brief  RTC_Operate-¿ªÆôRTCÊ±ÖÓ·½·¨
+ * @brief  RTC_Operate-å¼€å¯RTCæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -382,7 +384,7 @@ void RTC_Operate::RCC_Enable()
 }
 
 /**
- * @brief  RTC_Operate-¹Ø±ÕRTCÊ±ÖÓ·½·¨
+ * @brief  RTC_Operate-å…³é—­RTCæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */

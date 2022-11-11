@@ -4,7 +4,7 @@
 #include "RCC.h"
 #include "GPIO.h"
 
-//TODO 20220927(ĞèÒªÖØĞ´£¬²¢ÇÒÓëTIMºÏ²¢)
+//TODO 20220927(éœ€è¦é‡å†™ï¼Œå¹¶ä¸”ä¸TIMåˆå¹¶)
 /*
 
                 Channel1    Channel2    Channel3    Channel4
@@ -43,139 +43,139 @@ TIM8:
                   PC6         PC7         PC8         PC9
 
 
-Ê¹ÓÃÍ¬Ò»¶¨Ê±Æ÷²»Í¬Í¨µÀÊ±Òª×¢Òâ:
-1¡¢¸÷¸öÍ¨µÀµÄÆµÂÊÏàÍ¬,ÇÒÓÉ×îºóÒ»´ÎÅäÖÃÍ¨µÀµÄÆµÂÊ²Ù×÷¾ö¶¨(ÆµÂÊÓÉARR¿ØÖÆ,¶ø¶¨Ê±Æ÷µÄARRÖ»ÓĞÒ»¸ö)
-2¡¢¸÷¸öÍ¨µÀµÄÕ¼¿Õ±È¿ÉÒÔ²»Í¬,Õâ¸öÓÉCCRx¿ØÖÆ(x = 1,2,3,4)ËùÒÔ¸÷Â·Õ¼¿Õ±ÈÓÉ×Ô¼ºµÄCCRx¾ö¶¨
-3¡¢µ±ÆäÖĞÒ»¸öÍ¨µÀÓÃµÄÊ±¾­AFIOÖØÓ³ÉäµÄÒı½Åºó,ÆäËûµÄÍ¨µÀµÄÒı½ÅÒ²»áÖØÓ³Éä
+ä½¿ç”¨åŒä¸€å®šæ—¶å™¨ä¸åŒé€šé“æ—¶è¦æ³¨æ„:
+1ã€å„ä¸ªé€šé“çš„é¢‘ç‡ç›¸åŒ,ä¸”ç”±æœ€åä¸€æ¬¡é…ç½®é€šé“çš„é¢‘ç‡æ“ä½œå†³å®š(é¢‘ç‡ç”±ARRæ§åˆ¶,è€Œå®šæ—¶å™¨çš„ARRåªæœ‰ä¸€ä¸ª)
+2ã€å„ä¸ªé€šé“çš„å ç©ºæ¯”å¯ä»¥ä¸åŒ,è¿™ä¸ªç”±CCRxæ§åˆ¶(x = 1,2,3,4)æ‰€ä»¥å„è·¯å ç©ºæ¯”ç”±è‡ªå·±çš„CCRxå†³å®š
+3ã€å½“å…¶ä¸­ä¸€ä¸ªé€šé“ç”¨çš„æ—¶ç»AFIOé‡æ˜ å°„çš„å¼•è„šå,å…¶ä»–çš„é€šé“çš„å¼•è„šä¹Ÿä¼šé‡æ˜ å°„
 
 */
 
 typedef enum
 {
-  // Êä³öÒı½Å PA8
+  // è¾“å‡ºå¼•è„š PA8
   TIM1_Channel1_Default,
-  // Êä³öÒı½Å PA9
+  // è¾“å‡ºå¼•è„š PA9
   TIM1_Channel2_Default,
-  // Êä³öÒı½Å PA10
+  // è¾“å‡ºå¼•è„š PA10
   TIM1_Channel3_Default,
-  // Êä³öÒı½Å PA11
+  // è¾“å‡ºå¼•è„š PA11
   TIM1_Channel4_Default,
 
-  // Êä³öÒı½Å PA8
+  // è¾“å‡ºå¼•è„š PA8
   TIM1_Channel1_PartialRemap,
-  // Êä³öÒı½Å PA9
+  // è¾“å‡ºå¼•è„š PA9
   TIM1_Channel2_PartialRemap,
-  // Êä³öÒı½Å PA10
+  // è¾“å‡ºå¼•è„š PA10
   TIM1_Channel3_PartialRemap,
-  // Êä³öÒı½Å PA11
+  // è¾“å‡ºå¼•è„š PA11
   TIM1_Channel4_PartialRemap,
 
-  // Êä³öÒı½Å PE9
+  // è¾“å‡ºå¼•è„š PE9
   TIM1_Channel1_FullRemap,
-  // Êä³öÒı½Å PE11
+  // è¾“å‡ºå¼•è„š PE11
   TIM1_Channel2_FullRemap,
-  // Êä³öÒı½Å PE13
+  // è¾“å‡ºå¼•è„š PE13
   TIM1_Channel3_FullRemap,
-  // Êä³öÒı½Å PE14
+  // è¾“å‡ºå¼•è„š PE14
   TIM1_Channel4_FullRemap,
 
-  // Êä³öÒı½Å PA0
+  // è¾“å‡ºå¼•è„š PA0
   TIM2_Channel1_Default,
-  // Êä³öÒı½Å PA1
+  // è¾“å‡ºå¼•è„š PA1
   TIM2_Channel2_Default,
-  // Êä³öÒı½Å PA2
+  // è¾“å‡ºå¼•è„š PA2
   TIM2_Channel3_Default,
-  // Êä³öÒı½Å PA3
+  // è¾“å‡ºå¼•è„š PA3
   TIM2_Channel4_Default,
 
-  // Êä³öÒı½Å PA15
+  // è¾“å‡ºå¼•è„š PA15
   TIM2_Channel1_PartialRemap1,
-  // Êä³öÒı½Å PB3
+  // è¾“å‡ºå¼•è„š PB3
   TIM2_Channel2_PartialRemap1,
-  // Êä³öÒı½Å PA2
+  // è¾“å‡ºå¼•è„š PA2
   TIM2_Channel3_PartialRemap1,
-  // Êä³öÒı½Å PA3
+  // è¾“å‡ºå¼•è„š PA3
   TIM2_Channel4_PartialRemap1,
 
-  // Êä³öÒı½Å PA0
+  // è¾“å‡ºå¼•è„š PA0
   TIM2_Channel1_PartialRemap2,
-  // Êä³öÒı½Å PA1
+  // è¾“å‡ºå¼•è„š PA1
   TIM2_Channel2_PartialRemap2,
-  // Êä³öÒı½Å PB10
+  // è¾“å‡ºå¼•è„š PB10
   TIM2_Channel3_PartialRemap2,
-  // Êä³öÒı½Å PB11
+  // è¾“å‡ºå¼•è„š PB11
   TIM2_Channel4_PartialRemap2,
 
-  // Êä³öÒı½Å PA15
+  // è¾“å‡ºå¼•è„š PA15
   TIM2_Channel1_FullRemap,
-  // Êä³öÒı½Å PB3
+  // è¾“å‡ºå¼•è„š PB3
   TIM2_Channel2_FullRemap,
-  // Êä³öÒı½Å PB10
+  // è¾“å‡ºå¼•è„š PB10
   TIM2_Channel3_FullRemap,
-  // Êä³öÒı½Å PB11
+  // è¾“å‡ºå¼•è„š PB11
   TIM2_Channel4_FullRemap,
 
-  // Êä³öÒı½Å PA6
+  // è¾“å‡ºå¼•è„š PA6
   TIM3_Channel1_Default,
-  // Êä³öÒı½Å PA7
+  // è¾“å‡ºå¼•è„š PA7
   TIM3_Channel2_Default,
-  // Êä³öÒı½Å PB0
+  // è¾“å‡ºå¼•è„š PB0
   TIM3_Channel3_Default,
-  // Êä³öÒı½Å PB1
+  // è¾“å‡ºå¼•è„š PB1
   TIM3_Channel4_Default,
 
-  // Êä³öÒı½Å PB4
+  // è¾“å‡ºå¼•è„š PB4
   TIM3_Channel1_PartialRemap,
-  // Êä³öÒı½Å PB5
+  // è¾“å‡ºå¼•è„š PB5
   TIM3_Channel2_PartialRemap,
-  // Êä³öÒı½Å PB0
+  // è¾“å‡ºå¼•è„š PB0
   TIM3_Channel3_PartialRemap,
-  // Êä³öÒı½Å PB1
+  // è¾“å‡ºå¼•è„š PB1
   TIM3_Channel4_PartialRemap,
 
-  // Êä³öÒı½Å PC6
+  // è¾“å‡ºå¼•è„š PC6
   TIM3_Channel1_FullRemap,
-  // Êä³öÒı½Å PC7
+  // è¾“å‡ºå¼•è„š PC7
   TIM3_Channel2_FullRemap,
-  // Êä³öÒı½Å PC8
+  // è¾“å‡ºå¼•è„š PC8
   TIM3_Channel3_FullRemap,
-  // Êä³öÒı½Å PC9
+  // è¾“å‡ºå¼•è„š PC9
   TIM3_Channel4_FullRemap,
 
-  // Êä³öÒı½Å PB6
+  // è¾“å‡ºå¼•è„š PB6
   TIM4_Channel1_Default,
-  // Êä³öÒı½Å PB7
+  // è¾“å‡ºå¼•è„š PB7
   TIM4_Channel2_Default,
-  // Êä³öÒı½Å PB8
+  // è¾“å‡ºå¼•è„š PB8
   TIM4_Channel3_Default,
-  // Êä³öÒı½Å PB9
+  // è¾“å‡ºå¼•è„š PB9
   TIM4_Channel4_Default,
 
-  // Êä³öÒı½Å PD12
+  // è¾“å‡ºå¼•è„š PD12
   TIM4_Channel1_Remap,
-  // Êä³öÒı½Å PD13
+  // è¾“å‡ºå¼•è„š PD13
   TIM4_Channel2_Remap,
-  // Êä³öÒı½Å PD14
+  // è¾“å‡ºå¼•è„š PD14
   TIM4_Channel3_Remap,
-  // Êä³öÒı½Å PD15
+  // è¾“å‡ºå¼•è„š PD15
   TIM4_Channel4_Remap,
 
-  // Êä³öÒı½Å PA0
+  // è¾“å‡ºå¼•è„š PA0
   TIM5_Channel1_Default,
-  // Êä³öÒı½Å PA1
+  // è¾“å‡ºå¼•è„š PA1
   TIM5_Channel2_Default,
-  // Êä³öÒı½Å PA2
+  // è¾“å‡ºå¼•è„š PA2
   TIM5_Channel3_Default,
-  // Êä³öÒı½Å PA3
+  // è¾“å‡ºå¼•è„š PA3
   TIM5_Channel4_Default,
 
-  // Êä³öÒı½Å PC6
+  // è¾“å‡ºå¼•è„š PC6
   TIM8_Channel1_Default,
-  // Êä³öÒı½Å PC7
+  // è¾“å‡ºå¼•è„š PC7
   TIM8_Channel2_Default,
-  // Êä³öÒı½Å PC8
+  // è¾“å‡ºå¼•è„š PC8
   TIM8_Channel3_Default,
-  // Êä³öÒı½Å PC9
+  // è¾“å‡ºå¼•è„š PC9
   TIM8_Channel4_Default,
 
 } TIMx_Channelx_enum;

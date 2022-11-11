@@ -19,13 +19,13 @@ DMA2:   SPI/I2S3_RX     SPI/I2S3_TX     UART4_RX        SDIO            ADC3
         TIM8_UP         TIM8_TRIG
                         TIM8_COM
 
-ÖĞ¶Ï±êÖ¾Î»ÁĞ±í
-DMA_IT_HT   //´«Êä¹ı°ë±êÖ¾
-DMA_IT_TC   //´«ÊäÍê³É±êÖ¾
-DMA_IT_TE   //´«Êä´íÎó±êÖ¾
+ä¸­æ–­æ ‡å¿—ä½åˆ—è¡¨
+DMA_IT_HT   //ä¼ è¾“è¿‡åŠæ ‡å¿—
+DMA_IT_TC   //ä¼ è¾“å®Œæˆæ ‡å¿—
+DMA_IT_TE   //ä¼ è¾“é”™è¯¯æ ‡å¿—
 */
 
-// DMAÍâÉèÃ¶¾Ù
+// DMAå¤–è®¾æšä¸¾
 typedef enum
 {
     // DMA1_Channel1
@@ -104,10 +104,10 @@ typedef enum
 typedef struct
 {
     DMA_Channel_TypeDef *DMA_Channelx;       // DMA_Channelx
-    DMA_InitTypeDef DMA_InitStructure;       // DMA³õÊ¼»¯½á¹¹Ìå
-    NVIC_InitTypeDef DMA_NVIC_InitStructure; // DMAÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
-    uint32_t DMA_IT_Selection;               // DMAÖĞ¶ÏÎ»Ñ¡Ôñ
-    FunctionalState DMA_IT_State;            // DMAÖĞ¶ÏÊ¹(Ê§)ÄÜ
+    DMA_InitTypeDef DMA_InitStructure;       // DMAåˆå§‹åŒ–ç»“æ„ä½“
+    NVIC_InitTypeDef DMA_NVIC_InitStructure; // DMAä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+    uint32_t DMA_IT_Selection;               // DMAä¸­æ–­ä½é€‰æ‹©
+    FunctionalState DMA_IT_State;            // DMAä¸­æ–­ä½¿(å¤±)èƒ½
 } DMA_Param;
 class DMA
 {
@@ -135,4 +135,15 @@ public:
     static uint8_t Get_DMAx_Channelx_IRQn(DMA_Channel_TypeDef *DMAx_Channelx);
     static bool Check_DMAx_Channelx(DMA_Channel_TypeDef *DMAx_Channelx);
 };
+extern void (*DMA1_Channel1_Handler)(void);
+extern void (*DMA1_Channel2_Handler)(void);
+extern void (*DMA1_Channel3_Handler)(void);
+extern void (*DMA1_Channel4_Handler)(void);
+extern void (*DMA1_Channel5_Handler)(void);
+extern void (*DMA1_Channel6_Handler)(void);
+extern void (*DMA1_Channel7_Handler)(void);
+extern void (*DMA2_Channel1_Handler)(void);
+extern void (*DMA2_Channel2_Handler)(void);
+extern void (*DMA2_Channel3_Handler)(void);
+extern void (*DMA2_Channel4_5_Handler)(void);
 #endif /*_OJ_DMA_h*/

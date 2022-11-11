@@ -2,38 +2,38 @@
 // I2C
 #define STM32_OWN_ADDR7 0xB0
 I2C_InitTypeDef I2C1_InitStructure = {
-    .I2C_ClockSpeed = 400000,
+    .I2C_ClockSpeed = 100000,
     .I2C_Mode = I2C_Mode_I2C,
     .I2C_DutyCycle = I2C_DutyCycle_16_9,
     .I2C_OwnAddress1 = STM32_OWN_ADDR7,
     .I2C_Ack = I2C_Ack_Enable,
     .I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit};
 I2C_InitTypeDef I2C2_InitStructure = {
-    .I2C_ClockSpeed = 400000,
+    .I2C_ClockSpeed = 100000,
     .I2C_Mode = I2C_Mode_I2C,
     .I2C_DutyCycle = I2C_DutyCycle_16_9,
     .I2C_OwnAddress1 = STM32_OWN_ADDR7,
     .I2C_Ack = I2C_Ack_Enable,
     .I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit};
-// I2C1 ´íÎóÖĞ¶Ï
+// I2C1 é”™è¯¯ä¸­æ–­
 NVIC_InitTypeDef I2C1_ER_NVIC_InitStructure = {
     .NVIC_IRQChannel = I2C1_ER_IRQn,
     .NVIC_IRQChannelPreemptionPriority = 0,
     .NVIC_IRQChannelSubPriority = 6,
     .NVIC_IRQChannelCmd = ENABLE};
-// I2C1 ÊÂ¼şÖĞ¶Ï
+// I2C1 äº‹ä»¶ä¸­æ–­
 NVIC_InitTypeDef I2C1_EV_NVIC_InitStructure = {
     .NVIC_IRQChannel = I2C1_EV_IRQn,
     .NVIC_IRQChannelPreemptionPriority = 0,
     .NVIC_IRQChannelSubPriority = 7,
     .NVIC_IRQChannelCmd = ENABLE};
-// I2C2 ´íÎóÖĞ¶Ï
+// I2C2 é”™è¯¯ä¸­æ–­
 NVIC_InitTypeDef I2C2_ER_NVIC_InitStructure = {
     .NVIC_IRQChannel = I2C2_ER_IRQn,
     .NVIC_IRQChannelPreemptionPriority = 0,
     .NVIC_IRQChannelSubPriority = 8,
     .NVIC_IRQChannelCmd = ENABLE};
-// I2C2 ÊÂ¼şÖĞ¶Ï
+// I2C2 äº‹ä»¶ä¸­æ–­
 NVIC_InitTypeDef I2C2_EV_NVIC_InitStructure = {
     .NVIC_IRQChannel = I2C2_EV_IRQn,
     .NVIC_IRQChannelPreemptionPriority = 0,
@@ -58,10 +58,10 @@ I2C_Param I2C2_Param = {
     .I2C_IT_State = DISABLE,
     .I2C_DMA_State = DISABLE};
 
-// I2C1 400KHz Ö÷·¢ËÍÆ÷
+// I2C1 400KHz ä¸»å‘é€å™¨
 I2C I2C_1(I2C1_Param);
 
-// I2C2 400KHz Ö÷·¢ËÍÆ÷
+// I2C2 400KHz ä¸»å‘é€å™¨
 I2C I2C_2(I2C2_Param);
 
 // USART
@@ -181,36 +181,36 @@ USART_Param UART5_Param = {
     .USART_IT_State = DISABLE,
     .USART_DMA_State = DISABLE};
 
-// USART1 ²¨ÌØÂÊ115200 ÄÜÊÕÄÜ·¢
+// USART1 æ³¢ç‰¹ç‡115200 èƒ½æ”¶èƒ½å‘
 USART USART_1(USART1_Param);
-// USART2 ²¨ÌØÂÊ115200 ÄÜÊÕÄÜ·¢
+// USART2 æ³¢ç‰¹ç‡115200 èƒ½æ”¶èƒ½å‘
 USART USART_2(USART2_Param);
-// USART3 ²¨ÌØÂÊ115200 ÄÜÊÕÄÜ·¢
+// USART3 æ³¢ç‰¹ç‡115200 èƒ½æ”¶èƒ½å‘
 USART USART_3(USART3_Param);
-// USART4 ²¨ÌØÂÊ115200 ÄÜÊÕÄÜ·¢(Êµ¼ÊÉÏÓ¦¸ÃÊÇUART4)
+// USART4 æ³¢ç‰¹ç‡115200 èƒ½æ”¶èƒ½å‘(å®é™…ä¸Šåº”è¯¥æ˜¯UART4)
 USART UART_4(UART4_Param);
-// USART5 ²¨ÌØÂÊ115200 ÄÜÊÕÄÜ·¢(Êµ¼ÊÉÏÓ¦¸ÃÊÇUART5)
+// USART5 æ³¢ç‰¹ç‡115200 èƒ½æ”¶èƒ½å‘(å®é™…ä¸Šåº”è¯¥æ˜¯UART5)
 USART UART_5(UART5_Param);
 
 // TIM
-// TIM»ù±¾²ÎÊı³õÊ¼»¯½á¹¹Ìå
+// TIMåŸºæœ¬å‚æ•°åˆå§‹åŒ–ç»“æ„ä½“
 TIM_TimeBaseInitTypeDef TIM2_TimeBaseStructure = {
     .TIM_Prescaler = (uint16_t)(RCC_Operate::Get_SYSCLK_Frequency() / 1000000), // 72
     .TIM_CounterMode = TIM_CounterMode_Up,
-    .TIM_Period = 999,                 //¼Æ1000´Î,ÕâÑùÃ¿´Î1ms
-    .TIM_ClockDivision = TIM_CKD_DIV1, //ÊäÈëĞÅºÅÂË²¨ÆµÂÊ
-    .TIM_RepetitionCounter = 0         //ÖØ¸´´ÎÊı,Ö»ÓÃÍ¨ÓÃºÍ¸ß¼¶¶¨Ê±Æ÷²ÅÓĞ
+    .TIM_Period = 999,                 //è®¡1000æ¬¡,è¿™æ ·æ¯æ¬¡1ms
+    .TIM_ClockDivision = TIM_CKD_DIV1, //è¾“å…¥ä¿¡å·æ»¤æ³¢é¢‘ç‡
+    .TIM_RepetitionCounter = 0         //é‡å¤æ¬¡æ•°,åªç”¨é€šç”¨å’Œé«˜çº§å®šæ—¶å™¨æ‰æœ‰
 };
-// TIMÍ¨µÀ³õÊ¼»¯½á¹¹Ìå
+// TIMé€šé“åˆå§‹åŒ–ç»“æ„ä½“
 TIM_OCInitTypeDef TIM2_OCStructure = {
-    .TIM_OCMode = TIM_OCMode_PWM1,                //Í¨µÀÄ£Ê½
-    .TIM_OutputState = TIM_OutputState_Enable,    //ÊäÈë/²¶»ñÊ¹ÄÜ(OCx)
-    .TIM_OutputNState = TIM_OutputNState_Disable, //ÊäÈë/»¥²¹Êä³öÊ¹ÄÜ,Ö»ÓĞ¸ß¼¶¶¨Ê±Æ÷²ÅÓĞ(OCxN)
-    .TIM_Pulse = 500,                             // CCRxµÄÖµ,ÓÃÀ´ÉèÖÃÕ¼¿Õ±È
-    .TIM_OCPolarity = TIM_OCPolarity_High,        //ÊäÈë/²¶»ñ¼«ĞÔ,¸ßµçÆ½ÓĞĞ§(OCx)
-    .TIM_OCNPolarity = TIM_OCNPolarity_High,      //ÊäÈë/²¶»ñ»¥²¹Êä³ö¼«ĞÔ,¸ßµçÆ½ÓĞĞ§(OCNx)
-    .TIM_OCIdleState = TIM_OCIdleState_Reset,     //Êä³ö¿ÕÏĞ×´Ì¬(OCx)
-    .TIM_OCNIdleState = TIM_OCNIdleState_Reset    //Êä³ö¿ÕÏĞ×´Ì¬(OCxN)
+    .TIM_OCMode = TIM_OCMode_PWM1,                //é€šé“æ¨¡å¼
+    .TIM_OutputState = TIM_OutputState_Enable,    //è¾“å…¥/æ•è·ä½¿èƒ½(OCx)
+    .TIM_OutputNState = TIM_OutputNState_Disable, //è¾“å…¥/äº’è¡¥è¾“å‡ºä½¿èƒ½,åªæœ‰é«˜çº§å®šæ—¶å™¨æ‰æœ‰(OCxN)
+    .TIM_Pulse = 500,                             // CCRxçš„å€¼,ç”¨æ¥è®¾ç½®å ç©ºæ¯”
+    .TIM_OCPolarity = TIM_OCPolarity_High,        //è¾“å…¥/æ•è·ææ€§,é«˜ç”µå¹³æœ‰æ•ˆ(OCx)
+    .TIM_OCNPolarity = TIM_OCNPolarity_High,      //è¾“å…¥/æ•è·äº’è¡¥è¾“å‡ºææ€§,é«˜ç”µå¹³æœ‰æ•ˆ(OCNx)
+    .TIM_OCIdleState = TIM_OCIdleState_Reset,     //è¾“å‡ºç©ºé—²çŠ¶æ€(OCx)
+    .TIM_OCNIdleState = TIM_OCNIdleState_Reset    //è¾“å‡ºç©ºé—²çŠ¶æ€(OCxN)
 };
 TIM_ICInitTypeDef TIM2_ICSturcture = {
     .TIM_Channel = TIM_Channel_1,
@@ -218,14 +218,14 @@ TIM_ICInitTypeDef TIM2_ICSturcture = {
     .TIM_ICSelection = TIM_ICSelection_DirectTI,
     .TIM_ICPrescaler = TIM_ICPSC_DIV1,
     .TIM_ICFilter = 0x00};
-// NVICÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
+// NVICä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
 NVIC_InitTypeDef TIM2_NVIC_Structure = {
     .NVIC_IRQChannel = TIM2_IRQn,
     .NVIC_IRQChannelPreemptionPriority = 0,
     .NVIC_IRQChannelSubPriority = 5,
     .NVIC_IRQChannelCmd = ENABLE};
 
-// TIM2³õÊ¼»¯²ÎÊı
+// TIM2åˆå§‹åŒ–å‚æ•°
 TIM_Parma TIM2_Parma = {
     .TIMx = TIM2,
     .TIM_TimeBaseStructure = TIM2_TimeBaseStructure,
@@ -240,7 +240,7 @@ TIM_Parma TIM2_Parma = {
 TIM TIM_2(TIM2_Parma);
 
 // DMA
-//ÒÔUSARTÊ¾·¶DMA
+//ä»¥USARTç¤ºèŒƒDMA
 #define USART_DR_ADDR (USART1_BASE + 0x04)
 #define USART_TX_DMA_Channel DMA1_Channel4
 #define USART_RX_DMA_Channel DMA1_Channel5
@@ -320,7 +320,7 @@ DMA_Param Flash_SRAM_DMA_Param = {
 DMA USART1_RX_DMA = DMA(USART1_RX_DMA_Param);
 DMA USART1_TX_DMA = DMA(USART1_TX_DMA_Param);
 DMA Flash_SRAM_DMA = DMA(Flash_SRAM_DMA_Param);
-//ÓÉÓÚSPIµÄDMAĞèÒª×ö5¸öÊµÑéËùÒÔ²ÎÊı»áÓĞ±ä»¯,ÕâÀï¾Í²»Ğ´²ÎÊıÅäÖÃÁË,ÏêÏ¸¼ûspiµÄ²âÊÔ
+//ç”±äºSPIçš„DMAéœ€è¦åš5ä¸ªå®éªŒæ‰€ä»¥å‚æ•°ä¼šæœ‰å˜åŒ–,è¿™é‡Œå°±ä¸å†™å‚æ•°é…ç½®äº†,è¯¦ç»†è§spiçš„æµ‹è¯•
 DMA SPI2_RX_DMA;
 DMA SPI1_TX_DMA;
 
@@ -374,9 +374,9 @@ SPI_Param SPI2_Param = {
     .SPI_IT_State = DISABLE,
     .SPI_DMA_State = DISABLE};
 
-// SPI1 Ö÷Ä£Ê½
+// SPI1 ä¸»æ¨¡å¼
 SPI SPI_1(SPI1_Param);
-// SPI2 ´ÓÄ£Ê½
+// SPI2 ä»æ¨¡å¼
 SPI SPI_2(SPI2_Param);
 
 // RTC
@@ -409,9 +409,9 @@ EXTI_InitTypeDef EXTI_PC6_InitStructure = {
 EXTI_Operate EXTI_PC6 = EXTI_Operate(EXTI_PC6_InitStructure, EXTI_PC6_NVIC_InitStructure, GPIOC);
 
 // LED
-// LED1_RED     PB5(Ã»ÓÃ)
+// LED1_RED     PB5(æ²¡ç”¨)
 // LED1_GREEN   PB0
-// LED1_BLUE    PB1(Ã»ÓÃ)
+// LED1_BLUE    PB1(æ²¡ç”¨)
 // LED2         PF7
 // LED3         PF8
 LED LED_1_R(PB5, Low_level_lighting);
@@ -456,7 +456,7 @@ ADC_Channel_InitTypeDef ADC1_RegularChannel_InitStructure = {
     .ADC_ExternalTrig = DISABLE};
 ADC_Channel_InitTypeDef ADC1_InjectedChannel_InitStructure = {
     .ADC_Channellist = ADC1_InjectedChannellist,
-    .ADC_ExternalTrigConv = ADC_ExternalTrigInjecConv_None, //Èç¹ûÓÃÈí¼ş¿ªÆôÔòÖ±½ÓÊ¹ÓÃnone
+    .ADC_ExternalTrigConv = ADC_ExternalTrigInjecConv_None, //å¦‚æœç”¨è½¯ä»¶å¼€å¯åˆ™ç›´æ¥ä½¿ç”¨none
     .ADC_DiscMode = DISABLE,
     .ADC_ExternalTrig = DISABLE};
 ADC_Param ADC1_Param = {
@@ -476,20 +476,20 @@ Button Key1(PA0, false);
 // Buzzer
 Buzzer Beep(TIM1_Channel1_Default);
 
-//ÏµÍ³±äÁ¿
+//ç³»ç»Ÿå˜é‡
 time_t system_start_time;
 time_t timestamp;
 tm timeinfo;
 char timestr[80];
 
-//ÆÕÍ¨±äÁ¿Çø
+//æ™®é€šå˜é‡åŒº
 BitAction flag = Bit_SET;
 uint8_t receivedata;
 uint32_t time_ms = 0;
 uint32_t current_time_ms = 0;
-const char SendBuffer1[] = "1235678910\n"; //ÎªÁËÑéÖ¤spidmaCRCÎÛÈ¾ÎÊÌâËùÒÔµÚÒ»¸ö×Ö·ûËæ±ãĞ´
+const char SendBuffer1[] = "1235678910\n"; //ä¸ºäº†éªŒè¯spidmaCRCæ±¡æŸ“é—®é¢˜æ‰€ä»¥ç¬¬ä¸€ä¸ªå­—ç¬¦éšä¾¿å†™
 const char SendBuffer[] =
-    "-------------------½ğ³½ĞÇÎÒ°®Äã------------------\n"
+    "-------------------é‡‘è¾°æ˜Ÿæˆ‘çˆ±ä½ ------------------\n"
     "$$$_____$$$$$$$$$$$$$$$_$$$_______$$$_$$$$$$$$$$\n"
     "$$$____$$$____$$$____$$$_$$$_____$$$__$$$_______\n"
     "$$$____$$$___________$$$_$$$_____$$$__$$$_______\n"

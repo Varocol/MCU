@@ -1,5 +1,5 @@
 #include "System.h"
-const char *str = "Ê¢Ë¹Âü²»½²ÎäµÂ°¡";
+const char *str = "ç››æ–¯æ›¼ä¸è®²æ­¦å¾·å•Š";
 using namespace std;
 uchar image[] =
     {
@@ -1030,10 +1030,10 @@ uchar image[] =
 };
 int main()
 {
-    // ÓÃ´®¿ÚÆÁÊ±RCC×îÉÙ3±¶Æµ,Ò²¾ÍÊÇ¾§ÕñÆµÂÊ×îÉÙ24MHz,·ñÔòµÎ´ð¶¨Ê±Æ÷ÑÓÊ±º¯Êý»á³öÎÊÌâ,²¢¿ÚÆÁÎÞËùÎ½
+    // ç”¨ä¸²å£å±æ—¶RCCæœ€å°‘3å€é¢‘,ä¹Ÿå°±æ˜¯æ™¶æŒ¯é¢‘çŽ‡æœ€å°‘24MHz,å¦åˆ™æ»´ç­”å®šæ—¶å™¨å»¶æ—¶å‡½æ•°ä¼šå‡ºé—®é¢˜,å¹¶å£å±æ— æ‰€è°“
     RCC_Operate::HSE_SetSysClock(RCC_PLLMul_9);
     // HSE_SetSysClock(RCC_PLLMul_2);
-    //²¢¿ÚÊäÈë²ÉÈ¡gpio 16Î»µÄµÍ°ËÎ»
+    //å¹¶å£è¾“å…¥é‡‡å–gpio 16ä½çš„ä½Žå…«ä½
     // LCD_12864_Param_Parallel Param =
     //     {
     //         .IO_PIN = PA_All,
@@ -1056,7 +1056,7 @@ int main()
             .SID_PIN = PB13,
             .SCK_PIN = PB14,
         };
-    LCD_12864 *my12864 = new LCD_12864_Serial(Param2); //Õâ¸öÎªÉÏ×ªÐÍ¶ÔÏó£¬ËùÒÔÒªÓÃÖ¸Õë
+    LCD_12864 *my12864 = new LCD_12864_Serial(Param2); //è¿™ä¸ªä¸ºä¸Šè½¬åž‹å¯¹è±¡ï¼Œæ‰€ä»¥è¦ç”¨æŒ‡é’ˆ
     my12864->Init();
     my12864->Show_String((uchar *)str, 0, 0);
     my12864->Display_Image(image);

@@ -1,6 +1,9 @@
 #include "SPI.h"
+void (*SPI1_Handler)(void);
+void (*SPI2_Handler)(void);
+void (*SPI3_Handler)(void);
 /**
- * @brief  SPI-¿Õ¹¹Ôì·½·¨
+ * @brief  SPI-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,7 +12,7 @@ SPI::SPI()
 }
 
 /**
- * @brief  SPI-Îö¹¹·½·¨
+ * @brief  SPI-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -18,8 +21,8 @@ SPI::~SPI()
 }
 
 /**
- * @brief  SPI-¹¹Ôì·½·¨
- * @param  SPIx_Param   SPIµÄ²ÎÊıÁĞ±í
+ * @brief  SPI-æ„é€ æ–¹æ³•
+ * @param  SPIx_Param   SPIçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 SPI::SPI(SPI_Param SPIx_Param)
@@ -28,8 +31,8 @@ SPI::SPI(SPI_Param SPIx_Param)
 }
 
 /**
- * @brief  SPI-·¢ËÍ×Ö½Ú
- * @param  data         16Î»Êı¾İ
+ * @brief  SPI-å‘é€å­—èŠ‚
+ * @param  data         16ä½æ•°æ®
  * @retval None
  */
 void SPI::Send_Data(uint16_t data)
@@ -40,9 +43,9 @@ void SPI::Send_Data(uint16_t data)
 }
 
 /**
- * @brief  SPI-·¢ËÍ×Ö½ÚÊı×é(×Ô´ø·¢ËÍCRC¹¦ÄÜ)
- * @param  buffer       16Î»×Ö½ÚÊı×é
- * @param  cnt          16Î»×Ö½ÚÊı×é´óĞ¡
+ * @brief  SPI-å‘é€å­—èŠ‚æ•°ç»„(è‡ªå¸¦å‘é€CRCåŠŸèƒ½)
+ * @param  buffer       16ä½å­—èŠ‚æ•°ç»„
+ * @param  cnt          16ä½å­—èŠ‚æ•°ç»„å¤§å°
  * @retval None
  */
 void SPI::Send_Buffer(uint8_t *buffer, uint32_t cnt)
@@ -69,9 +72,9 @@ void SPI::Send_Buffer(uint8_t *buffer, uint32_t cnt)
 }
 
 /**
- * @brief  SPI-·¢ËÍ×Ö½ÚÊı×é(×Ô´ø·¢ËÍCRC¹¦ÄÜ)
- * @param  buffer       16Î»×Ö½ÚÊı×é
- * @param  cnt          16Î»×Ö½ÚÊı×é´óĞ¡
+ * @brief  SPI-å‘é€å­—èŠ‚æ•°ç»„(è‡ªå¸¦å‘é€CRCåŠŸèƒ½)
+ * @param  buffer       16ä½å­—èŠ‚æ•°ç»„
+ * @param  cnt          16ä½å­—èŠ‚æ•°ç»„å¤§å°
  * @retval None
  */
 void SPI::Send_Buffer(uint16_t *buffer, uint32_t cnt)
@@ -98,9 +101,9 @@ void SPI::Send_Buffer(uint16_t *buffer, uint32_t cnt)
 }
 
 /**
- * @brief  SPI-½ÓÊÕ×Ö½Ú
+ * @brief  SPI-æ¥æ”¶å­—èŠ‚
  * @param  None
- * @retval ½ÓÊÕ»º³åÆ÷µÄÖµ
+ * @retval æ¥æ”¶ç¼“å†²å™¨çš„å€¼
  */
 uint16_t SPI::Receive_Data()
 {
@@ -108,7 +111,7 @@ uint16_t SPI::Receive_Data()
 }
 
 /**
- * @brief  SPI-GPIOÒı½Å³õÊ¼»¯
+ * @brief  SPI-GPIOå¼•è„šåˆå§‹åŒ–
  * @param  None
  * @retval None
  */
@@ -117,26 +120,26 @@ void SPI::Pin_Init()
     GPIO SCK = GPIO();
     GPIO MOSI = GPIO();
     GPIO MISO = GPIO();
-    // ³õÊ¼»¯Èí¼şNSS
+    // åˆå§‹åŒ–è½¯ä»¶NSS
     if (SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Soft)
     {
         NSS.Init();
     }
 
-    // ³õÊ¼»¯Ö÷Ä£Ê½ÏÂ Ó²¼şNSS SSOE=0,SSM=0 ¼´ÊäÈëÄ£Ê½(´ËÊ±Ê¹ÓÃÈí¼şÒı½Å)
+    // åˆå§‹åŒ–ä¸»æ¨¡å¼ä¸‹ ç¡¬ä»¶NSS SSOE=0,SSM=0 å³è¾“å…¥æ¨¡å¼(æ­¤æ—¶ä½¿ç”¨è½¯ä»¶å¼•è„š)
     if (SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Hard && SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master && SPIx_Param.SPI_NSS == SPI_NSS_Master_Hard)
     {
         NSS.Init();
     }
 
-    // ÒÔÏÂ³õÊ¼»¯SCK MOSI MISOºÍÓ²¼şNSS
+    // ä»¥ä¸‹åˆå§‹åŒ–SCK MOSI MISOå’Œç¡¬ä»¶NSS
     if (SPIx_Param.SPIx == SPI1)
     {
         if (SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master)
         {
             if (SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Hard)
             {
-                // SSOE¿ªÆô,Êä³öÄ£Ê½ÏÂ,ĞèÒªÓÃµ½Ó²¼şNSS
+                // SSOEå¼€å¯,è¾“å‡ºæ¨¡å¼ä¸‹,éœ€è¦ç”¨åˆ°ç¡¬ä»¶NSS
                 if (SPIx_Param.SPI_NSS == SPI_NSS_Master_SSOE_Hard)
                 {
                     NSS = GPIO();
@@ -164,7 +167,7 @@ void SPI::Pin_Init()
         {
             if (SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Hard)
             {
-                // SSOE¿ªÆô,Êä³öÄ£Ê½ÏÂ,ĞèÒªÓÃµ½Ó²¼şNSS
+                // SSOEå¼€å¯,è¾“å‡ºæ¨¡å¼ä¸‹,éœ€è¦ç”¨åˆ°ç¡¬ä»¶NSS
                 if (SPIx_Param.SPI_NSS == SPI_NSS_Master_SSOE_Hard)
                 {
                     NSS = GPIO();
@@ -192,7 +195,7 @@ void SPI::Pin_Init()
         {
             if (SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Hard)
             {
-                // SSOE¿ªÆô,Êä³öÄ£Ê½ÏÂ,ĞèÒªÓÃµ½Ó²¼şNSS
+                // SSOEå¼€å¯,è¾“å‡ºæ¨¡å¼ä¸‹,éœ€è¦ç”¨åˆ°ç¡¬ä»¶NSS
                 if (SPIx_Param.SPI_NSS == SPI_NSS_Master_SSOE_Hard)
                 {
                     NSS = GPIO();
@@ -217,7 +220,7 @@ void SPI::Pin_Init()
 }
 
 /**
- * @brief  SPI-Æ¬Ñ¡Òı½ÅÀ­¸ß
+ * @brief  SPI-ç‰‡é€‰å¼•è„šæ‹‰é«˜
  * @param  None
  * @retval None
  */
@@ -227,7 +230,7 @@ void SPI::NSS_High()
 }
 
 /**
- * @brief  SPI-Æ¬Ñ¡Òı½ÅÀ­µÍ
+ * @brief  SPI-ç‰‡é€‰å¼•è„šæ‹‰ä½
  * @param  None
  * @retval None
  */
@@ -237,11 +240,11 @@ void SPI::NSS_Low()
 }
 
 /**
- * @brief  SPI-ÉèÖÃNSSÈí¼şÄ£Ê½Æ¬Ñ¡Òı½Å¸ßµÍ
- * @note   ÔÚÈí¼şÖ÷Ä£Ê½ÏÂ,´ÓÉè±¸ÍêÈ«ÊÜNSS_SoftÒı½ÅµÄ¹ÜÀí,
- *         ÔÚÈí¼ş´ÓÄ£Ê½ÏÂ,SPINSSĞÅºÅÊÜµ½SSIÎ»Ó°Ïì,ËùÒÔ²»ĞèÒª
- *         NSS_SoftµÄ³õÊ¼»¯Ò²ÄÜ¹»Ö´ĞĞ¡£
- * @param  BitVal       ×´Ì¬Öµ
+ * @brief  SPI-è®¾ç½®NSSè½¯ä»¶æ¨¡å¼ç‰‡é€‰å¼•è„šé«˜ä½
+ * @note   åœ¨è½¯ä»¶ä¸»æ¨¡å¼ä¸‹,ä»è®¾å¤‡å®Œå…¨å—NSS_Softå¼•è„šçš„ç®¡ç†,
+ *         åœ¨è½¯ä»¶ä»æ¨¡å¼ä¸‹,SPINSSä¿¡å·å—åˆ°SSIä½å½±å“,æ‰€ä»¥ä¸éœ€è¦
+ *         NSS_Softçš„åˆå§‹åŒ–ä¹Ÿèƒ½å¤Ÿæ‰§è¡Œã€‚
+ * @param  BitVal       çŠ¶æ€å€¼
  * @retval None
  */
 void SPI::Set_NSS_Val(uint8_t BitVal)
@@ -249,15 +252,15 @@ void SPI::Set_NSS_Val(uint8_t BitVal)
     uint16_t SPI_MODE = SPIx_Param.SPI_InitStructure.SPI_Mode;
     uint16_t SPI_NSS = SPIx_Param.SPI_InitStructure.SPI_NSS;
     uint8_t SPI_NSS_Mode = SPIx_Param.SPI_NSS;
-    // Èí¼ş Ö÷Ä£Ê½(Ö÷Òª±»Ê¹ÓÃ)
+    // è½¯ä»¶ ä¸»æ¨¡å¼(ä¸»è¦è¢«ä½¿ç”¨)
     if (SPI_MODE == SPI_Mode_Master && SPI_NSS == SPI_NSS_Soft)
     {
         NSS.Set_Pin_Val(BitVal);
     }
-    // Èí¼ş ´ÓÄ£Ê½(»ù±¾ÓÃ²»µ½)
+    // è½¯ä»¶ ä»æ¨¡å¼(åŸºæœ¬ç”¨ä¸åˆ°)
     else if (SPI_MODE == SPI_Mode_Slave && SPI_NSS == SPI_NSS_Soft)
     {
-        // È¡×îºóÒ»Î»
+        // å–æœ€åä¸€ä½
         if (BitVal & 0x01)
         {
             SPI_NSSInternalSoftwareConfig(SPIx_Param.SPIx, SPI_NSSInternalSoft_Set);
@@ -267,20 +270,20 @@ void SPI::Set_NSS_Val(uint8_t BitVal)
             SPI_NSSInternalSoftwareConfig(SPIx_Param.SPIx, SPI_NSSInternalSoft_Reset);
         }
     }
-    // Ó²¼ş Ö÷Ä£Ê½ÊäÈëÄ£Ê½(ssoe = 0,ssm = 0),NSS¶ÔÏóÎªÍâ²¿ÉèÖÃµÄ¿ÕÏĞGPIO¶ÔÏó
-    // Ó²¼ş Ö÷Ä£Ê½Êä³öÄ£Ê½(ssoe = 1,ssm = 0),NSS¶ÔÏóÎª¶ÔÓ¦Ó²¼şNSSÒı½ÅµÄGPIO¶ÔÏó
+    // ç¡¬ä»¶ ä¸»æ¨¡å¼è¾“å…¥æ¨¡å¼(ssoe = 0,ssm = 0),NSSå¯¹è±¡ä¸ºå¤–éƒ¨è®¾ç½®çš„ç©ºé—²GPIOå¯¹è±¡
+    // ç¡¬ä»¶ ä¸»æ¨¡å¼è¾“å‡ºæ¨¡å¼(ssoe = 1,ssm = 0),NSSå¯¹è±¡ä¸ºå¯¹åº”ç¡¬ä»¶NSSå¼•è„šçš„GPIOå¯¹è±¡
     else if (SPI_MODE == SPI_Mode_Master && SPI_NSS == SPI_NSS_Hard)
     {
         if (SPI_NSS_Mode == SPI_NSS_Master_SSOE_Hard)
         {
-            // Êä³öÄ£Ê½ÏÂ,¹Ø±ÕSPI,²¢À­¸ßNSSÒı½Å(Stm32µÄbug,Ò»¶¨Òª¹Ø±ÕSPIºóÕâ¸öÒı½Å²ÅÄÜÊÍ·Å
-            // ·ñÔòÈç¹ûSSOE=1,´ËÊ±Òı½Å²»ÊÜGPIO¿ØÖÆ,ÈôSSOE=0,ÔòÏÂÒ»´ÎÓ²¼şÎŞ·¨ÔÙ´Î¿ØÖÆ´ËÒı½Å)
+            // è¾“å‡ºæ¨¡å¼ä¸‹,å…³é—­SPI,å¹¶æ‹‰é«˜NSSå¼•è„š(Stm32çš„bug,ä¸€å®šè¦å…³é—­SPIåè¿™ä¸ªå¼•è„šæ‰èƒ½é‡Šæ”¾
+            // å¦åˆ™å¦‚æœSSOE=1,æ­¤æ—¶å¼•è„šä¸å—GPIOæ§åˆ¶,è‹¥SSOE=0,åˆ™ä¸‹ä¸€æ¬¡ç¡¬ä»¶æ— æ³•å†æ¬¡æ§åˆ¶æ­¤å¼•è„š)
             if (BitVal & 0x01)
             {
                 Disable();
                 NSS.Set_Pin_Val(1);
             }
-            // ÊäÈëÄ£Ê½ÏÂ,¿ªÆôSSOE,Òı½Å×Ô¶¯À­µÍ
+            // è¾“å…¥æ¨¡å¼ä¸‹,å¼€å¯SSOE,å¼•è„šè‡ªåŠ¨æ‹‰ä½
             else
             {
                 Enable();
@@ -294,11 +297,11 @@ void SPI::Set_NSS_Val(uint8_t BitVal)
 }
 
 /**
- * @brief  SPI-ÉèÖÃNSSÈí¼şÄ£Ê½Æ¬Ñ¡Òı½Å¸ßµÍ
- * @note   ¸Ã·½·¨Ò²ÊÊºÏµ±ssoe=0,ssm=0Ê±,nss¹¤×÷ÓÚÓ²¼şÄ£Ê½µÄ
- *         ÊäÈëÄ£Ê½ÏÂ,¸ÃÄ£Ê½ÏÂÍâ²¿Òı½Å±»ssoe¿ØÖÆ,ËùÒÔ¿ÉÒÔ³¢ÊÔ
- *         Ê¹ÓÃÆäËûÒı½Å´úÌæ¡£
- * @param  NSS_Soft     NSS GPIO¶ÔÏó
+ * @brief  SPI-è®¾ç½®NSSè½¯ä»¶æ¨¡å¼ç‰‡é€‰å¼•è„šé«˜ä½
+ * @note   è¯¥æ–¹æ³•ä¹Ÿé€‚åˆå½“ssoe=0,ssm=0æ—¶,nsså·¥ä½œäºç¡¬ä»¶æ¨¡å¼çš„
+ *         è¾“å…¥æ¨¡å¼ä¸‹,è¯¥æ¨¡å¼ä¸‹å¤–éƒ¨å¼•è„šè¢«ssoeæ§åˆ¶,æ‰€ä»¥å¯ä»¥å°è¯•
+ *         ä½¿ç”¨å…¶ä»–å¼•è„šä»£æ›¿ã€‚
+ * @param  NSS_Soft     NSS GPIOå¯¹è±¡
  * @retval None
  */
 void SPI::Set_NSS_Pin(GPIO &NSS_Soft)
@@ -307,8 +310,8 @@ void SPI::Set_NSS_Pin(GPIO &NSS_Soft)
 }
 
 /**
- * @brief  SPI-²ÎÊıÁĞ±í¸üĞÂ
- * @param  SPIx_Param   SPIµÄ²ÎÊıÁĞ±í
+ * @brief  SPI-å‚æ•°åˆ—è¡¨æ›´æ–°
+ * @param  SPIx_Param   SPIçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void SPI::Update(SPI_Param SPIx_Param)
@@ -319,8 +322,8 @@ void SPI::Update(SPI_Param SPIx_Param)
 }
 
 /**
- * @brief  SPI-ÉèÖÃSPIµÄ²ÎÊıÁĞ±í
- * @param  SPIx_Param   SPIµÄ²ÎÊıÁĞ±í
+ * @brief  SPI-è®¾ç½®SPIçš„å‚æ•°åˆ—è¡¨
+ * @param  SPIx_Param   SPIçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void SPI::Set_SPI_Param(SPI_Param SPIx_Param)
@@ -329,9 +332,9 @@ void SPI::Set_SPI_Param(SPI_Param SPIx_Param)
 }
 
 /**
- * @brief  SPI-Ê¹ÓÃDMA´«Êä¹¦ÄÜ
- * @param  SPI_DMA_enum Ê¹ÓÃDMA´«ÊäµÄÒı½Å
- * @param  NewState     ÊÇ·ñÊ¹ÄÜDMA
+ * @brief  SPI-ä½¿ç”¨DMAä¼ è¾“åŠŸèƒ½
+ * @param  SPI_DMA_enum ä½¿ç”¨DMAä¼ è¾“çš„å¼•è„š
+ * @param  NewState     æ˜¯å¦ä½¿èƒ½DMA
  * @retval None
  */
 void SPI::DMACmd(SPI_DMA_enum SPI_DMA_enum, FunctionalState NewState)
@@ -351,22 +354,22 @@ void SPI::DMACmd(SPI_DMA_enum SPI_DMA_enum, FunctionalState NewState)
 }
 
 /**
- * @brief  SPI-ÖĞ¶Ï·½·¨
- * @param  SPI_I2S_IT   ÖĞ¶Ï±êÖ¾µÄÑ¡Ôñ
- * @param  NewState     Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  SPI-ä¸­æ–­æ–¹æ³•
+ * @param  SPI_I2S_IT   ä¸­æ–­æ ‡å¿—çš„é€‰æ‹©
+ * @param  NewState     ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void SPI::ITConfig(uint8_t SPI_I2S_IT, FunctionalState NewState)
 {
-    // ÅäÖÃSPIÖĞ¶ÏÓÅÏÈ¼¶
+    // é…ç½®SPIä¸­æ–­ä¼˜å…ˆçº§
     SPIx_Param.SPI_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
     NVIC_Operate(SPIx_Param.SPI_NVIC_InitStructure).Init();
     SPI_I2S_ITConfig(SPIx_Param.SPIx, SPI_I2S_IT, NewState);
 }
 
 /**
- * @brief  SPI-ÆôÓÃCRC¼ÆËã
- * @param  NewState     Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  SPI-å¯ç”¨CRCè®¡ç®—
+ * @param  NewState     ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void SPI::CalculateCRC(FunctionalState NewState)
@@ -374,7 +377,7 @@ void SPI::CalculateCRC(FunctionalState NewState)
     assert_param(IS_SPI_ALL_PERIPH(SPIx_Param.SPIx));
     FunctionalState SPI_State;
     uint16_t CR1_SPE_Set = ((uint16_t)0x0040);
-    // »ñÈ¡SPI×´Ì¬
+    // è·å–SPIçŠ¶æ€
     if (SPIx_Param.SPIx->CR1 & CR1_SPE_Set)
     {
         SPI_State = ENABLE;
@@ -389,8 +392,8 @@ void SPI::CalculateCRC(FunctionalState NewState)
 }
 
 /**
- * @brief  SPI-Çå¿ÕCRCĞ£ÑéÖµ
- * @param  NewState     Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  SPI-æ¸…ç©ºCRCæ ¡éªŒå€¼
+ * @param  NewState     ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void SPI::ClearCRC()
@@ -398,7 +401,7 @@ void SPI::ClearCRC()
     assert_param(IS_SPI_ALL_PERIPH(SPIx_Param.SPIx));
     FunctionalState SPI_State;
     uint16_t CR1_SPE_Set = ((uint16_t)0x0040);
-    // »ñÈ¡SPI×´Ì¬
+    // è·å–SPIçŠ¶æ€
     if (SPIx_Param.SPIx->CR1 & CR1_SPE_Set)
     {
         SPI_State = ENABLE;
@@ -415,7 +418,7 @@ void SPI::ClearCRC()
 }
 
 /**
- * @brief  SPI-ÆôÓÃCRC¼ÆËã
+ * @brief  SPI-å¯ç”¨CRCè®¡ç®—
  * @param  None
  * @retval None
  */
@@ -425,9 +428,9 @@ void SPI::TransmitCRC()
 }
 
 /**
- * @brief  SPI-»ñÈ¡CRCĞ£ÑéÖµ
- * @param  SPI_CRC      SPI_CRC_TX»òÕßSPI_CRC_RX
- * @retval CRC¼Ä´æÆ÷ÖĞµÄÖµ
+ * @brief  SPI-è·å–CRCæ ¡éªŒå€¼
+ * @param  SPI_CRC      SPI_CRC_TXæˆ–è€…SPI_CRC_RX
+ * @retval CRCå¯„å­˜å™¨ä¸­çš„å€¼
  */
 uint16_t SPI::GetCRC(uint8_t SPI_CRC)
 {
@@ -435,35 +438,35 @@ uint16_t SPI::GetCRC(uint8_t SPI_CRC)
 }
 
 /**
- * @brief  SPI-³õÊ¼»¯·½·¨
+ * @brief  SPI-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void SPI::Init()
 {
-    // ¿ªÆôSPIÊ±ÖÓ
+    // å¼€å¯SPIæ—¶é’Ÿ
     RCC_Enable();
-    // SPIx¼Ä´æÆ÷¸´Î»
+    // SPIxå¯„å­˜å™¨å¤ä½
     SPI_I2S_DeInit(SPIx_Param.SPIx);
-    // Òı½Å³õÊ¼»¯
+    // å¼•è„šåˆå§‹åŒ–
     Pin_Init();
-    // ÅäÖÃSPI
+    // é…ç½®SPI
     SPI_Init(SPIx_Param.SPIx, &SPIx_Param.SPI_InitStructure);
-    // ÅäÖÃSPIÖĞ¶Ï
+    // é…ç½®SPIä¸­æ–­
     ITConfig(SPIx_Param.SPI_IT_Selection, SPIx_Param.SPI_IT_State);
-    // ÅäÖÃÎªNSSÓ²¼şÄ£Ê½µÄÊä³öÄ£Ê½(ssoe=1,ssm=0)
+    // é…ç½®ä¸ºNSSç¡¬ä»¶æ¨¡å¼çš„è¾“å‡ºæ¨¡å¼(ssoe=1,ssm=0)
     if (SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master && SPIx_Param.SPI_InitStructure.SPI_NSS == SPI_NSS_Hard && SPIx_Param.SPI_NSS == SPI_NSS_Master_SSOE_Hard)
     {
         SPI_SSOutputCmd(SPIx_Param.SPIx, ENABLE);
     }
-    // ÅäÖÃDMA
+    // é…ç½®DMA
     DMACmd(SPIx_Param.SPI_DMA_enum, SPIx_Param.SPI_DMA_State);
-    // Ê¹ÄÜSPI
+    // ä½¿èƒ½SPI
     Enable();
 }
 
 /**
- * @brief  SPI-¿ªÆôSPI·½·¨(SPIÊ¹ÄÜ)
+ * @brief  SPI-å¼€å¯SPIæ–¹æ³•(SPIä½¿èƒ½)
  * @param  None
  * @retval None
  */
@@ -473,50 +476,50 @@ void SPI::Enable()
 }
 
 /**
- * @brief  SPI-¹Ø±ÕSPI·½·¨(SPIÊ§ÄÜ)
+ * @brief  SPI-å…³é—­SPIæ–¹æ³•(SPIå¤±èƒ½)
  * @param  None
  * @retval None
  */
 void SPI::Disable()
 {
     uint16_t SPI_Direction = SPIx_Param.SPI_InitStructure.SPI_Direction;
-    // ÔÚÖ÷»ò´ÓÄ£Ê½ÏÂµÄÈ«Ë«¹¤Ä£Ê½(BIDIMODE=0£¬RXONLY=0)
+    // åœ¨ä¸»æˆ–ä»æ¨¡å¼ä¸‹çš„å…¨åŒå·¥æ¨¡å¼(BIDIMODE=0ï¼ŒRXONLY=0)
     if (SPI_Direction == SPI_Direction_2Lines_FullDuplex)
     {
-        // µÈ´ıRXNE=1²¢½ÓÊÕ×îºóÒ»¸öÊı¾İ
+        // ç­‰å¾…RXNE=1å¹¶æ¥æ”¶æœ€åä¸€ä¸ªæ•°æ®
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        // µÈ´ıTXE=1
+        // ç­‰å¾…TXE=1
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        // µÈ´ıBSY=0
+        // ç­‰å¾…BSY=0
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_BSY) == SET)
             ;
     }
-    // ÔÚÖ÷»ò´ÓÄ£Ê½ÏÂµÄµ¥ÏòÖ»·¢ËÍÄ£Ê½(BIDIMODE=0£¬RXONLY=0)»òË«ÏòµÄ·¢ËÍÄ£Ê½(BIDIMODE=1£¬BIDIOE=1)
-    // µ¥ÏòÖ»·¢ËÍÖØ¸´ÉÏÃæ,ËùÒÔÖ»Ğ´Ë«ÏòµÄ·¢ËÍÄ£Ê½
+    // åœ¨ä¸»æˆ–ä»æ¨¡å¼ä¸‹çš„å•å‘åªå‘é€æ¨¡å¼(BIDIMODE=0ï¼ŒRXONLY=0)æˆ–åŒå‘çš„å‘é€æ¨¡å¼(BIDIMODE=1ï¼ŒBIDIOE=1)
+    // å•å‘åªå‘é€é‡å¤ä¸Šé¢,æ‰€ä»¥åªå†™åŒå‘çš„å‘é€æ¨¡å¼
     else if (SPI_Direction == SPI_Direction_1Line_Tx)
     {
-        // µÈ´ıTXE=1
+        // ç­‰å¾…TXE=1
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        // µÈ´ıBSY=0
+        // ç­‰å¾…BSY=0
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_BSY) == SET)
             ;
     }
-    // ÔÚÖ÷Ä£Ê½ÏÂµÄµ¥ÏòÖ»½ÓÊÕÄ£Ê½(MSTR=1£¬BIDIMODE=0£¬RXONLY=1)»òË«ÏòµÄ½ÓÊÕÄ£Ê½(MSTR=1£¬BIDIMODE=1£¬BIDIOE=0)
+    // åœ¨ä¸»æ¨¡å¼ä¸‹çš„å•å‘åªæ¥æ”¶æ¨¡å¼(MSTR=1ï¼ŒBIDIMODE=0ï¼ŒRXONLY=1)æˆ–åŒå‘çš„æ¥æ”¶æ¨¡å¼(MSTR=1ï¼ŒBIDIMODE=1ï¼ŒBIDIOE=0)
     else if (SPIx_Param.SPI_InitStructure.SPI_Mode == SPI_Mode_Master && (SPI_Direction == SPI_Direction_2Lines_RxOnly || SPI_Direction == SPI_Direction_1Line_Rx))
     {
-        // µÈ´ı×îºóÒ»¸öRXNE=1
+        // ç­‰å¾…æœ€åä¸€ä¸ªRXNE=1
         while (SPI_I2S_GetFlagStatus(SPIx_Param.SPIx, SPI_I2S_FLAG_RXNE) == RESET)
             ;
-        // ×îºóÒ»¸öÊı¾İÓÉÍâ²¿´úÂë¶Á³ö
+        // æœ€åä¸€ä¸ªæ•°æ®ç”±å¤–éƒ¨ä»£ç è¯»å‡º
     }
     SPI_Cmd(SPIx_Param.SPIx, DISABLE);
 }
 
 /**
- * @brief  SPI-¿ªÆôSPIÊ±ÖÓ
+ * @brief  SPI-å¼€å¯SPIæ—¶é’Ÿ
  * @param  None
  * @retval None
  */
@@ -526,7 +529,7 @@ void SPI::RCC_Enable()
 }
 
 /**
- * @brief  SPI-¹Ø±ÕSPIÊ±ÖÓ
+ * @brief  SPI-å…³é—­SPIæ—¶é’Ÿ
  * @param  None
  * @retval None
  */
@@ -536,7 +539,7 @@ void SPI::RCC_Disable()
 }
 
 /**
- * @brief  SPI-¿ªÆôSPIÊ±ÖÓ
+ * @brief  SPI-å¼€å¯SPIæ—¶é’Ÿ
  * @param  None
  * @retval None
  */
@@ -546,7 +549,7 @@ void SPI::RCC_Enable(SPI_TypeDef *SPIx)
 }
 
 /**
- * @brief  SPI-¹Ø±ÕSPIÊ±ÖÓ
+ * @brief  SPI-å…³é—­SPIæ—¶é’Ÿ
  * @param  None
  * @retval None
  */

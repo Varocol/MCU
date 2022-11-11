@@ -5,7 +5,7 @@
 #include <cstdio>
 using namespace std;
 
-//Æ½Ì¨Ö¸¶¨µÄÍâÉè(ÓÃÓÚÖØ¶¨ÏòCµ×²ãº¯Êı)
+//å¹³å°æŒ‡å®šçš„å¤–è®¾(ç”¨äºé‡å®šå‘Cåº•å±‚å‡½æ•°)
 #define PLATFORM_USART USART_1
 #define PLATFORM_LED LED_1
 #define PLATFORM_RTC RTC_x

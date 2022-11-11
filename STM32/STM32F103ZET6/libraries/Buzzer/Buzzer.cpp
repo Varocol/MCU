@@ -1,7 +1,7 @@
 #include "Buzzer.h"
 #include "System.h"
 /**
- * @brief       ·äÃùÆ÷¿Õ¹¹Ôì·½·¨
+ * @brief       èœ‚é¸£å™¨ç©ºæ„é€ æ–¹æ³•
  * @param       None
  * @retval      None
  */
@@ -10,8 +10,8 @@ Buzzer::Buzzer()
 }
 
 /**
- * @brief       ·äÃùÆ÷´ø²Î¹¹Ôì·½·¨
- * @param       pin         Çı¶¯·äÃùÆ÷µÄÒı½Å
+ * @brief       èœ‚é¸£å™¨å¸¦å‚æ„é€ æ–¹æ³•
+ * @param       pin         é©±åŠ¨èœ‚é¸£å™¨çš„å¼•è„š
  * @retval      None
  */
 Buzzer::Buzzer(TIMx_Channelx_enum pwmch)
@@ -20,8 +20,8 @@ Buzzer::Buzzer(TIMx_Channelx_enum pwmch)
 }
 
 /**
- * @brief       ·äÃùÆ÷´ø²Î¹¹Ôì·½·¨
- * @param       pin         Çı¶¯·äÃùÆ÷µÄÒı½Å
+ * @brief       èœ‚é¸£å™¨å¸¦å‚æ„é€ æ–¹æ³•
+ * @param       pin         é©±åŠ¨èœ‚é¸£å™¨çš„å¼•è„š
  * @retval      None
  */
 Buzzer::~Buzzer()
@@ -29,7 +29,7 @@ Buzzer::~Buzzer()
 }
 
 /**
- * @brief       ·äÃùÆ÷Æô¶¯PWM
+ * @brief       èœ‚é¸£å™¨å¯åŠ¨PWM
  * @param       Null
  * @retval      None
  */
@@ -39,7 +39,7 @@ void Buzzer::Beep_On()
 }
 
 /**
- * @brief       ·äÃùÆ÷Í£Ö¹PWM
+ * @brief       èœ‚é¸£å™¨åœæ­¢PWM
  * @param       Null
  * @retval      None
  */
@@ -49,9 +49,9 @@ void Buzzer::Beep_Off()
 }
 
 /**
- * @brief       ·äÃùÆ÷ÉèÖÃPWM²ÎÊı
- * @param       freq        ·äÃùÆ÷ÆµÂÊ
- * @param       volume      ·äÃùÆ÷ÒôÁ¿
+ * @brief       èœ‚é¸£å™¨è®¾ç½®PWMå‚æ•°
+ * @param       freq        èœ‚é¸£å™¨é¢‘ç‡
+ * @param       volume      èœ‚é¸£å™¨éŸ³é‡
  * @retval      None
  */
 void Buzzer::Beep_Set(uint16_t freq, uint8_t volume)
@@ -62,14 +62,14 @@ void Buzzer::Beep_Set(uint16_t freq, uint8_t volume)
 }
 
 /**
- * @brief       ·äÃùÆ÷»ñÈ¡¸èÇú³¤¶È
- * @param       song        ÒôÀÖ½á¹¹Ìå
+ * @brief       èœ‚é¸£å™¨è·å–æ­Œæ›²é•¿åº¦
+ * @param       song        éŸ³ä¹ç»“æ„ä½“
  * @retval      None
  */
 uint16_t Buzzer::Beep_Song_Get_Len(const struct beep_song *song)
 {
     uint16_t cnt = 0;
-    /* ¸èÇúÒÔ0x00 0x00½áÎ² ¼ì²â½áÊø±êÖ¾*/
+    /* æ­Œæ›²ä»¥0x00 0x00ç»“å°¾ æ£€æµ‹ç»“æŸæ ‡å¿—*/
     while (song->data[cnt])
     {
         cnt += 2;
@@ -78,9 +78,9 @@ uint16_t Buzzer::Beep_Song_Get_Len(const struct beep_song *song)
 }
 
 /**
- * @brief       ·äÃùÆ÷»ñÈ¡¸èÇúÃû×Ö
- * @param       song        ÒôÀÖ½á¹¹Ìå
- * @param       name        ÓÃÓÚ¶ÁÈ¡ÒôÀÖÃûµÄ×Ö·ûÊı×é
+ * @brief       èœ‚é¸£å™¨è·å–æ­Œæ›²åå­—
+ * @param       song        éŸ³ä¹ç»“æ„ä½“
+ * @param       name        ç”¨äºè¯»å–éŸ³ä¹åçš„å­—ç¬¦æ•°ç»„
  * @retval      None
  */
 void Buzzer::Beep_Song_Get_Name(const struct beep_song *song, char *name)
@@ -95,19 +95,19 @@ void Buzzer::Beep_Song_Get_Name(const struct beep_song *song, char *name)
 }
 
 /**
- * @brief       ·äÃùÆ÷µ÷ÕûÒôÀÖÇúµ÷
- * @param       signature|µ÷ºÅ(0-11)       :  ÊÇÖ¸ÀÖÇúÉı¶àÉÙ¸ö°ëÒôÑİ×à;
- * @param       octachord|Éı½µ°Ë¶È(-2µ½+2) :  < 0 ½µ¼¸¸ö°Ë¶È; > 0 Éı¼¸¸ö°Ë¶È
+ * @brief       èœ‚é¸£å™¨è°ƒæ•´éŸ³ä¹æ›²è°ƒ
+ * @param       signature|è°ƒå·(0-11)       :  æ˜¯æŒ‡ä¹æ›²å‡å¤šå°‘ä¸ªåŠéŸ³æ¼”å¥;
+ * @param       octachord|å‡é™å…«åº¦(-2åˆ°+2) :  < 0 é™å‡ ä¸ªå…«åº¦; > 0 å‡å‡ ä¸ªå…«åº¦
  * @retval      None
  */
 void Buzzer::Beep_Song_Decode_new_freq(uint8_t signature, int8_t octachord)
 {
     uint8_t i, j;
-    for (i = 0; i < 12; i++) // ¸ù¾İµ÷ºÅ¼°Éı½µ°Ë¶ÈÀ´Éú³ÉĞÂµÄÆµÂÊ±í
+    for (i = 0; i < 12; i++) // æ ¹æ®è°ƒå·åŠå‡é™å…«åº¦æ¥ç”Ÿæˆæ–°çš„é¢‘ç‡è¡¨
     {
         j = i + signature;
 
-        if (j > 11) //ÉıÍêÖ®ºó³¬³ö±¾×é»ù±¾Òô¼¶£¬¾ÍÌøµ½ÏÂÒ»×éÒô¼¶
+        if (j > 11) //å‡å®Œä¹‹åè¶…å‡ºæœ¬ç»„åŸºæœ¬éŸ³çº§ï¼Œå°±è·³åˆ°ä¸‹ä¸€ç»„éŸ³çº§
         {
             j = j - 12;
             freq_tab_new[i] = freq_tab[j] * 2;
@@ -117,69 +117,69 @@ void Buzzer::Beep_Song_Decode_new_freq(uint8_t signature, int8_t octachord)
             freq_tab_new[i] = freq_tab[j];
         }
 
-        /* Éı½µ°Ë¶È */
+        /* å‡é™å…«åº¦ */
         if (octachord < 0)
         {
             freq_tab_new[i] >>= (-octachord);
         }
         else if (octachord > 0)
         {
-            freq_tab_new[i] <<= octachord; //Ã¿ÉıÒ»¸ö°Ë¶È ÆµÂÊ¾Í·­Ò»±¶
+            freq_tab_new[i] <<= octachord; //æ¯å‡ä¸€ä¸ªå…«åº¦ é¢‘ç‡å°±ç¿»ä¸€å€
         }
     }
 }
 
 /**
- * @brief       ·äÃùÆ÷ÒôÀÖ½âÂë
- * @param       tone            Òôµ÷
- * @param       length          Òô·û³¤¶È
- * @param       Basicspeed      ¸èÇúËÙ¶È
- * @param       data            ¸èÇúĞÅÏ¢Êı×é(ÓÃÓÚ´æ·Å½âÂëºóµÄĞÅÏ¢)
+ * @brief       èœ‚é¸£å™¨éŸ³ä¹è§£ç 
+ * @param       tone            éŸ³è°ƒ
+ * @param       length          éŸ³ç¬¦é•¿åº¦
+ * @param       Basicspeed      æ­Œæ›²é€Ÿåº¦
+ * @param       data            æ­Œæ›²ä¿¡æ¯æ•°ç»„(ç”¨äºå­˜æ”¾è§£ç åçš„ä¿¡æ¯)
  * @retval      None
  */
 void Buzzer::Beep_Song_Decode(uint16_t tone, uint16_t length, uint16_t Basicspeed, struct beep_song_data *data)
 {
-    static const uint16_t div0_len = 60.0 / Basicspeed * 1000; // È«Òô·ûµÄ³¤¶È(ms)
+    static const uint16_t div0_len = 60.0 / Basicspeed * 1000; // å…¨éŸ³ç¬¦çš„é•¿åº¦(ms)
     uint16_t note_len, note_sound_len, current_freq;
     uint8_t note, sharp, range, note_div, effect, dotted;
 
-    note = tone % 10;                                        //¼ÆËã³öÒô·û
-    range = tone / 10 % 10;                                  //¼ÆËã³ö¸ßµÍÒô
-    sharp = tone / 100;                                      //¼ÆËã³öÊÇ·ñÉı°ë
-    current_freq = freq_tab_new[sign_tab[note - 1] + sharp]; //²é³ö¶ÔÓ¦Òô·ûµÄÆµÂÊ
+    note = tone % 10;                                        //è®¡ç®—å‡ºéŸ³ç¬¦
+    range = tone / 10 % 10;                                  //è®¡ç®—å‡ºé«˜ä½éŸ³
+    sharp = tone / 100;                                      //è®¡ç®—å‡ºæ˜¯å¦å‡åŠ
+    current_freq = freq_tab_new[sign_tab[note - 1] + sharp]; //æŸ¥å‡ºå¯¹åº”éŸ³ç¬¦çš„é¢‘ç‡
 
     if (note != 0)
     {
         if (range == 1)
-            current_freq >>= 1; //µÍÒô ½µ°Ë¶È
+            current_freq >>= 1; //ä½éŸ³ é™å…«åº¦
         if (range == 3)
-            current_freq <<= 1; //¸ßÒô Éı°Ë¶È
+            current_freq <<= 1; //é«˜éŸ³ å‡å…«åº¦
         data->freq = current_freq;
     }
     else
     {
         data->freq = 0;
     }
-    note_div = length_tab[length % 10]; //Ëã³öÊÇ¼¸·ÖÒô·û
-    effect = length / 10 % 10;          //Ëã³öÒô·ûÀàĞÍ(0ÆÕÍ¨1Á¬Òô2¶ÙÒô)
-    dotted = length / 100;              //Ëã³öÊÇ·ñ¸½µã
-    note_len = div0_len / note_div;     //Ëã³öÒô·ûµÄÊ±³¤
+    note_div = length_tab[length % 10]; //ç®—å‡ºæ˜¯å‡ åˆ†éŸ³ç¬¦
+    effect = length / 10 % 10;          //ç®—å‡ºéŸ³ç¬¦ç±»å‹(0æ™®é€š1è¿éŸ³2é¡¿éŸ³)
+    dotted = length / 100;              //ç®—å‡ºæ˜¯å¦é™„ç‚¹
+    note_len = div0_len / note_div;     //ç®—å‡ºéŸ³ç¬¦çš„æ—¶é•¿
 
     if (dotted == 1)
         note_len = note_len + note_len / 2;
 
     if (effect != 1)
     {
-        if (effect == 0) //Ëã³öÆÕÍ¨Òô·ûµÄÑİ×à³¤¶È
+        if (effect == 0) //ç®—å‡ºæ™®é€šéŸ³ç¬¦çš„æ¼”å¥é•¿åº¦
         {
             note_sound_len = note_len * SOUND_SPACE;
         }
-        else //Ëã³ö¶ÙÒôµÄÑİ×à³¤¶È
+        else //ç®—å‡ºé¡¿éŸ³çš„æ¼”å¥é•¿åº¦
         {
             note_sound_len = note_len / 2;
         }
     }
-    else //Ëã³öÁ¬ÒôµÄÑİ×à³¤¶È
+    else //ç®—å‡ºè¿éŸ³çš„æ¼”å¥é•¿åº¦
     {
         note_sound_len = note_len;
     }
@@ -188,14 +188,14 @@ void Buzzer::Beep_Song_Decode(uint16_t tone, uint16_t length, uint16_t Basicspee
         note_sound_len = 0;
     }
     data->sound_len = note_sound_len;
-    data->nosound_len = note_len - note_sound_len; //Ëã³ö²»·¢ÒôµÄ³¤¶È
+    data->nosound_len = note_len - note_sound_len; //ç®—å‡ºä¸å‘éŸ³çš„é•¿åº¦
 }
 
 /**
- * @brief       ·äÃùÆ÷»ñÈ¡ÒôÀÖ½âÂëĞÅÏ¢
- * @param       song            ¸èÇúĞÅÏ¢
- * @param       index           Òô·ûµ±Ç°ËùÔÚÎ»ÖÃ
- * @param       data            ¸èÇúĞÅÏ¢Êı×é(ÓÃÓÚ´æ·Å½âÂëºóµÄĞÅÏ¢)
+ * @brief       èœ‚é¸£å™¨è·å–éŸ³ä¹è§£ç ä¿¡æ¯
+ * @param       song            æ­Œæ›²ä¿¡æ¯
+ * @param       index           éŸ³ç¬¦å½“å‰æ‰€åœ¨ä½ç½®
+ * @param       data            æ­Œæ›²ä¿¡æ¯æ•°ç»„(ç”¨äºå­˜æ”¾è§£ç åçš„ä¿¡æ¯)
  * @retval      None
  */
 void Buzzer::Beep_Song_Get_Data(const struct beep_song *song, uint16_t index, struct beep_song_data *data)
@@ -204,8 +204,8 @@ void Buzzer::Beep_Song_Get_Data(const struct beep_song *song, uint16_t index, st
 }
 
 /**
- * @brief       ÉèÖÃÊä³öÍ¨µÀ
- * @param       pwmch   Êä³öÍ¨µÀÑ¡Ôñ
+ * @brief       è®¾ç½®è¾“å‡ºé€šé“
+ * @param       pwmch   è¾“å‡ºé€šé“é€‰æ‹©
  * @retval      None
  */
 void Buzzer::Set_Buzzer_Param(TIMx_Channelx_enum pwmch)
@@ -214,10 +214,10 @@ void Buzzer::Set_Buzzer_Param(TIMx_Channelx_enum pwmch)
 }
 
 /**
- * @brief       ÒôÀÖ·½·¨
- * @param       HZ:Òôµ÷µÄÆµÂÊÊı
- * @param       time:ÏìÓ¦µÄÊ±¼ä(Ò»ÅÄÎª1,°ëÅÄÎª0.5,ÒÔ´ËÀàÍÆ)
- * @param       Basespeed:ÀÖÇú»ù±¾ÅÄÊı(±íÊ¾Ã¿·ÖÖÓ¼¸¸ö1³¤¶ÈµÄÒô·û)
+ * @brief       éŸ³ä¹æ–¹æ³•
+ * @param       HZ:éŸ³è°ƒçš„é¢‘ç‡æ•°
+ * @param       time:å“åº”çš„æ—¶é—´(ä¸€æ‹ä¸º1,åŠæ‹ä¸º0.5,ä»¥æ­¤ç±»æ¨)
+ * @param       Basespeed:ä¹æ›²åŸºæœ¬æ‹æ•°(è¡¨ç¤ºæ¯åˆ†é’Ÿå‡ ä¸ª1é•¿åº¦çš„éŸ³ç¬¦)
  * @retval      None
  */
 void Buzzer::Music(const struct beep_song *song)
@@ -226,18 +226,18 @@ void Buzzer::Music(const struct beep_song *song)
     struct beep_song_data data;
     int len, i = 0;
     char name[SONG_NAME_LENGTH_MAX + 1];
-    /*ÅäÖÃÀÖÇúÇúµ÷,song->tone = 0, Ä¬ÈÏÎªCµ÷*/
+    /*é…ç½®ä¹æ›²æ›²è°ƒ,song->tone = 0, é»˜è®¤ä¸ºCè°ƒ*/
     Beep_Song_Decode_new_freq(song->tone, 0);
-    /*ÌáÈ¡ÀÖÇúÃû*/
+    /*æå–ä¹æ›²å*/
     Beep_Song_Get_Name(song, name);
-    //¸Ã·½·¨´Óµ×²ãµ÷ÓÃuart£¬Êä³ö¸ü°²È«
-    printf("ÕıÔÚ²¥·Å£º%s\n", name);
-    /*»ñÈ¡ÀÖÇú³¤¶È*/
+    //è¯¥æ–¹æ³•ä»åº•å±‚è°ƒç”¨uartï¼Œè¾“å‡ºæ›´å®‰å…¨
+    printf("æ­£åœ¨æ’­æ”¾ï¼š%s\n", name);
+    /*è·å–ä¹æ›²é•¿åº¦*/
     len = Beep_Song_Get_Len(song);
-    /*¿ªÊ¼²¥·ÅÀÖÇú*/
+    /*å¼€å§‹æ’­æ”¾ä¹æ›²*/
     while (i < len)
     {
-        /* ½âÂëÒôÀÖÊı¾İ */
+        /* è§£ç éŸ³ä¹æ•°æ® */
         Beep_Song_Get_Data(song, i, &data);
         Beep_Set(data.freq, song->volume);
         Beep_On();

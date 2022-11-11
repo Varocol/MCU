@@ -1,7 +1,7 @@
 #ifndef __OJ_DEBUG_H
 #define __OJ_DEBUG_H
 #include "stdio.h"
-//ÓÃÓÚµ÷ÊÔ
+//ç”¨äºŽè°ƒè¯•
 #define DEBUG_OUT_PUT 1
 #define DEBUG_ERROR_INFO(fmt, ...) \
     if (DEBUG_OUT_PUT)             \

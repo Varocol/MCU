@@ -1,14 +1,14 @@
 #include "System.h"
 int main()
 {
-    double LED_Frequency = 500; // LEDÆµÂÊ,100Hz,²»ÄÜ³¬¹ı500Hz,ÇÒ²»ÄÜ´óÓÚPWM³õÊ¼»¯²ÎÊıÖĞµÄÆµÂÊ
-    double LED_Cycle = 2;       // LEDÒ»ÁÁÃğÖÜÆÚ,2s
+    double LED_Frequency = 500; // LEDé¢‘ç‡,100Hz,ä¸èƒ½è¶…è¿‡500Hz,ä¸”ä¸èƒ½å¤§äºPWMåˆå§‹åŒ–å‚æ•°ä¸­çš„é¢‘ç‡
+    double LED_Cycle = 2;       // LEDä¸€äº®ç­å‘¨æœŸ,2s
     PWM pwm = PWM(TIM3_Channel3_PartialRemap, 1000, 0.5);
     pwm.Init();
     int flag = 1;
     for (int i = 0;; i += flag)
     {
-        if (i == LED_Frequency) // 100µÄË¢ĞÂÆµÂÊ
+        if (i == LED_Frequency) // 100çš„åˆ·æ–°é¢‘ç‡
         {
             flag = -1;
         }

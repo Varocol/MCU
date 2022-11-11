@@ -1,6 +1,6 @@
 #include "LED.h"
 /**
- * @brief   LED-¿Õ¹¹Ôì·½·¨
+ * @brief   LED-ç©ºæ„é€ æ–¹æ³•
  * @param   None
  * @return  None
  */
@@ -9,9 +9,9 @@ LED::LED()
 }
 
 /**
- * @brief   LED-´ø²Î¹¹Ôì·½·¨
- * @param   pin         ÓÃ»§ĞèÒª²Ù×÷µÄÒı½Å
- * @param   mode        LEDµçÆ½¼«ĞÔ
+ * @brief   LED-å¸¦å‚æ„é€ æ–¹æ³•
+ * @param   pin         ç”¨æˆ·éœ€è¦æ“ä½œçš„å¼•è„š
+ * @param   mode        LEDç”µå¹³ææ€§
  * @return  None
  */
 LED::LED(PIN_enum pin, LED_Lighting_Mode mode)
@@ -20,7 +20,7 @@ LED::LED(PIN_enum pin, LED_Lighting_Mode mode)
 }
 
 /**
- * @brief   LED-Îö¹¹·½·¨
+ * @brief   LED-ææ„æ–¹æ³•
  * @param   None
  * @return  None
  */
@@ -29,9 +29,9 @@ LED::~LED()
 }
 
 /**
- * @brief   LED-ÉèÖÃ²ÎÊı·½·¨
- * @param   pin         ÓÃ»§ĞèÒª²Ù×÷µÄÒı½Å
- * @param   mode        LEDµçÆ½¼«ĞÔ
+ * @brief   LED-è®¾ç½®å‚æ•°æ–¹æ³•
+ * @param   pin         ç”¨æˆ·éœ€è¦æ“ä½œçš„å¼•è„š
+ * @param   mode        LEDç”µå¹³ææ€§
  * @return  None
  */
 void LED::Set_Param(PIN_enum pin, LED_Lighting_Mode mode)
@@ -41,8 +41,8 @@ void LED::Set_Param(PIN_enum pin, LED_Lighting_Mode mode)
 }
 
 /**
- * @brief   LED-ÉèÖÃ¼¤»îÄ£Ê½
- * @param   mode        LEDµçÆ½¼«ĞÔ
+ * @brief   LED-è®¾ç½®æ¿€æ´»æ¨¡å¼
+ * @param   mode        LEDç”µå¹³ææ€§
  * @return  None
  */
 void LED::Set_Mode(LED_Lighting_Mode mode)
@@ -51,7 +51,7 @@ void LED::Set_Mode(LED_Lighting_Mode mode)
 }
 
 /**
- * @brief   LED-³õÊ¼»¯
+ * @brief   LED-åˆå§‹åŒ–
  * @param   None
  * @return  None
  */
@@ -62,7 +62,7 @@ void LED::Init()
 }
 
 /**
- * @brief   LED-µÆÁÁ
+ * @brief   LED-ç¯äº®
  * @param   None
  * @return  None
  */
@@ -79,7 +79,7 @@ void LED::On()
 }
 
 /**
- * @brief  LED-µÆÃğ
+ * @brief  LED-ç¯ç­
  * @param  None
  * @return None
  */
@@ -96,7 +96,7 @@ void LED::Off()
 }
 
 /**
- * @brief  LED-µÆ·´×ª
+ * @brief  LED-ç¯åè½¬
  * @param  None
  * @return None
  */

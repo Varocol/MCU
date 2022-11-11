@@ -1,7 +1,7 @@
 #include "GPIO.h"
 
 /**
- * @brief  GPIO-¿Õ¹¹Ôì·½·¨
+ * @brief  GPIO-ç©ºæ„é€ æ–¹æ³•
  * @retval None
  */
 GPIO::GPIO()
@@ -9,7 +9,7 @@ GPIO::GPIO()
 }
 
 /**
- * @brief  GPIO-Îö¹¹·½·¨
+ * @brief  GPIO-ææ„æ–¹æ³•
  * @retval None
  */
 GPIO::~GPIO()
@@ -17,11 +17,11 @@ GPIO::~GPIO()
 }
 
 /**
- * @brief  GPIO-¹¹Ôì·½·¨
- * @param  Pin          Òı½Å
- * @param  Val          GPIO³õÊ¼»¯Êä³öÖµ
- * @param  Mode         GPIOÄ£Ê½
- * @param  Speed        GPIOËÙ¶È
+ * @brief  GPIO-æ„é€ æ–¹æ³•
+ * @param  Pin          å¼•è„š
+ * @param  Val          GPIOåˆå§‹åŒ–è¾“å‡ºå€¼
+ * @param  Mode         GPIOæ¨¡å¼
+ * @param  Speed        GPIOé€Ÿåº¦
  * @retval None
  */
 GPIO::GPIO(PIN_enum Pin, GPIOMode_TypeDef Mode, BitAction Val, GPIOSpeed_TypeDef Speed)
@@ -30,8 +30,8 @@ GPIO::GPIO(PIN_enum Pin, GPIOMode_TypeDef Mode, BitAction Val, GPIOSpeed_TypeDef
 }
 
 /**
- * @brief  GPIO-ÉèÖÃGPIOÒı½Å
- * @param  Pin            Òı½Å
+ * @brief  GPIO-è®¾ç½®GPIOå¼•è„š
+ * @param  Pin            å¼•è„š
  * @retval None
  */
 void GPIO::Set_Pin(PIN_enum Pin)
@@ -42,9 +42,9 @@ void GPIO::Set_Pin(PIN_enum Pin)
 }
 
 /**
- * @brief  GPIO-ÉèÖÃGPIO³õÊ¼»¯Êä³öÖµ
- *         (²»ÄÜÓÃÓÚÉèÖÃÒı½ÅÖµ,ÈôĞèÒªÇëÊ¹ÓÃSet_Pin_Val)
- * @param  Val          GPIO³õÊ¼»¯Êä³öÖµ
+ * @brief  GPIO-è®¾ç½®GPIOåˆå§‹åŒ–è¾“å‡ºå€¼
+ *         (ä¸èƒ½ç”¨äºè®¾ç½®å¼•è„šå€¼,è‹¥éœ€è¦è¯·ä½¿ç”¨Set_Pin_Val)
+ * @param  Val          GPIOåˆå§‹åŒ–è¾“å‡ºå€¼
  * @retval None
  */
 void GPIO::Set_Val(BitAction Val)
@@ -53,8 +53,8 @@ void GPIO::Set_Val(BitAction Val)
 }
 
 /**
- * @brief  GPIO-ÉèÖÃGPIOËÙ¶È
- * @param  Speed         GPIOËÙ¶È
+ * @brief  GPIO-è®¾ç½®GPIOé€Ÿåº¦
+ * @param  Speed         GPIOé€Ÿåº¦
  * @retval None
  */
 void GPIO::Set_Speed(GPIOSpeed_TypeDef Speed)
@@ -63,8 +63,8 @@ void GPIO::Set_Speed(GPIOSpeed_TypeDef Speed)
 }
 
 /**
- * @brief  GPIO-ÉèÖÃGPIOÄ£Ê½
- * @param  Speed         GPIOÄ£Ê½
+ * @brief  GPIO-è®¾ç½®GPIOæ¨¡å¼
+ * @param  Speed         GPIOæ¨¡å¼
  * @retval None
  */
 void GPIO::Set_Mode(GPIOMode_TypeDef Mode)
@@ -73,7 +73,7 @@ void GPIO::Set_Mode(GPIOMode_TypeDef Mode)
 }
 
 /**
- * @brief  GPIO-»ñÈ¡Òı½Å
+ * @brief  GPIO-è·å–å¼•è„š
  * @param  None
  * @retval Pin
  */
@@ -83,7 +83,7 @@ PIN_enum GPIO::Get_Pin()
 }
 
 /**
- * @brief  GPIO-»ñÈ¡Òı½Å³õÊ¼»¯Öµ
+ * @brief  GPIO-è·å–å¼•è„šåˆå§‹åŒ–å€¼
  * @param  None
  * @retval Val
  */
@@ -93,7 +93,7 @@ BitAction GPIO::Get_Val()
 }
 
 /**
- * @brief  GPIO-·µ»ØGPIO¶Ë¿Ú
+ * @brief  GPIO-è¿”å›GPIOç«¯å£
  * @param  None
  * @retval GPIOx
  */
@@ -103,7 +103,7 @@ GPIO_TypeDef *GPIO::Get_GPIOx()
 }
 
 /**
- * @brief  GPIO-·µ»ØGPIO³õÊ¼»¯½á¹¹Ìå
+ * @brief  GPIO-è¿”å›GPIOåˆå§‹åŒ–ç»“æ„ä½“
  * @param  None
  * @retval GPIOInitStructure
  */
@@ -113,9 +113,9 @@ GPIO_InitTypeDef GPIO::Get_GPIOInitStructure()
 }
 
 /**
- * @brief  GPIO-»ñÈ¡PinËù¶ÔÓ¦µÄ¶Ë¿Ú
- * @param  Pin          Òı½Å
- * @retval PinËù¶ÔÓ¦µÄ¶Ë¿Ú
+ * @brief  GPIO-è·å–Pinæ‰€å¯¹åº”çš„ç«¯å£
+ * @param  Pin          å¼•è„š
+ * @retval Pinæ‰€å¯¹åº”çš„ç«¯å£
  */
 GPIO_TypeDef *GPIO::Get_GPIOx(PIN_enum Pin)
 {
@@ -148,9 +148,9 @@ GPIO_TypeDef *GPIO::Get_GPIOx(PIN_enum Pin)
 }
 
 /**
- * @brief  GPIO-»ñÈ¡PinËù¶ÔÓ¦µÄGPIO_Pin
- * @param  Pin          Òı½Å
- * @retval PinËù¶ÔÓ¦µÄGPIO_Pin
+ * @brief  GPIO-è·å–Pinæ‰€å¯¹åº”çš„GPIO_Pin
+ * @param  Pin          å¼•è„š
+ * @retval Pinæ‰€å¯¹åº”çš„GPIO_Pin
  */
 uint16_t GPIO::Get_GPIO_Pin(PIN_enum Pin)
 {
@@ -213,7 +213,7 @@ uint16_t GPIO::Get_GPIO_Pin(PIN_enum Pin)
 }
 
 /**
- * @brief  GPIO-³õÊ¼»¯GPIOÎªÊä³öÄ£Ê½
+ * @brief  GPIO-åˆå§‹åŒ–GPIOä¸ºè¾“å‡ºæ¨¡å¼
  * @param  None
  * @retval None
  */
@@ -225,7 +225,7 @@ void GPIO::OUT_MODE()
 }
 
 /**
- * @brief  GPIO-³õÊ¼»¯GPIOÎªÊäÈëÄ£Ê½
+ * @brief  GPIO-åˆå§‹åŒ–GPIOä¸ºè¾“å…¥æ¨¡å¼
  * @param  None
  * @retval None
  */
@@ -237,7 +237,7 @@ void GPIO::IN_MODE()
 }
 
 /**
- * @brief  GPIO-Òı½ÅÀ­¸ß
+ * @brief  GPIO-å¼•è„šæ‹‰é«˜
  * @param  None
  * @retval None
  */
@@ -247,7 +247,7 @@ void GPIO::Pin_High()
 }
 
 /**
- * @brief  GPIO-Òı½ÅÀ­µÍ
+ * @brief  GPIO-å¼•è„šæ‹‰ä½
  * @param  None
  * @retval None
  */
@@ -257,7 +257,7 @@ void GPIO::Pin_Low()
 }
 
 /**
- * @brief  GPIO-Òı½Å·´×ª
+ * @brief  GPIO-å¼•è„šåè½¬
  * @param  None
  * @retval None
  */
@@ -267,8 +267,8 @@ void GPIO::Pin_Toggle()
 }
 
 /**
- * @brief  GPIO-ÉèÖÃÒı½ÅÖµ
- * @param  BitVal       Òı½ÅÖµ
+ * @brief  GPIO-è®¾ç½®å¼•è„šå€¼
+ * @param  BitVal       å¼•è„šå€¼
  * @retval None
  */
 void GPIO::Set_Pin_Val(uint8_t BitVal)
@@ -277,8 +277,8 @@ void GPIO::Set_Pin_Val(uint8_t BitVal)
 }
 
 /**
- * @brief  GPIO-ÉèÖÃ¶Ë¿ÚÖµ
- * @param  PortVal      ¶Ë¿ÚÖµ
+ * @brief  GPIO-è®¾ç½®ç«¯å£å€¼
+ * @param  PortVal      ç«¯å£å€¼
  * @retval None
  */
 void GPIO::Set_Port_Val(uint16_t PortVal)
@@ -287,9 +287,9 @@ void GPIO::Set_Port_Val(uint16_t PortVal)
 }
 
 /**
- * @brief  GPIO-¶ÁÈ¡ÊäÈëµÄÒı½ÅÊıÖµ
+ * @brief  GPIO-è¯»å–è¾“å…¥çš„å¼•è„šæ•°å€¼
  * @param  None
- * @retval ÊäÈëÒı½ÅµÄÊıÖµ
+ * @retval è¾“å…¥å¼•è„šçš„æ•°å€¼
  */
 BitAction GPIO::Get_Input_Pin()
 {
@@ -304,9 +304,9 @@ BitAction GPIO::Get_Input_Pin()
 }
 
 /**
- * @brief  GPIO-¶ÁÈ¡Êä³öµÄÒı½ÅÊıÖµ
+ * @brief  GPIO-è¯»å–è¾“å‡ºçš„å¼•è„šæ•°å€¼
  * @param  None
- * @retval Êä³öÒı½ÅµÄÊıÖµ
+ * @retval è¾“å‡ºå¼•è„šçš„æ•°å€¼
  */
 BitAction GPIO::Get_Output_Pin()
 {
@@ -321,9 +321,9 @@ BitAction GPIO::Get_Output_Pin()
 }
 
 /**
- * @brief  GPIO-¶ÁÈ¡ÊäÈëµÄ¶Ë¿ÚÊıÖµ
+ * @brief  GPIO-è¯»å–è¾“å…¥çš„ç«¯å£æ•°å€¼
  * @param  None
- * @retval ÊäÈë¶Ë¿ÚµÄÊıÖµ
+ * @retval è¾“å…¥ç«¯å£çš„æ•°å€¼
  */
 uint16_t GPIO::Get_Input_Port()
 {
@@ -331,9 +331,9 @@ uint16_t GPIO::Get_Input_Port()
 }
 
 /**
- * @brief  GPIO-¶ÁÈ¡Êä³öµÄ¶Ë¿ÚÊıÖµ
+ * @brief  GPIO-è¯»å–è¾“å‡ºçš„ç«¯å£æ•°å€¼
  * @param  None
- * @retval Êä³ö¶Ë¿ÚµÄÊıÖµ
+ * @retval è¾“å‡ºç«¯å£çš„æ•°å€¼
  */
 uint16_t GPIO::Get_Output_Port()
 {
@@ -341,11 +341,11 @@ uint16_t GPIO::Get_Output_Port()
 }
 
 /**
- * @brief  GPIO-ÉèÖÃ²ÎÊıÁĞ±í
- * @param  Pin          Òı½Å
- * @param  Val          GPIO³õÊ¼»¯Êä³öÖµ
- * @param  Mode         GPIOÄ£Ê½
- * @param  Speed        GPIOËÙ¶È
+ * @brief  GPIO-è®¾ç½®å‚æ•°åˆ—è¡¨
+ * @param  Pin          å¼•è„š
+ * @param  Val          GPIOåˆå§‹åŒ–è¾“å‡ºå€¼
+ * @param  Mode         GPIOæ¨¡å¼
+ * @param  Speed        GPIOé€Ÿåº¦
  * @retval None
  */
 void GPIO::Set_GPIO_Param(PIN_enum Pin, GPIOMode_TypeDef Mode, BitAction Val, GPIOSpeed_TypeDef Speed)
@@ -357,11 +357,11 @@ void GPIO::Set_GPIO_Param(PIN_enum Pin, GPIOMode_TypeDef Mode, BitAction Val, GP
 }
 
 /**
- * @brief  GPIO-²ÎÊı¸üĞÂ
- * @param  Pin          Òı½Å
- * @param  Val          GPIO³õÊ¼»¯Êä³öÖµ
- * @param  Mode         GPIOÄ£Ê½
- * @param  Speed        GPIOËÙ¶È
+ * @brief  GPIO-å‚æ•°æ›´æ–°
+ * @param  Pin          å¼•è„š
+ * @param  Val          GPIOåˆå§‹åŒ–è¾“å‡ºå€¼
+ * @param  Mode         GPIOæ¨¡å¼
+ * @param  Speed        GPIOé€Ÿåº¦
  * @retval None
  */
 void GPIO::Update(PIN_enum Pin, GPIOMode_TypeDef Mode, BitAction Val, GPIOSpeed_TypeDef Speed)
@@ -371,7 +371,7 @@ void GPIO::Update(PIN_enum Pin, GPIOMode_TypeDef Mode, BitAction Val, GPIOSpeed_
 }
 
 /**
- * @brief  GPIO-³õÊ¼»¯·½·¨
+ * @brief  GPIO-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -391,7 +391,7 @@ void GPIO::Init()
 }
 
 /**
- * @brief  GPIO-¿ªÆôGPIOÊ±ÖÓ·½·¨
+ * @brief  GPIO-å¼€å¯GPIOæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -401,7 +401,7 @@ void GPIO::RCC_Enable()
 }
 
 /**
- * @brief  GPIO-¹Ø±ÕGPIOÊ±ÖÓ·½·¨
+ * @brief  GPIO-å…³é—­GPIOæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -411,7 +411,7 @@ void GPIO::RCC_Disable()
 }
 
 /**
- * @brief  GPIO-¿ªÆôGPIOÊ±ÖÓ·½·¨
+ * @brief  GPIO-å¼€å¯GPIOæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -421,7 +421,7 @@ void GPIO::RCC_Enable(GPIO_TypeDef *GPIOx)
 }
 
 /**
- * @brief  GPIO-¹Ø±ÕGPIOÊ±ÖÓ·½·¨
+ * @brief  GPIO-å…³é—­GPIOæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */

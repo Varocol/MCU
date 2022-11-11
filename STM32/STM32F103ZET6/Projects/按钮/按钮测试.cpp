@@ -11,11 +11,11 @@ int main()
 }
 void Setup()
 {
-    //³õÊ¼»¯ÏµÍ³
+    //åˆå§‹åŒ–ç³»ç»Ÿ
     system_init();
-    //³õÊ¼»¯°´Å¥
+    //åˆå§‹åŒ–æŒ‰é’®
     Key1.Init();
-    //ÉèÖÃ°´Å¥´¥·¢º¯Êı
+    //è®¾ç½®æŒ‰é’®è§¦å‘å‡½æ•°
     Key1.attachClick(Click1);
     Key1.attachDoubleClick(DoubleClick1);
     Key1.attachDuringLongPress(DuringLongPress1);

@@ -2,17 +2,17 @@
 #define __OJ_SERVO_H
 #include "PWM.h"
 
-//¶æ»ú²ÎÊı½á¹¹Ìå
+//èˆµæœºå‚æ•°ç»“æ„ä½“
 typedef struct
 {
-    TIMx_Channelx_enum pwmch; // Servo PWMÍ¨µÀ
-    uint32_t freq;            // Servo Çı¶¯ÆµÂÊ
-    double CURRENT_MAX;       // Servo Âö¿í×î´óÖµ(Ö»ÓÃÓÚ¼ÇÂ¼),µ¥Î»ms
-    double CURRENT_MIN;       // Servo Âö¿í×îĞ¡Öµ(Ö»ÓÃÓÚ¼ÇÂ¼),µ¥Î»ms
-    double CURRENT_END;       // Servo ÊÜ¿Ø·¶Î§Âö¿í×î´óÖµ,µ¥Î»ms
-    double CURRENT_START;     // Servo ÊÜ¿Ø·¶Î§Âö¿í×îĞ¡Öµ,µ¥Î»ms
-    double MAP_MAX;           // Servo Ó³Éä×î´óÖµ
-    double MAP_MIN;           // Servo Ó³Éä×îĞ¡Öµ
+    TIMx_Channelx_enum pwmch; // Servo PWMé€šé“
+    uint32_t freq;            // Servo é©±åŠ¨é¢‘ç‡
+    double CURRENT_MAX;       // Servo è„‰å®½æœ€å¤§å€¼(åªç”¨äºè®°å½•),å•ä½ms
+    double CURRENT_MIN;       // Servo è„‰å®½æœ€å°å€¼(åªç”¨äºè®°å½•),å•ä½ms
+    double CURRENT_END;       // Servo å—æ§èŒƒå›´è„‰å®½æœ€å¤§å€¼,å•ä½ms
+    double CURRENT_START;     // Servo å—æ§èŒƒå›´è„‰å®½æœ€å°å€¼,å•ä½ms
+    double MAP_MAX;           // Servo æ˜ å°„æœ€å¤§å€¼
+    double MAP_MIN;           // Servo æ˜ å°„æœ€å°å€¼
 } Servo_Param;
 
 class Servo : public PWM

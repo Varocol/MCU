@@ -2,15 +2,15 @@
 #define __OJ_BUZZER_H
 #include "PWM.h"
 /*
-   ÒÔÏÂÄ£°åÏê¼û:
+   ä»¥ä¸‹æ¨¡æ¿è¯¦è§:
   https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/tutorial/beep-player
 */
 
-/*·äÃùÆ÷ÒôÀÖ²ÎÊı*/
+/*èœ‚é¸£å™¨éŸ³ä¹å‚æ•°*/
 #define SONG_NAME_LENGTH_MAX 30
 #define SONG_DATA_LENGTH_MAX 500
 #define SOUND_SPACE 0.8
-/*Òôµ÷*/
+/*éŸ³è°ƒ*/
 typedef enum
 {
     C,
@@ -25,29 +25,29 @@ typedef enum
     A,
     uA,
     B
-    /*¶ÔÓ¦C¡¢#C¡¢D¡¢#D¡¢E¡¢F¡¢#F¡¢G¡¢A¡¢#A¡¢Bµ÷*/
+    /*å¯¹åº”Cã€#Cã€Dã€#Dã€Eã€Fã€#Fã€Gã€Aã€#Aã€Bè°ƒ*/
 } Tone;
-/*ÀÖÇúĞÅÏ¢*/
+/*ä¹æ›²ä¿¡æ¯*/
 struct beep_song
 {
-    const uint8_t volume;                     // ÒôÁ¿
-    const uint16_t Basicspeed;                // ÕâÀïµÄ»ù´¡½ÚÅÄÊÇÒÔÈ«Òô·ûÎªµ¥Î»£¬ÀıÈç40±íÊ¾Ò»·ÖÖÓ40¸öÈ«Òô·û
-    const Tone tone;                        // »ù´¡Òôµ÷
-    const uint8_t name[SONG_NAME_LENGTH_MAX]; //¸èÇúÃû
-    const uint8_t data[SONG_DATA_LENGTH_MAX]; //¸èÇú±àÂë
+    const uint8_t volume;                     // éŸ³é‡
+    const uint16_t Basicspeed;                // è¿™é‡Œçš„åŸºç¡€èŠ‚æ‹æ˜¯ä»¥å…¨éŸ³ç¬¦ä¸ºå•ä½ï¼Œä¾‹å¦‚40è¡¨ç¤ºä¸€åˆ†é’Ÿ40ä¸ªå…¨éŸ³ç¬¦
+    const Tone tone;                        // åŸºç¡€éŸ³è°ƒ
+    const uint8_t name[SONG_NAME_LENGTH_MAX]; //æ­Œæ›²å
+    const uint8_t data[SONG_DATA_LENGTH_MAX]; //æ­Œæ›²ç¼–ç 
 };
-/*Ã¿Ò»¸öÒô·ûµÄĞÅÏ¢*/
+/*æ¯ä¸€ä¸ªéŸ³ç¬¦çš„ä¿¡æ¯*/
 struct beep_song_data
 {
-    uint16_t freq;        //Òô·ûÆµÂÊ
-    uint16_t sound_len;   //Òô·ûÓĞÉù³¤¶È
-    uint16_t nosound_len; //Òô·ûÎŞÉù³¤¶È
+    uint16_t freq;        //éŸ³ç¬¦é¢‘ç‡
+    uint16_t sound_len;   //éŸ³ç¬¦æœ‰å£°é•¿åº¦
+    uint16_t nosound_len; //éŸ³ç¬¦æ— å£°é•¿åº¦
 };
-/*Cµ÷»ù´¡ÆµÂÊ±í*/
-static const uint16_t freq_tab[12] = {262, 277, 294, 311, 330, 349, 369, 392, 415, 440, 466, 494}; //ÆµÂÊ±í CDEFGAB
-/*1~7ÔÚÆµÂÊ±íÖĞµÄÎ»ÖÃ*/
+/*Cè°ƒåŸºç¡€é¢‘ç‡è¡¨*/
+static const uint16_t freq_tab[12] = {262, 277, 294, 311, 330, 349, 369, 392, 415, 440, 466, 494}; //é¢‘ç‡è¡¨ CDEFGAB
+/*1~7åœ¨é¢‘ç‡è¡¨ä¸­çš„ä½ç½®*/
 static const uint8_t sign_tab[7] = {0, 2, 4, 5, 7, 9, 11};
-/*¼¸·ÖÒô·û 2^0,2^1,2^2,2^3...*/
+/*å‡ åˆ†éŸ³ç¬¦ 2^0,2^1,2^2,2^3...*/
 static const uint8_t length_tab[7] = {1, 2, 4, 8, 16, 32, 64};
 
 class Buzzer : public PWM
@@ -61,8 +61,8 @@ private:
     void Beep_Song_Get_Data(const struct beep_song *song, uint16_t index, struct beep_song_data *data);
     static uint16_t Beep_Song_Get_Len(const struct beep_song *song);
     static void Beep_Song_Get_Name(const struct beep_song *song, char *name);
-    /*±äµ÷ºóµÄÆµÂÊ±í*/
-    uint16_t freq_tab_new[12]; //ĞÂµÄÆµÂÊ±í
+    /*å˜è°ƒåçš„é¢‘ç‡è¡¨*/
+    uint16_t freq_tab_new[12]; //æ–°çš„é¢‘ç‡è¡¨
 public:
     Buzzer();
     Buzzer(TIMx_Channelx_enum pwmch);

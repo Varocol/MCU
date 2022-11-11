@@ -47,13 +47,13 @@ extern Button Key1;
 // Buzzer
 extern Buzzer Beep;
 
-// ÏµÍ³±äÁ¿
+// ç³»ç»Ÿå˜é‡
 extern time_t timestamp;
 extern time_t system_start_time;
 extern tm timeinfo;
 extern char timestr[80];
 
-// ÆÕÍ¨±äÁ¿
+// æ™®é€šå˜é‡
 extern BitAction flag;
 extern uint8_t receivedata;
 extern uint32_t time_ms;

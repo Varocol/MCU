@@ -1,7 +1,7 @@
 #include "Libraries.h"
 #include "bsp_led.h"
-void Delay_ms(uint32_t ms); //±£ÁôTIM2ÓÃÀ´ÑÓÊ±,ÐèÒª´îÅädelay_CompleteÀ´ÅÐ¶ÏÑÓÊ±ÊÇ·ñÍê³É
-bool Delay_Complete();      //ÑÓÊ±ÊÇ·ñÍê³É
+void Delay_ms(uint32_t ms); //ä¿ç•™TIM2ç”¨æ¥å»¶æ—¶,éœ€è¦æ­é…delay_Completeæ¥åˆ¤æ–­å»¶æ—¶æ˜¯å¦å®Œæˆ
+bool Delay_Complete();      //å»¶æ—¶æ˜¯å¦å®Œæˆ
 int main()
 {
      // HSE_SetSysClock(RCC_PLLMul_9);
@@ -18,35 +18,35 @@ int main()
 }
 
 /**
-  * @brief  TIM¾²Ì¬ºÁÃë¼¶ÑÓÊ±·½·¨
-  * @param  TIMx_Parma:TIM³õÊ¼»¯²ÎÊýÁÐ±í
+  * @brief  TIMé™æ€æ¯«ç§’çº§å»¶æ—¶æ–¹æ³•
+  * @param  TIMx_Parma:TIMåˆå§‹åŒ–å‚æ•°åˆ—è¡¨
   * @retval None
   */
 void Delay_ms(uint32_t ms)
 {
   TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-  //¿ªÆôTIM2Ê±ÖÓ
+  //å¼€å¯TIM2æ—¶é’Ÿ
   RCC_Operate::RCC_Config(TIM2, ENABLE);
-  //TIM2¼Ä´æÆ÷¸´Î»
+  //TIM2å¯„å­˜å™¨å¤ä½
   TIM_DeInit(TIM2);
-  //TIM»ù´¡²ÎÊý½á¹¹Ìå
-  // ÅäÖÃ¶¨Ê±Æ÷µÄ·ÖÆµÒò×Ó(PSC)
+  //TIMåŸºç¡€å‚æ•°ç»“æž„ä½“
+  // é…ç½®å®šæ—¶å™¨çš„åˆ†é¢‘å› å­(PSC)
   TIM_TimeBaseStructure.TIM_Prescaler = RCC_Operate::Get_SYSCLK_Frequency() / 1000000 - 1;
-  // ÅäÖÃ¶¨Ê±Æ÷µÄÖØ×°ÔØ¼Ä´æÆ÷(ARR)
-  TIM_TimeBaseStructure.TIM_Period = (1000 - 1); // Õâ¸öÖµ¿ÉÒÔÁÙÊ±ÉèÖÃ
-  // Ê±ÖÓ·ÖÆµÒò×Ó£¬»ù±¾¶¨Ê±Æ÷Ã»ÓÐ
+  // é…ç½®å®šæ—¶å™¨çš„é‡è£…è½½å¯„å­˜å™¨(ARR)
+  TIM_TimeBaseStructure.TIM_Period = (1000 - 1); // è¿™ä¸ªå€¼å¯ä»¥ä¸´æ—¶è®¾ç½®
+  // æ—¶é’Ÿåˆ†é¢‘å› å­ï¼ŒåŸºæœ¬å®šæ—¶å™¨æ²¡æœ‰
   TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-  // ¼ÆÊýÆ÷¼ÆÊýÄ£Ê½£¬»ù±¾¶¨Ê±Æ÷Ö»ÄÜÏòÉÏ¼ÆÊý£¬Ã»ÓÐ¼ÆÊýÄ£Ê½µÄÉèÖÃ
+  // è®¡æ•°å™¨è®¡æ•°æ¨¡å¼ï¼ŒåŸºæœ¬å®šæ—¶å™¨åªèƒ½å‘ä¸Šè®¡æ•°ï¼Œæ²¡æœ‰è®¡æ•°æ¨¡å¼çš„è®¾ç½®
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-  // ÖØ¸´¼ÆÊýÆ÷µÄÖµ£¬»ù±¾¶¨Ê±Æ÷Ã»ÓÐ
+  // é‡å¤è®¡æ•°å™¨çš„å€¼ï¼ŒåŸºæœ¬å®šæ—¶å™¨æ²¡æœ‰
   TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
-  // ³õÊ¼»¯¶¨Ê±Æ÷
+  // åˆå§‹åŒ–å®šæ—¶å™¨
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-  // Çå³ý¼ÆÊ±Æ÷ÖÐ¶Ï±êÖ¾Î»/
+  // æ¸…é™¤è®¡æ—¶å™¨ä¸­æ–­æ ‡å¿—ä½/
   TIM_ClearFlag(TIM2, TIM_FLAG_Update);
-  // ¿ªÆô¼ÆÊ±Æ÷ÖÐ¶Ï
+  // å¼€å¯è®¡æ—¶å™¨ä¸­æ–­
   TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-  //NVICÅäÖÃ
+  //NVICé…ç½®
   NVIC_InitTypeDef NVIC_InitStructure =
       {
           TIM2_IRQn,
@@ -55,20 +55,20 @@ void Delay_ms(uint32_t ms)
           ENABLE};
   NVIC_Operate TIM2_NVIC_Operate = NVIC_Operate(NVIC_InitStructure);
   TIM2_NVIC_Operate.Init();
-  //ÉèÖÃÊ±¼ä
+  //è®¾ç½®æ—¶é—´
   time_ms = ms;
-  // Ê¹ÄÜ¼ÆÊýÆ÷
+  // ä½¿èƒ½è®¡æ•°å™¨
   TIM_Cmd(TIM2, ENABLE);
 }
 
 /**
-  * @brief  ÅÐ¶ÏÑÓÊ±ÊÇ·ñÍê³Éº¯Êý
+  * @brief  åˆ¤æ–­å»¶æ—¶æ˜¯å¦å®Œæˆå‡½æ•°
   * @param  None
-  * @retval ÊÇ·ñÑÓÊ±½áÊø
+  * @retval æ˜¯å¦å»¶æ—¶ç»“æŸ
   */
 bool Delay_Complete()
 {
-  //¼ì²éTIM2×´Ì¬
+  //æ£€æŸ¥TIM2çŠ¶æ€
   if((!(TIM2->CR1 & TIM_CR1_CEN)) && current_time_ms == 0)
   {
     return true;

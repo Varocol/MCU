@@ -1,7 +1,7 @@
 #include "System.h"
 /*
-    ÊµÑé£º
-        ÕıÈ·ÅäÖÃRTC²¢Êä³öÊ±¼ä,²âÊÔRTCµÄËùÓĞÖĞ¶Ï¹¦ÄÜ¡£
+    å®éªŒï¼š
+        æ­£ç¡®é…ç½®RTCå¹¶è¾“å‡ºæ—¶é—´,æµ‹è¯•RTCçš„æ‰€æœ‰ä¸­æ–­åŠŸèƒ½ã€‚
 */
 void Setup();
 void Test();
@@ -23,28 +23,28 @@ void Test()
     // while (!flag)
     // {
     //     RTC_x.ITConfig(RTC_IT_SEC, DISABLE);
-    //     printf("ÊäÈëÊ±¼äĞ£×¼:\n");
+    //     printf("è¾“å…¥æ—¶é—´æ ¡å‡†:\n");
     //     scanf("%ld", &timestamp);
     //     RTC_x.SetCounter(timestamp);
     //     RTC_x.ITConfig(RTC_IT_SEC, ENABLE);
-    //     printf("Ğ£×¼³É¹¦ÇëÊäÈë1,·ñÔòÊäÈë0:\n");
+    //     printf("æ ¡å‡†æˆåŠŸè¯·è¾“å…¥1,å¦åˆ™è¾“å…¥0:\n");
     //     scanf("%d", &flag);
     // }
     // RTC_x.ITConfig(RTC_IT_SEC, DISABLE);
-    // printf("ÊäÈëÄÖÖÓÊ±¼ä:\n");
+    // printf("è¾“å…¥é—¹é’Ÿæ—¶é—´:\n");
     // scanf("%ld", &timestamp);
     // RTC_x.SetAlarm(timestamp);
-    // printf("ÉèÖÃ³É¹¦£¡\n");
+    // printf("è®¾ç½®æˆåŠŸï¼\n");
     // RTC_x.ITConfig(RTC_IT_SEC, ENABLE);
-    // printf("³ÌĞòÆô¶¯³É¹¦£¡\n");
+    // printf("ç¨‹åºå¯åŠ¨æˆåŠŸï¼\n");
     // if (PWR_GetFlagStatus(PWR_FLAG_SB) == SET && PWR_GetFlagStatus(PWR_FLAG_WU) == SET)
     // {
-    //     printf("´ı»ú»½ĞÑ»òÄÖÖÓ¸´Î»\n");
+    //     printf("å¾…æœºå”¤é†’æˆ–é—¹é’Ÿå¤ä½\n");
     //     RTC_x.Init();
     // }
     // else
     // {
-    //     printf("½øÈë´ı»úÄ£Ê½\n");
+    //     printf("è¿›å…¥å¾…æœºæ¨¡å¼\n");
     //     PWR_ClearFlag(PWR_FLAG_SB);
     //     PWR_ClearFlag(PWR_FLAG_WU);
     //     PWR_WakeUpPinCmd(ENABLE);

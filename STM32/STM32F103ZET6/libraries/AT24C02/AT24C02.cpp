@@ -1,6 +1,6 @@
 #include "AT24C02.h"
 /**
- * @brief  AT24C02-¿Õ¹¹Ôì·½·¨
+ * @brief  AT24C02-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,8 +9,8 @@ AT24C02::AT24C02()
 }
 
 /**
- * @brief  AT24C02-¹¹Ôì·½·¨
- * @param  AT24C02x_Param   AT24C02µÄ²ÎÊıÁĞ±í
+ * @brief  AT24C02-æ„é€ æ–¹æ³•
+ * @param  AT24C02x_Param   AT24C02çš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 AT24C02::AT24C02(AT24C02_Param AT24C02x_Param)
@@ -19,7 +19,7 @@ AT24C02::AT24C02(AT24C02_Param AT24C02x_Param)
 }
 
 /**
- * @brief  AT24C02-Îö¹¹·½·¨
+ * @brief  AT24C02-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -28,7 +28,7 @@ AT24C02::~AT24C02()
 }
 
 /**
- * @brief  AT24C02-³õÊ¼»¯·½·¨
+ * @brief  AT24C02-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -40,8 +40,8 @@ void AT24C02::Init()
 }
 
 /**
- * @brief  AT24C02-²ÎÊıÁĞ±í¸üĞÂ
- * @param  AT24C02x_Param   AT24C02µÄ²ÎÊıÁĞ±í
+ * @brief  AT24C02-å‚æ•°åˆ—è¡¨æ›´æ–°
+ * @param  AT24C02x_Param   AT24C02çš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void AT24C02::Update(AT24C02_Param AT24C02x_Param)
@@ -51,8 +51,8 @@ void AT24C02::Update(AT24C02_Param AT24C02x_Param)
 }
 
 /**
- * @brief  AT24C02-ÉèÖÃAT24C02µÄ²ÎÊıÁĞ±í
- * @param  AT24C02x_Param   AT24C02µÄ²ÎÊıÁĞ±í
+ * @brief  AT24C02-è®¾ç½®AT24C02çš„å‚æ•°åˆ—è¡¨
+ * @param  AT24C02x_Param   AT24C02çš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void AT24C02::Set_AT24C02x_Param(AT24C02_Param AT24C02x_Param)
@@ -61,21 +61,21 @@ void AT24C02::Set_AT24C02x_Param(AT24C02_Param AT24C02x_Param)
 }
 
 /**
- * @brief  AT24C02-STM32ÏòEERPOM·¢ËÍÒ»¸ö×Ö½Ú·½·¨
- * @param  Data             Êı¾İ
- * @param  Byte_Addr        ×ÖµØÖ·
+ * @brief  AT24C02-STM32å‘EERPOMå‘é€ä¸€ä¸ªå­—èŠ‚æ–¹æ³•
+ * @param  Data             æ•°æ®
+ * @param  Byte_Addr        å­—åœ°å€
  * @retval None
  */
 void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
 {
-    //Èô³ÌĞòÓĞÒ»´¦ÎŞ·¨ÕıÈ·ÔËĞĞÔòÈ«²¿ÖÕÖ¹
+    //è‹¥ç¨‹åºæœ‰ä¸€å¤„æ— æ³•æ­£ç¡®è¿è¡Œåˆ™å…¨éƒ¨ç»ˆæ­¢
     Check_PROCESS_CONDITION;
 
-    //ÅĞ¶Ï×ÜÏßÊÇ·ñÃ¦Âµ
+    //åˆ¤æ–­æ€»çº¿æ˜¯å¦å¿™ç¢Œ
     {
-        //ÖØÖÃFLAG_TIMEOUT
+        //é‡ç½®FLAG_TIMEOUT
         FLAG_TIMEOUT = I2CT_FLAG_TIMEOUT;
-        //¼ì²âBusyÎ»
+        //æ£€æµ‹Busyä½
         while (I2Cx->GetFlagStatus(I2C_FLAG_BUSY) == SET)
         {
             if ((FLAG_TIMEOUT--) == 0)
@@ -87,20 +87,20 @@ void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
         }
     }
 
-    //ÅĞ¶ÏAT24C02ÄÚ²¿ÊÇ·ñÃ¦Âµ
+    //åˆ¤æ–­AT24C02å†…éƒ¨æ˜¯å¦å¿™ç¢Œ
     Check_AT24C02_Busy();
 
-    //Èô³ÌĞòÓĞÒ»´¦ÎŞ·¨ÕıÈ·ÔËĞĞÔòÈ«²¿ÖÕÖ¹
+    //è‹¥ç¨‹åºæœ‰ä¸€å¤„æ— æ³•æ­£ç¡®è¿è¡Œåˆ™å…¨éƒ¨ç»ˆæ­¢
     Check_PROCESS_CONDITION;
 
-    //²úÉúÆğÊ¼Ìõ¼ş
+    //äº§ç”Ÿèµ·å§‹æ¡ä»¶
     I2Cx->Generate_START(ENABLE);
 
-    //¼ì²âEV5ÊÂ¼ş
+    //æ£€æµ‹EV5äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV5ÊÂ¼ş
+        //æ£€æµ‹EV5äº‹ä»¶
         while (I2Cx->Check_Event(EV5) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -112,14 +112,14 @@ void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
         }
     }
 
-    //·¢ËÍµØÖ·
+    //å‘é€åœ°å€
     I2Cx->Send7bitAddress(AT24C02x_Param.AT24C02_ADDR, I2C_Direction_Transmitter);
 
-    //¼ì²âEV6ÊÂ¼ş
+    //æ£€æµ‹EV6äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV6ÊÂ¼ş
+        //æ£€æµ‹EV6äº‹ä»¶
         while (I2Cx->Check_Event(EV6_1) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -131,14 +131,14 @@ void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
         }
     }
 
-    //·¢ËÍ×ÖµØÖ·
+    //å‘é€å­—åœ°å€
     I2Cx->SendData(Byte_Addr);
 
-    //¼ì²âEV8ÊÂ¼ş
+    //æ£€æµ‹EV8äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV8ÊÂ¼ş
+        //æ£€æµ‹EV8äº‹ä»¶
         while (I2Cx->Check_Event(EV8) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -150,14 +150,14 @@ void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
         }
     }
 
-    //·¢ËÍÊı¾İ
+    //å‘é€æ•°æ®
     I2Cx->SendData(Data);
 
-    //¼ì²âEV8_2ÊÂ¼ş
+    //æ£€æµ‹EV8_2äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV8_2ÊÂ¼ş
+        //æ£€æµ‹EV8_2äº‹ä»¶
         while (I2Cx->Check_Event(EV8_2) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -169,20 +169,20 @@ void AT24C02::Write_Byte(uint8_t Byte_Addr, uint8_t Data)
         }
     }
 
-    //²úÉúÍ£Ö¹Ìõ¼ş
+    //äº§ç”Ÿåœæ­¢æ¡ä»¶
     I2Cx->Generate_STOP(ENABLE);
 }
 
 /**
- * @brief  AT24C02-STM32Çø¿éĞ´AT24C02
- * @param  Byte_Addr        ×ÖµØÖ·
- * @param  p                ÓÃÓÚ´æÊı¾İµÄÊı×é
- * @param  num              ËùĞè¶ÁµÄ×Ö½ÚÊı
+ * @brief  AT24C02-STM32åŒºå—å†™AT24C02
+ * @param  Byte_Addr        å­—åœ°å€
+ * @param  p                ç”¨äºå­˜æ•°æ®çš„æ•°ç»„
+ * @param  num              æ‰€éœ€è¯»çš„å­—èŠ‚æ•°
  * @retval None
  */
 void AT24C02::Write_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 {
-    //Èô³ÌĞòÓĞÒ»´¦ÎŞ·¨ÕıÈ·ÔËĞĞÔòÈ«²¿ÖÕÖ¹
+    //è‹¥ç¨‹åºæœ‰ä¸€å¤„æ— æ³•æ­£ç¡®è¿è¡Œåˆ™å…¨éƒ¨ç»ˆæ­¢
     Check_PROCESS_CONDITION;
     int num_temp;
     int count = 0;
@@ -199,22 +199,22 @@ void AT24C02::Write_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 }
 
 /**
- * @brief  AT24C02-STM32Ò³Ğ´AT24C02
- * @param  Byte_Addr        ×ÖµØÖ·
- * @param  p                ÓÃÓÚ´æÊı¾İµÄÊı×é
- * @param  num              ËùĞè¶ÁµÄ×Ö½ÚÊı
+ * @brief  AT24C02-STM32é¡µå†™AT24C02
+ * @param  Byte_Addr        å­—åœ°å€
+ * @param  p                ç”¨äºå­˜æ•°æ®çš„æ•°ç»„
+ * @param  num              æ‰€éœ€è¯»çš„å­—èŠ‚æ•°
  * @retval None
  */
 void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 {
-    //Èô³ÌĞòÓĞÒ»´¦ÎŞ·¨ÕıÈ·ÔËĞĞÔòÈ«²¿ÖÕÖ¹
+    //è‹¥ç¨‹åºæœ‰ä¸€å¤„æ— æ³•æ­£ç¡®è¿è¡Œåˆ™å…¨éƒ¨ç»ˆæ­¢
     Check_PROCESS_CONDITION;
 
-    //ÅĞ¶Ï×ÜÏßÊÇ·ñÃ¦Âµ
+    //åˆ¤æ–­æ€»çº¿æ˜¯å¦å¿™ç¢Œ
     {
-        //ÖØÖÃFLAG_TIMEOUT
+        //é‡ç½®FLAG_TIMEOUT
         FLAG_TIMEOUT = I2CT_FLAG_TIMEOUT;
-        //¼ì²âBusyÎ»
+        //æ£€æµ‹Busyä½
         while (I2Cx->GetFlagStatus(I2C_FLAG_BUSY) == SET)
         {
             if ((FLAG_TIMEOUT--) == 0)
@@ -226,20 +226,20 @@ void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //ÅĞ¶ÏAT24C02ÄÚ²¿ÊÇ·ñÃ¦Âµ
+    //åˆ¤æ–­AT24C02å†…éƒ¨æ˜¯å¦å¿™ç¢Œ
     Check_AT24C02_Busy();
 
-    //Èô³ÌĞòÓĞÒ»´¦ÎŞ·¨ÕıÈ·ÔËĞĞÔòÈ«²¿ÖÕÖ¹
+    //è‹¥ç¨‹åºæœ‰ä¸€å¤„æ— æ³•æ­£ç¡®è¿è¡Œåˆ™å…¨éƒ¨ç»ˆæ­¢
     Check_PROCESS_CONDITION;
 
-    //²úÉúÆğÊ¼Ìõ¼ş
+    //äº§ç”Ÿèµ·å§‹æ¡ä»¶
     I2Cx->Generate_START(ENABLE);
 
-    //¼ì²âEV5ÊÂ¼ş
+    //æ£€æµ‹EV5äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV5ÊÂ¼ş
+        //æ£€æµ‹EV5äº‹ä»¶
         while (I2Cx->Check_Event(EV5) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -251,14 +251,14 @@ void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //·¢ËÍµØÖ·
+    //å‘é€åœ°å€
     I2Cx->Send7bitAddress(AT24C02x_Param.AT24C02_ADDR, I2C_Direction_Transmitter);
 
-    //¼ì²âEV6ÊÂ¼ş
+    //æ£€æµ‹EV6äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV6ÊÂ¼ş
+        //æ£€æµ‹EV6äº‹ä»¶
         while (I2Cx->Check_Event(EV6_1) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -270,15 +270,15 @@ void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //·¢ËÍ×ÖµØÖ·
+    //å‘é€å­—åœ°å€
     I2Cx->SendData(Byte_Addr);
 
-    //·¢ËÍÊı¾İ
+    //å‘é€æ•°æ®
     for (int i = 0; i < num; i++)
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV8ÊÂ¼ş
+        //æ£€æµ‹EV8äº‹ä»¶
         while (I2Cx->Check_Event(EV8) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -288,15 +288,15 @@ void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
                 return;
             }
         }
-        //·¢ËÍÊı¾İ
+        //å‘é€æ•°æ®
         I2Cx->SendData(p[i]);
     }
 
-    //¼ì²âEV8_2ÊÂ¼ş
+    //æ£€æµ‹EV8_2äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV8_2ÊÂ¼ş
+        //æ£€æµ‹EV8_2äº‹ä»¶
         while (I2Cx->Check_Event(EV8_2) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -308,27 +308,27 @@ void AT24C02::Write_Page(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //²úÉúÍ£Ö¹Ìõ¼ş
+    //äº§ç”Ÿåœæ­¢æ¡ä»¶
     I2Cx->Generate_STOP(ENABLE);
 }
 
 /**
- * @brief  AT24C02-STM32ÏòEERPOM¶ÁÈ¡Ò»¸öÇø¿éµÄÊı¾İ
- * @param  Byte_Addr        ×ÖµØÖ·
- * @param  p                ÓÃÓÚ´æÊı¾İµÄÊı×é
- * @param  num              ËùĞè¶ÁµÄ×Ö½ÚÊı
+ * @brief  AT24C02-STM32å‘EERPOMè¯»å–ä¸€ä¸ªåŒºå—çš„æ•°æ®
+ * @param  Byte_Addr        å­—åœ°å€
+ * @param  p                ç”¨äºå­˜æ•°æ®çš„æ•°ç»„
+ * @param  num              æ‰€éœ€è¯»çš„å­—èŠ‚æ•°
  * @retval None
  */
 void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
 {
-    //Èô³ÌĞòÓĞÒ»´¦ÎŞ·¨ÕıÈ·ÔËĞĞÔòÈ«²¿ÖÕÖ¹
+    //è‹¥ç¨‹åºæœ‰ä¸€å¤„æ— æ³•æ­£ç¡®è¿è¡Œåˆ™å…¨éƒ¨ç»ˆæ­¢
     Check_PROCESS_CONDITION;
 
-    //ÅĞ¶Ï×ÜÏßÊÇ·ñÃ¦Âµ
+    //åˆ¤æ–­æ€»çº¿æ˜¯å¦å¿™ç¢Œ
     {
-        //ÖØÖÃFLAG_TIMEOUT
+        //é‡ç½®FLAG_TIMEOUT
         FLAG_TIMEOUT = I2CT_FLAG_TIMEOUT;
-        //¼ì²âBusyÎ»
+        //æ£€æµ‹Busyä½
         while (I2Cx->GetFlagStatus(I2C_FLAG_BUSY) == SET)
         {
             if ((FLAG_TIMEOUT--) == 0)
@@ -340,21 +340,21 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //ÅĞ¶ÏAT24C02ÄÚ²¿ÊÇ·ñÃ¦Âµ
+    //åˆ¤æ–­AT24C02å†…éƒ¨æ˜¯å¦å¿™ç¢Œ
     Check_AT24C02_Busy();
 
-    //Èô³ÌĞòÓĞÒ»´¦ÎŞ·¨ÕıÈ·ÔËĞĞÔòÈ«²¿ÖÕÖ¹
+    //è‹¥ç¨‹åºæœ‰ä¸€å¤„æ— æ³•æ­£ç¡®è¿è¡Œåˆ™å…¨éƒ¨ç»ˆæ­¢
     Check_PROCESS_CONDITION;
 
-    //µÚÒ»²¿·Ö
-    //²úÉúÆğÊ¼Ìõ¼ş
+    //ç¬¬ä¸€éƒ¨åˆ†
+    //äº§ç”Ÿèµ·å§‹æ¡ä»¶
     I2Cx->Generate_START(ENABLE);
 
-    //¼ì²âEV5ÊÂ¼ş
+    //æ£€æµ‹EV5äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV5ÊÂ¼ş
+        //æ£€æµ‹EV5äº‹ä»¶
         while (I2Cx->Check_Event(EV5) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -366,14 +366,14 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //·¢ËÍAT24C02µØÖ·
+    //å‘é€AT24C02åœ°å€
     I2Cx->Send7bitAddress(AT24C02x_Param.AT24C02_ADDR, I2C_Direction_Transmitter);
 
-    //¼ì²âEV6ÊÂ¼ş
+    //æ£€æµ‹EV6äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV6ÊÂ¼ş
+        //æ£€æµ‹EV6äº‹ä»¶
         while (I2Cx->Check_Event(EV6_1) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -385,14 +385,14 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //·¢ËÍ×ÖµØÖ·
+    //å‘é€å­—åœ°å€
     I2Cx->SendData(Byte_Addr);
 
-    //¼ì²âEV8ÊÂ¼ş
+    //æ£€æµ‹EV8äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV8ÊÂ¼ş
+        //æ£€æµ‹EV8äº‹ä»¶
         while (I2Cx->Check_Event(EV8) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -404,15 +404,15 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //µÚ¶ş²¿·Ö
-    //²úÉúÆğÊ¼Ìõ¼ş
+    //ç¬¬äºŒéƒ¨åˆ†
+    //äº§ç”Ÿèµ·å§‹æ¡ä»¶
     I2Cx->Generate_START(ENABLE);
 
-    //¼ì²âEV5ÊÂ¼ş
+    //æ£€æµ‹EV5äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV5ÊÂ¼ş
+        //æ£€æµ‹EV5äº‹ä»¶
         while (I2Cx->Check_Event(EV5) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -424,14 +424,14 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //·¢ËÍAT24C02µØÖ·
+    //å‘é€AT24C02åœ°å€
     I2Cx->Send7bitAddress(AT24C02x_Param.AT24C02_ADDR, I2C_Direction_Receiver);
 
-    //¼ì²âEV6ÊÂ¼ş
+    //æ£€æµ‹EV6äº‹ä»¶
     {
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV6ÊÂ¼ş
+        //æ£€æµ‹EV6äº‹ä»¶
         while (I2Cx->Check_Event(EV6_2) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -443,7 +443,7 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         }
     }
 
-    //´æÈëÊı¾İ
+    //å­˜å…¥æ•°æ®
     for (int i = 0; i < num; i++)
     {
         if (i == num - 1)
@@ -454,9 +454,9 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         {
             I2Cx->AcknowledgeConfig(ENABLE);
         }
-        //ÖØÖÃEVENT_TIMEOUT
+        //é‡ç½®EVENT_TIMEOUT
         EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
-        //¼ì²âEV7ÊÂ¼ş
+        //æ£€æµ‹EV7äº‹ä»¶
         while (I2Cx->Check_Event(EV7) == ERROR)
         {
             if ((EVENT_TIMEOUT--) == 0)
@@ -469,27 +469,27 @@ void AT24C02::Read_Buffer(uint8_t Byte_Addr, uint8_t p[], uint8_t num)
         p[i] = I2Cx->ReceiveData();
     }
 
-    //²úÉú½áÊøÌõ¼ş
+    //äº§ç”Ÿç»“æŸæ¡ä»¶
     I2Cx->Generate_STOP(ENABLE);
 }
 
 /**
- * @brief  AT24C02-Ó¦´ğ²éÑ¯(ÅĞÃ¦·½·¨)
+ * @brief  AT24C02-åº”ç­”æŸ¥è¯¢(åˆ¤å¿™æ–¹æ³•)
  * @param  None
  * @retval None
  */
 void AT24C02::Check_AT24C02_Busy()
 {
-    //µÚÒ»ÖÖ,Ò°Âù·¨,Ö±½Ó¼ì²âflagÎ»
-    // //ÖØÖÃEVENT_TIMEOUT
+    //ç¬¬ä¸€ç§,é‡è›®æ³•,ç›´æ¥æ£€æµ‹flagä½
+    // //é‡ç½®EVENT_TIMEOUT
     // EVENT_TIMEOUT = I2CT_EVENT_TIMEOUT;
     // do
     // {
-    //     //²úÉúÆğÊ¼Ìõ¼ş
+    //     //äº§ç”Ÿèµ·å§‹æ¡ä»¶
     //     I2Cx->Generate_START(ENABLE);
-    //     //ÖØÖÃFLAG_TIMEOUT
+    //     //é‡ç½®FLAG_TIMEOUT
     //     FLAG_TIMEOUT = I2CT_FLAG_TIMEOUT;
-    //     //¼ì²âSBÎ»
+    //     //æ£€æµ‹SBä½
     //     while (I2Cx->GetFlagStatus(I2C_FLAG_SB) == RESET)
     //     {
     //         if ((FLAG_TIMEOUT--) == 0)
@@ -499,7 +499,7 @@ void AT24C02::Check_AT24C02_Busy()
     //             return;
     //         }
     //     }
-    //     //·¢ËÍµØÖ·
+    //     //å‘é€åœ°å€
     //     I2Cx->Send7bitAddress(AT24C02x_Param.AT24C02_ADDR, I2C_Direction_Transmitter);
     //     if ((EVENT_TIMEOUT--) == 0)
     //     {
@@ -508,25 +508,25 @@ void AT24C02::Check_AT24C02_Busy()
     //         return;
     //     }
     // }
-    // //¼ì²âADDRÎ»
+    // //æ£€æµ‹ADDRä½
     // while (I2Cx->GetFlagStatus(I2C_FLAG_ADDR) == RESET);
-    // //Çå³ıAFÓ¦´ğÊ§°ÜÎ»
+    // //æ¸…é™¤AFåº”ç­”å¤±è´¥ä½
     // I2Cx->ClearFlag(I2C_FLAG_AF);
-    // //·¢ËÍÍ£Ö¹Î»
+    // //å‘é€åœæ­¢ä½
     // I2Cx->Generate_STOP(ENABLE);
 
-    //µÚ¶şÖÖ,ÍêÕûÊ±Ğò·¨
-    //ÖØÖÃEVENT_TIMEOUT
+    //ç¬¬äºŒç§,å®Œæ•´æ—¶åºæ³•
+    //é‡ç½®EVENT_TIMEOUT
     EVENT_TIMEOUT = 1000;
     do
     {
-        //Çå³ıAFÓ¦´ğÊ§°ÜÎ»
+        //æ¸…é™¤AFåº”ç­”å¤±è´¥ä½
         I2Cx->ClearFlag(I2C_FLAG_AF);
-        //²úÉúÆğÊ¼Ìõ¼ş
+        //äº§ç”Ÿèµ·å§‹æ¡ä»¶
         I2Cx->Generate_START(ENABLE);
-        //ÖØÖÃFLAG_TIMEOUT
+        //é‡ç½®FLAG_TIMEOUT
         FLAG_TIMEOUT = I2CT_FLAG_TIMEOUT;
-        //¼ì²âSBÎ»
+        //æ£€æµ‹SBä½
         while (I2Cx->GetFlagStatus(I2C_FLAG_SB) == RESET)
         {
             if ((FLAG_TIMEOUT--) == 0)
@@ -536,9 +536,9 @@ void AT24C02::Check_AT24C02_Busy()
                 return;
             }
         }
-        //·¢ËÍµØÖ·
+        //å‘é€åœ°å€
         I2Cx->Send7bitAddress(AT24C02x_Param.AT24C02_ADDR, I2C_Direction_Transmitter);
-        //µÈ´ı·¢ËÍÍê³É
+        //ç­‰å¾…å‘é€å®Œæˆ
         while (I2Cx->GetFlagStatus(I2C_FLAG_TXE) == RESET && I2Cx->GetFlagStatus(I2C_FLAG_AF) == RESET)
             ;
         if ((EVENT_TIMEOUT--) == 0)
@@ -548,10 +548,10 @@ void AT24C02::Check_AT24C02_Busy()
             return;
         }
     }
-    //¼ì²âEV6ÊÂ¼ş
+    //æ£€æµ‹EV6äº‹ä»¶
     while (I2Cx->Check_Event(EV6_1) == ERROR);
-    //Çå³ıAFÓ¦´ğÊ§°ÜÎ»
+    //æ¸…é™¤AFåº”ç­”å¤±è´¥ä½
     I2Cx->ClearFlag(I2C_FLAG_AF);
-    //·¢ËÍÍ£Ö¹Î»
+    //å‘é€åœæ­¢ä½
     I2Cx->Generate_STOP(ENABLE);
 }

@@ -1,6 +1,8 @@
 #include "ADC.h"
+void (*ADC1_2_Handler)(void);
+void (*ADC3_Handler)(void);
 /**
- * @brief  ADC-¿Õ¹¹Ôì·½·¨
+ * @brief  ADC-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,7 +11,7 @@ ADC::ADC()
 }
 
 /**
- * @brief  ADC-Îö¹¹·½·¨
+ * @brief  ADC-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -18,8 +20,8 @@ ADC::~ADC()
 }
 
 /**
- * @brief  ADC-¹¹Ôì·½·¨
- * @param  ADCx_Param     ADCµÄ²ÎÊıÁĞ±í
+ * @brief  ADC-æ„é€ æ–¹æ³•
+ * @param  ADCx_Param     ADCçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 ADC::ADC(ADC_Param ADCx_Param)
@@ -28,8 +30,8 @@ ADC::ADC(ADC_Param ADCx_Param)
 }
 
 /**
- * @brief  ADC-ÉèÖÃADCµÄ²ÎÊıÁĞ±í
- * @param  ADCx_Param     ADCµÄ²ÎÊıÁĞ±í
+ * @brief  ADC-è®¾ç½®ADCçš„å‚æ•°åˆ—è¡¨
+ * @param  ADCx_Param     ADCçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void ADC::Set_ADC_Param(ADC_Param ADCx_Param)
@@ -38,8 +40,8 @@ void ADC::Set_ADC_Param(ADC_Param ADCx_Param)
 }
 
 /**
- * @brief  ADC-²ÎÊıÁĞ±í¸üĞÂ
- * @param  ADCx_Param     ADCµÄ²ÎÊıÁĞ±í
+ * @brief  ADC-å‚æ•°åˆ—è¡¨æ›´æ–°
+ * @param  ADCx_Param     ADCçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void ADC::Update(ADC_Param ADCx_Param)
@@ -50,8 +52,8 @@ void ADC::Update(ADC_Param ADCx_Param)
 }
 
 /**
- * @brief  ADC-Ê¹ÓÃDMA´«Êä¹¦ÄÜ
- * @param  NewState       ÊÇ·ñÊ¹ÄÜDMA
+ * @brief  ADC-ä½¿ç”¨DMAä¼ è¾“åŠŸèƒ½
+ * @param  NewState       æ˜¯å¦ä½¿èƒ½DMA
  * @retval None
  */
 void ADC::DMACmd(FunctionalState NewState)
@@ -60,9 +62,9 @@ void ADC::DMACmd(FunctionalState NewState)
 }
 
 /**
- * @brief  ADC-ÖĞ¶Ï·½·¨
- * @param  ADC_IT         ÖĞ¶Ï±êÖ¾µÄÑ¡Ôñ
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  ADC-ä¸­æ–­æ–¹æ³•
+ * @param  ADC_IT         ä¸­æ–­æ ‡å¿—çš„é€‰æ‹©
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void ADC::ITConfig(uint16_t ADC_IT, FunctionalState NewState)
@@ -73,7 +75,7 @@ void ADC::ITConfig(uint16_t ADC_IT, FunctionalState NewState)
 }
 
 /**
- * @brief  ADC-µ¥Í¨µÀGPIO³õÊ¼»¯
+ * @brief  ADC-å•é€šé“GPIOåˆå§‹åŒ–
  * @param  None
  * @retval None
  */
@@ -153,7 +155,7 @@ void ADC::Pin_Init(uint8_t ADC_Channel)
 }
 
 /**
- * @brief  ADC-GPIOÒı½Å³õÊ¼»¯
+ * @brief  ADC-GPIOå¼•è„šåˆå§‹åŒ–
  * @param  None
  * @retval None
  */
@@ -170,21 +172,21 @@ void ADC::Pin_Init()
 }
 
 /**
- * @brief  ADC-³õÊ¼»¯·½·¨
+ * @brief  ADC-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void ADC::Init()
 {
-    // ¿ªÆôADCÊ±ÖÓ
+    // å¼€å¯ADCæ—¶é’Ÿ
     RCC_Enable();
-    // ÅäÖÃADC¹¤×÷Ê±ÖÓ
+    // é…ç½®ADCå·¥ä½œæ—¶é’Ÿ
     RCC_Operate::ADC_CLKConfig(ADCx_Param.ADC_Base_InitStructure.RCC_PCLK2_Divx);
-    // ADCx¼Ä´æÆ÷¸´Î»
+    // ADCxå¯„å­˜å™¨å¤ä½
     ADC_DeInit(ADCx_Param.ADCx);
-    // Òı½Å³õÊ¼»¯
+    // å¼•è„šåˆå§‹åŒ–
     Pin_Init();
-    // »ù´¡³õÊ¼»¯ADC
+    // åŸºç¡€åˆå§‹åŒ–ADC
     uint8_t listsize = ADCx_Param.ADC_RegularChannel_InitStructure.ADC_Channellist.size();
     ADC_InitTypeDef ADC_InitStructure = {
         .ADC_Mode = ADCx_Param.ADC_Base_InitStructure.ADC_Mode,
@@ -194,49 +196,49 @@ void ADC::Init()
         .ADC_DataAlign = ADCx_Param.ADC_Base_InitStructure.ADC_DataAlign,
         .ADC_NbrOfChannel = listsize};
     ADC_Init(ADCx_Param.ADCx, &ADC_InitStructure);
-    // ÅäÖÃ¹æÔòÍ¨µÀĞòºÅºÍ²ÉÑùÊ±¼ä
+    // é…ç½®è§„åˆ™é€šé“åºå·å’Œé‡‡æ ·æ—¶é—´
     for (ADC_Channel_ConInfo it : ADCx_Param.ADC_RegularChannel_InitStructure.ADC_Channellist)
     {
         ADC_RegularChannelConfig(ADCx_Param.ADCx, it.ADC_Channel, it.Rank, it.ADC_SampleTime);
     }
-    // ÅäÖÃ×¢ÈëÍ¨µÀĞòÁĞ³¤¶È
+    // é…ç½®æ³¨å…¥é€šé“åºåˆ—é•¿åº¦
     ADC_InjectedSequencerLengthConfig(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_Channellist.size());
     for (ADC_Channel_ConInfo it : ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_Channellist)
     {
         ADC_InjectedChannelConfig(ADCx_Param.ADCx, it.ADC_Channel, it.Rank, it.ADC_SampleTime);
     }
-    // ÅäÖÃ×¢ÈëÍ¨µÀµÄ×Ô¶¯×¢Èë
+    // é…ç½®æ³¨å…¥é€šé“çš„è‡ªåŠ¨æ³¨å…¥
     ADC_AutoInjectedConvCmd(ADCx_Param.ADCx, ADCx_Param.ADC_Base_InitStructure.ADC_JAuto);
-    // ÅäÖÃ¼ä¶ÏÄ£Ê½
+    // é…ç½®é—´æ–­æ¨¡å¼
     ADC_DiscModeCmd(ADCx_Param.ADCx, ADCx_Param.ADC_RegularChannel_InitStructure.ADC_DiscMode);
     ADC_InjectedDiscModeCmd(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_DiscMode);
     ADC_DiscModeChannelCountConfig(ADCx_Param.ADCx, ADCx_Param.ADC_Base_InitStructure.ADC_DiscModeNumber);
-    // ÅäÖÃ¹æÔòÍ¨µÀÍâ²¿´¥·¢
-    // ÓÉÓÚÔÚADC_InitÀïÒÑ¾­ÅäÖÃÁË´¥·¢Ê¹ÄÜ,ËùÒÔ²»ĞèÒªÅäÖÃ
+    // é…ç½®è§„åˆ™é€šé“å¤–éƒ¨è§¦å‘
+    // ç”±äºåœ¨ADC_Inité‡Œå·²ç»é…ç½®äº†è§¦å‘ä½¿èƒ½,æ‰€ä»¥ä¸éœ€è¦é…ç½®
     ADC_ExternalTrigConvCmd(ADCx_Param.ADCx, ADCx_Param.ADC_RegularChannel_InitStructure.ADC_ExternalTrig);
-    // ÅäÖÃ×¢ÈëÍ¨µÀÍâ²¿´¥·¢
+    // é…ç½®æ³¨å…¥é€šé“å¤–éƒ¨è§¦å‘
     ADC_ExternalTrigInjectedConvCmd(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_ExternalTrig);
     ADC_ExternalTrigInjectedConvConfig(ADCx_Param.ADCx, ADCx_Param.ADC_InjectedChannel_InitStructure.ADC_ExternalTrigConv);
-    // ÅäÖÃDMA
+    // é…ç½®DMA
     DMACmd(ADCx_Param.ADC_DMA_State);
-    // ÅäÖÃÖĞ¶Ï
+    // é…ç½®ä¸­æ–­
     ITConfig(ADCx_Param.ADC_IT_Selection, ADCx_Param.ADC_IT_State);
-    // ½«ADC´ÓË¯ÃßÄ£Ê½»½ĞÑ
+    // å°†ADCä»ç¡çœ æ¨¡å¼å”¤é†’
     Enable();
-    // ³õÊ¼»¯ADCĞ£×¼¼Ä´æÆ÷
+    // åˆå§‹åŒ–ADCæ ¡å‡†å¯„å­˜å™¨
     ADC_ResetCalibration(ADCx_Param.ADCx);
-    // µÈ´ıĞ£×¼¼Ä´æÆ÷³õÊ¼»¯Íê³É
+    // ç­‰å¾…æ ¡å‡†å¯„å­˜å™¨åˆå§‹åŒ–å®Œæˆ
     while (ADC_GetResetCalibrationStatus(ADCx_Param.ADCx))
         ;
-    // ADC¿ªÊ¼Ğ£×¼
+    // ADCå¼€å§‹æ ¡å‡†
     ADC_StartCalibration(ADCx_Param.ADCx);
-    // µÈ´ıĞ£×¼Íê³É
+    // ç­‰å¾…æ ¡å‡†å®Œæˆ
     while (ADC_GetCalibrationStatus(ADCx_Param.ADCx))
         ;
 }
 
 /**
- * @brief  ADC-¿ªÆôADC·½·¨(ADCÊ¹ÄÜ)
+ * @brief  ADC-å¼€å¯ADCæ–¹æ³•(ADCä½¿èƒ½)
  * @param  None
  * @retval None
  */
@@ -246,7 +248,7 @@ void ADC::Enable()
 }
 
 /**
- * @brief  ADC-¹Ø±ÕADC·½·¨(ADCÊ§ÄÜ)
+ * @brief  ADC-å…³é—­ADCæ–¹æ³•(ADCå¤±èƒ½)
  * @param  None
  * @retval None
  */
@@ -256,8 +258,8 @@ void ADC::Disable()
 }
 
 /**
- * @brief  ADC-ÎÂ¶È´«¸ĞÆ÷ºÍVREFINTÊ¹ÄÜ(Ê§ÄÜ)
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  ADC-æ¸©åº¦ä¼ æ„Ÿå™¨å’ŒVREFINTä½¿èƒ½(å¤±èƒ½)
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void ADC::TempSensorVrefintCmd(FunctionalState NewState)
@@ -266,8 +268,8 @@ void ADC::TempSensorVrefintCmd(FunctionalState NewState)
 }
 
 /**
- * @brief  ADC-Èí¼ş¿ªÆô×ª»»¹æÔòÍ¨µÀÊ¹ÄÜ(Ê§ÄÜ)
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  ADC-è½¯ä»¶å¼€å¯è½¬æ¢è§„åˆ™é€šé“ä½¿èƒ½(å¤±èƒ½)
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void ADC::SoftwareStartConvCmd(FunctionalState NewState)
@@ -276,8 +278,8 @@ void ADC::SoftwareStartConvCmd(FunctionalState NewState)
 }
 
 /**
- * @brief  ADC-Èí¼ş¿ªÆô×ª»»×¢ÈëÍ¨µÀÊ¹ÄÜ(Ê§ÄÜ)
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  ADC-è½¯ä»¶å¼€å¯è½¬æ¢æ³¨å…¥é€šé“ä½¿èƒ½(å¤±èƒ½)
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void ADC::SoftwareStartInjectedConvCmd(FunctionalState NewState)
@@ -286,8 +288,8 @@ void ADC::SoftwareStartInjectedConvCmd(FunctionalState NewState)
 }
 
 /**
- * @brief  ADC-Ä£Äâ¿´ÃÅ¹·Ä£Ê½Ñ¡Ôñ
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  ADC-æ¨¡æ‹Ÿçœ‹é—¨ç‹—æ¨¡å¼é€‰æ‹©
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void ADC::AnalogWatchdogCmd(uint32_t ADC_AnalogWatchdog)
@@ -296,9 +298,9 @@ void ADC::AnalogWatchdogCmd(uint32_t ADC_AnalogWatchdog)
 }
 
 /**
- * @brief  ADC-ÉèÖÃÄ£Äâ¿´ÃÅ¹·ÉÏÏÂãĞÖµ
- * @param  HighThreshold  ÉÏÏŞ
- * @param  LowThreshold   ÏÂÏŞ
+ * @brief  ADC-è®¾ç½®æ¨¡æ‹Ÿçœ‹é—¨ç‹—ä¸Šä¸‹é˜ˆå€¼
+ * @param  HighThreshold  ä¸Šé™
+ * @param  LowThreshold   ä¸‹é™
  * @retval None
  */
 void ADC::AnalogWatchdogThresholdsConfig(uint16_t HighThreshold, uint16_t LowThreshold)
@@ -307,8 +309,8 @@ void ADC::AnalogWatchdogThresholdsConfig(uint16_t HighThreshold, uint16_t LowThr
 }
 
 /**
- * @brief  ADC-ÉèÖÃÄ£Äâ¿´ÃÅ¹·Í¨µÀ
- * @param  ADC_Channel    ADCÍ¨µÀ
+ * @brief  ADC-è®¾ç½®æ¨¡æ‹Ÿçœ‹é—¨ç‹—é€šé“
+ * @param  ADC_Channel    ADCé€šé“
  * @retval None
  */
 void ADC::AnalogWatchdogSingleChannelConfig(uint8_t ADC_Channel)
@@ -317,8 +319,8 @@ void ADC::AnalogWatchdogSingleChannelConfig(uint8_t ADC_Channel)
 }
 
 /**
- * @brief  ADC-ÉèÖÃ×¢ÈëÍ¨µÀÆ«ÒÆÁ¿
- * @param  ADC_InjectedChannel      ADC×¢ÈëÍ¨µÀ
+ * @brief  ADC-è®¾ç½®æ³¨å…¥é€šé“åç§»é‡
+ * @param  ADC_InjectedChannel      ADCæ³¨å…¥é€šé“
  *
  * @retval None
  */
@@ -328,7 +330,7 @@ void ADC::SetInjectedOffset(uint8_t ADC_InjectedChannel, uint16_t Offset)
 }
 
 /**
- * @brief  ADC-¿ªÆôADCÊ±ÖÓ·½·¨
+ * @brief  ADC-å¼€å¯ADCæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -338,7 +340,7 @@ void ADC::RCC_Enable()
 }
 
 /**
- * @brief  ADC-¹Ø±ÕADCÊ±ÖÓ·½·¨
+ * @brief  ADC-å…³é—­ADCæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -348,7 +350,7 @@ void ADC::RCC_Disable()
 }
 
 /**
- * @brief  ADC-¿ªÆôADCÊ±ÖÓ·½·¨
+ * @brief  ADC-å¼€å¯ADCæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -358,7 +360,7 @@ void ADC::RCC_Enable(ADC_TypeDef *ADCx)
 }
 
 /**
- * @brief  ADC-¹Ø±ÕADCÊ±ÖÓ·½·¨
+ * @brief  ADC-å…³é—­ADCæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */

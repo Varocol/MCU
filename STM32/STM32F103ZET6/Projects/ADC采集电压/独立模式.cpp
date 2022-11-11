@@ -1,15 +1,15 @@
 #include "System.h"
 /*
-    ²âÊÔ¶ÀÁ¢Ä£Ê½
-        É¨Ãè                        1
-        ¹æÔò´¥·¢ (Èí¼ş´¥·¢)          1 
-        ×¢Èë´¥·¢ (Èí¼ş´¥·¢)          1
-        ¹æÔò¼ä¶Ï                    0
-        ×¢Èë¼ä¶Ï                    0
-        ×Ô¶¯×¢Èë                    0
-        Á¬Ğø×ª»»                    1
-        ¿´ÃÅ¹·                      0
-        ÄÚ²¿ÎÂ¶È                    0
+    æµ‹è¯•ç‹¬ç«‹æ¨¡å¼
+        æ‰«æ                        1
+        è§„åˆ™è§¦å‘ (è½¯ä»¶è§¦å‘)          1 
+        æ³¨å…¥è§¦å‘ (è½¯ä»¶è§¦å‘)          1
+        è§„åˆ™é—´æ–­                    0
+        æ³¨å…¥é—´æ–­                    0
+        è‡ªåŠ¨æ³¨å…¥                    0
+        è¿ç»­è½¬æ¢                    1
+        çœ‹é—¨ç‹—                      0
+        å†…éƒ¨æ¸©åº¦                    0
         DMA                        0
 */
 NVIC_InitTypeDef ADC_NVIC_InitStructure = {
@@ -46,7 +46,7 @@ ADC_Channel_InitTypeDef ADC_RegularChannel_InitStructure = {
     .ADC_ExternalTrig = DISABLE};
 ADC_Channel_InitTypeDef ADC_InjectedChannel_InitStructure = {
     .ADC_Channellist = ADC_InjectedChannellist,
-    .ADC_ExternalTrigConv = ADC_ExternalTrigInjecConv_None, //Èç¹ûÓÃÈí¼ş¿ªÆôÔòÖ±½ÓÊ¹ÓÃnone
+    .ADC_ExternalTrigConv = ADC_ExternalTrigInjecConv_None, //å¦‚æœç”¨è½¯ä»¶å¼€å¯åˆ™ç›´æ¥ä½¿ç”¨none
     .ADC_DiscMode = DISABLE,
     .ADC_ExternalTrig = DISABLE};
 ADC_Param ADCx_Param = {

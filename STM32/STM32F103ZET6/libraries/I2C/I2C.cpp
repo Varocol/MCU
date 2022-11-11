@@ -1,6 +1,10 @@
 #include "I2C.h"
+void (*I2C1_EV_Handler)(void);
+void (*I2C1_ER_Handler)(void);
+void (*I2C2_EV_Handler)(void);
+void (*I2C2_ER_Handler)(void);
 /**
- * @brief  I2C-¿Õ¹¹Ôì·½·¨
+ * @brief  I2C-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,8 +13,8 @@ I2C::I2C()
 }
 
 /**
- * @brief  I2C-¹¹Ôì·½·¨
- * @param  I2Cx_Param     I2CµÄ²ÎÊıÁĞ±í
+ * @brief  I2C-æ„é€ æ–¹æ³•
+ * @param  I2Cx_Param     I2Cçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 I2C::I2C(I2C_Param I2Cx_Param)
@@ -19,7 +23,7 @@ I2C::I2C(I2C_Param I2Cx_Param)
 }
 
 /**
- * @brief  I2C-Îö¹¹·½·¨
+ * @brief  I2C-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -28,16 +32,16 @@ I2C::~I2C()
 }
 
 /**
- * @brief  I2C-GPIOÒı½Å³õÊ¼»¯
+ * @brief  I2C-GPIOå¼•è„šåˆå§‹åŒ–
  * @param  None
  * @retval None
  */
 void I2C::Pin_Init()
 {
-  // ÈôÓ²¼ş·½ÃæÃ»ÓĞ¸øÓè¸ßµçÆ½¿ÉÒÔ¿¼ÂÇÄÚ²¿ÉÏÀ­(IN_MODE)
+  // è‹¥ç¡¬ä»¶æ–¹é¢æ²¡æœ‰ç»™äºˆé«˜ç”µå¹³å¯ä»¥è€ƒè™‘å†…éƒ¨ä¸Šæ‹‰(IN_MODE)
   GPIO I2C_SCL = GPIO();
   GPIO I2C_SDA = GPIO();
-  // ¶ÔSCLºÍSDAÏßÏÈÉÏÀ­,ºó¿ªÂ©
+  // å¯¹SCLå’ŒSDAçº¿å…ˆä¸Šæ‹‰,åå¼€æ¼
   if (I2Cx_Param.I2C_Pin_Remap == I2C1_Remap && I2Cx_Param.I2Cx == I2C1)
   {
     RCC_Operate::RCC_Config(AFIO, ENABLE);
@@ -73,33 +77,33 @@ void I2C::Pin_Init()
 }
 
 /**
- * @brief  I2C-³õÊ¼»¯·½·¨
+ * @brief  I2C-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void I2C::Init()
 {
-  // ¿ªÆôI2CÊ±ÖÓ
+  // å¼€å¯I2Cæ—¶é’Ÿ
   RCC_Enable();
-  // I2C¼Ä´æÆ÷¸´Î»
+  // I2Cå¯„å­˜å™¨å¤ä½
   I2C_DeInit(I2Cx_Param.I2Cx);
-  // Èí¼ş¸´Î»,ÓÃÓÚÍ¨Ñ¶Ê§°Üºó¸´Î»Busy
+  // è½¯ä»¶å¤ä½,ç”¨äºé€šè®¯å¤±è´¥åå¤ä½Busy
   Software_Reset(ENABLE);
   Software_Reset(DISABLE);
-  // Òı½Å³õÊ¼»¯
+  // å¼•è„šåˆå§‹åŒ–
   Pin_Init();
-  // ÅäÖÃI2C
+  // é…ç½®I2C
   I2C_Init(I2Cx_Param.I2Cx, &I2Cx_Param.I2C_InitStructure);
-  // ÅäÖÃI2CÖĞ¶Ï
+  // é…ç½®I2Cä¸­æ–­
   ITConfig(I2Cx_Param.I2C_IT_Selection, I2Cx_Param.I2C_IT_State);
-  // ÅäÖÃDMA
+  // é…ç½®DMA
   DMACmd(I2Cx_Param.I2C_DMA_State);
-  // Ê¹ÄÜI2C
+  // ä½¿èƒ½I2C
   Enable();
 }
 
 /**
- * @brief  I2C-¿ªÆôI2C·½·¨(I2CÊ¹ÄÜ)
+ * @brief  I2C-å¼€å¯I2Cæ–¹æ³•(I2Cä½¿èƒ½)
  * @param  None
  * @retval None
  */
@@ -109,7 +113,7 @@ void I2C::Enable()
 }
 
 /**
- * @brief  I2C-¹Ø±ÕI2C·½·¨(I2CÊ§ÄÜ)
+ * @brief  I2C-å…³é—­I2Cæ–¹æ³•(I2Cå¤±èƒ½)
  * @param  None
  * @retval None
  */
@@ -119,8 +123,8 @@ void I2C::Disable()
 }
 
 /**
- * @brief  I2C-Ê¹ÄÜ/Ê§ÄÜDMA´«Êä
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  I2C-ä½¿èƒ½/å¤±èƒ½DMAä¼ è¾“
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void I2C::DMACmd(FunctionalState NewState)
@@ -129,8 +133,8 @@ void I2C::DMACmd(FunctionalState NewState)
 }
 
 /**
- * @brief  I2C-²ÎÊıÁĞ±í¸üĞÂ
- * @param  I2Cx_Param     I2CµÄ²ÎÊıÁĞ±í
+ * @brief  I2C-å‚æ•°åˆ—è¡¨æ›´æ–°
+ * @param  I2Cx_Param     I2Cçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void I2C::Update(I2C_Param I2Cx_Param)
@@ -141,24 +145,24 @@ void I2C::Update(I2C_Param I2Cx_Param)
 }
 
 /**
- * @brief  I2C-ÖĞ¶Ï·½·¨
- * @param  I2C_IT         ÖĞ¶Ï±êÖ¾µÄÑ¡Ôñ
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  I2C-ä¸­æ–­æ–¹æ³•
+ * @param  I2C_IT         ä¸­æ–­æ ‡å¿—çš„é€‰æ‹©
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void I2C::ITConfig(uint16_t I2C_IT, FunctionalState NewState)
 {
   I2Cx_Param.I2C_ER_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
   I2Cx_Param.I2C_EV_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
-  // ÅäÖÃI2CÖĞ¶ÏÓÅÏÈ¼¶
+  // é…ç½®I2Cä¸­æ–­ä¼˜å…ˆçº§
   NVIC_Operate(I2Cx_Param.I2C_ER_NVIC_InitStructure).Init();
   NVIC_Operate(I2Cx_Param.I2C_EV_NVIC_InitStructure).Init();
   I2C_ITConfig(I2Cx_Param.I2Cx, I2C_IT, NewState);
 }
 
 /**
- * @brief  I2C-ÉèÖÃI2CµÄ²ÎÊıÁĞ±í
- * @param  I2Cx_Param     I2CµÄ²ÎÊıÁĞ±í
+ * @brief  I2C-è®¾ç½®I2Cçš„å‚æ•°åˆ—è¡¨
+ * @param  I2Cx_Param     I2Cçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void I2C::Set_I2C_Param(I2C_Param I2Cx_Param)
@@ -167,8 +171,8 @@ void I2C::Set_I2C_Param(I2C_Param I2Cx_Param)
 }
 
 /**
- * @brief  I2C-²úÉúÆğÊ¼Ìõ¼ş
- * @param  NewState       ÆğÊ¼Ìõ¼şĞÂ×´Ì¬
+ * @brief  I2C-äº§ç”Ÿèµ·å§‹æ¡ä»¶
+ * @param  NewState       èµ·å§‹æ¡ä»¶æ–°çŠ¶æ€
  * @retval None
  */
 void I2C::Generate_START(FunctionalState NewState)
@@ -177,8 +181,8 @@ void I2C::Generate_START(FunctionalState NewState)
 }
 
 /**
- * @brief  I2C-²úÉú½áÊøÌõ¼ş
- * @param  NewState       ½áÊøÌõ¼şĞÂ×´Ì¬
+ * @brief  I2C-äº§ç”Ÿç»“æŸæ¡ä»¶
+ * @param  NewState       ç»“æŸæ¡ä»¶æ–°çŠ¶æ€
  * @retval None
  */
 void I2C::Generate_STOP(FunctionalState NewState)
@@ -187,9 +191,9 @@ void I2C::Generate_STOP(FunctionalState NewState)
 }
 
 /**
- * @brief  I2C-¼ì²âÊÂ¼ş
- * @param  Event          ÊÂ¼şÃ¶¾Ù×ÓÏî
- * @retval ÊÂ¼ş×´Ì¬
+ * @brief  I2C-æ£€æµ‹äº‹ä»¶
+ * @param  Event          äº‹ä»¶æšä¸¾å­é¡¹
+ * @retval äº‹ä»¶çŠ¶æ€
  */
 ErrorStatus I2C::Check_Event(I2C_Event Event)
 {
@@ -197,9 +201,9 @@ ErrorStatus I2C::Check_Event(I2C_Event Event)
 }
 
 /**
- * @brief  I2C-·¢ËÍ7Î»µØÖ··½·¨
- * @param  Addr           µØÖ·
- * @param  I2C_Direction  ´«Êä·½Ïò
+ * @brief  I2C-å‘é€7ä½åœ°å€æ–¹æ³•
+ * @param  Addr           åœ°å€
+ * @param  I2C_Direction  ä¼ è¾“æ–¹å‘
  * @retval None
  */
 void I2C::Send7bitAddress(uint8_t Addr, uint8_t I2C_Direction)
@@ -208,8 +212,8 @@ void I2C::Send7bitAddress(uint8_t Addr, uint8_t I2C_Direction)
 }
 
 /**
- * @brief  I2C-·¢ËÍ8Î»Êı¾İ
- * @param  Data           Êı¾İ
+ * @brief  I2C-å‘é€8ä½æ•°æ®
+ * @param  Data           æ•°æ®
  * @retval None
  */
 void I2C::SendData(uint8_t Data)
@@ -218,9 +222,9 @@ void I2C::SendData(uint8_t Data)
 }
 
 /**
- * @brief  I2C-½ÓÊÕ8Î»Êı¾İ
+ * @brief  I2C-æ¥æ”¶8ä½æ•°æ®
  * @param  None
- * @retval 8Î»Êı¾İ
+ * @retval 8ä½æ•°æ®
  */
 uint8_t I2C::ReceiveData()
 {
@@ -228,8 +232,8 @@ uint8_t I2C::ReceiveData()
 }
 
 /**
- * @brief  I2C-²úÉúÓ¦´ğĞÅºÅ
- * @param  NewState       Ó¦´ğĞÂ×´Ì¬
+ * @brief  I2C-äº§ç”Ÿåº”ç­”ä¿¡å·
+ * @param  NewState       åº”ç­”æ–°çŠ¶æ€
  * @retval None
  */
 void I2C::AcknowledgeConfig(FunctionalState NewState)
@@ -238,9 +242,9 @@ void I2C::AcknowledgeConfig(FunctionalState NewState)
 }
 
 /**
- * @brief  I2C-»ñÈ¡±êÖ¾Î»·½·¨
- * @param  I2C_FLAG       I2C±êÖ¾Î»
- * @retval ±êÖ¾Î»×´Ì¬
+ * @brief  I2C-è·å–æ ‡å¿—ä½æ–¹æ³•
+ * @param  I2C_FLAG       I2Cæ ‡å¿—ä½
+ * @retval æ ‡å¿—ä½çŠ¶æ€
  */
 FlagStatus I2C::GetFlagStatus(uint32_t I2C_FLAG)
 {
@@ -248,8 +252,8 @@ FlagStatus I2C::GetFlagStatus(uint32_t I2C_FLAG)
 }
 
 /**
- * @brief  I2C-Çå³ı±êÖ¾Î»
- * @param  I2C_FLAG       I2C±êÖ¾Î»
+ * @brief  I2C-æ¸…é™¤æ ‡å¿—ä½
+ * @param  I2C_FLAG       I2Cæ ‡å¿—ä½
  * @retval None
  */
 void I2C::ClearFlag(uint32_t I2C_FLAG)
@@ -258,8 +262,8 @@ void I2C::ClearFlag(uint32_t I2C_FLAG)
 }
 
 /**
- * @brief  I2C-Èí¼ş¸´Î»(¿ÉÒÔ±ÜÃâÒòÎªÇ°Ò»´ÎÍ¨Ñ¶Ê§°ÜºóBusyÎ»Ò»Ö±ÖÃ1)
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  I2C-è½¯ä»¶å¤ä½(å¯ä»¥é¿å…å› ä¸ºå‰ä¸€æ¬¡é€šè®¯å¤±è´¥åBusyä½ä¸€ç›´ç½®1)
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void I2C::Software_Reset(FunctionalState NewState)
@@ -268,8 +272,8 @@ void I2C::Software_Reset(FunctionalState NewState)
 }
 
 /**
- * @brief  I2C-½ûÖ¹Ê±ÖÓÑÓ³¤
- * @param  NewState       Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  I2C-ç¦æ­¢æ—¶é’Ÿå»¶é•¿
+ * @param  NewState       ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void I2C::StretchClockCmd(FunctionalState NewState)
@@ -278,7 +282,7 @@ void I2C::StretchClockCmd(FunctionalState NewState)
 }
 
 /**
- * @brief  I2C-¿ªÆôI2CÊ±ÖÓ·½·¨
+ * @brief  I2C-å¼€å¯I2Cæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -287,7 +291,7 @@ void I2C::RCC_Enable()
   RCC_Operate::RCC_Config(I2Cx_Param.I2Cx, ENABLE);
 }
 /**
- * @brief  I2C-¹Ø±ÕI2CÊ±ÖÓ·½·¨
+ * @brief  I2C-å…³é—­I2Cæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -298,7 +302,7 @@ void I2C::RCC_Disable()
 }
 
 /**
- * @brief  I2C-¿ªÆôI2CÊ±ÖÓ·½·¨
+ * @brief  I2C-å¼€å¯I2Cæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -308,7 +312,7 @@ void I2C::RCC_Enable(I2C_TypeDef *I2Cx)
 }
 
 /**
- * @brief  I2C-¹Ø±ÕI2CÊ±ÖÓ·½·¨
+ * @brief  I2C-å…³é—­I2Cæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */

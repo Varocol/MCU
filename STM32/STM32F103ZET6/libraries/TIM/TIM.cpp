@@ -1,6 +1,20 @@
 #include "TIM.h"
+void (*TIM1_BRK_Handler)(void);
+void (*TIM1_UP_Handler)(void);
+void (*TIM1_TRG_COM_Handler)(void);
+void (*TIM1_CC_Handler)(void);
+void (*TIM2_Handler)(void);
+void (*TIM3_Handler)(void);
+void (*TIM4_Handler)(void);
+void (*TIM8_BRK_Handler)(void);
+void (*TIM8_UP_Handler)(void);
+void (*TIM8_TRG_COM_Handler)(void);
+void (*TIM8_CC_Handler)(void);
+void (*TIM5_Handler)(void);
+void (*TIM6_Handler)(void);
+void (*TIM7_Handler)(void);
 /**
- * @brief  TIM-¹¹Ôì·½·¨
+ * @brief  TIM-æ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,7 +23,7 @@ TIM::TIM()
 }
 
 /**
- * @brief  TIM-Îö¹¹·½·¨
+ * @brief  TIM-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -18,8 +32,8 @@ TIM::~TIM()
 }
 
 /**
- * @brief  TIM-¹¹Ôì·½·¨
- * @param  TIMx_Parma   TIM³õÊ¼»¯²ÎÊıÁĞ±í
+ * @brief  TIM-æ„é€ æ–¹æ³•
+ * @param  TIMx_Parma   TIMåˆå§‹åŒ–å‚æ•°åˆ—è¡¨
  * @retval None
  */
 TIM::TIM(TIM_Parma TIMx_Parma)
@@ -28,8 +42,8 @@ TIM::TIM(TIM_Parma TIMx_Parma)
 }
 
 /**
- * @brief  TIM-ÉèÖÃ²ÎÊıÁĞ±í·½·¨
- * @param  TIMx_Parma   TIM³õÊ¼»¯²ÎÊıÁĞ±í
+ * @brief  TIM-è®¾ç½®å‚æ•°åˆ—è¡¨æ–¹æ³•
+ * @param  TIMx_Parma   TIMåˆå§‹åŒ–å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void TIM::Set_TIM_Parma(TIM_Parma TIMx_Parma)
@@ -38,8 +52,8 @@ void TIM::Set_TIM_Parma(TIM_Parma TIMx_Parma)
 }
 
 /**
- * @brief  TIM-¸üĞÂ²ÎÊıÁĞ±í·½·¨
- * @param  TIMx_Parma   TIM³õÊ¼»¯²ÎÊıÁĞ±í
+ * @brief  TIM-æ›´æ–°å‚æ•°åˆ—è¡¨æ–¹æ³•
+ * @param  TIMx_Parma   TIMåˆå§‹åŒ–å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void TIM::Update(TIM_Parma TIMx_Parma)
@@ -50,14 +64,14 @@ void TIM::Update(TIM_Parma TIMx_Parma)
 }
 
 /**
- * @brief  TIM-Í¨µÀµÄGPIOÒı½Å³õÊ¼»¯
- * @param  TIMx_Parma   TIM³õÊ¼»¯²ÎÊıÁĞ±í
+ * @brief  TIM-é€šé“çš„GPIOå¼•è„šåˆå§‹åŒ–
+ * @param  TIMx_Parma   TIMåˆå§‹åŒ–å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void TIM::Pin_Init()
 {
-  // ¿¼ÂÇµ½ÓĞÌ«¶àÇé¿ö,Çë×ÔĞĞ¸ù¾İĞèÒªÅäÖÃÒı½Å(CHx,CHxN,BKIN,ETR)
-  //  CHN (eg: TIM2 CH1 PA0 PWMÊä³ö)
+  // è€ƒè™‘åˆ°æœ‰å¤ªå¤šæƒ…å†µ,è¯·è‡ªè¡Œæ ¹æ®éœ€è¦é…ç½®å¼•è„š(CHx,CHxN,BKIN,ETR)
+  //  CHN (eg: TIM2 CH1 PA0 PWMè¾“å‡º)
   {
       // GPIO_InitTypeDef GPIO_InitStructure =
       //     {
@@ -81,24 +95,24 @@ void TIM::Pin_Init()
 }
 
 /**
- * @brief  TIM-»ù±¾²ÎÊı³õÊ¼»¯·½·¨
+ * @brief  TIM-åŸºæœ¬å‚æ•°åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void TIM::Base_Init()
 {
-  // ³õÊ¼»¯¶¨Ê±Æ÷»ù´¡²ÎÊı
+  // åˆå§‹åŒ–å®šæ—¶å™¨åŸºç¡€å‚æ•°
   TIM_TimeBaseInit(TIMx_Parma.TIMx, &TIMx_Parma.TIM_TimeBaseStructure);
 }
 
 /**
- * @brief  TIM-OCÍ¨µÀ³õÊ¼»¯·½·¨
+ * @brief  TIM-OCé€šé“åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void TIM::OC_Init()
 {
-  // ÅäÖÃOCÍ¨µÀ
+  // é…ç½®OCé€šé“
   switch (TIMx_Parma.OCx)
   {
   case OC1:
@@ -117,7 +131,7 @@ void TIM::OC_Init()
 }
 
 /**
- * @brief  TIM-IC³õÊ¼»¯·½·¨
+ * @brief  TIM-ICåˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -127,48 +141,48 @@ void TIM::IC_Init()
 }
 
 /**
- * @brief  TIM-³õÊ¼»¯·½·¨
+ * @brief  TIM-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void TIM::Init()
 {
-  // ÏµÍ³Ê±ÖÓ·½·¨£¬¿ªÆôTIMxÊ±ÖÓ
+  // ç³»ç»Ÿæ—¶é’Ÿæ–¹æ³•ï¼Œå¼€å¯TIMxæ—¶é’Ÿ
   RCC_Operate::RCC_Config(TIMx_Parma.TIMx, ENABLE);
-  // TIMx¼Ä´æÆ÷¸´Î»
+  // TIMxå¯„å­˜å™¨å¤ä½
   TIM_DeInit(TIMx_Parma.TIMx);
-  // ÅäÖÃËùĞèÒı½Å
+  // é…ç½®æ‰€éœ€å¼•è„š
   Pin_Init();
-  // ÅäÖÃ»ù±¾²ÎÊı
+  // é…ç½®åŸºæœ¬å‚æ•°
   Base_Init();
-  // ÅäÖÃÍ¨µÀ²ÎÊı
+  // é…ç½®é€šé“å‚æ•°
   OC_Init();
-  // ÅäÖÃIC²ÎÊı
+  // é…ç½®ICå‚æ•°
   IC_Init();
-  // Çå³ı¼ÆÊ±Æ÷ÖĞ¶Ï±êÖ¾Î»
+  // æ¸…é™¤è®¡æ—¶å™¨ä¸­æ–­æ ‡å¿—ä½
   TIM_ClearFlag(TIMx_Parma.TIMx, TIM_FLAG_Update);
-  // ÅäÖÃ¼ÆÊ±Æ÷ÖĞ¶Ï
+  // é…ç½®è®¡æ—¶å™¨ä¸­æ–­
   ITConfig(TIMx_Parma.TIM_IT_Selection, TIMx_Parma.TIM_IT_State);
-  // ¿ªÆô¶¨Ê±Æ÷
+  // å¼€å¯å®šæ—¶å™¨
   Enable();
 }
 
 /**
- * @brief  TIM-ÖĞ¶Ï·½·¨
- * @param  TIM_IT       ÖĞ¶Ï±êÖ¾µÄÑ¡Ôñ
- * @param  NewState     Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  TIM-ä¸­æ–­æ–¹æ³•
+ * @param  TIM_IT       ä¸­æ–­æ ‡å¿—çš„é€‰æ‹©
+ * @param  NewState     ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void TIM::ITConfig(uint16_t TIM_IT, FunctionalState NewState)
 {
-  // NVICÅäÖÃ
+  // NVICé…ç½®
   TIMx_Parma.TIM_NVIC_InitStructure.NVIC_IRQChannelCmd = NewState;
   NVIC_Operate(TIMx_Parma.TIM_NVIC_InitStructure).Init();
   TIM_ITConfig(TIMx_Parma.TIMx, TIM_IT, NewState);
 }
 
 /**
- * @brief  TIM-¿ªÆôTIM·½·¨
+ * @brief  TIM-å¼€å¯TIMæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -178,7 +192,7 @@ void TIM::Enable()
 }
 
 /**
- * @brief  TIM-¹Ø±ÕTIM·½·¨
+ * @brief  TIM-å…³é—­TIMæ–¹æ³•
  * @param  None
  * @retval None
  */

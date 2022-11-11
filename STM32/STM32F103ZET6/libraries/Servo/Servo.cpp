@@ -1,6 +1,6 @@
 #include "Servo.h"
 /**
- * @brief  Servo-¿Õ¹¹Ôì·½·¨
+ * @brief  Servo-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @return None
  */
@@ -9,8 +9,8 @@ Servo::Servo()
 }
 
 /**
- * @brief  Servo-´ø²Î¹¹Ôì·½·¨
- * @param  Param        Servo²ÎÊıÁĞ±í
+ * @brief  Servo-å¸¦å‚æ„é€ æ–¹æ³•
+ * @param  Param        Servoå‚æ•°åˆ—è¡¨
  * @return None
  */
 Servo::Servo(Servo_Param Param)
@@ -19,7 +19,7 @@ Servo::Servo(Servo_Param Param)
 }
 
 /**
- * @brief  Servo-Îö¹¹·½·¨
+ * @brief  Servo-ææ„æ–¹æ³•
  * @param  None
  * @return None
  */
@@ -28,13 +28,13 @@ Servo::~Servo()
 }
 
 /**
- * @brief  Servo-ÉèÖÃ²ÎÊı·½·¨
- * @param  Param        Servo²ÎÊıÁĞ±í
+ * @brief  Servo-è®¾ç½®å‚æ•°æ–¹æ³•
+ * @param  Param        Servoå‚æ•°åˆ—è¡¨
  * @return None
  */
 void Servo::Set_Servo_Param(Servo_Param Param)
 {
-    //·ÀÖ¹ÊÜ¿ØÂö¿í³¬³ö¶æ»úãĞÖµ
+    //é˜²æ­¢å—æ§è„‰å®½è¶…å‡ºèˆµæœºé˜ˆå€¼
     if (Param.CURRENT_START < Param.CURRENT_MIN)
     {
         Param.CURRENT_START = Param.CURRENT_MIN;
@@ -44,18 +44,18 @@ void Servo::Set_Servo_Param(Servo_Param Param)
         Param.CURRENT_END = Param.CURRENT_MAX;
     }
     this->Param = Param;
-    //ÕâÒ»²½Ö»ÊÇÓÃÓÚÉèÖÃÍ¨µÀÒı½ÅºÍÇı¶¯ÆµÂÊ
+    //è¿™ä¸€æ­¥åªæ˜¯ç”¨äºè®¾ç½®é€šé“å¼•è„šå’Œé©±åŠ¨é¢‘ç‡
     Set_PWM_Param(Param.pwmch, Param.freq, MAP_TO_Percent((Param.MAP_MAX + Param.MAP_MIN) / 2));
 }
 
 /**
- * @brief  Servo-×ªÏò·½·¨
- * @param  MAP_Value    Ó³ÉäºóµÄ×ªÏò²ÎÊı
+ * @brief  Servo-è½¬å‘æ–¹æ³•
+ * @param  MAP_Value    æ˜ å°„åçš„è½¬å‘å‚æ•°
  * @return None
  */
 void Servo::Turn(double MAP_VAL)
 {
-    //·ÀÖ¹¶æ»ú×ªÏò¹ı¶È
+    //é˜²æ­¢èˆµæœºè½¬å‘è¿‡åº¦
     if (MAP_VAL < Param.MAP_MIN)
     {
         MAP_VAL = Param.MAP_MIN;
@@ -68,9 +68,9 @@ void Servo::Turn(double MAP_VAL)
 }
 
 /**
- * @brief  Servo-Âö¿í×ª»»³ÉÕ¼¿Õ±È°Ù·Ö±È
- * @param  CURRENT      Âö¿í
- * @return Percent      Õ¼¿Õ±È°Ù·Ö±È
+ * @brief  Servo-è„‰å®½è½¬æ¢æˆå ç©ºæ¯”ç™¾åˆ†æ¯”
+ * @param  CURRENT      è„‰å®½
+ * @return Percent      å ç©ºæ¯”ç™¾åˆ†æ¯”
  */
 double Servo::CURRENT_To_Percent(double CURRENT)
 {
@@ -78,9 +78,9 @@ double Servo::CURRENT_To_Percent(double CURRENT)
 }
 
 /**
- * @brief  Servo-Ó³ÉäÖµ×ª»»³ÉÂö¿í
- * @param  MAP_VAL      Ó³ÉäÖµ
- * @return CURRENT      Âö¿í
+ * @brief  Servo-æ˜ å°„å€¼è½¬æ¢æˆè„‰å®½
+ * @param  MAP_VAL      æ˜ å°„å€¼
+ * @return CURRENT      è„‰å®½
  */
 double Servo::MAP_TO_CURRENT(double MAP_VAL)
 {
@@ -88,9 +88,9 @@ double Servo::MAP_TO_CURRENT(double MAP_VAL)
 }
 
 /**
- * @brief  Servo-Ó³ÉäÖµ×ª»»³ÉÕ¼¿Õ±È
- * @param  MAP_VAL      Ó³ÉäÖµ
- * @return Percent      Õ¼¿Õ±È°Ù·Ö±È
+ * @brief  Servo-æ˜ å°„å€¼è½¬æ¢æˆå ç©ºæ¯”
+ * @param  MAP_VAL      æ˜ å°„å€¼
+ * @return Percent      å ç©ºæ¯”ç™¾åˆ†æ¯”
  */
 double Servo::MAP_TO_Percent(double MAP_VAL)
 {

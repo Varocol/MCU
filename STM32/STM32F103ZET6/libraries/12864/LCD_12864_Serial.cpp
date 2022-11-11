@@ -1,6 +1,6 @@
 #include "LCD_12864_Serial.h"
 /**
- * @brief  LCD12864´®ĞĞ-¿Õ¹¹Ôì·½·¨
+ * @brief  LCD12864ä¸²è¡Œ-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,8 +9,8 @@ LCD_12864_Serial::LCD_12864_Serial()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-´«²Î¹¹Ôì·½·¨
- * @param  Param        LCD12864´®ĞĞ²ÎÊıÁĞ±í
+ * @brief  LCD12864ä¸²è¡Œ-ä¼ å‚æ„é€ æ–¹æ³•
+ * @param  Param        LCD12864ä¸²è¡Œå‚æ•°åˆ—è¡¨
  * @retval None
  */
 LCD_12864_Serial::LCD_12864_Serial(LCD_12864_Param_Serial Param)
@@ -19,8 +19,8 @@ LCD_12864_Serial::LCD_12864_Serial(LCD_12864_Param_Serial Param)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-ÉèÖÃ²ÎÊı·½·¨
- * @param  Param        LCD12864´®ĞĞ²ÎÊıÁĞ±í
+ * @brief  LCD12864ä¸²è¡Œ-è®¾ç½®å‚æ•°æ–¹æ³•
+ * @param  Param        LCD12864ä¸²è¡Œå‚æ•°åˆ—è¡¨
  * @retval None
  */
 void LCD_12864_Serial::Set_Param(LCD_12864_Param_Serial Param)
@@ -29,8 +29,8 @@ void LCD_12864_Serial::Set_Param(LCD_12864_Param_Serial Param)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-¸üĞÂ²ÎÊı·½·¨
- * @param  Param        LCD12864´®ĞĞ²ÎÊıÁĞ±í
+ * @brief  LCD12864ä¸²è¡Œ-æ›´æ–°å‚æ•°æ–¹æ³•
+ * @param  Param        LCD12864ä¸²è¡Œå‚æ•°åˆ—è¡¨
  * @retval None
  */
 void LCD_12864_Serial::Update(LCD_12864_Param_Serial Param)
@@ -40,7 +40,7 @@ void LCD_12864_Serial::Update(LCD_12864_Param_Serial Param)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-ÇåÆÁ·½·¨
+ * @brief  LCD12864ä¸²è¡Œ-æ¸…å±æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -51,8 +51,8 @@ void LCD_12864_Serial::Clear_DDRAM()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-·¢ËÍµ¥×Ö½Ú·½·¨
- * @param  Data         ĞèÒª·¢ËÍµÄ×Ö½Ú
+ * @brief  LCD12864ä¸²è¡Œ-å‘é€å•å­—èŠ‚æ–¹æ³•
+ * @param  Data         éœ€è¦å‘é€çš„å­—èŠ‚
  * @retval None
  */
 void LCD_12864_Serial::Send_Byte(uchar Data)
@@ -74,8 +74,8 @@ void LCD_12864_Serial::Send_Byte(uchar Data)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-Ğ´Ö¸Áî·½·¨
- * @param  cmd          ĞèÒª·¢ËÍµÄÖ¸Áî
+ * @brief  LCD12864ä¸²è¡Œ-å†™æŒ‡ä»¤æ–¹æ³•
+ * @param  cmd          éœ€è¦å‘é€çš„æŒ‡ä»¤
  * @retval None
  */
 void LCD_12864_Serial::Write_Cmd(uchar cmd)
@@ -89,8 +89,8 @@ void LCD_12864_Serial::Write_Cmd(uchar cmd)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-Ğ´Êı¾İ·½·¨
- * @param  Data         ĞèÒª·¢ËÍµÄÊı¾İ
+ * @brief  LCD12864ä¸²è¡Œ-å†™æ•°æ®æ–¹æ³•
+ * @param  Data         éœ€è¦å‘é€çš„æ•°æ®
  * @retval None
  */
 void LCD_12864_Serial::Write_Data(uchar Data)
@@ -104,9 +104,9 @@ void LCD_12864_Serial::Write_Data(uchar Data)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-µ÷½ÚÊäÈëÎ»ÖÃ·½·¨
- * @param  x            ĞĞÊı(0~3)
- * @param  y            ÁĞÊı(0~7)
+ * @brief  LCD12864ä¸²è¡Œ-è°ƒèŠ‚è¾“å…¥ä½ç½®æ–¹æ³•
+ * @param  x            è¡Œæ•°(0~3)
+ * @param  y            åˆ—æ•°(0~7)
  * @retval None
  */
 void LCD_12864_Serial::Pos(uchar x, uchar y)
@@ -130,7 +130,7 @@ void LCD_12864_Serial::Pos(uchar x, uchar y)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-³õÊ¼»¯·½·¨(º¬GPIO)
+ * @brief  LCD12864ä¸²è¡Œ-åˆå§‹åŒ–æ–¹æ³•(å«GPIO)
  * @param  None
  * @retval None
  */
@@ -146,7 +146,7 @@ void LCD_12864_Serial::Init()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-GPIOÒı½Å³õÊ¼»¯·½·¨
+ * @brief  LCD12864ä¸²è¡Œ-GPIOå¼•è„šåˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -177,7 +177,7 @@ void LCD_12864_Serial::Pin_Init()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-ÅĞÃ¦·½·¨
+ * @brief  LCD12864ä¸²è¡Œ-åˆ¤å¿™æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -189,42 +189,42 @@ void LCD_12864_Serial::Check_Busy()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-Ğ´ÈëCGRAM·½·¨
- * @param  num          ±àºÅ(0-3)
- * @param  p            ´æ·Å×ÖÊı¾İµÄÖ¸Õë
+ * @brief  LCD12864ä¸²è¡Œ-å†™å…¥CGRAMæ–¹æ³•
+ * @param  num          ç¼–å·(0-3)
+ * @param  p            å­˜æ”¾å­—æ•°æ®çš„æŒ‡é’ˆ
  * @retval None
  */
 void LCD_12864_Serial::Set_CGRAM(uchar num, uchar *p)
 {
   uchar i, firstadd;
-  Write_Cmd(0x34); //À©³äÖ¸Áî¼¯
-  Write_Cmd(0x02); //µÚ13Ìõ,ÔÊĞíÉèÖÃCGRAMµØÖ·
-  Write_Cmd(0x30); //»Øµ½»ù±¾Ö¸Áî¼¯
+  Write_Cmd(0x34); //æ‰©å……æŒ‡ä»¤é›†
+  Write_Cmd(0x02); //ç¬¬13æ¡,å…è®¸è®¾ç½®CGRAMåœ°å€
+  Write_Cmd(0x30); //å›åˆ°åŸºæœ¬æŒ‡ä»¤é›†
   firstadd = (0x40 | num << 4);
   for (i = 0; i < 16; i++)
   {
-    Write_Cmd(firstadd + i); //ÉèÖÃ×İ×ø±ê
+    Write_Cmd(firstadd + i); //è®¾ç½®çºµåæ ‡
     Write_Data(p[i * 2]);
     Write_Data(p[i * 2 + 1]);
   }
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-³ÊÏÖCGRAM·½·¨
- * @param  num          ±àºÅ(0-3)
- * @param  x            ĞĞºÅ
- * @param  y            ÁĞºÅ
+ * @brief  LCD12864ä¸²è¡Œ-å‘ˆç°CGRAMæ–¹æ³•
+ * @param  num          ç¼–å·(0-3)
+ * @param  x            è¡Œå·
+ * @param  y            åˆ—å·
  * @retval None
  */
 void LCD_12864_Serial::Display_CGRAM(uchar num, uchar x, uchar y)
 {
   Pos(x, y);
-  Write_Data(0x00); // CGRAMµ±×÷Êı¾İµ÷ÓÃ
+  Write_Data(0x00); // CGRAMå½“ä½œæ•°æ®è°ƒç”¨
   Write_Data(num * 2);
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-¿Õ·½·¨(¸ø²¢ĞĞÓÃµÄ)
+ * @brief  LCD12864ä¸²è¡Œ-ç©ºæ–¹æ³•(ç»™å¹¶è¡Œç”¨çš„)
  * @retval None
  */
 void LCD_12864_Serial::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag)
@@ -232,7 +232,7 @@ void LCD_12864_Serial::Draw_Rectangle(uchar x1, uchar y1, uchar x2, uchar y2, uc
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-¿Õ·½·¨(¸ø²¢ĞĞÓÃµÄ)
+ * @brief  LCD12864ä¸²è¡Œ-ç©ºæ–¹æ³•(ç»™å¹¶è¡Œç”¨çš„)
  * @retval None
  */
 void LCD_12864_Serial::Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, uchar flag)
@@ -240,7 +240,7 @@ void LCD_12864_Serial::Draw_Rectangle_1(uchar x1, uchar y1, uchar x2, uchar y2, 
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-¿Õ·½·¨(¸ø²¢ĞĞÓÃµÄ)
+ * @brief  LCD12864ä¸²è¡Œ-ç©ºæ–¹æ³•(ç»™å¹¶è¡Œç”¨çš„)
  * @retval None
  */
 void LCD_12864_Serial::Draw_Point(uchar x, uchar y, uchar flag)
@@ -248,10 +248,10 @@ void LCD_12864_Serial::Draw_Point(uchar x, uchar y, uchar flag)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-³ÊÏÖCGRAM·½·¨
- * @param  p            ËùĞèÏÔÊ¾µÄ×Ö·û´®µÄÖ¸Õë
- * @param  row          ĞĞºÅ
- * @param  col          ÁĞºÅ
+ * @brief  LCD12864ä¸²è¡Œ-å‘ˆç°CGRAMæ–¹æ³•
+ * @param  p            æ‰€éœ€æ˜¾ç¤ºçš„å­—ç¬¦ä¸²çš„æŒ‡é’ˆ
+ * @param  row          è¡Œå·
+ * @param  col          åˆ—å·
  * @retval None
  */
 void LCD_12864_Serial::Show_String(uchar *p, uint16_t row, uint16_t col)
@@ -302,14 +302,14 @@ void LCD_12864_Serial::Show_String(uchar *p, uint16_t row, uint16_t col)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-»æÍ¼·½·¨
- * @param  p            ËùĞèÏÔÊ¾µÄ×Ö·û´®µÄÖ¸Õë
+ * @brief  LCD12864ä¸²è¡Œ-ç»˜å›¾æ–¹æ³•
+ * @param  p            æ‰€éœ€æ˜¾ç¤ºçš„å­—ç¬¦ä¸²çš„æŒ‡é’ˆ
  * @retval None
  */
 void LCD_12864_Serial::Display_Image(uchar *p)
 {
   uchar i, j;
-  Write_Cmd(0x34); //À©³äÖ¸Áî¼¯,»æÍ¼Ä£Ê½¹Ø
+  Write_Cmd(0x34); //æ‰©å……æŒ‡ä»¤é›†,ç»˜å›¾æ¨¡å¼å…³
   for (i = 0; i < 32; i++)
   {
     Write_Cmd(0x80 + i);
@@ -335,14 +335,14 @@ void LCD_12864_Serial::Display_Image(uchar *p)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-Çå¿ÕGDRAM·½·¨
+ * @brief  LCD12864ä¸²è¡Œ-æ¸…ç©ºGDRAMæ–¹æ³•
  * @param  None
  * @retval None
  */
 void LCD_12864_Serial::Clear_GDRAM()
 {
   uchar i, j;
-  Write_Cmd(0x34); //À©³äÖ¸Áî¼¯,»æÍ¼Ä£Ê½¹Ø
+  Write_Cmd(0x34); //æ‰©å……æŒ‡ä»¤é›†,ç»˜å›¾æ¨¡å¼å…³
   for (i = 0; i < 32; i++)
   {
     Write_Cmd(0x80 + i);
@@ -366,9 +366,9 @@ void LCD_12864_Serial::Clear_GDRAM()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-¿Õ·½·¨(¸ø²¢ĞĞÓÃµÄ)
- * @param  x            ÁĞºÅ
- * @param  y            ĞĞºÅ
+ * @brief  LCD12864ä¸²è¡Œ-ç©ºæ–¹æ³•(ç»™å¹¶è¡Œç”¨çš„)
+ * @param  x            åˆ—å·
+ * @param  y            è¡Œå·
  * @retval None
  */
 void LCD_12864_Serial::Read_GDRAM(uchar x, uchar y)
@@ -376,9 +376,9 @@ void LCD_12864_Serial::Read_GDRAM(uchar x, uchar y)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-ÉèÖÃGDRAMµØÖ··½·¨
- * @param  x            ĞĞºÅ
- * @param  y            ÁĞºÅ
+ * @brief  LCD12864ä¸²è¡Œ-è®¾ç½®GDRAMåœ°å€æ–¹æ³•
+ * @param  x            è¡Œå·
+ * @param  y            åˆ—å·
  * @retval None
  */
 void LCD_12864_Serial::Set_GDRAMadd(uchar x, uchar y)
@@ -388,10 +388,10 @@ void LCD_12864_Serial::Set_GDRAMadd(uchar x, uchar y)
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-¶ÁÆÁÄ»Êı¾İ·½·¨
- *         ¸Ã·½·¨´®ĞĞ²»¿ÉÓÃ(´®ĞĞÎŞ·¨¶ÁÈ¡ÆÁÄ»Êı¾İ,Ò²¾ÍÊÇÕâ¸öÎŞÓÃ)
+ * @brief  LCD12864ä¸²è¡Œ-è¯»å±å¹•æ•°æ®æ–¹æ³•
+ *         è¯¥æ–¹æ³•ä¸²è¡Œä¸å¯ç”¨(ä¸²è¡Œæ— æ³•è¯»å–å±å¹•æ•°æ®,ä¹Ÿå°±æ˜¯è¿™ä¸ªæ— ç”¨)
  * @param  None
- * @retval ÆÁÄ»Êı¾İ
+ * @retval å±å¹•æ•°æ®
  */
 uchar LCD_12864_Serial::Read_Data()
 {
@@ -400,9 +400,9 @@ uchar LCD_12864_Serial::Read_Data()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-½ÓÊÜÆÁÄ»×Ö½Ú·½·¨
+ * @brief  LCD12864ä¸²è¡Œ-æ¥å—å±å¹•å­—èŠ‚æ–¹æ³•
  * @param  None
- * @retval ½ÓÊÕµ½µÄ×Ö½Ú
+ * @retval æ¥æ”¶åˆ°çš„å­—èŠ‚
  */
 uchar LCD_12864_Serial::Receive_Byte()
 {
@@ -438,9 +438,9 @@ uchar LCD_12864_Serial::Receive_Byte()
 }
 
 /**
- * @brief  LCD12864´®ĞĞ-¶ÁÆÁÄ»×´Ì¬·½·¨
+ * @brief  LCD12864ä¸²è¡Œ-è¯»å±å¹•çŠ¶æ€æ–¹æ³•
  * @param  None
- * @retval LCDµÄ×´Ì¬
+ * @retval LCDçš„çŠ¶æ€
  */
 uchar LCD_12864_Serial::Read_Status()
 {

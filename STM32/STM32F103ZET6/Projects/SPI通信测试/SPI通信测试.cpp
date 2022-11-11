@@ -7,22 +7,22 @@
 #define SPI1_TX_DMA_CHANNEL DMA1_Channel3
 #define SPI1_TX_DMA_CHANNEL_IRQN DMA1_Channel3_IRQn
 /*
-    ����һ:
-        ����SPI_NSS_Master_Softģʽ
-         SPI1��������,ģʽΪ������ģʽ,SPI2�����ӻ�,ģʽΪӲ����ģʽ,����SPI2���յ��Ľ���������;
-    ���Զ�:
-        ����SPI_NSS_Master_SSOE_Hardģʽ
-        SPI1��������,ģʽΪӲ����ģʽ�����ģʽ(��SPI_NSS_Master_SSOE_Hardģʽ),SPI2�����ӻ�,ģʽΪӲ����ģʽ,����SPI2���յ��Ľ���������;
-    ������:
-        ����SPI_NSS_Master_Hardģʽ(����ô��,����)
-        SPI1��������,ģʽΪӲ����ģʽ������ģʽ(��SPI_NSS_Master_Hardģʽ),SPI2�����ӻ�,ģʽΪӲ����ģʽ,����SPI2���յ��Ľ���������;
-    ������:
-        ����SPI_NSS_Slave_Softģʽ(���ģʽҲ����ô��)
-        SPI1��������,ģʽΪӲ����ģʽ������ģʽ(��SPI_NSS_Master_Hardģʽ),SPI2�����ӻ�,ģʽΪ������ģʽ,����SPI2���յ��Ľ���������;
-        ��β�����,��������ʹ��SPI_NSS_Master_Hardģʽ,����ʹ���������ⲿ����,�ֱ�ΪPC7(����),PC6(�ӻ�),��ȻҲ����������ΪPI_NSS_Master_SSOE_Hard
-        ʱ,��ֻʹ��PC6��ģʽ,Ҳ��ͨ����,���Իῴ���в��ִ��뱻ע��,���β������EXTI�ⲿ�жϡ�
-    ������:
-        CRCУ��,�ٷ��Ƽ��Ĺر�SPI�Ĳ������,�Լ��жϵĲ��ԡ�
+    测试一:
+        检验SPI_NSS_Master_Soft模式
+         SPI1当作主机,模式为软件主模式,SPI2当作从机,模式为硬件从模式,并将SPI2接收到的结果串口输出;
+    测试二:
+        检验SPI_NSS_Master_SSOE_Hard模式
+        SPI1当作主机,模式为硬件主模式的输出模式(即SPI_NSS_Master_SSOE_Hard模式),SPI2当作从机,模式为硬件从模式,并将SPI2接收到的结果串口输出;
+    测试三:
+        检验SPI_NSS_Master_Hard模式(不怎么用,鸡肋)
+        SPI1当作主机,模式为硬件主模式的输入模式(即SPI_NSS_Master_Hard模式),SPI2当作从机,模式为硬件从模式,并将SPI2接收到的结果串口输出;
+    测试四:
+        检验SPI_NSS_Slave_Soft模式(这个模式也不怎么用)
+        SPI1当作主机,模式为硬件主模式的输入模式(即SPI_NSS_Master_Hard模式),SPI2当作从机,模式为软件从模式,并将SPI2接收到的结果串口输出;
+        这次测试中,由于主机使用SPI_NSS_Master_Hard模式,所以使用了两个外部引脚,分别为PC7(主机),PC6(从机),当然也测试了主机为PI_NSS_Master_SSOE_Hard
+        时,即只使用PC6的模式,也是通过的,所以会看到有部分代码被注释,本次测验基于EXTI外部中断。
+    测试五:
+        CRC校验,官方推荐的关闭SPI的步骤测试,以及中断的测试。
 
 */
 SPI SPI_1_Test;
@@ -39,12 +39,12 @@ int main()
 }
 void Setup()
 {
-    // ��ʼ������
+    // 初始化串口
     USART_1.Init();
-    // ��ʼ���źŵ�
+    // 初始化信号灯
     LED_1.Init();
 #if TEST_MODE != 5
-    // ��ʼ��DMA
+    // 初始化DMA
     NVIC_InitTypeDef SPI2_RX_DMA_NVIC_InitStructure = {
         .NVIC_IRQChannel = SPI2_RX_DMA_CHANNEL_IRQN,
         .NVIC_IRQChannelPreemptionPriority = 0,
@@ -66,7 +66,7 @@ void Setup()
         .DMA_Channelx = SPI2_RX_DMA_CHANNEL,
         .DMA_InitStructure = SPI2_RX_DMA_InitStructure,
         .DMA_NVIC_InitStructure = SPI2_RX_DMA_NVIC_InitStructure,
-        .DMA_IT_Selection = DMA_IT_TC | DMA_IT_HT | DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(���ֻ�ǹ���ѡ��,ʵ�ʲ������������ʽ����)
+        .DMA_IT_Selection = DMA_IT_TC | DMA_IT_HT | DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
         .DMA_IT_State = DISABLE,
     };
     SPI2_RX_DMA = DMA(SPI2_RX_DMA_Param);
@@ -183,7 +183,7 @@ void Setup()
     SPI_1_Test.Init();
 #endif
 #if TEST_MODE == 3
-    // ��ģʽ�²�����SSOE,ͬʱҲ����ʼ��nssӲ������,����ʹ������GPIO����������,����������nss,�е㼦��
+    // 该模式下不开启SSOE,同时也不初始化nss硬件引脚,而是使用其他GPIO引脚来代替,类似于软件nss,有点鸡肋
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
         .NVIC_IRQChannel = SPI1_IRQn,
         .NVIC_IRQChannelPreemptionPriority = 0,
@@ -240,9 +240,9 @@ void Setup()
     SPI_1_Test.Init();
 #endif
 #if TEST_MODE == 4
-    // ��ģʽ�²�����SSOE,ͬʱҲ����ʼ��nssӲ������,����ʹ������GPIO����������,����������nss,�е㼦��
-    // ��������Slaveģʽ�µ��ⲿnss���Ų������ڲ�nss,������Ҫʹ���ⲿ�жϴ����޸��ڲ�nss
-    // ���Կ�����Ҫ�����ⲿ����
+    // 该模式下不开启SSOE,同时也不初始化nss硬件引脚,而是使用其他GPIO引脚来代替,类似于软件nss,有点鸡肋
+    // 由于软件Slave模式下的外部nss引脚不接入内部nss,所以需要使用外部中断触发修改内部nss
+    // 所以可能需要两个外部引脚
     NVIC_InitTypeDef SPI1_NVIC_InitStructure = {
         .NVIC_IRQChannel = SPI1_IRQn,
         .NVIC_IRQChannelPreemptionPriority = 0,
@@ -297,21 +297,21 @@ void Setup()
     // SPI_1_Test.Set_NSS_Pin(NSS_Soft);
     SPI_2_Test.Init();
     SPI_1_Test.Init();
-    // ��SPI_2_Test����SPI_2ʹ��SPI_2_Test�ܹ����жϺ���ʹ��
+    // 将SPI_2_Test赋给SPI_2使得SPI_2_Test能够被中断函数使用
     SPI_2 = SPI_2_Test;
-    // ��ʼ��GPIO PC6,Ϊ�˷����ȡ�����ź�
+    // 初始化GPIO PC6,为了方便读取引脚信号
     GPIO Read_Pin = GPIO(PC6);
     Read_Pin.OUT_MODE();
-    // ��ʼ���ⲿ�ж�
+    // 初始化外部中断
     EXTI_PC6.Init();
-    printf("��ʼ����ɣ�\n");
-    // Ƭѡ����ʹ�����½���
+    printf("初始化完成！\n");
+    // 片选拉高使得有下降沿
     //  SPI_1_Test.NSS_High();
-    // ���������˹ٷ��Ƽ���SPI�رշ���,���Բ���ʹ������ķ�ʽ����
-    // ��ΪSSOEģʽ������������Ҫ�ر�SPI,������ر�Ӧ����spi����ʱʹ��
+    // 由于新增了官方推荐的SPI关闭方法,所以不再使用上面的方式拉高
+    // 因为SSOE模式下引脚拉高需要关闭SPI,而这个关闭应该在spi传输时使用
     Read_Pin.Pin_High();
     Read_Pin.IN_MODE();
-    // �������ŵ�ƽ�仯
+    // 测试引脚电平变化
     //  while (1)
     //  {
     //      SPI_1_Test.NSS_Low();
@@ -400,7 +400,7 @@ void Setup()
         .DMA_Channelx = SPI2_RX_DMA_CHANNEL,
         .DMA_InitStructure = SPI2_RX_DMA_InitStructure,
         .DMA_NVIC_InitStructure = SPI2_RX_DMA_NVIC_InitStructure,
-        .DMA_IT_Selection = DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(���ֻ�ǹ���ѡ��,ʵ�ʲ������������ʽ����)
+        .DMA_IT_Selection = DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
         .DMA_IT_State = DISABLE,
     };
     SPI2_RX_DMA = DMA(SPI2_RX_DMA_Param);
@@ -425,7 +425,7 @@ void Setup()
         .DMA_Channelx = SPI1_TX_DMA_CHANNEL,
         .DMA_InitStructure = SPI1_TX_DMA_InitStructure,
         .DMA_NVIC_InitStructure = SPI1_TX_DMA_NVIC_InitStructure,
-        .DMA_IT_Selection = DMA_IT_TC | DMA_IT_HT | DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(���ֻ�ǹ���ѡ��,ʵ�ʲ������������ʽ����)
+        .DMA_IT_Selection = DMA_IT_TC | DMA_IT_HT | DMA_IT_TE, // DMA_IT_TC | DMA_IT_HT | DMA_IT_TE(这个只是供你选择,实际并不能用与的形式传参)
         .DMA_IT_State = DISABLE,
     };
     // SPI1_TX_DMA = DMA(SPI1_TX_DMA_Param);
@@ -437,62 +437,62 @@ void Test()
 #if TEST_MODE != 5
     while (1)
     {
-        // Ƭѡ����
+        // 片选拉低
         SPI_1_Test.NSS_Low();
-        // ���͵�������
+        // 发送单个数据
         //  SPI_1_Test.Send_Data('1');
-        //  printf("����һ:���յ����ֽ� %c\n", SPI_2_Test.Receive_Data());
-        // ���Ͷ������
-        // ����SPI1���ʹ�������,����ʹ��DMA��֤
-        // ��ս��ջ�����
+        //  printf("测试一:接收单个字节 %c\n", SPI_2_Test.Receive_Data());
+        // 发送多个数据
+        // 由于SPI1发送大量数据,所以使用DMA验证
+        // 清空接收缓冲区
         memset(ReceiveBuffer, 0, sizeof(ReceiveBuffer));
         SPI_1_Test.Send_Buffer((uint8_t *)SendBuffer, strlen(SendBuffer) + 1);
-        printf("����һ:�����ַ���\n%s\n", ReceiveBuffer);
-        // ��ʱ
+        printf("测试一:接收字符串\n%s\n", ReceiveBuffer);
+        // 延时
         SysTick_Operate::Delay_ms(250);
         LED_1.Toggle();
         SPI_1_Test.NSS_High();
-        // ������ʱʹ�õ�ƽ�仯������
+        // 二次延时使得电平变化更明显
         SysTick_Operate::Delay_ms(250);
     }
 #else
     while (1)
     {
-        // Ƭѡ����
+        // 片选拉低
         SPI_1_Test.NSS_Low();
-        // ���Ͷ������
-        // ����SPI1���ʹ�������,����ʹ��DMA��֤
-        // ��ս��ջ�����
+        // 发送多个数据
+        // 由于SPI1发送大量数据,所以使用DMA验证
+        // 清空接收缓冲区
         memset(ReceiveBuffer, 0, sizeof(ReceiveBuffer));
-        // ����ʹ��DMA����CRC��ռ��һ���Ŀռ�,����ָ��ֱ�Ӵ�βָ��ͷ,�Ӷ�������һ�����ݴ�λ,���Ը�λDMA
-        // ��Ҫע����������ʼ����Ҫ���ʼ��һ��,��֪��Ϊʲô�������ξͺ�ʹ
+        // 由于使用DMA传输CRC会占用一定的空间,导致指针直接从尾指向头,从而导致下一次数据错位,所以复位DMA
+        // 需要注意的是这个初始化需要多初始化一次,不知道为什么反正两次就好使
         SPI2_RX_DMA.Init();
         SPI2_RX_DMA.Init();
-        // ����SPI1_TX DMAͨ��
+        // 开启SPI1_TX DMA通道
         //  SPI1_TX_DMA.Init();
         SPI_1_Test.Send_Buffer((uint8_t *)SendBuffer, strlen(SendBuffer) + 1);
-        // �ȴ�SPI2_RX DMA�������
+        // 等待SPI2_RX DMA传输完成
         while (DMA_GetFlagStatus(DMA1_FLAG_TC4) == RESET)
             ;
         printf("SPI1 CRC:%d\n\n", SPI_1_Test.GetCRC(SPI_CRC_Tx));
-        // �ж��Ƿ�У��ɹ�
+        // 判断是否校验成功
         if (SPI_I2S_GetFlagStatus(SPI2, SPI_FLAG_CRCERR) == RESET)
         {
-            printf("����һ:�����ַ���\n%s\n", (uint8_t *)ReceiveBuffer);
+            printf("测试一:接收字符串\n%s\n", (uint8_t *)ReceiveBuffer);
             printf("SPI2 CRC:%d\n\n", SPI_2_Test.GetCRC(SPI_CRC_Rx));
         }
         else
         {
-            printf("У��ʧ��!\n");
+            printf("校验失败!\n");
         }
-        // CRC�Ĵ�������
+        // CRC寄存器清零
         SPI_1_Test.ClearCRC();
         SPI_2_Test.ClearCRC();
-        // ��ʱ
+        // 延时
         SysTick_Operate::Delay_ms(500);
         LED_1.Toggle();
         SPI_1_Test.NSS_High();
-        // ������ʱʹ�õ�ƽ�仯������
+        // 二次延时使得电平变化更明显
         SysTick_Operate::Delay_ms(500);
     }
 #endif

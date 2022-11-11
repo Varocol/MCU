@@ -5,8 +5,8 @@
 #include "RCC.h"
 #include "NVIC.h"
 
-//TODO ĞèÒª¸ÄTIMÕûÌå¼Ü¹¹
-// OCÍ¨µÀÁĞ±í
+//TODO éœ€è¦æ”¹TIMæ•´ä½“æ¶æ„
+// OCé€šé“åˆ—è¡¨
 typedef enum
 {
     OC1,
@@ -14,17 +14,17 @@ typedef enum
     OC3,
     OC4
 } OC_enum;
-// TIM²ÎÊıÁĞ±í
+// TIMå‚æ•°åˆ—è¡¨
 typedef struct
 {
     TIM_TypeDef *TIMx;                             // TIMx
-    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; // TIM»ù´¡²ÎÊı³õÊ¼»¯½á¹¹Ìå
-    TIM_OCInitTypeDef TIM_OCStructure;             // TIMOCÍ¨µÀ³õÊ¼»¯½á¹¹Ìå
-    TIM_ICInitTypeDef TIM_ICStructure;             // TIMIC³õÊ¼»¯½á¹¹Ìå
-    NVIC_InitTypeDef TIM_NVIC_InitStructure;       // TIMÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
-    uint16_t TIM_IT_Selection;                     // TIMÖĞ¶ÏÎ»Ñ¡Ôñ
-    OC_enum OCx;                                   // TIMÑ¡ÔñocÍ¨µÀ
-    FunctionalState TIM_IT_State;                  // TIMÖĞ¶ÏÊ¹(Ê§)ÄÜ
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; // TIMåŸºç¡€å‚æ•°åˆå§‹åŒ–ç»“æ„ä½“
+    TIM_OCInitTypeDef TIM_OCStructure;             // TIMOCé€šé“åˆå§‹åŒ–ç»“æ„ä½“
+    TIM_ICInitTypeDef TIM_ICStructure;             // TIMICåˆå§‹åŒ–ç»“æ„ä½“
+    NVIC_InitTypeDef TIM_NVIC_InitStructure;       // TIMä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+    uint16_t TIM_IT_Selection;                     // TIMä¸­æ–­ä½é€‰æ‹©
+    OC_enum OCx;                                   // TIMé€‰æ‹©océ€šé“
+    FunctionalState TIM_IT_State;                  // TIMä¸­æ–­ä½¿(å¤±)èƒ½
 } TIM_Parma;
 
 class TIM
@@ -38,7 +38,7 @@ public:
     TIM(TIM_Parma TIMx_Parma);
     void Update(TIM_Parma TIMx_Parma);
     void Set_TIM_Parma(TIM_Parma TIMx_Parma);
-    void Pin_Init(); //ºóĞø»á¸üĞÂ×Ô¶¯ÅäÖÃÒı½Å
+    void Pin_Init(); //åç»­ä¼šæ›´æ–°è‡ªåŠ¨é…ç½®å¼•è„š
     void Base_Init();
     void OC_Init();
     void IC_Init();
@@ -47,4 +47,18 @@ public:
     void Enable();
     void Disable();
 };
+extern void (*TIM1_BRK_Handler)(void);
+extern void (*TIM1_UP_Handler)(void);
+extern void (*TIM1_TRG_COM_Handler)(void);
+extern void (*TIM1_CC_Handler)(void);
+extern void (*TIM2_Handler)(void);
+extern void (*TIM3_Handler)(void);
+extern void (*TIM4_Handler)(void);
+extern void (*TIM8_BRK_Handler)(void);
+extern void (*TIM8_UP_Handler)(void);
+extern void (*TIM8_TRG_COM_Handler)(void);
+extern void (*TIM8_CC_Handler)(void);
+extern void (*TIM5_Handler)(void);
+extern void (*TIM6_Handler)(void);
+extern void (*TIM7_Handler)(void);
 #endif

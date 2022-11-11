@@ -69,7 +69,8 @@
             "memory_resource": "cpp",
             "compare": "c",
             "version": "cpp",
-            "queue": "cpp"
+            "queue": "cpp",
+            "iomanip": "cpp"
         },
         "files.autoGuessEncoding": false,
         "C_Cpp.default.configurationProvider": "cl.eide",
@@ -79,7 +80,7 @@
             "editor.tabSize": 4,
             "editor.autoIndent": "advanced"
         },
-        "files.encoding": "gbk"
+        "files.encoding": "utf8"
     },
     "extensions": {
         "recommendations": [

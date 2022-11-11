@@ -1,7 +1,14 @@
 #include "EXTI.h"
+void (*EXTI0_Handler)(void);
+void (*EXTI1_Handler)(void);
+void (*EXTI2_Handler)(void);
+void (*EXTI3_Handler)(void);
+void (*EXTI4_Handler)(void);
+void (*EXTI9_5_Handler)(void);
+void (*EXTI15_10_Handler)(void);
 /**
- * @brief  EXTI-GPIOx×ª»»³ÉGPIOPortSource
- * @param  GPIOx                GPIO¶Ë¿Ú
+ * @brief  EXTI-GPIOxè½¬æ¢æˆGPIOPortSource
+ * @param  GPIOx                GPIOç«¯å£
  * @retval GPIO_PortSource
  */
 uint8_t EXTI_Operate::GPIO_2_GPIO_PortSource(GPIO_TypeDef *GPIOx)
@@ -41,8 +48,8 @@ uint8_t EXTI_Operate::GPIO_2_GPIO_PortSource(GPIO_TypeDef *GPIOx)
 }
 
 /**
- * @brief  EXTI-EXTI_Linex×ª»»³ÉGPIO_PinSource
- * @param  EXTI_Linex           EXTIÍ¨µÀ
+ * @brief  EXTI-EXTI_Linexè½¬æ¢æˆGPIO_PinSource
+ * @param  EXTI_Linex           EXTIé€šé“
  * @retval GPIO_PinSource
  */
 uint8_t EXTI_Operate::EXTI_2_GPIO_PinSource(uint32_t EXTI_Linex)
@@ -87,7 +94,7 @@ uint8_t EXTI_Operate::EXTI_2_GPIO_PinSource(uint32_t EXTI_Linex)
 }
 
 /**
- * @brief  EXTI-¿Õ¹¹Ôì·½·¨
+ * @brief  EXTI-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -96,7 +103,7 @@ EXTI_Operate::EXTI_Operate()
 }
 
 /**
- * @brief  EXTI-Îö¹¹·½·¨
+ * @brief  EXTI-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -105,8 +112,8 @@ EXTI_Operate::~EXTI_Operate()
 }
 
 /**
- * @brief  EXTI-¹¹Ôì·½·¨1
- * @param  EXTI_InitStructure   EXTI³õÊ¼»¯½á¹¹Ìå
+ * @brief  EXTI-æ„é€ æ–¹æ³•1
+ * @param  EXTI_InitStructure   EXTIåˆå§‹åŒ–ç»“æ„ä½“
  * @retval None
  */
 EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure)
@@ -115,9 +122,9 @@ EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure)
 }
 
 /**
- * @brief  EXTI-¹¹Ôì·½·¨2
- * @param  EXTI_InitStructure         EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  EXTI_NVIC_InitStructure    NVICÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
+ * @brief  EXTI-æ„é€ æ–¹æ³•2
+ * @param  EXTI_InitStructure         EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  EXTI_NVIC_InitStructure    NVICä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
  * @retval None
  */
 EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure)
@@ -126,9 +133,9 @@ EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef
 }
 
 /**
- * @brief  EXTI-¹¹Ôì·½·¨3
- * @param  EXTI_InitStructure   EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  GPIOx                GPIO¶Ë¿Ú
+ * @brief  EXTI-æ„é€ æ–¹æ³•3
+ * @param  EXTI_InitStructure   EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  GPIOx                GPIOç«¯å£
  * @retval None
  */
 EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPIOx)
@@ -137,10 +144,10 @@ EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GP
 }
 
 /**
- * @brief  EXTI-¹¹Ôì·½·¨4
- * @param  EXTI_InitStructure         EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  EXTI_NVIC_InitStructure    NVICÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
- * @param  GPIOx                      GPIO¶Ë¿Ú
+ * @brief  EXTI-æ„é€ æ–¹æ³•4
+ * @param  EXTI_InitStructure         EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  EXTI_NVIC_InitStructure    NVICä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+ * @param  GPIOx                      GPIOç«¯å£
  * @retval None
  */
 EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx)
@@ -149,8 +156,8 @@ EXTI_Operate::EXTI_Operate(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef
 }
 
 /**
- * @brief  EXTI-ÉèÖÃEXTIµÄ²ÎÊıÁĞ±í1
- * @param  EXTI_InitStructure   EXTI³õÊ¼»¯½á¹¹Ìå
+ * @brief  EXTI-è®¾ç½®EXTIçš„å‚æ•°åˆ—è¡¨1
+ * @param  EXTI_InitStructure   EXTIåˆå§‹åŒ–ç»“æ„ä½“
  * @retval None
  */
 void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure)
@@ -160,9 +167,9 @@ void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure)
 }
 
 /**
- * @brief  EXTI-ÉèÖÃEXTIµÄ²ÎÊıÁĞ±í2
- * @param  EXTI_InitStructure           EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  EXTI_NVIC_InitStructure      NVICÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
+ * @brief  EXTI-è®¾ç½®EXTIçš„å‚æ•°åˆ—è¡¨2
+ * @param  EXTI_InitStructure           EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  EXTI_NVIC_InitStructure      NVICä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
  * @retval None
  */
 void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure)
@@ -173,9 +180,9 @@ void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Init
 }
 
 /**
- * @brief  EXTI-ÉèÖÃEXTIµÄ²ÎÊıÁĞ±í3
- * @param  EXTI_InitStructure   EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  GPIOx                GPIO¶Ë¿Ú
+ * @brief  EXTI-è®¾ç½®EXTIçš„å‚æ•°åˆ—è¡¨3
+ * @param  EXTI_InitStructure   EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  GPIOx                GPIOç«¯å£
  * @retval None
  */
 void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPIOx)
@@ -186,10 +193,10 @@ void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, GPIO_Type
 }
 
 /**
- * @brief  EXTI-ÉèÖÃEXTIµÄ²ÎÊıÁĞ±í4
- * @param  EXTI_InitStructure           EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  EXTI_NVIC_InitStructure      NVICÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
- * @param  GPIOx                        GPIO¶Ë¿Ú
+ * @brief  EXTI-è®¾ç½®EXTIçš„å‚æ•°åˆ—è¡¨4
+ * @param  EXTI_InitStructure           EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  EXTI_NVIC_InitStructure      NVICä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+ * @param  GPIOx                        GPIOç«¯å£
  * @retval None
  */
 void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx)
@@ -201,8 +208,8 @@ void EXTI_Operate::Set_EXTI_Param(EXTI_InitTypeDef EXTI_InitStructure, NVIC_Init
 }
 
 /**
- * @brief  EXTI-¸üĞÂEXTIµÄ²ÎÊıÁĞ±í1
- * @param  EXTI_InitStructure   EXTI³õÊ¼»¯½á¹¹Ìå
+ * @brief  EXTI-æ›´æ–°EXTIçš„å‚æ•°åˆ—è¡¨1
+ * @param  EXTI_InitStructure   EXTIåˆå§‹åŒ–ç»“æ„ä½“
  * @retval None
  */
 void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure)
@@ -212,9 +219,9 @@ void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure)
 }
 
 /**
- * @brief  EXTI-¸üĞÂEXTIµÄ²ÎÊıÁĞ±í2
- * @param  EXTI_InitStructure         EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  EXTI_NVIC_InitStructure    NVICÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
+ * @brief  EXTI-æ›´æ–°EXTIçš„å‚æ•°åˆ—è¡¨2
+ * @param  EXTI_InitStructure         EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  EXTI_NVIC_InitStructure    NVICä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
  * @retval None
  */
 void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure)
@@ -224,9 +231,9 @@ void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef 
 }
 
 /**
- * @brief  EXTI-¸üĞÂEXTIµÄ²ÎÊıÁĞ±í3
- * @param  EXTI_InitStructure   EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  GPIOx                GPIO¶Ë¿Ú
+ * @brief  EXTI-æ›´æ–°EXTIçš„å‚æ•°åˆ—è¡¨3
+ * @param  EXTI_InitStructure   EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  GPIOx                GPIOç«¯å£
  * @retval None
  */
 void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPIOx)
@@ -236,10 +243,10 @@ void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, GPIO_TypeDef *GPI
 }
 
 /**
- * @brief  EXTI-¸üĞÂEXTIµÄ²ÎÊıÁĞ±í4
- * @param  EXTI_InitStructure         EXTI³õÊ¼»¯½á¹¹Ìå
- * @param  EXTI_NVIC_InitStructure    NVICÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
- * @param  GPIOx                      GPIO¶Ë¿Ú
+ * @brief  EXTI-æ›´æ–°EXTIçš„å‚æ•°åˆ—è¡¨4
+ * @param  EXTI_InitStructure         EXTIåˆå§‹åŒ–ç»“æ„ä½“
+ * @param  EXTI_NVIC_InitStructure    NVICä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+ * @param  GPIOx                      GPIOç«¯å£
  * @retval None
  */
 void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef EXTI_NVIC_InitStructure, GPIO_TypeDef *GPIOx)
@@ -249,7 +256,7 @@ void EXTI_Operate::Update(EXTI_InitTypeDef EXTI_InitStructure, NVIC_InitTypeDef 
 }
 
 /**
- * @brief  EXTI-²úÉúÈí¼şÖĞ¶Ï/ÊÂ¼ş±êÖ¾
+ * @brief  EXTI-äº§ç”Ÿè½¯ä»¶ä¸­æ–­/äº‹ä»¶æ ‡å¿—
  * @param  None
  * @retval None
  */
@@ -259,7 +266,7 @@ void EXTI_Operate::GenerateSWInterrupt()
 }
 
 /**
- * @brief  EXTI-Çå³ıÓ²¼ş/Èí¼şµÄÖĞ¶Ï/ÊÂ¼ş±êÖ¾
+ * @brief  EXTI-æ¸…é™¤ç¡¬ä»¶/è½¯ä»¶çš„ä¸­æ–­/äº‹ä»¶æ ‡å¿—
  * @param  None
  * @retval None
  */
@@ -269,36 +276,36 @@ void EXTI_Operate::ClearFlag()
 }
 
 /**
- * @brief  EXTI-³õÊ¼»¯
+ * @brief  EXTI-åˆå§‹åŒ–
  * @param  None
  * @retval None
  */
 void EXTI_Operate::Init()
 {
-    //Èç¹ûÃ»ÓĞ³õÊ¼»¯²ÎÊıÔò²»³õÊ¼»¯
+    //å¦‚æœæ²¡æœ‰åˆå§‹åŒ–å‚æ•°åˆ™ä¸åˆå§‹åŒ–
     if (Init_Type == EXTI_Init_None)
     {
         return;
     }
-    // EXTI0~15 Ñ¡ÔñGPIOx×÷ÎªEXTI_LinexµÄÊäÈë¶Ë
+    // EXTI0~15 é€‰æ‹©GPIOxä½œä¸ºEXTI_Linexçš„è¾“å…¥ç«¯
     if (Init_Type == EXTI_0_15_Event || Init_Type == EXTI_0_15_Intterupt)
     {
-        //¿ªÆôAFIOÊ±ÖÓ
+        //å¼€å¯AFIOæ—¶é’Ÿ
         RCC_Operate::RCC_Config(AFIO, ENABLE);
-        //ÅäÖÃAFIOµÄAFIO_EXTICRx¼Ä´æÆ÷
+        //é…ç½®AFIOçš„AFIO_EXTICRxå¯„å­˜å™¨
         GPIO_EXTILineConfig(GPIO_2_GPIO_PortSource(GPIOx), EXTI_2_GPIO_PinSource(EXTI_InitStructure.EXTI_Line));
     }
-    //ÅäÖÃEXTIÖĞ¶ÏÓÅÏÈ¼¶
+    //é…ç½®EXTIä¸­æ–­ä¼˜å…ˆçº§
     if (Init_Type == EXTI_16_20_Intterupt || Init_Type == EXTI_0_15_Intterupt)
     {
         NVIC_Operate(EXTI_NVIC_InitStructure).Init();
     }
-    //¿ªÆôEXTI(ÓÉÓÚEXTI±È½ÏÌØÊâ,ËùÒÔÏÂÃæµÄ·½·¨×Ô´øEXTI³õÊ¼»¯)
+    //å¼€å¯EXTI(ç”±äºEXTIæ¯”è¾ƒç‰¹æ®Š,æ‰€ä»¥ä¸‹é¢çš„æ–¹æ³•è‡ªå¸¦EXTIåˆå§‹åŒ–)
     Enable();
 }
 
 /**
- * @brief  EXTI-¿ªÆôEXTI·½·¨(EXTIÊ¹ÄÜ)
+ * @brief  EXTI-å¼€å¯EXTIæ–¹æ³•(EXTIä½¿èƒ½)
  * @param  None
  * @retval None
  */
@@ -309,7 +316,7 @@ void EXTI_Operate::Enable()
 }
 
 /**
- * @brief  EXTI-¹Ø±ÕEXTI·½·¨(EXTIÊ§ÄÜ)
+ * @brief  EXTI-å…³é—­EXTIæ–¹æ³•(EXTIå¤±èƒ½)
  * @param  None
  * @retval None
  */

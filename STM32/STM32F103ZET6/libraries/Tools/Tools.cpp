@@ -1,6 +1,6 @@
 #include "Tools.h"
 
-//¼ÆËãÁ½¸öÄê·İÖ®¼äµÄÌìÊı
+//è®¡ç®—ä¸¤ä¸ªå¹´ä»½ä¹‹é—´çš„å¤©æ•°
 uint32_t days_between_years(uint32_t year1, uint32_t year2)
 {
     if (year1 > year2)
@@ -12,7 +12,7 @@ uint32_t days_between_years(uint32_t year1, uint32_t year2)
     return (uint32_t)year2 * 365 + year2 / 4 + year2 / 400 - year2 / 100 - (year1 * 365 + year1 / 4 + year1 / 400 - year1 / 100);
 }
 
-//ÅĞ¶ÏÊÇ·ñÎªÈòÄê
+//åˆ¤æ–­æ˜¯å¦ä¸ºé—°å¹´
 uint8_t is_leapyear(uint32_t year)
 {
     if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
@@ -22,7 +22,7 @@ uint8_t is_leapyear(uint32_t year)
     return 0;
 }
 
-//·µ»ØÄ³ÄêÄ³ÔÂÓĞ¼¸Ìì
+//è¿”å›æŸå¹´æŸæœˆæœ‰å‡ å¤©
 uint8_t days_in_months(uint32_t year, uint8_t month)
 {
     int day;

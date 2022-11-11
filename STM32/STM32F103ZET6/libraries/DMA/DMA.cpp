@@ -1,6 +1,19 @@
 #include "DMA.h"
+
+void (*DMA1_Channel1_Handler)(void);
+void (*DMA1_Channel2_Handler)(void);
+void (*DMA1_Channel3_Handler)(void);
+void (*DMA1_Channel4_Handler)(void);
+void (*DMA1_Channel5_Handler)(void);
+void (*DMA1_Channel6_Handler)(void);
+void (*DMA1_Channel7_Handler)(void);
+void (*DMA2_Channel1_Handler)(void);
+void (*DMA2_Channel2_Handler)(void);
+void (*DMA2_Channel3_Handler)(void);
+void (*DMA2_Channel4_5_Handler)(void);
+
 /**
- * @brief  DMA-¿Õ¹¹Ôì·½·¨
+ * @brief  DMA-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,7 +22,7 @@ DMA::DMA()
 }
 
 /**
- * @brief  DMA-Îö¹¹·½·¨
+ * @brief  DMA-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -18,8 +31,8 @@ DMA::~DMA()
 }
 
 /**
- * @brief  DMA-¹¹Ôì·½·¨
- * @param  DMAx_Param   DMAµÄ²ÎÊıÁĞ±í
+ * @brief  DMA-æ„é€ æ–¹æ³•
+ * @param  DMAx_Param   DMAçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 DMA::DMA(DMA_Param DMAx_Param)
@@ -28,8 +41,8 @@ DMA::DMA(DMA_Param DMAx_Param)
 }
 
 /**
- * @brief  DMA-ÉèÖÃDMAµÄ²ÎÊıÁĞ±í
- * @param  DMAx_Param   DMAµÄ²ÎÊıÁĞ±í
+ * @brief  DMA-è®¾ç½®DMAçš„å‚æ•°åˆ—è¡¨
+ * @param  DMAx_Param   DMAçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void DMA::Set_DMA_Param(DMA_Param DMAx_Param)
@@ -38,8 +51,8 @@ void DMA::Set_DMA_Param(DMA_Param DMAx_Param)
 }
 
 /**
- * @brief  DMA-²ÎÊıÁĞ±í¸üĞÂ
- * @param  DMAx_Param   DMAµÄ²ÎÊıÁĞ±í
+ * @brief  DMA-å‚æ•°åˆ—è¡¨æ›´æ–°
+ * @param  DMAx_Param   DMAçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void DMA::Update(DMA_Param DMAx_Param)
@@ -50,8 +63,8 @@ void DMA::Update(DMA_Param DMAx_Param)
 }
 
 /**
- * @brief  DMA-ÓÃÓÚÔÚ²»ÊÇÑ­»·Ä£Ê½ÏÂµÄÊı¾İÁ¿ÉèÖÃ
- * @param  DMAx_Param   DMAµÄ²ÎÊıÁĞ±í
+ * @brief  DMA-ç”¨äºåœ¨ä¸æ˜¯å¾ªç¯æ¨¡å¼ä¸‹çš„æ•°æ®é‡è®¾ç½®
+ * @param  DMAx_Param   DMAçš„å‚æ•°åˆ—è¡¨
  * @retval None
  */
 void DMA::SetCurrDataCounter(uint16_t DataNumber)
@@ -60,28 +73,28 @@ void DMA::SetCurrDataCounter(uint16_t DataNumber)
 }
 
 /**
- * @brief  DMA-³õÊ¼»¯·½·¨
+ * @brief  DMA-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void DMA::Init()
 {
-    // ¿ªÆôRCCÊ±ÖÓ
+    // å¼€å¯RCCæ—¶é’Ÿ
     RCC_Enable();
-    // DMA¼Ä´æÆ÷¸´Î»
+    // DMAå¯„å­˜å™¨å¤ä½
     DMA_DeInit(this->DMAx_Param.DMA_Channelx);
-    // ÅäÖÃDMA
+    // é…ç½®DMA
     DMA_Init(DMAx_Param.DMA_Channelx, &DMAx_Param.DMA_InitStructure);
-    // ÅäÖÃDMAÖĞ¶Ï
+    // é…ç½®DMAä¸­æ–­
     ITConfig(DMAx_Param.DMA_IT_Selection, DMAx_Param.DMA_IT_State);
-    // Ê¹ÄÜDMA
+    // ä½¿èƒ½DMA
     Enable();
 }
 
 /**
- * @brief  DMA-ÖĞ¶Ï·½·¨
- * @param  DMA_IT       ÖĞ¶Ï±êÖ¾µÄÑ¡Ôñ
- * @param  NewState     Ê¹ÄÜ»òÊ§ÄÜ
+ * @brief  DMA-ä¸­æ–­æ–¹æ³•
+ * @param  DMA_IT       ä¸­æ–­æ ‡å¿—çš„é€‰æ‹©
+ * @param  NewState     ä½¿èƒ½æˆ–å¤±èƒ½
  * @retval None
  */
 void DMA::ITConfig(uint32_t DMA_IT, FunctionalState NewState)
@@ -92,7 +105,7 @@ void DMA::ITConfig(uint32_t DMA_IT, FunctionalState NewState)
 }
 
 /**
- * @brief  DMA-¿ªÆôDMA·½·¨(DMAÊ¹ÄÜ)
+ * @brief  DMA-å¼€å¯DMAæ–¹æ³•(DMAä½¿èƒ½)
  * @param  None
  * @retval None
  */
@@ -102,7 +115,7 @@ void DMA::Enable()
 }
 
 /**
- * @brief  DMA-¹Ø±ÕDMA·½·¨(DMAÊ§ÄÜ)
+ * @brief  DMA-å…³é—­DMAæ–¹æ³•(DMAå¤±èƒ½)
  * @param  None
  * @retval None
  */
@@ -112,7 +125,7 @@ void DMA::Disable()
 }
 
 /**
- * @brief  DMA-¿ªÆôDMAÊ±ÖÓ·½·¨
+ * @brief  DMA-å¼€å¯DMAæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -122,7 +135,7 @@ void DMA::RCC_Enable()
 }
 
 /**
- * @brief  ¹Ø±ÕDMA-DMAÊ±ÖÓ·½·¨
+ * @brief  å…³é—­DMA-DMAæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -132,7 +145,7 @@ void DMA::RCC_Disable()
 }
 
 /**
- * @brief  DMA-¿ªÆôDMAÊ±ÖÓ·½·¨
+ * @brief  DMA-å¼€å¯DMAæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -142,7 +155,7 @@ void DMA::RCC_Enable(DMA_TypeDef *DMAx)
 }
 
 /**
- * @brief  ¹Ø±ÕDMA-DMAÊ±ÖÓ·½·¨
+ * @brief  å…³é—­DMA-DMAæ—¶é’Ÿæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -152,9 +165,9 @@ void DMA::RCC_Disable(DMA_TypeDef *DMAx)
 }
 
 /**
- * @brief  DMA-»ñÈ¡DMAÍ¨µÀËùÊôµÄDMA
- * @param  DMA_Channelx     DMAÍ¨µÀ½á¹¹Ìå
- * @retval DMAÍ¨µÀËùÊôµÄDMAx
+ * @brief  DMA-è·å–DMAé€šé“æ‰€å±çš„DMA
+ * @param  DMA_Channelx     DMAé€šé“ç»“æ„ä½“
+ * @retval DMAé€šé“æ‰€å±çš„DMAx
  */
 DMA_TypeDef *DMA::Get_DMA(DMA_Channel_TypeDef *DMA_Channelx)
 {
@@ -172,9 +185,9 @@ DMA_TypeDef *DMA::Get_DMA(DMA_Channel_TypeDef *DMA_Channelx)
 }
 
 /**
- * @brief  DMA-»ñÈ¡DMAÍ¨µÀ
- * @param  perip                ÍâÉèÃ¶¾Ù
- * @retval DMAÍ¨µÀËùÊôµÄDMAx
+ * @brief  DMA-è·å–DMAé€šé“
+ * @param  perip                å¤–è®¾æšä¸¾
+ * @retval DMAé€šé“æ‰€å±çš„DMAx
  */
 DMA_Channel_TypeDef *DMA::Get_DMA_Channel(DMA_Perip_enum perip)
 {
@@ -210,9 +223,9 @@ DMA_Channel_TypeDef *DMA::Get_DMA_Channel(DMA_Perip_enum perip)
 }
 
 /**
- * @brief  DMA-»ñÈ¡DMAÖĞ¶ÏIRQn
- * @param  DMAx_Channelx        DMAÍ¨µÀ
- * @retval DMAÍ¨µÀ¶ÔÓ¦µÄIRQn
+ * @brief  DMA-è·å–DMAä¸­æ–­IRQn
+ * @param  DMAx_Channelx        DMAé€šé“
+ * @retval DMAé€šé“å¯¹åº”çš„IRQn
  */
 uint8_t DMA::Get_DMAx_Channelx_IRQn(DMA_Channel_TypeDef *DMAx_Channelx)
 {
@@ -264,9 +277,9 @@ uint8_t DMA::Get_DMAx_Channelx_IRQn(DMA_Channel_TypeDef *DMAx_Channelx)
 }
 
 /**
- * @brief  DMA-¼ì²âDMAÍ¨µÀÊÇ·ñÔÚ¹¤×÷
- * @param  DMAx_Channelx        DMAÍ¨µÀ
- * @retval DMAÍ¨µÀÊÇ·ñÔÚ¹¤×÷
+ * @brief  DMA-æ£€æµ‹DMAé€šé“æ˜¯å¦åœ¨å·¥ä½œ
+ * @param  DMAx_Channelx        DMAé€šé“
+ * @retval DMAé€šé“æ˜¯å¦åœ¨å·¥ä½œ
  */
 bool DMA::Check_DMAx_Channelx(DMA_Channel_TypeDef *DMAx_Channelx)
 {

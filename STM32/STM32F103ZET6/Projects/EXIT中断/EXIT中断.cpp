@@ -1,8 +1,8 @@
 #include "System.h"
 /*
-    ²âÊÔ£º
-        Ê¹ÓÃ°åÔØKEY1¸Ä±äLED×´Ì¬(×¢Òâ£¡£¡£¡°´¼üµÄÒı½ÅÒ»¶¨ÒªÅäÖÃ¹ı)
-        Ğ§¹û²¢²»¼Ñ
+    æµ‹è¯•ï¼š
+        ä½¿ç”¨æ¿è½½KEY1æ”¹å˜LEDçŠ¶æ€(æ³¨æ„ï¼ï¼ï¼æŒ‰é”®çš„å¼•è„šä¸€å®šè¦é…ç½®è¿‡)
+        æ•ˆæœå¹¶ä¸ä½³
 */
 void Setup();
 void Test();
@@ -17,7 +17,7 @@ void Setup()
 {
     USART_1.Init();
     LED_1.Init();
-    //½«°´¼üËùÔÚµÄÒı½ÅÅäÖÃ³É²»Í¬µÄÄ£Ê½
+    //å°†æŒ‰é”®æ‰€åœ¨çš„å¼•è„šé…ç½®æˆä¸åŒçš„æ¨¡å¼
     GPIO KEY1 = GPIO(PA0, GPIO_Mode_IN_FLOATING);
     KEY1.Init();
     NVIC_InitTypeDef EXTI_KEY1_NVIC_InitStructure = {
@@ -32,7 +32,7 @@ void Setup()
         .NVIC_IRQChannelCmd = ENABLE};
     EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, EXTI_KEY1_NVIC_InitStructure, GPIOA);
     EXTI_KEY1.Init();
-    printf("ÒÑ³õÊ¼»¯Íê³É!\n");
+    printf("å·²åˆå§‹åŒ–å®Œæˆ!\n");
 }
 void Test()
 {

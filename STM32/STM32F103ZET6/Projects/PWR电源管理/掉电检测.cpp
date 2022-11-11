@@ -1,9 +1,9 @@
 #include "System.h"
 /*
-    ÊµÑé:
-        ÅäÖÃPVD¼à¿Ø¹¦ÄÜ,ÊµÏÖPVDÖÐ¶Ï(Èç¹ûÏëÒªÊ¹ÓÃPVDÊÂ¼þ,¿ÉÒÔ¿´¿´AFIO¼Ä´æÆ÷µÄEVENTOUT,ÓÃÓÚÊä³ö¸ßÂö³åÐÅºÅ)¡£
-        ×öÕâ¸öÊµÑéÖ»ÐèÊ¹ÓÃ´®¿Ú¹©µç,È»ºó×÷ËÀµØËÉ¶¯Ò»ÏÂ´®¿Ú,×îºÃÅäÉÏTFTÏÔÊ¾ÆÁ,ÌáÉý´®¿ÚÊä³ö¹¦ÂÊ,ÕâÑùµçÑ¹¾Í²»ÎÈÁË,
-        µ±È»µçÑ¹ãÐÖµ×îºÃÍùÉÏÉý¡£
+    å®žéªŒ:
+        é…ç½®PVDç›‘æŽ§åŠŸèƒ½,å®žçŽ°PVDä¸­æ–­(å¦‚æžœæƒ³è¦ä½¿ç”¨PVDäº‹ä»¶,å¯ä»¥çœ‹çœ‹AFIOå¯„å­˜å™¨çš„EVENTOUT,ç”¨äºŽè¾“å‡ºé«˜è„‰å†²ä¿¡å·)ã€‚
+        åšè¿™ä¸ªå®žéªŒåªéœ€ä½¿ç”¨ä¸²å£ä¾›ç”µ,ç„¶åŽä½œæ­»åœ°æ¾åŠ¨ä¸€ä¸‹ä¸²å£,æœ€å¥½é…ä¸ŠTFTæ˜¾ç¤ºå±,æå‡ä¸²å£è¾“å‡ºåŠŸçŽ‡,è¿™æ ·ç”µåŽ‹å°±ä¸ç¨³äº†,
+        å½“ç„¶ç”µåŽ‹é˜ˆå€¼æœ€å¥½å¾€ä¸Šå‡ã€‚
 */
 void Setup();
 void Test();
@@ -17,17 +17,17 @@ int main()
 }
 void Setup()
 {
-    //³õÊ¼»¯µÆ
+    //åˆå§‹åŒ–ç¯
     LED_1.Init();
-    //³õÊ¼»¯´®¿Ú
+    //åˆå§‹åŒ–ä¸²å£
     USART_1.Init();
-    //±ðÍü¼Ç¿ªPWRÊ±ÖÓ
+    //åˆ«å¿˜è®°å¼€PWRæ—¶é’Ÿ
     RCC_Operate::RCC_Config(PWR, ENABLE);
-    //ÅäÖÃPVDãÐÖµµÈ¼¶
+    //é…ç½®PVDé˜ˆå€¼ç­‰çº§
     PWR_PVDLevelConfig(PWR_PVDLevel_2V9);
-    //¿ªÆôPVDµçÔ´¹ÜÀí
+    //å¼€å¯PVDç”µæºç®¡ç†
     PWR_PVDCmd(ENABLE);
-    //ÅäÖÃEXTI16ÏßµÄÖÐ¶Ï
+    //é…ç½®EXTI16çº¿çš„ä¸­æ–­
     NVIC_InitTypeDef EXTI_PVD_NVIC_InitStructure = {
         .NVIC_IRQChannel = PVD_IRQn,
         .NVIC_IRQChannelPreemptionPriority = 0,

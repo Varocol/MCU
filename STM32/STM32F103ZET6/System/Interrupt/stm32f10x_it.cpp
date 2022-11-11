@@ -140,18 +140,19 @@ void SysTick_Handler(void)
 }
 void EXTI0_IRQHandler(void)
 {
-  // PWRµçÔ´¹ÜÀíÏîÄ¿
-  if (EXTI_GetITStatus(EXTI_Line0) != RESET)
-  {
-    EXTI_ClearITPendingBit(EXTI_Line0);
-  }
-  // EXTIÖĞ¶ÏÏîÄ¿
+  // PWRç”µæºç®¡ç†é¡¹ç›®
+  // if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+  // {
+  //   EXTI_ClearITPendingBit(EXTI_Line0);
+  // }
+  // EXTIä¸­æ–­é¡¹ç›®
   // if (EXTI_GetITStatus(EXTI_Line0) != RESET)
   // {
   //   LED_1.Toggle();
-  //   printf("°´ÏÂ\n");
+  //   printf("æŒ‰ä¸‹\n");
   //   EXTI_ClearITPendingBit(EXTI_Line0);
   // }
+  EXTI0_Handler();
 }
 void TIM2_IRQHandler(void)
 {
@@ -178,10 +179,10 @@ void USART1_IRQHandler(void)
 {
   // if (USART_GetITStatus(USART1, USART_IT_RXNE))
   // {
-  // ÊµÑé¶ş
+  // å®éªŒäºŒ
   // receivedata = USART_1.ReceiveByte();
   // USART_1.SendByte(receivedata);
-  // ÊµÑéÈı
+  // å®éªŒä¸‰
   // if((uint8_t)receivedata == '1')
   // {
   // PBout(12) = 0;
@@ -192,6 +193,7 @@ void USART1_IRQHandler(void)
   // }
   // USART_ClearITPendingBit(USART1, USART_IT_RXNE);
   // }
+  USART1_Handler();
 }
 void WWDG_IRQHandler(void)
 {
@@ -200,45 +202,46 @@ void PVD_IRQHandler(void)
 {
   if (EXTI_GetITStatus(EXTI_Line16) != RESET)
   {
-    if (PWR_GetFlagStatus(PWR_FLAG_PVDO) == RESET) // ¸ßÓÚãĞÖµ
+    if (PWR_GetFlagStatus(PWR_FLAG_PVDO) == RESET) // é«˜äºé˜ˆå€¼
     {
-      printf("½øÈëPVDÖĞ¶Ï,µçÑ¹¸ßÓÚãĞÖµ\r\n");
+      printf("è¿›å…¥PVDä¸­æ–­,ç”µå‹é«˜äºé˜ˆå€¼\r\n");
     }
-    else // µÍÓÚãĞÖµ
+    else // ä½äºé˜ˆå€¼
     {
-      printf("½øÈëPVDÖĞ¶Ï,µçÑ¹µÍÓÚãĞÖµ\r\n");
+      printf("è¿›å…¥PVDä¸­æ–­,ç”µå‹ä½äºé˜ˆå€¼\r\n");
     }
     EXTI_ClearITPendingBit(EXTI_Line16);
   }
 }
 void TAMPER_IRQHandler(void)
 {
-  // ÈëÇÖ¼ì²âÏîÄ¿
+  // å…¥ä¾µæ£€æµ‹é¡¹ç›®
   if (BKP_GetITStatus() != RESET)
   {
-    printf("ÈëÇÖÊÂ¼ş´¥·¢!\n");
+    printf("å…¥ä¾µäº‹ä»¶è§¦å‘!\n");
     BKP_ClearFlag();
     BKP_ClearITPendingBit();
   }
 }
 void RTC_IRQHandler(void)
 {
-  // RTCÊµÊ±Ê±ÖÓÏîÄ¿
-  if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
-  {
-    timeinfo = RTC_Operate::Get_Time();
-    strftime(timestr, sizeof(timestr) / sizeof(char), "%Y/%m/%d %p %H:%M:%S %A %Z ", &timeinfo);
-    printf("%s\r", timestr);
-    LED_1.Toggle();
-    RTC_WaitForLastTask();
-    RTC_ClearITPendingBit(RTC_IT_SEC);
-  }
-  else if (RTC_GetITStatus(RTC_IT_ALR) != RESET)
-  {
-    printf("ÄÖÖÓÊÂ¼ş´¥·¢!\n");
-    RTC_WaitForLastTask();
-    RTC_ClearITPendingBit(RTC_IT_ALR);
-  }
+  // RTCå®æ—¶æ—¶é’Ÿé¡¹ç›®
+  // if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
+  // {
+  //   timeinfo = RTC_Operate::Get_Time();
+  //   strftime(timestr, sizeof(timestr) / sizeof(char), "%Y/%m/%d %p %H:%M:%S %A %Z ", &timeinfo);
+  //   printf("%s\r", timestr);
+  //   LED_1.Toggle();
+  //   RTC_WaitForLastTask();
+  //   RTC_ClearITPendingBit(RTC_IT_SEC);
+  // }
+  // else if (RTC_GetITStatus(RTC_IT_ALR) != RESET)
+  // {
+  //   printf("é—¹é’Ÿäº‹ä»¶è§¦å‘!\n");
+  //   RTC_WaitForLastTask();
+  //   RTC_ClearITPendingBit(RTC_IT_ALR);
+  // }
+  RTC_Handler();
 }
 void FLASH_IRQHandler(void)
 {
@@ -248,78 +251,70 @@ void RCC_IRQHandler(void)
 }
 void EXTI1_IRQHandler(void)
 {
+  EXTI1_Handler();
 }
 void EXTI2_IRQHandler(void)
 {
+  EXTI2_Handler();
 }
 void EXTI3_IRQHandler(void)
 {
+  EXTI3_Handler();
 }
 void EXTI4_IRQHandler(void)
 {
+  EXTI4_Handler();
 }
 void DMA1_Channel1_IRQHandler(void)
 {
+  DMA1_Channel1_Handler();
 }
 void DMA1_Channel2_IRQHandler(void)
 {
+  DMA1_Channel2_Handler();
 }
 void DMA1_Channel3_IRQHandler(void)
 {
-  if (DMA_GetITStatus(DMA1_IT_TC3))
-  {
-    printf("123\n");
-    DMA_ClearITPendingBit(DMA1_IT_TC3);
-  }
+  // if (DMA_GetITStatus(DMA1_IT_TC3))
+  // {
+  //   printf("123\n");
+  //   DMA_ClearITPendingBit(DMA1_IT_TC3);
+  // }
+  DMA1_Channel3_Handler();
 }
 void DMA1_Channel4_IRQHandler(void)
 {
-  // USART_DMAÏîÄ¿
-  if (USART::DMA_Config_Check(USART1))
-  {
-    if (DMA_GetITStatus(DMA1_IT_HT4))
-    {
-      DMA_ClearITPendingBit(DMA1_IT_HT4);
-    }
-    else if (DMA_GetITStatus(DMA1_IT_TC4))
-    {
-      USART::DMA_Queue_Remove(USART1);
-      USART::DMA_Queue_Start(USART1);
-      DMA_ClearITPendingBit(DMA1_IT_TC4);
-    }
-    else if (DMA_GetITStatus(DMA1_IT_TE4))
-    {
-      printf("[USART1]:DMAÏûÏ¢¶ÓÁĞ´«Êä´íÎó!\n");
-      USART::DMA_Queue_Stop(USART1);
-      DMA_ClearITPendingBit(DMA1_IT_TE4);
-    }
-  }
+  DMA1_Channel4_Handler();
 }
 void DMA1_Channel5_IRQHandler(void)
 {
-  // DMA´®¿ÚÍ¨ĞÅÏîÄ¿
-  if (DMA_GetITStatus(DMA1_IT_TC5))
-  {
-    // Ò»°ã·¢ËÍ
-    //  for (int i = 0; i < sizeof(ReceiveBuffer) / sizeof(char); i++)
-    //  {
-    //    USART_1.Send_Data(ReceiveBuffer[i]);
-    //  }
-    //  DMA·¢ËÍ
-    USART1_TX_DMA.Init();
-    USART_1.DMACmd(USART_DMA_TX, ENABLE);
-    DMA_ClearITPendingBit(DMA1_IT_TC5);
-  }
+  // DMAä¸²å£é€šä¿¡é¡¹ç›®
+  // if (DMA_GetITStatus(DMA1_IT_TC5))
+  // {
+  //   // ä¸€èˆ¬å‘é€
+  //   //  for (int i = 0; i < sizeof(ReceiveBuffer) / sizeof(char); i++)
+  //   //  {
+  //   //    USART_1.Send_Data(ReceiveBuffer[i]);
+  //   //  }
+  //   //  DMAå‘é€
+  //   USART1_TX_DMA.Init();
+  //   USART_1.DMACmd(USART_DMA_TX, ENABLE);
+  //   DMA_ClearITPendingBit(DMA1_IT_TC5);
+  // }
+  DMA1_Channel5_Handler();
 }
 
 void DMA1_Channel6_IRQHandler(void)
 {
+  DMA1_Channel6_Handler();
 }
 void DMA1_Channel7_IRQHandler(void)
 {
+  DMA1_Channel7_Handler();
 }
 void ADC1_2_IRQHandler(void)
 {
+  ADC1_2_Handler();
 }
 void USB_HP_CAN1_TX_IRQHandler(void)
 {
@@ -335,166 +330,163 @@ void CAN1_SCE_IRQHandler(void)
 }
 void EXTI9_5_IRQHandler(void)
 {
-  // SPIÍ¨ĞÅ²âÊÔÏîÄ¿
-  if (EXTI_GetITStatus(EXTI_Line6) != RESET)
-  {
-    // USART_1.Send_String("ÒÑ½øÈëÖĞ¶Ï£¡\n");
-    // ¶ÁÈ¡PC6
-    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6) == Bit_SET)
-    {
-      USART_1.Send_String("Òı½ÅÒÑÀ­¸ß\n");
-      SPI_2.NSS_High();
-    }
-    else if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6) == Bit_RESET)
-    {
-      USART_1.Send_String("Òı½ÅÒÑÀ­µÍ\n");
-      SPI_2.NSS_Low();
-    }
-    EXTI_ClearITPendingBit(EXTI_Line6);
-  }
+  // SPIé€šä¿¡æµ‹è¯•é¡¹ç›®
+  // if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+  // {
+  //   // USART_1.Send_String("å·²è¿›å…¥ä¸­æ–­ï¼\n");
+  //   // è¯»å–PC6
+  //   if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6) == Bit_SET)
+  //   {
+  //     USART_1.Send_String("å¼•è„šå·²æ‹‰é«˜\n");
+  //     SPI_2.NSS_High();
+  //   }
+  //   else if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6) == Bit_RESET)
+  //   {
+  //     USART_1.Send_String("å¼•è„šå·²æ‹‰ä½\n");
+  //     SPI_2.NSS_Low();
+  //   }
+  //   EXTI_ClearITPendingBit(EXTI_Line6);
+  // }
+  EXTI9_5_Handler();
 }
 void TIM1_BRK_IRQHandler(void)
 {
+  TIM1_BRK_Handler();
 }
 void TIM1_UP_IRQHandler(void)
 {
+  TIM1_UP_Handler();
 }
 void TIM1_TRG_COM_IRQHandler(void)
 {
+  TIM1_TRG_COM_Handler();
 }
 void TIM1_CC_IRQHandler(void)
 {
+  TIM1_CC_Handler();
 }
 void TIM3_IRQHandler(void)
 {
+  TIM3_Handler();
 }
 void TIM4_IRQHandler(void)
 {
+  TIM4_Handler();
 }
 void I2C1_EV_IRQHandler(void)
 {
-  // I2CÖĞ×ªÏîÄ¿
-  // ÅĞ¶Ï´¥·¢À´Ô´
-  if (I2C_GetITStatus(I2C1, I2C_IT_SB) == SET)
-  {
-    printf("[I2C1]:ÆğÊ¼Î»ÒÑ·¢ËÍ\n");
-  }
-  else if (I2C_GetITStatus(I2C1, I2C_IT_ADDR) == SET)
-  {
-    printf("[I2C1]:µØÖ·ÒÑÆ¥Åä\n");
-  }
-  else if (I2C_GetITStatus(I2C1, I2C_IT_ADDR) == SET)
-  {
-  }
-  // ÅĞ¶ÏÊÇ·ñÎª´Ó»úÄ£Ê½
-  if (I2C_GetFlagStatus(I2C1, I2C_FLAG_MSL) == SET)
-  {
-    DEBUG_ERROR_INFO("[I2C1]:µ±Ç°×´Ì¬²»Îª´Ó»úÄ£Ê½");
-    return;
-  }
-  // Í¨Ñ¶³¬Ê±
-  if (I2C_GetFlagStatus(I2C1, I2C_FLAG_TIMEOUT) == SET)
-  {
-    DEBUG_ERROR_INFO("[I2C1]:Í¨Ñ¶³¬Ê±");
-  }
-  // ¼ì²â
+  I2C1_EV_Handler();
 }
 void I2C1_ER_IRQHandler(void)
 {
+  I2C1_ER_Handler();
 }
 void I2C2_EV_IRQHandler(void)
 {
+  I2C2_EV_Handler();
 }
 void I2C2_ER_IRQHandler(void)
 {
+  I2C2_ER_Handler();
 }
 void SPI1_IRQHandler(void)
 {
-  if (SPI_I2S_GetITStatus(SPI1, SPI_IT_MODF) != RESET)
-  {
-    printf("MODF!\n");
-  }
-  if (SPI_I2S_GetITStatus(SPI1, SPI_IT_CRCERR) != RESET)
-  {
-    printf("CRCERR!\n");
-  }
-  if (SPI_I2S_GetITStatus(SPI1, SPI_I2S_IT_OVR) != RESET)
-  {
-    printf("OVR!\n");
-  }
+  // if (SPI_I2S_GetITStatus(SPI1, SPI_IT_MODF) != RESET)
+  // {
+  //   printf("MODF!\n");
+  // }
+  // if (SPI_I2S_GetITStatus(SPI1, SPI_IT_CRCERR) != RESET)
+  // {
+  //   printf("CRCERR!\n");
+  // }
+  // if (SPI_I2S_GetITStatus(SPI1, SPI_I2S_IT_OVR) != RESET)
+  // {
+  //   printf("OVR!\n");
+  // }
+  SPI1_Handler();
 }
 void SPI2_IRQHandler(void)
 {
-  if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_RXNE) != RESET)
-  {
-    printf("%c", SPI_I2S_ReceiveData(SPI2));
-    // printf("RXNE!\n");
-  }
-  if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_TXE) != RESET)
-  {
-    printf("TXE!\n");
-  }
-  if (SPI_I2S_GetITStatus(SPI2, SPI_IT_CRCERR) != RESET)
-  {
-    printf("CRCERR!\n");
-  }
-  if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_OVR) != RESET)
-  {
-    printf("OVR!\n");
-  }
-  if (SPI_I2S_GetITStatus(SPI2, SPI_IT_MODF) != RESET)
-  {
-    printf("MODF!\n");
-  }
-  if (SPI_I2S_GetITStatus(SPI2, I2S_IT_UDR) != RESET)
-  {
-    printf("UDR!\n");
-  }
+  // if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_RXNE) != RESET)
+  // {
+  //   printf("%c", SPI_I2S_ReceiveData(SPI2));
+  //   // printf("RXNE!\n");
+  // }
+  // if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_TXE) != RESET)
+  // {
+  //   printf("TXE!\n");
+  // }
+  // if (SPI_I2S_GetITStatus(SPI2, SPI_IT_CRCERR) != RESET)
+  // {
+  //   printf("CRCERR!\n");
+  // }
+  // if (SPI_I2S_GetITStatus(SPI2, SPI_I2S_IT_OVR) != RESET)
+  // {
+  //   printf("OVR!\n");
+  // }
+  // if (SPI_I2S_GetITStatus(SPI2, SPI_IT_MODF) != RESET)
+  // {
+  //   printf("MODF!\n");
+  // }
+  // if (SPI_I2S_GetITStatus(SPI2, I2S_IT_UDR) != RESET)
+  // {
+  //   printf("UDR!\n");
+  // }
+  SPI2_Handler();
 }
 void USART2_IRQHandler(void)
 {
+  USART2_Handler();
 }
 void USART3_IRQHandler(void)
 {
+  USART3_Handler();
 }
 void EXTI15_10_IRQHandler(void)
 {
-  // PWRµçÔ´¹ÜÀíÏîÄ¿
-  if (EXTI_GetITStatus(EXTI_Line13) != RESET)
-  {
-    printf("½øÈëË¯ÃßÄ£Ê½\n");
-    __WFE();
-    EXTI_ClearITPendingBit(EXTI_Line13);
-  }
+  // PWRç”µæºç®¡ç†é¡¹ç›®
+  // if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+  // {
+  //   printf("è¿›å…¥ç¡çœ æ¨¡å¼\n");
+  //   __WFE();
+  //   EXTI_ClearITPendingBit(EXTI_Line13);
+  // }
+  EXTI15_10_Handler();
 }
 void RTCAlarm_IRQHandler(void)
 {
-  // PWRµçÔ´¹ÜÀíÏîÄ¿
-  if (EXTI_GetITStatus(EXTI_Line17) != RESET)
-  {
-    // Í£Ö¹Ä£Ê½»½ĞÑµÄÊ±ÖÓ²»×ãÒÔ·¢ËÍ´®¿Ú
-    // printf("ÄÖÖÓ60s»½ĞÑ\n");
-    RTC_x.SetAlarm(RTC_Operate::GetCounter() + 60);
-    EXTI_ClearITPendingBit(EXTI_Line17);
-  }
+  // PWRç”µæºç®¡ç†é¡¹ç›®
+  // if (EXTI_GetITStatus(EXTI_Line17) != RESET)
+  // {
+  //   // åœæ­¢æ¨¡å¼å”¤é†’çš„æ—¶é’Ÿä¸è¶³ä»¥å‘é€ä¸²å£
+  //   // printf("é—¹é’Ÿ60så”¤é†’\n");
+  //   RTC_x.SetAlarm(RTC_Operate::GetCounter() + 60);
+  //   EXTI_ClearITPendingBit(EXTI_Line17);
+  // }
+  RTCAlarm_Handler();
 }
 void USBWakeUp_IRQHandler(void)
 {
 }
 void TIM8_BRK_IRQHandler(void)
 {
+  TIM8_BRK_Handler();
 }
 void TIM8_UP_IRQHandler(void)
 {
+  TIM8_UP_Handler();
 }
 void TIM8_TRG_COM_IRQHandler(void)
 {
+  TIM8_TRG_COM_Handler();
 }
 void TIM8_CC_IRQHandler(void)
 {
+  TIM8_CC_Handler();
 }
 void ADC3_IRQHandler(void)
 {
+  ADC3_Handler();
 }
 void FSMC_IRQHandler(void)
 {
@@ -504,33 +496,43 @@ void SDIO_IRQHandler(void)
 }
 void TIM5_IRQHandler(void)
 {
+  TIM5_Handler();
 }
 void SPI3_IRQHandler(void)
 {
+  SPI3_Handler();
 }
 void UART4_IRQHandler(void)
 {
+  UART4_Handler();
 }
 void UART5_IRQHandler(void)
 {
+  UART5_Handler();
 }
 void TIM6_IRQHandler(void)
 {
+  TIM6_Handler();
 }
 void TIM7_IRQHandler(void)
 {
+  TIM7_Handler();
 }
 void DMA2_Channel1_IRQHandler(void)
 {
+  DMA2_Channel1_Handler();
 }
 void DMA2_Channel2_IRQHandler(void)
 {
+  DMA2_Channel2_Handler();
 }
 void DMA2_Channel3_IRQHandler(void)
 {
+  DMA2_Channel3_Handler();
 }
 void DMA2_Channel4_5_IRQHandler(void)
 {
+  DMA2_Channel4_5_Handler();
 }
 
 /******************************************************************************/

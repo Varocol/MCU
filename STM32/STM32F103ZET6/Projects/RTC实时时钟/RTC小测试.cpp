@@ -14,7 +14,7 @@ int main()
 }
 void Setup()
 {
-    //³õÊ¼»¯ÏµÍ³
+    //åˆå§‹åŒ–ç³»ç»Ÿ
     system_init();
 }
 void Test()
@@ -22,11 +22,11 @@ void Test()
     int option;
     while (1)
     {
-        printf("-----------ÇëÑ¡ÔñĞèÒª½øĞĞµÄ²Ù×÷-----------\n");
-        printf("1.ÏÔÊ¾ÏµÍ³Ê±¼ä                           \n");
-        printf("2.ĞŞ¸ÄÏµÍ³Ê±¼ä                           \n");
-        printf("3.UNIXÊ±¼ä´Á×ªÆÕÍ¨Ê±¼ä                   \n");
-        printf("4.ÆÕÍ¨Ê±¼ä×ªUNIXÊ±¼ä´Á                   \n");
+        printf("-----------è¯·é€‰æ‹©éœ€è¦è¿›è¡Œçš„æ“ä½œ-----------\n");
+        printf("1.æ˜¾ç¤ºç³»ç»Ÿæ—¶é—´                           \n");
+        printf("2.ä¿®æ”¹ç³»ç»Ÿæ—¶é—´                           \n");
+        printf("3.UNIXæ—¶é—´æˆ³è½¬æ™®é€šæ—¶é—´                   \n");
+        printf("4.æ™®é€šæ—¶é—´è½¬UNIXæ—¶é—´æˆ³                   \n");
         scanf("%d", &option);
         switch (option)
         {
@@ -43,7 +43,7 @@ void Test()
             Time_To_Timestamp();
             break;
         default:
-            printf("ÊäÈëµÄÑ¡ÏîÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+            printf("è¾“å…¥çš„é€‰é¡¹æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
             break;
         }
     }
@@ -54,8 +54,8 @@ void End()
 
 void Show_Time()
 {
-    printf("-----------ÏÔÊ¾ÏµÍ³Ê±¼ä-----------\n");
-    printf("°´ÏÂQ·µ»Ø²Ëµ¥\n");
+    printf("-----------æ˜¾ç¤ºç³»ç»Ÿæ—¶é—´-----------\n");
+    printf("æŒ‰ä¸‹Qè¿”å›èœå•\n");
     RTC_x.ITConfig(RTC_IT_SEC, ENABLE);
     char c;
     while (1)
@@ -69,10 +69,10 @@ void Show_Time()
 }
 void Alter_Time()
 {
-    printf("-----------ĞŞ¸ÄÏµÍ³Ê±¼ä-----------\n");
+    printf("-----------ä¿®æ”¹ç³»ç»Ÿæ—¶é—´-----------\n");
     while (1)
     {
-        printf("ÇëÊäÈëÄê·İ(1970~2106):\n");
+        printf("è¯·è¾“å…¥å¹´ä»½(1970~2106):\n");
         scanf("%d", &timeinfo.tm_year);
         if (timeinfo.tm_year <= 2106 && timeinfo.tm_year >= 1970)
         {
@@ -80,11 +80,11 @@ void Alter_Time()
             timeinfo.tm_year -= 1900;
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëÔÂ·İ(1~12):\n");
+        printf("è¯·è¾“å…¥æœˆä»½(1~12):\n");
         scanf("%d", &timeinfo.tm_mon);
         if (timeinfo.tm_mon <= 12 && timeinfo.tm_mon >= 1)
         {
@@ -92,59 +92,59 @@ void Alter_Time()
             timeinfo.tm_mon -= 1;
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëÈÕÆÚ:\n");
+        printf("è¯·è¾“å…¥æ—¥æœŸ:\n");
         scanf("%d", &timeinfo.tm_mday);
         if (timeinfo.tm_mday <= days_in_months(timeinfo.tm_year + 1900, timeinfo.tm_mon) && timeinfo.tm_mon >= 1)
         {
             printf("%d\n", timeinfo.tm_mday);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëĞ¡Ê±(0~23):\n");
+        printf("è¯·è¾“å…¥å°æ—¶(0~23):\n");
         scanf("%d", &timeinfo.tm_hour);
         if (timeinfo.tm_hour <= 23 && timeinfo.tm_hour >= 0)
         {
             printf("%d\n", timeinfo.tm_hour);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈë·ÖÖÓ(0~59):\n");
+        printf("è¯·è¾“å…¥åˆ†é’Ÿ(0~59):\n");
         scanf("%d", &timeinfo.tm_min);
         if (timeinfo.tm_min <= 59 && timeinfo.tm_min >= 0)
         {
             printf("%d\n", timeinfo.tm_min);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëÃë(0~59):\n");
+        printf("è¯·è¾“å…¥ç§’(0~59):\n");
         scanf("%d", &timeinfo.tm_sec);
         if (timeinfo.tm_sec <= 59 && timeinfo.tm_sec >= 0)
         {
             printf("%d\n", timeinfo.tm_sec);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     RTC_Operate::Set_Time(timeinfo);
-    printf("ĞŞ¸Ä³É¹¦!\n");
+    printf("ä¿®æ”¹æˆåŠŸ!\n");
 }
 void Timestamp_To_Time()
 {
-    printf("-----------UNIXÊ±¼ä´Á×ªÆÕÍ¨Ê±¼ä-----------\n");
-    printf("ÇëÊäÈëUNIXÊ±¼ä´Á:\n");
+    printf("-----------UNIXæ—¶é—´æˆ³è½¬æ™®é€šæ—¶é—´-----------\n");
+    printf("è¯·è¾“å…¥UNIXæ—¶é—´æˆ³:\n");
     scanf("%llu\n", &timestamp);
     _localtime_r(&timestamp, &timeinfo);
     strftime(timestr, sizeof(timestr) / sizeof(char), "%Y-%m-%d %H:%M:%S", &timeinfo);
@@ -152,10 +152,10 @@ void Timestamp_To_Time()
 }
 void Time_To_Timestamp()
 {
-    printf("-----------ÆÕÍ¨Ê±¼ä×ªUNIXÊ±¼ä´Á-----------\n");
+    printf("-----------æ™®é€šæ—¶é—´è½¬UNIXæ—¶é—´æˆ³-----------\n");
     while (1)
     {
-        printf("ÇëÊäÈëÄê·İ(1970~2106):\n");
+        printf("è¯·è¾“å…¥å¹´ä»½(1970~2106):\n");
         scanf("%d", &timeinfo.tm_year);
         if (timeinfo.tm_year <= 2106 && timeinfo.tm_year >= 1970)
         {
@@ -163,11 +163,11 @@ void Time_To_Timestamp()
             timeinfo.tm_year -= 1900;
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëÔÂ·İ(1~12):\n");
+        printf("è¯·è¾“å…¥æœˆä»½(1~12):\n");
         scanf("%d", &timeinfo.tm_mon);
         if (timeinfo.tm_mon <= 12 && timeinfo.tm_mon >= 1)
         {
@@ -175,51 +175,51 @@ void Time_To_Timestamp()
             timeinfo.tm_mon -= 1;
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëÈÕÆÚ:\n");
+        printf("è¯·è¾“å…¥æ—¥æœŸ:\n");
         scanf("%d", &timeinfo.tm_mday);
         if (timeinfo.tm_mday <= days_in_months(timeinfo.tm_year + 1900, timeinfo.tm_mon) && timeinfo.tm_mon >= 1)
         {
             printf("%d\n", timeinfo.tm_mday);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëĞ¡Ê±(0~23):\n");
+        printf("è¯·è¾“å…¥å°æ—¶(0~23):\n");
         scanf("%d", &timeinfo.tm_hour);
         if (timeinfo.tm_hour <= 23 && timeinfo.tm_hour >= 0)
         {
             printf("%d\n", timeinfo.tm_hour);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈë·ÖÖÓ(0~59):\n");
+        printf("è¯·è¾“å…¥åˆ†é’Ÿ(0~59):\n");
         scanf("%d", &timeinfo.tm_min);
         if (timeinfo.tm_min <= 59 && timeinfo.tm_min >= 0)
         {
             printf("%d\n", timeinfo.tm_min);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     while (1)
     {
-        printf("ÇëÊäÈëÃë(0~59):\n");
+        printf("è¯·è¾“å…¥ç§’(0~59):\n");
         scanf("%d", &timeinfo.tm_sec);
         if (timeinfo.tm_sec <= 59 && timeinfo.tm_sec >= 0)
         {
             printf("%d\n", timeinfo.tm_sec);
             break;
         }
-        printf("ÊäÈëÓĞÎó,ÇëÖØĞÂÊäÈë!\n");
+        printf("è¾“å…¥æœ‰è¯¯,è¯·é‡æ–°è¾“å…¥!\n");
     }
     printf("Timestamp:\n%llu\n", mktime(&timeinfo));
 }

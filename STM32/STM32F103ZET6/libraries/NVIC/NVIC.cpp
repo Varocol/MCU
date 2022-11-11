@@ -1,21 +1,21 @@
 #include "NVIC.h"
 /**
-  * @brief  NVIC-¿Õ¹¹Ôì·½·¨
+  * @brief  NVIC-ç©ºæ„é€ æ–¹æ³•
   * @retval None
   */
 NVIC_Operate::NVIC_Operate()
 {
 }
 /**
-  * @brief  NVIC-Îö¹¹·½·¨
+  * @brief  NVIC-ææ„æ–¹æ³•
   * @retval None
   */
 NVIC_Operate::~NVIC_Operate()
 {
 }
 /**
-  * @brief  NVIC-¹¹Ôì·½·¨
-  * @param  NVIC_InitStructure    NVIC³õÊ¼»¯½á¹¹Ìå
+  * @brief  NVIC-æ„é€ æ–¹æ³•
+  * @param  NVIC_InitStructure    NVICåˆå§‹åŒ–ç»“æ„ä½“
   * @retval None
   */
 NVIC_Operate::NVIC_Operate(NVIC_InitTypeDef &NVIC_InitStructure)
@@ -23,8 +23,8 @@ NVIC_Operate::NVIC_Operate(NVIC_InitTypeDef &NVIC_InitStructure)
   Set_NVIC_InitStructure(NVIC_InitStructure);
 }
 /**
-  * @brief  NVIC-ÉèÖÃNVIC³õÊ¼»¯½á¹¹Ìå
-  * @param  NVIC_InitStructure    NVIC³õÊ¼»¯½á¹¹Ìå
+  * @brief  NVIC-è®¾ç½®NVICåˆå§‹åŒ–ç»“æ„ä½“
+  * @param  NVIC_InitStructure    NVICåˆå§‹åŒ–ç»“æ„ä½“
   * @retval None
   */
 void NVIC_Operate::Set_NVIC_InitStructure(NVIC_InitTypeDef &NVIC_InitStructure)
@@ -32,8 +32,8 @@ void NVIC_Operate::Set_NVIC_InitStructure(NVIC_InitTypeDef &NVIC_InitStructure)
   this->NVIC_InitStructure = NVIC_InitStructure;
 }
 /**
-  * @brief  NVIC-NVICÅäÖÃ¸üĞÂ·½·¨
-  * @param  NVIC_InitStructure    NVIC³õÊ¼»¯½á¹¹Ìå
+  * @brief  NVIC-NVICé…ç½®æ›´æ–°æ–¹æ³•
+  * @param  NVIC_InitStructure    NVICåˆå§‹åŒ–ç»“æ„ä½“
   * @retval None
   */
 void NVIC_Operate::Update(NVIC_InitTypeDef &NVIC_InitStructure)
@@ -42,7 +42,7 @@ void NVIC_Operate::Update(NVIC_InitTypeDef &NVIC_InitStructure)
   Init();
 }
 /**
-  * @brief  NVIC-³õÊ¼»¯·½·¨
+  * @brief  NVIC-åˆå§‹åŒ–æ–¹æ³•
   * @param  None
   * @retval None
   */
@@ -52,7 +52,7 @@ void NVIC_Operate::Init()
   NVIC_Init(&NVIC_InitStructure);
 }
 /**
-  * @brief  NVIC-¿ªÆôNVIC¹ÜÀí
+  * @brief  NVIC-å¼€å¯NVICç®¡ç†
   * @param  None
   * @retval None
   */
@@ -62,7 +62,7 @@ void NVIC_Operate::Enable()
   Init();
 }
 /**
-  * @brief  NVIC-¹Ø±ÕNVIC¹ÜÀí
+  * @brief  NVIC-å…³é—­NVICç®¡ç†
   * @param  None
   * @retval None
   */

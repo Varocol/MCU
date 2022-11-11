@@ -1,6 +1,6 @@
 #include "PWM.h"
 /**
- * @brief  PWM-¿Õ¹¹Ôì·½·¨
+ * @brief  PWM-ç©ºæ„é€ æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -9,10 +9,10 @@ PWM::PWM()
 }
 
 /**
- * @brief  PWM-¹¹Ôì·½·¨
- * @param  TIMx_Channelx        Ñ¡ÔñTIMxµÄCHxÍ¨µÀ
- * @param  Frequency            ÆµÂÊ(²»µÍÓÚ1,²»¸ßÓÚcpu¹¤×÷ÆµÂÊÎÊÌâ²»´ó)
- * @param  DutyRatio            Õ¼¿Õ±È
+ * @brief  PWM-æ„é€ æ–¹æ³•
+ * @param  TIMx_Channelx        é€‰æ‹©TIMxçš„CHxé€šé“
+ * @param  Frequency            é¢‘ç‡(ä¸ä½äº1,ä¸é«˜äºcpuå·¥ä½œé¢‘ç‡é—®é¢˜ä¸å¤§)
+ * @param  DutyRatio            å ç©ºæ¯”
  * @retval None
  */
 PWM::PWM(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double DutyRatio)
@@ -21,7 +21,7 @@ PWM::PWM(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double DutyRatio)
 }
 
 /**
- * @brief  PWM-Îö¹¹·½·¨
+ * @brief  PWM-ææ„æ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -30,7 +30,7 @@ PWM::~PWM()
 }
 
 /**
- * @brief  PWM-GPIOÒı½Å³õÊ¼»¯
+ * @brief  PWM-GPIOå¼•è„šåˆå§‹åŒ–
  * @param  None
  * @retval None
  */
@@ -38,7 +38,7 @@ void PWM::Pin_Init()
 {
     RCC_Operate::RCC_Config(AFIO, ENABLE);
     PIN_enum Channel_Pin;
-    //ÉèÖÃÖØÓ³Éä
+    //è®¾ç½®é‡æ˜ å°„
     switch (TIMx_Channelx)
     {
     case TIM1_Channel1_PartialRemap:
@@ -92,7 +92,7 @@ void PWM::Pin_Init()
     default:
         break;
     }
-    //»ñÈ¡Òı½Å
+    //è·å–å¼•è„š
     switch (TIMx_Channelx)
     {
         // PA8
@@ -325,15 +325,15 @@ void PWM::Pin_Init()
 }
 
 /**
- * @brief  PWM-³õÊ¼»¯·½·¨
+ * @brief  PWM-åˆå§‹åŒ–æ–¹æ³•
  * @param  None
  * @retval None
  */
 void PWM::Init()
 {
-    //³õÊ¼»¯GPIO¸´ÓÃ
+    //åˆå§‹åŒ–GPIOå¤ç”¨
     Pin_Init();
-    //»ñÈ¡TIM³õÊ¼²ÎÊı
+    //è·å–TIMåˆå§‹å‚æ•°
     if (TIMx_Channelx <= TIM1_Channel4_FullRemap)
     {
         TIMx = TIM1;
@@ -358,25 +358,25 @@ void PWM::Init()
     {
         TIMx = TIM8;
     }
-    //¿ªÆôTIMÊ±ÖÓ
+    //å¼€å¯TIMæ—¶é’Ÿ
     RCC_Operate::RCC_Config(TIMx, ENABLE);
-    // TIM¼Ä´æÆ÷¸´Î»
+    // TIMå¯„å­˜å™¨å¤ä½
     TIM_DeInit(TIMx);
-    //»ù±¾ÉèÖÃ
+    //åŸºæœ¬è®¾ç½®
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseStructure.TIM_Prescaler = RCC_Operate::Get_SYSCLK_Frequency() / 1000000 - 1;
     TIM_TimeBaseStructure.TIM_Period =
-        RCC_Operate::Get_SYSCLK_Frequency() / ((TIM_TimeBaseStructure.TIM_Prescaler + 1) * Frequency) - 1; // ARR¼Ä´æÆ÷µÄÖµ
+        RCC_Operate::Get_SYSCLK_Frequency() / ((TIM_TimeBaseStructure.TIM_Prescaler + 1) * Frequency) - 1; // ARRå¯„å­˜å™¨çš„å€¼
     TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
     TIM_TimeBaseInit(TIMx, &TIM_TimeBaseStructure);
     TIM_OCInitTypeDef TIM_OCInitStructure;
-    // TIMOCÍ¨µÀÉèÖÃ
-    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;             //ÉèÖÃÍ¨µÀPWMÄ£Ê½(ÉÏÉı¸ßµçÆ½ÓĞĞ§,³¬¹ıCCRxÎªµÍµçÆ½)
-    TIM_OCInitStructure.TIM_Pulse = DutyRatio * (TIMx->ARR + 1);  //ÉèÖÃTIMµÄCCRx
-    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //Ê¹ÄÜTIMÍ¨µÀ
-    //ÉèÖÃÑ¡ÔñÍ¨µÀ
+    // TIMOCé€šé“è®¾ç½®
+    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;             //è®¾ç½®é€šé“PWMæ¨¡å¼(ä¸Šå‡é«˜ç”µå¹³æœ‰æ•ˆ,è¶…è¿‡CCRxä¸ºä½ç”µå¹³)
+    TIM_OCInitStructure.TIM_Pulse = DutyRatio * (TIMx->ARR + 1);  //è®¾ç½®TIMçš„CCRx
+    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //ä½¿èƒ½TIMé€šé“
+    //è®¾ç½®é€‰æ‹©é€šé“
     switch (TIMx_Channelx % 4)
     {
     case 0:
@@ -396,10 +396,10 @@ void PWM::Init()
 }
 
 /**
- * @brief  PWM-ÉèÖÃPWM²ÎÊı
- * @param  TIMx_Channelx        Ñ¡ÔñTIMxµÄCHxÍ¨µÀ
- * @param  Frequency            ÆµÂÊ(²»µÍÓÚ1,²»¸ßÓÚcpu¹¤×÷ÆµÂÊÎÊÌâ²»´ó)
- * @param  DutyRatio            Õ¼¿Õ±È
+ * @brief  PWM-è®¾ç½®PWMå‚æ•°
+ * @param  TIMx_Channelx        é€‰æ‹©TIMxçš„CHxé€šé“
+ * @param  Frequency            é¢‘ç‡(ä¸ä½äº1,ä¸é«˜äºcpuå·¥ä½œé¢‘ç‡é—®é¢˜ä¸å¤§)
+ * @param  DutyRatio            å ç©ºæ¯”
  * @retval None
  */
 void PWM::Set_PWM_Param(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double DutyRatio)
@@ -410,10 +410,10 @@ void PWM::Set_PWM_Param(TIMx_Channelx_enum TIMx_Channelx, double Frequency, doub
 }
 
 /**
- * @brief  PWM-²ÎÊı¸üĞÂ·½·¨
- * @param  TIMx_Channelx        Ñ¡ÔñTIMxµÄCHxÍ¨µÀ
- * @param  Frequency            ÆµÂÊ(²»µÍÓÚ1,²»¸ßÓÚcpu¹¤×÷ÆµÂÊÎÊÌâ²»´ó)
- * @param  DutyRatio            Õ¼¿Õ±È
+ * @brief  PWM-å‚æ•°æ›´æ–°æ–¹æ³•
+ * @param  TIMx_Channelx        é€‰æ‹©TIMxçš„CHxé€šé“
+ * @param  Frequency            é¢‘ç‡(ä¸ä½äº1,ä¸é«˜äºcpuå·¥ä½œé¢‘ç‡é—®é¢˜ä¸å¤§)
+ * @param  DutyRatio            å ç©ºæ¯”
  * @retval None
  */
 void PWM::Update(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double DutyRatio)
@@ -426,8 +426,8 @@ void PWM::Update(TIMx_Channelx_enum TIMx_Channelx, double Frequency, double Duty
 }
 
 /**
- * @brief  PWM-ÉèÖÃPWMÑ¡ÔñÂ·
- * @param  TIMx_Channelx        Ñ¡ÔñTIMxµÄCHxÍ¨µÀ
+ * @brief  PWM-è®¾ç½®PWMé€‰æ‹©è·¯
+ * @param  TIMx_Channelx        é€‰æ‹©TIMxçš„CHxé€šé“
  * @retval None
  */
 void PWM::Set_TIMx_Channelx_enum(TIMx_Channelx_enum TIMx_Channelx)
@@ -436,8 +436,8 @@ void PWM::Set_TIMx_Channelx_enum(TIMx_Channelx_enum TIMx_Channelx)
 }
 
 /**
- * @brief  PWM-ÉèÖÃPWMÆµÂÊ·½·¨
- * @param  Frequency            ÆµÂÊ(²»µÍÓÚ1,²»¸ßÓÚcpu¹¤×÷ÆµÂÊÎÊÌâ²»´ó)
+ * @brief  PWM-è®¾ç½®PWMé¢‘ç‡æ–¹æ³•
+ * @param  Frequency            é¢‘ç‡(ä¸ä½äº1,ä¸é«˜äºcpuå·¥ä½œé¢‘ç‡é—®é¢˜ä¸å¤§)
  * @retval None
  */
 void PWM::Set_Frequency(double Frequency)
@@ -446,8 +446,8 @@ void PWM::Set_Frequency(double Frequency)
 }
 
 /**
- * @brief  PWM-ÉèÖÃPWMÕ¼¿Õ±È·½·¨
- * @param  DutyRatio            Õ¼¿Õ±È
+ * @brief  PWM-è®¾ç½®PWMå ç©ºæ¯”æ–¹æ³•
+ * @param  DutyRatio            å ç©ºæ¯”
  * @retval None
  */
 void PWM::Set_DutyRatio(double DutyRatio)
@@ -456,7 +456,7 @@ void PWM::Set_DutyRatio(double DutyRatio)
 }
 
 /**
- * @brief  PWM-¿ªÆôPWM·½·¨
+ * @brief  PWM-å¼€å¯PWMæ–¹æ³•
  * @param  None
  * @retval None
  */
@@ -466,7 +466,7 @@ void PWM::Enable()
 }
 
 /**
- * @brief  PWM-¹Ø±ÕPWM·½·¨
+ * @brief  PWM-å…³é—­PWMæ–¹æ³•
  * @param  None
  * @retval None
  */

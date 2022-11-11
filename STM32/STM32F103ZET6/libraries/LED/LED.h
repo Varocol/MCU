@@ -3,16 +3,16 @@
 #include "GPIO.h"
 typedef enum
 {
-    //µÍµçÆ½´¥·¢
+    //ä½ç”µå¹³è§¦å‘
     Low_level_lighting,
-    //¸ßµçÆ½´¥·¢
+    //é«˜ç”µå¹³è§¦å‘
     High_level_lighting
 } LED_Lighting_Mode;
 
 class LED : public GPIO
 {
 private:
-    LED_Lighting_Mode mode = High_level_lighting; //µÆ´¥·¢Ä£Ê½
+    LED_Lighting_Mode mode = High_level_lighting; //ç¯è§¦å‘æ¨¡å¼
 public:
     LED();
     ~LED();

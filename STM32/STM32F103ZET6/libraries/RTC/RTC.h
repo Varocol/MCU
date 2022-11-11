@@ -4,27 +4,27 @@
 #include "NVIC.h"
 #include "time.h"
 /*
-����RTC���̣�
-    1.��λ������(��ѡ)
-    2.����PWR��BKPʱ��
-    3.�������������
-    4.����RTC����ʱ��Դ
-    5.�ȴ�ʱ��Դ����
-    6.ѡ��RTCʱ��Դ(3�ֿ�ѡ)
-    7.����RTCʱ��(һ��Ҫ�ȿ���,�����޷�����)
-    8.�ȴ�RTCʱ����APB1ʱ��ͬ��(û����һ�����޷������ж�)
-    9.�����ж��Լ���Ƶ�����������ӼĴ���
-    10.���õ�ʱ����������ж���ֱ������,�����ó��ж�����������ȿ�������ģʽ
-    11.�������ر��˳�����ģʽ
-    12.���������жϻ�������NVIC
+配置RTC过程：
+    1.复位备份域(可选)
+    2.开启PWR和BKP时钟
+    3.开启备份域访问
+    4.开启RTC所需时钟源
+    5.等待时钟源就绪
+    6.选择RTC时钟源(3种可选)
+    7.开启RTC时钟(一定要先开启,否则无法配置)
+    8.等待RTC时钟与APB1时钟同步(没有这一步就无法配置中断)
+    9.配置中断以及分频、计数、闹钟寄存器
+    10.配置的时候如果配置中断则直接配置,若配置除中断以外的则需先开启配置模式
+    11.配置完后关闭退出配置模式
+    12.若配置了中断还需配置NVIC
 
-�жϱ�־λ�б�
-RTC_IT_OW    //����ж�
-RTC_IT_ALR   //�����ж�
-RTC_IT_SEC   //���ж�
+中断标志位列表
+RTC_IT_OW    //溢出中断
+RTC_IT_ALR   //闹钟中断
+RTC_IT_SEC   //秒中断
 
-RTCʱ���׼ֵ��1970-1-1 00:00:00    (��С����ֵ)
-RTC���ʱ��:   2106-2-7 06:28:15    (�������ֵ)
+RTC时间基准值：1970-1-1 00:00:00    (最小允许值)
+RTC溢出时间:   2106-2-7 06:28:15    (最大允许值)
 
 */
 typedef enum
@@ -34,17 +34,17 @@ typedef enum
     RTC_CLK_HSE_Div128
 } RTC_CLK_enum;
 
-//������ʼ����ʹ���������еĲ���
-//��һ���ʼ����ʹ��
+//基础初始化会使用下面所有的参数
+//而一般初始化会使用
 typedef struct
 {
-    uint32_t PrescalerValue;                 // RTC��Ƶϵ��
-    uint32_t CounterValue;                   // RTC������ֵ
-    uint32_t AlarmValue;                     // RTC����ֵ
-    RTC_CLK_enum RTC_CLK;                    // RTCʱ��ѡ��
-    NVIC_InitTypeDef RTC_NVIC_InitStructure; // RTC�жϳ�ʼ���ṹ��
-    uint32_t RTC_IT_Selection;               // RTC�ж�λѡ��
-    FunctionalState RTC_IT_State;            // RTC�ж�ʹ(ʧ)��
+    uint32_t PrescalerValue;                 // RTC分频系数
+    uint32_t CounterValue;                   // RTC计数器值
+    uint32_t AlarmValue;                     // RTC闹钟值
+    RTC_CLK_enum RTC_CLK;                    // RTC时钟选择
+    NVIC_InitTypeDef RTC_NVIC_InitStructure; // RTC中断初始化结构体
+    uint32_t RTC_IT_Selection;               // RTC中断位选择
+    FunctionalState RTC_IT_State;            // RTC中断使(失)能
 } RTC_Param;
 
 class RTC_Operate
@@ -83,5 +83,8 @@ public:
     static void RCC_Enable();
     static void RCC_Disable();
 };
+
+extern void (*RTC_Handler)(void);
+extern void (*RTCAlarm_Handler)(void);
 
 #endif /*__OJ_RTC_H*/

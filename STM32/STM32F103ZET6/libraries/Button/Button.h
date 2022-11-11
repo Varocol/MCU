@@ -34,7 +34,7 @@ typedef void (*callbackFunction)(void);
 typedef void (*parameterizedCallbackFunction)(void *);
 }
 
-//电平高低枚举
+//鐢靛钩楂樹綆鏋氫妇
 typedef enum{
     LOW = 0,
     HIGH

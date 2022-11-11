@@ -4,14 +4,14 @@
 #include "RCC.h"
 #include "NVIC.h"
 /*
-    ËµÃ÷:EXTIÓĞ20¸ö´¦ÀíÍ¨µÀ,EXTI0¶ÔÓ¦GPIOx(x=A...G)_Pin_0,EXTI1¶ÔÓ¦GPIOx(x=A...G)_Pin_1,
-    ÒÔ´ËÀàÍÆ,¶øEXTI16~20½ÓÁËÌØÊâÍ¨µÀ¡£³õÊ¼»¯Ê±·ÖÎªÁ½¿é²¿·Ö,µÚÒ»²¿·ÖÊÇEXTI±¾ÉíµÄ²ÎÊı£¬ºóÃæ¿ÉÒÔ½Ó
-    GPIOµÄÑ¡Ôñ²ÎÊı,Èç¹û²»´«²Î¶ÔÓ¦µÄÊÇEXTI16~20µÄ²¿·Ö,Ò²¿ÉÒÔ½ÓNVICÖĞ¶Ï²¿·Ö¡£
-    ³õÊ¼»¯²ÎÊı£º
-    1.EXTI16~20µÄÓ²¼şÊÂ¼ş   EXTI_InitStructure
-    2.EXTI16~20µÄÓ²¼şÖĞ¶Ï   EXTI_InitStructure | EXTI_NVIC_Operate
-    3.EXTI0~15µÄÓ²¼şÊÂ¼ş    EXTI_InitStructure | GPIOx
-    4.EXTI0~15µÄÓ²¼şÖĞ¶Ï    EXTI_InitStructure | EXTI_NVIC_Operate | GPIOx
+    è¯´æ˜:EXTIæœ‰20ä¸ªå¤„ç†é€šé“,EXTI0å¯¹åº”GPIOx(x=A...G)_Pin_0,EXTI1å¯¹åº”GPIOx(x=A...G)_Pin_1,
+    ä»¥æ­¤ç±»æ¨,è€ŒEXTI16~20æ¥äº†ç‰¹æ®Šé€šé“ã€‚åˆå§‹åŒ–æ—¶åˆ†ä¸ºä¸¤å—éƒ¨åˆ†,ç¬¬ä¸€éƒ¨åˆ†æ˜¯EXTIæœ¬èº«çš„å‚æ•°ï¼Œåé¢å¯ä»¥æ¥
+    GPIOçš„é€‰æ‹©å‚æ•°,å¦‚æœä¸ä¼ å‚å¯¹åº”çš„æ˜¯EXTI16~20çš„éƒ¨åˆ†,ä¹Ÿå¯ä»¥æ¥NVICä¸­æ–­éƒ¨åˆ†ã€‚
+    åˆå§‹åŒ–å‚æ•°ï¼š
+    1.EXTI16~20çš„ç¡¬ä»¶äº‹ä»¶   EXTI_InitStructure
+    2.EXTI16~20çš„ç¡¬ä»¶ä¸­æ–­   EXTI_InitStructure | EXTI_NVIC_Operate
+    3.EXTI0~15çš„ç¡¬ä»¶äº‹ä»¶    EXTI_InitStructure | GPIOx
+    4.EXTI0~15çš„ç¡¬ä»¶ä¸­æ–­    EXTI_InitStructure | EXTI_NVIC_Operate | GPIOx
 
 */
 
@@ -56,4 +56,11 @@ public:
     void Disable();
 };
 
+extern void (*EXTI0_Handler)(void);
+extern void (*EXTI1_Handler)(void);
+extern void (*EXTI2_Handler)(void);
+extern void (*EXTI3_Handler)(void);
+extern void (*EXTI4_Handler)(void);
+extern void (*EXTI9_5_Handler)(void);
+extern void (*EXTI15_10_Handler)(void);
 #endif /*__OJ_EXIT_H*/

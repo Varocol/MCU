@@ -12,18 +12,18 @@ I2C1:
 I2C2:
       Default:  PB10    PB11
 
-I2C ÖĞ¶ÏÁĞ±í
-I2C_IT_BUF    //»º³åÆ÷ÖĞ¶Ï±êÖ¾
-I2C_IT_EVT    //ÊÂ¼şÖĞ¶Ï±êÖ¾
-I2C_IT_ERR    //³ö´íÖĞ¶Ï±êÖ¾
+I2C ä¸­æ–­åˆ—è¡¨
+I2C_IT_BUF    //ç¼“å†²å™¨ä¸­æ–­æ ‡å¿—
+I2C_IT_EVT    //äº‹ä»¶ä¸­æ–­æ ‡å¿—
+I2C_IT_ERR    //å‡ºé”™ä¸­æ–­æ ‡å¿—
 */
-// I2CÒı½ÅÃ¶¾Ù
+// I2Cå¼•è„šæšä¸¾
 typedef enum
 {
   I2C_Default,
   I2C1_Remap
 } I2C_Remap_enum;
-// I2CÊÂ¼şÁĞ±í,Óëstm32f10x_i2c.cÖĞÁĞ±íÒ»ÖÂ
+// I2Cäº‹ä»¶åˆ—è¡¨,ä¸stm32f10x_i2c.cä¸­åˆ—è¡¨ä¸€è‡´
 typedef enum
 {
   // I2C_EVENT_SLAVE_TRANSMITTER_ADDRESS_MATCHED
@@ -68,17 +68,17 @@ typedef enum
   EV9 = I2C_EVENT_MASTER_MODE_ADDRESS10,
 } I2C_Event;
 
-// I2C²ÎÊıÁĞ±í½á¹¹Ìå
+// I2Cå‚æ•°åˆ—è¡¨ç»“æ„ä½“
 typedef struct
 {
   I2C_TypeDef *I2Cx;                          // I2Cx
-  I2C_InitTypeDef I2C_InitStructure;          // I2C³õÊ¼»¯½á¹¹Ìå
-  NVIC_InitTypeDef I2C_ER_NVIC_InitStructure; // I2C´íÎóÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
-  NVIC_InitTypeDef I2C_EV_NVIC_InitStructure; // I2CÊÂ¼şÖĞ¶Ï³õÊ¼»¯½á¹¹Ìå
-  I2C_Remap_enum I2C_Pin_Remap;               // I2CÒı½ÅÑ¡Ôñ
-  uint16_t I2C_IT_Selection;                  // I2CÖĞ¶ÏÎ»Ñ¡Ôñ
-  FunctionalState I2C_IT_State;               // I2CÖĞ¶ÏÊ¹(Ê§)ÄÜ
-  FunctionalState I2C_DMA_State;              // I2CDMAÊ¹(Ê§)ÄÜ
+  I2C_InitTypeDef I2C_InitStructure;          // I2Cåˆå§‹åŒ–ç»“æ„ä½“
+  NVIC_InitTypeDef I2C_ER_NVIC_InitStructure; // I2Cé”™è¯¯ä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+  NVIC_InitTypeDef I2C_EV_NVIC_InitStructure; // I2Cäº‹ä»¶ä¸­æ–­åˆå§‹åŒ–ç»“æ„ä½“
+  I2C_Remap_enum I2C_Pin_Remap;               // I2Cå¼•è„šé€‰æ‹©
+  uint16_t I2C_IT_Selection;                  // I2Cä¸­æ–­ä½é€‰æ‹©
+  FunctionalState I2C_IT_State;               // I2Cä¸­æ–­ä½¿(å¤±)èƒ½
+  FunctionalState I2C_DMA_State;              // I2CDMAä½¿(å¤±)èƒ½
 } I2C_Param;
 
 class I2C
@@ -115,4 +115,10 @@ public:
   static void RCC_Enable(I2C_TypeDef *I2Cx);
   static void RCC_Disable(I2C_TypeDef *I2Cx);
 };
+
+extern void (*I2C1_EV_Handler)(void);
+extern void (*I2C1_ER_Handler)(void);
+extern void (*I2C2_EV_Handler)(void);
+extern void (*I2C2_ER_Handler)(void);
+
 #endif /*__OJ_I2C_H*/

@@ -1,13 +1,13 @@
 #include "System.h"
 /*
     USART:
-        ÖØ¶¨Ïòprintf()ÒÔ¼°scanf()
+        é‡å®šå‘printf()ä»¥åŠscanf()
     RTC:
-        ÖØ¶¨Ïòtime()¡¢clock()ÒÔ¼°difftime()
+        é‡å®šå‘time()ã€clock()ä»¥åŠdifftime()
 */
 
-// ·¶Î§  0~23
-// ÖĞ¹ú±±¾©Ê±Çø
+// èŒƒå›´  0~23
+// ä¸­å›½åŒ—äº¬æ—¶åŒº
 static uint8_t TimeZone = 0x08;
 
 #ifdef __cplusplus
@@ -15,51 +15,51 @@ extern "C"
 {
 #endif
 #pragma import(__use_no_semihosting)
-    /* ¶¨Òå _sys_exit() ÒÔ±ÜÃâÊ¹ÓÃ°ëÖ÷»úÄ£Ê½ */
+    /* å®šä¹‰ _sys_exit() ä»¥é¿å…ä½¿ç”¨åŠä¸»æœºæ¨¡å¼ */
     void _sys_exit(int x)
     {
         x = x;
     }
-    /* ±ê×¼¿âĞèÒªµÄÖ§³ÖÀàĞÍ */
+    /* æ ‡å‡†åº“éœ€è¦çš„æ”¯æŒç±»å‹ */
     struct __FILE
     {
         int handle;
     };
     FILE __stdout;
 
-    // ÖØ¶¨Ïòc¿âº¯Êıprintfµ½´®¿Ú,ÖØ¶¨Ïòºó¿ÉÊ¹ÓÃprintfº¯Êı,Ç°ÌáÊÇµÃ¿ªÆôDEBUG_USARTx
+    // é‡å®šå‘cåº“å‡½æ•°printfåˆ°ä¸²å£,é‡å®šå‘åå¯ä½¿ç”¨printfå‡½æ•°,å‰ææ˜¯å¾—å¼€å¯DEBUG_USARTx
     int fputc(int ch, FILE *f)
     {
-        /* ·¢ËÍÒ»¸ö×Ö½ÚÊı¾İµ½´®¿Ú */
+        /* å‘é€ä¸€ä¸ªå­—èŠ‚æ•°æ®åˆ°ä¸²å£ */
         PLATFORM_USART.Send_Data((uint8_t)ch);
         return ch;
     }
-    // ÖØ¶¨Ïòc¿âº¯Êıscanfµ½´®¿Ú,ÖØ¶¨Ïòºó¿ÉÊ¹ÓÃscanf¡¢getcharµÈº¯Êı,Ç°ÌáÊÇµÃ¿ªÆôDEBUG_USARTx,Òª¹Ø±ÕRXNEÖĞ¶Ï²Å¿ÉÒÔÕı³£Ê¹ÓÃ
+    // é‡å®šå‘cåº“å‡½æ•°scanfåˆ°ä¸²å£,é‡å®šå‘åå¯ä½¿ç”¨scanfã€getcharç­‰å‡½æ•°,å‰ææ˜¯å¾—å¼€å¯DEBUG_USARTx,è¦å…³é—­RXNEä¸­æ–­æ‰å¯ä»¥æ­£å¸¸ä½¿ç”¨
     int fgetc(FILE *f)
     {
-        /* µÈ´ı´®¿ÚÊäÈëÊı¾İ */
+        /* ç­‰å¾…ä¸²å£è¾“å…¥æ•°æ® */
         return (int)PLATFORM_USART.Receive_Data();
     }
-    // ÖØ¶¨Ïòtime()
+    // é‡å®šå‘time()
     time_t time(time_t *timer)
     {
         if (timer != NULL)
         {
-            // Ç°ÌáÊÇRTCĞèÒª±»³õÊ¼»¯
+            // å‰ææ˜¯RTCéœ€è¦è¢«åˆå§‹åŒ–
             *timer = RTC_Operate::GetCounter();
             return *timer;
         }
         return RTC_Operate::GetCounter();
     }
-    // ÖØ¶¨Ïòclock(),clkÊÇ¸ù¾İRTCÊ±ÖÓµÄÔ­Ê¼Ê±ÖÓÆµÂÊÀ´µÄ,Èç¹ûÊÇLSEÔòÎª32768Hz,È¡³öµÄÖµ³ıÒÔ32768¼´¿ÉµÃÃë
-    // ÓĞĞ©Çé¿öÏÂ²»Ò»¶¨»ñµÃµÄ·ÖÆµ±ÈÓàÊı´ó,Èç¹ûÒ»Ö±Ê¹ÓÃÕâÌ×´úÂëÄÇÃ´Ã»ÎÊÌâ,µ«ÊÇÈç¹ûÔÚÄÇÖ®Ç°Ê¹ÓÃÆäËûµÄ´úÂëÉèÖÃ¹ı
-    //  RTC·ÖÆµ,ÄÇÃ´Ò»ÇĞ¶¼±äµÄÎ´Öª¡£ÓàÊı¼Ä´æÆ÷ÄÚµÄÖµÊÇÏòÏÂ¼ÆÊıµÄËùÒÔÒª¼õ
+    // é‡å®šå‘clock(),clkæ˜¯æ ¹æ®RTCæ—¶é’Ÿçš„åŸå§‹æ—¶é’Ÿé¢‘ç‡æ¥çš„,å¦‚æœæ˜¯LSEåˆ™ä¸º32768Hz,å–å‡ºçš„å€¼é™¤ä»¥32768å³å¯å¾—ç§’
+    // æœ‰äº›æƒ…å†µä¸‹ä¸ä¸€å®šè·å¾—çš„åˆ†é¢‘æ¯”ä½™æ•°å¤§,å¦‚æœä¸€ç›´ä½¿ç”¨è¿™å¥—ä»£ç é‚£ä¹ˆæ²¡é—®é¢˜,ä½†æ˜¯å¦‚æœåœ¨é‚£ä¹‹å‰ä½¿ç”¨å…¶ä»–çš„ä»£ç è®¾ç½®è¿‡
+    //  RTCåˆ†é¢‘,é‚£ä¹ˆä¸€åˆ‡éƒ½å˜çš„æœªçŸ¥ã€‚ä½™æ•°å¯„å­˜å™¨å†…çš„å€¼æ˜¯å‘ä¸‹è®¡æ•°çš„æ‰€ä»¥è¦å‡
     clock_t clock(void)
     {
         clock_t t = RTC_Operate::GetCounter();
         return (t + 1) * RTC_x.GetPrescaler() - RTC_Operate::GetDivider();
     }
-    // ÖØ¶¨Ïòdifftime(),·µ»ØÁ½ÕßÊ±¼ä²î,µ¥Î»s
+    // é‡å®šå‘difftime(),è¿”å›ä¸¤è€…æ—¶é—´å·®,å•ä½s
     double difftime(time_t time1, time_t time0)
     {
         if (time1 < time0)
@@ -70,7 +70,7 @@ extern "C"
         }
         return ((time_t)(time1 - time0)) * 1.0 / RTC_Operate::Get_Clock_Freq();
     }
-    // ÖØ¶¨Ïòmktime,ÍØÕ¹µ½64Î»
+    // é‡å®šå‘mktime,æ‹“å±•åˆ°64ä½
     time_t mktime(tm *timeptr)
     {
         time_t t;
@@ -102,29 +102,29 @@ extern "C"
         }
         return t;
     }
-    // ÖØ¶¨Ïòlocaltime,ÍØÕ¹µ½64Î»
+    // é‡å®šå‘localtime,æ‹“å±•åˆ°64ä½
     tm *localtime(const time_t *timer)
     {
         static tm temp;
         _localtime_r(timer, &temp);
         return &temp;
     }
-    // ÖØ¶¨Ïò_localtime_r,ÍØÕ¹µ½64Î»
+    // é‡å®šå‘_localtime_r,æ‹“å±•åˆ°64ä½
     tm *_localtime_r(const time_t *timer, tm *result)
     {
         time_t t = *timer + TimeZone * 60 * 60;
-        // È·¶¨Ê±·ÖÃë
-        // Ê±
+        // ç¡®å®šæ—¶åˆ†ç§’
+        // æ—¶
         result->tm_hour = t % (24 * 60 * 60) / (60 * 60);
-        // ·Ö
+        // åˆ†
         result->tm_min = t % (60 * 60) / 60;
-        // Ãë
+        // ç§’
         result->tm_sec = t % 60;
-        // ¼ÆËãÌìÊı
+        // è®¡ç®—å¤©æ•°
         t /= (24 * 60 * 60);
-        // ĞÇÆÚ (1970-1-1 ĞÇÆÚËÄ)
+        // æ˜ŸæœŸ (1970-1-1 æ˜ŸæœŸå››)
         result->tm_wday = (t + 4) % 7;
-        // ´Ó1970Äê¿ªÊ¼¼ÆËã
+        // ä»1970å¹´å¼€å§‹è®¡ç®—
         result->tm_year = t / 366 + 1970;
         for (; result->tm_year <= t / 365 + 1970; result->tm_year++)
         {
@@ -137,14 +137,14 @@ extern "C"
                 break;
             }
         }
-        // Äê·İ
+        // å¹´ä»½
         result->tm_year -= 1;
         t -= days_between_years(result->tm_year, 1970);
         result->tm_year -= 1900;
-        // Ò»ÄêÖĞµÚ¼¸Ìì
+        // ä¸€å¹´ä¸­ç¬¬å‡ å¤©
         result->tm_yday = t;
         result->tm_mday = t;
-        // ÔÂ·İ
+        // æœˆä»½
         for (result->tm_mon = 0; result->tm_mon < 12; result->tm_mon++)
         {
             int mon_day = days_in_months(result->tm_year + 1900, result->tm_mon + 1);
@@ -157,11 +157,11 @@ extern "C"
                 break;
             }
         }
-        // ½«ÌìÊı¹éÖÃÎª1~31µÄ±ê×¼
+        // å°†å¤©æ•°å½’ç½®ä¸º1~31çš„æ ‡å‡†
         result->tm_mday++;
         return result;
     }
-    // ÖØ¶¨Ïòtzset,µ«ÊÇ´Ë°æ±¾¿âÖĞÃ»ÓĞ
+    // é‡å®šå‘tzset,ä½†æ˜¯æ­¤ç‰ˆæœ¬åº“ä¸­æ²¡æœ‰
 #ifdef __cplusplus
 }
 #endif
@@ -187,32 +187,32 @@ void record_start_time()
 }
 void system_init()
 {
-    // ³õÊ¼»¯RTC
+    // åˆå§‹åŒ–RTC
     rtc_init();
-    // ¼ÇÂ¼ÏµÍ³Æô¶¯Ê±¼ä
+    // è®°å½•ç³»ç»Ÿå¯åŠ¨æ—¶é—´
     record_start_time();
-    // ³õÊ¼»¯´®¿Ú
+    // åˆå§‹åŒ–ä¸²å£
     usart_init();
-    // ³õÊ¼»¯ĞÅºÅµÆ
+    // åˆå§‹åŒ–ä¿¡å·ç¯
     led_init();
 }
-// »ñÈ¡ÏµÍ³ÔËĞĞÊ±¼ä
+// è·å–ç³»ç»Ÿè¿è¡Œæ—¶é—´
 uint32_t system_time()
 {
     return (uint32_t)time(0) - system_start_time;
 }
-// »ñÈ¡ºÁÃë¼¶ÏµÍ³ÔËĞĞÊ±¼ä
+// è·å–æ¯«ç§’çº§ç³»ç»Ÿè¿è¡Œæ—¶é—´
 uint32_t system_time_ms()
 {
     clock_t start_clock = (system_start_time + 1) * RTC_x.GetPrescaler();
     return difftime(start_clock, clock()) * 1000;
 }
-// ÏµÍ³¼¶ÑÓÊ±,µ¥Î»s
+// ç³»ç»Ÿçº§å»¶æ—¶,å•ä½s
 void system_delay(uint32_t s)
 {
     SysTick_Operate::Delay(s, (uint32_t)RCC_Operate::Get_SYSCLK_Frequency());
 }
-// ÏµÍ³¼¶ÑÓÊ±,µ¥Î»ms
+// ç³»ç»Ÿçº§å»¶æ—¶,å•ä½ms
 void system_delay_ms(uint32_t ms)
 {
     SysTick_Operate::Delay_ms(ms);

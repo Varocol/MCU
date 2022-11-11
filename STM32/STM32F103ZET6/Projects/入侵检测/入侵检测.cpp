@@ -10,23 +10,23 @@ int main()
 }
 void Setup()
 {
-    //³õÊ¼»¯´®¿Ú
+    //åˆå§‹åŒ–ä¸²å£
     USART_1.Init();
-    //³õÊ¼»¯ĞÅºÅµÆ
+    //åˆå§‹åŒ–ä¿¡å·ç¯
     LED_1.Init();
-    //¿ªÆôµçÔ´ºÍºó±¸¼Ä´æÆ÷Ê±ÖÓ
+    //å¼€å¯ç”µæºå’Œåå¤‡å¯„å­˜å™¨æ—¶é’Ÿ
     RCC_Operate::RCC_Config(PWR, ENABLE);
     RCC_Operate::RCC_Config(BKP, ENABLE);
 
-    //¿ª·Åºó±¸¼Ä´æÆ÷
+    //å¼€æ”¾åå¤‡å¯„å­˜å™¨
     PWR_BackupAccessCmd(ENABLE);
-    //¹Ø±ÕÇÖÈë¼ì²âÒı½Å
+    //å…³é—­ä¾µå…¥æ£€æµ‹å¼•è„š
     BKP_TamperPinCmd(DISABLE);
-    //ÉèÖÃÒı½ÅµçÆ½
+    //è®¾ç½®å¼•è„šç”µå¹³
     BKP_TamperPinLevelConfig(BKP_TamperPinLevel_Low);
-    //Çå³ı±êÖ¾Î»(ÇÖÈë¼ì²âÒı½Å¿ÉÒÔÔÚ²»ĞèÒªVDDµÄÊ±ºò¹¤×÷,ËùÒÔÓĞ¿ÉÄÜÔÚÕâÆÚ¼ä²úÉúÈëÇÖÊÂ¼ş,ĞèÒªÊÖ¶¯Çå³ı)
+    //æ¸…é™¤æ ‡å¿—ä½(ä¾µå…¥æ£€æµ‹å¼•è„šå¯ä»¥åœ¨ä¸éœ€è¦VDDçš„æ—¶å€™å·¥ä½œ,æ‰€ä»¥æœ‰å¯èƒ½åœ¨è¿™æœŸé—´äº§ç”Ÿå…¥ä¾µäº‹ä»¶,éœ€è¦æ‰‹åŠ¨æ¸…é™¤)
     BKP_ClearFlag();
-    //ÅäÖÃÖĞ¶Ï
+    //é…ç½®ä¸­æ–­
     NVIC_InitTypeDef Tamper_InitStructure =
         {
             .NVIC_IRQChannel = TAMPER_IRQn,
@@ -35,14 +35,14 @@ void Setup()
             .NVIC_IRQChannelCmd = ENABLE};
     NVIC_Operate(Tamper_InitStructure).Init();
     BKP_ITConfig(ENABLE);
-    //¿ªÆôÈëÇÖ¼ì²âÒı½Å
+    //å¼€å¯å…¥ä¾µæ£€æµ‹å¼•è„š
     BKP_TamperPinCmd(ENABLE);
 }
 void Test()
 {
-    //¶ÁÈ¡ÉÏµç´ÎÊı
-    printf("ÉÏµç´ÎÊı:%d\n", BKP_ReadBackupRegister(BKP_DR1));
-    //Ğ´ÈëÉÏµç´ÎÊı
+    //è¯»å–ä¸Šç”µæ¬¡æ•°
+    printf("ä¸Šç”µæ¬¡æ•°:%d\n", BKP_ReadBackupRegister(BKP_DR1));
+    //å†™å…¥ä¸Šç”µæ¬¡æ•°
     BKP_WriteBackupRegister(BKP_DR1, BKP_ReadBackupRegister(BKP_DR1) + 1);
     while (1)
         ;
