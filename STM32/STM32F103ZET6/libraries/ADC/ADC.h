@@ -119,6 +119,7 @@ class ADC
 private:
     ADC_Param ADCx_Param;
     void Pin_Init(uint8_t ADC_Channel);
+
 public:
     ADC();
     ~ADC();
@@ -138,6 +139,9 @@ public:
     void AnalogWatchdogThresholdsConfig(uint16_t HighThreshold, uint16_t LowThreshold);
     void AnalogWatchdogSingleChannelConfig(uint8_t ADC_Channel);
     void SetInjectedOffset(uint8_t ADC_InjectedChannel, uint16_t Offset);
+    uint16_t GetConversionValue();
+    uint32_t GetInjectedConversionValue(uint8_t ADC_InjectedChannel);
+    static uint32_t GetDualModeConversionValue();
 
     void RCC_Enable();
     void RCC_Disable();

@@ -8,10 +8,10 @@ queue<vector<uint8_t>> USART::USART3_DMA_Data_Queue; // USART3消息队列
 queue<vector<uint8_t>> USART::UART4_DMA_Data_Queue;  // UART4 消息队列
 
 // 内置DMA默认配置参数
-// USART1_DMA 通道中断子优先级 15
-// USART2_DMA 通道中断子优先级 14
-// USART3_DMA 通道中断子优先级 13
-// UART4_DMA  通道中断子优先级 12
+// USART1_DMA 通道中断子优先级 0
+// USART2_DMA 通道中断子优先级 1
+// USART3_DMA 通道中断子优先级 2
+// UART4_DMA  通道中断子优先级 3
 DMA_InitTypeDef USART_TX_DMA_Default_InitStructure = {
     .DMA_PeripheralBaseAddr = NULL,
     .DMA_MemoryBaseAddr = NULL,
@@ -725,19 +725,19 @@ void USART::DMA_Setup(USART_TypeDef *USARTx)
   DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   if (USARTx == USART1)
   {
-    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 15;
+    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   }
   else if (USARTx == USART2)
   {
-    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 14;
+    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
   }
   else if (USARTx == USART3)
   {
-    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 13;
+    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
   }
   else if (USARTx == UART4)
   {
-    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 12;
+    DMA_Param.DMA_NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
   }
   DMA_Param.DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t) & *(USART_DMA_Data_Queue->front().begin());
   DMA_Param.DMA_InitStructure.DMA_BufferSize = USART_DMA_Data_Queue->front().size();

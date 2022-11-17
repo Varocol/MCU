@@ -1,9 +1,0 @@
-#ifndef __ADMIN_H
-#define __ADMIN_H
-#include <System/System.h>
-void Admin_Menu();
-void Admin_SetAdmin();
-void Admin_SetDoorPassword();
-void Admin_SetAdminPassword();
-void Admin_ShowSystemMenu();
-#endif /*__ADMIN_H*/

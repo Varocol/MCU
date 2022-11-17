@@ -70,7 +70,9 @@
             "compare": "c",
             "version": "cpp",
             "queue": "cpp",
-            "iomanip": "cpp"
+            "iomanip": "cpp",
+            "mutex": "cpp",
+            "__mutex_base": "cpp"
         },
         "files.autoGuessEncoding": false,
         "C_Cpp.default.configurationProvider": "cl.eide",

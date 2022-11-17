@@ -1,4 +1,5 @@
 #include <AS608_Fingerprint.h>
+
 /*!
  * @brief Gets the command packet
  */

@@ -2,6 +2,7 @@
 #define __AS608_FINGERPRINT_H
 #include <Adafruit_Fingerprint.h>
 #include <vector>
+#include <SoftwareSerial.h>
 using namespace std;
 
 //AS608操作指令

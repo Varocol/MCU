@@ -314,7 +314,39 @@ void DMA1_Channel7_IRQHandler(void)
 }
 void ADC1_2_IRQHandler(void)
 {
-  ADC1_2_Handler();
+  // ADC1_2_Handler();
+  // JEOC会触发EOC,有重叠关系,所以使用if else
+  if (ADC_GetITStatus(ADC1, ADC_IT_EOC))
+  {
+    PLATFORM_SERIAL.Send_String_DMA("[ADC1]:1v\n");
+    if (ADC_GetITStatus(ADC1, ADC_IT_JEOC))
+    {
+      PLATFORM_SERIAL.Send_String_DMA("[ADC1]:2v\n");
+      ADC_ClearITPendingBit(ADC1, ADC_IT_JEOC);
+    }
+    ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
+  }
+  else if (ADC_GetITStatus(ADC1, ADC_IT_AWD))
+  {
+    PLATFORM_SERIAL.Send_String_DMA("[ADC1]:AWD Waring!\n");
+    ADC_ClearITPendingBit(ADC1, ADC_IT_AWD);
+  }
+
+  if (ADC_GetITStatus(ADC2, ADC_IT_EOC))
+  {
+    PLATFORM_SERIAL.Send_String_DMA("[ADC2]:1v\n");
+    if (ADC_GetITStatus(ADC2, ADC_IT_JEOC))
+    {
+      PLATFORM_SERIAL.Send_String_DMA("[ADC2]:2v\n");
+      ADC_ClearITPendingBit(ADC2, ADC_IT_JEOC);
+    }
+    ADC_ClearITPendingBit(ADC2, ADC_IT_EOC);
+  }
+  else if (ADC_GetITStatus(ADC2, ADC_IT_AWD))
+  {
+    PLATFORM_SERIAL.Send_String_DMA("[ADC2]:AWD Waring!\n");
+    ADC_ClearITPendingBit(ADC2, ADC_IT_AWD);
+  }
 }
 void USB_HP_CAN1_TX_IRQHandler(void)
 {

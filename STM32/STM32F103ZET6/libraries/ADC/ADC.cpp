@@ -321,12 +321,42 @@ void ADC::AnalogWatchdogSingleChannelConfig(uint8_t ADC_Channel)
 /**
  * @brief  ADC-设置注入通道偏移量
  * @param  ADC_InjectedChannel      ADC注入通道
- *
+ * @param  Offset                   偏移量
  * @retval None
  */
 void ADC::SetInjectedOffset(uint8_t ADC_InjectedChannel, uint16_t Offset)
 {
     ADC_SetInjectedOffset(ADCx_Param.ADCx, ADC_InjectedChannel, Offset);
+}
+
+/**
+ * @brief  ADC-获取规则通道转换值
+ * @param  None
+ * @retval 规则通道转换值
+ */
+uint16_t ADC::GetConversionValue()
+{
+    return ADC_GetConversionValue(ADCx_Param.ADCx);
+}
+
+/**
+ * @brief  ADC-获取注入通道转换值
+ * @param  ADC_InjectedChannel      ADC注入通道
+ * @retval 注入通道转换值
+ */
+uint32_t ADC::GetInjectedConversionValue(uint8_t ADC_InjectedChannel)
+{
+    return ADC_GetInjectedConversionValue(ADCx_Param.ADCx, ADC_InjectedChannel);
+}
+
+/**
+ * @brief  ADC-获取双通道转换值(ADC1&ADC2)
+ * @param  None
+ * @retval None
+ */
+uint32_t ADC::GetDualModeConversionValue()
+{
+    return ADC_GetDualModeConversionValue();
 }
 
 /**

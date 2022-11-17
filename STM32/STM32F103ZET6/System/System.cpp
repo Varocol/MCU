@@ -14,12 +14,17 @@ static uint8_t TimeZone = 0x08;
 extern "C"
 {
 #endif
-#pragma import(__use_no_semihosting)
+    __ASM(".global __use_no_semihosting");
     /* 定义 _sys_exit() 以避免使用半主机模式 */
     void _sys_exit(int x)
     {
         x = x;
     }
+    void _ttywrch(int ch)
+    {
+        ch = ch;
+    }
+
     /* 标准库需要的支持类型 */
     struct __FILE
     {
@@ -31,14 +36,14 @@ extern "C"
     int fputc(int ch, FILE *f)
     {
         /* 发送一个字节数据到串口 */
-        PLATFORM_USART.Send_Data((uint8_t)ch);
+        PLATFORM_SERIAL.Send_Data((uint8_t)ch);
         return ch;
     }
     // 重定向c库函数scanf到串口,重定向后可使用scanf、getchar等函数,前提是得开启DEBUG_USARTx,要关闭RXNE中断才可以正常使用
     int fgetc(FILE *f)
     {
         /* 等待串口输入数据 */
-        return (int)PLATFORM_USART.Receive_Data();
+        return (int)PLATFORM_SERIAL.Receive_Data();
     }
     // 重定向time()
     time_t time(time_t *timer)
@@ -171,7 +176,7 @@ void tzset(uint8_t time)
 }
 void usart_init()
 {
-    PLATFORM_USART.Init();
+    PLATFORM_SERIAL.Init();
 }
 void led_init()
 {

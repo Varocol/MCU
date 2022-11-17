@@ -7,9 +7,20 @@
 #include <SoftwareSerial.h>
 #include <SPIFFS.h>
 #include <ArduinoJson.h>
+#include <ESPAsyncWebServer.h>
 using namespace std;
 #define PLATFORM_FINGER Finger
 #define PLATFORM_SERIAL Serial
+#define SOCKET_PRINTF(...) websocket.printfAll(__VA_ARGS__)
+#define SOCKET_PRINTLN(fmt,...) websocket.printfAll(String(fmt).c_str(),##__VA_ARGS__)
+#define SERIAL_PRINTF(...) PLATFORM_SERIAL.printf(__VA_ARGS__)
+#define SERIAL_PRINTLN(...) PLATFORM_SERIAL.println(__VA_ARGS__)
+#define PLATFORM_PRINTF(...)\
+        SOCKET_PRINTF(__VA_ARGS__);\
+        SERIAL_PRINTF(__VA_ARGS__)
+    #define PLATFORM_PRINTLN(...)\
+        SOCKET_PRINTLN(__VA_ARGS__);\
+        SERIAL_PRINTLN(__VA_ARGS__)
 
 typedef struct
 {
@@ -33,6 +44,6 @@ extern HardwareSerial mySerial;
 extern AS608_Fingerprint Finger;
 extern Serial_Param serial_param;
 extern File finger_file;
-extern File system_log_file;
-
+extern File finger_backup_file;
+extern AsyncWebSocket websocket;
 #endif /*__VARIABLES_H*/

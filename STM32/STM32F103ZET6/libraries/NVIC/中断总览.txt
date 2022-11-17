@@ -1,6 +1,6 @@
-NVIC ◊È±:
+NVIC ÁªÑÂà´:
 NVIC_PriorityGroup = NVIC_PriorityGroup_0(0 bit PreemptionPriority / 4 bits SubPriority)
-÷–∂œ√˚≥∆:
+‰∏≠Êñ≠ÂêçÁß∞:
 NonMaskableInt_IRQn   
 MemoryManagement_IRQn 
 BusFault_IRQn         
@@ -70,11 +70,11 @@ DMA2_Channel2_IRQn
 DMA2_Channel3_IRQn   
 DMA2_Channel4_5_IRQn          
 
-NVIC ”≈œ»º∂:
-USART1                  0
-USART2                  1
-USART3                  2
-UART4                   3
+NVIC ‰ºòÂÖàÁ∫ß:
+USART1                  0   DMA1_Channel1_IRQn       0
+USART2                  1   DMA1_Channel1_IRQn       1
+USART3                  2   DMA1_Channel1_IRQn       2
+UART4                   3   DMA1_Channel1_IRQn       3
 UART5                   4
 TIM2/ADC1               5                       
 I2C1_ER/ADC3            6
@@ -86,4 +86,4 @@ DMA1_Channel5           11
 DMA1_Channel1           12
 SPI1_IRQn               13
 SPI2_IRQn               14
-EXTI9_5_IRQn            15 DMA1_Channel1_IRQn       15
+EXTI9_5_IRQn            15 

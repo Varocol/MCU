@@ -32,4 +32,10 @@ Serial_Param serial_param = {
 
 //文件系统变量
 File finger_file;
-File system_log_file;
+File finger_backup_file;
+
+//舵机驱动变量
+bool servo_flag = false;
+
+// websocket
+AsyncWebSocket websocket("/ws");
