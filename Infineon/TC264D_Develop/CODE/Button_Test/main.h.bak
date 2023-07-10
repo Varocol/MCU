@@ -1,7 +1,0 @@
-#ifndef __MAIN_H
-#define __MAIN_H
-#include "Libraries.h"
-#include "Button_Function.h"
-void setup();
-void loop();
-#endif /*__MAIN_H*/

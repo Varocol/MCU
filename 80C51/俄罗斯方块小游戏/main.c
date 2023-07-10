@@ -5,10 +5,8 @@ void main()
     gnd=0;
      while(1)
      {     
-         setup();
-         mainmenu();
-         chooseplayer();
-         choosedifficulty();
+         setu
+         5 6edifficulty();
          game(); 
          showscore();   
      }

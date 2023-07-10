@@ -1,6 +1,0 @@
-#ifndef _MAIN_H
-#define _MAIN_H
-#include "Libraries.h"
-void setup();
-void loop();
-#endif /*_MAIN_H*/

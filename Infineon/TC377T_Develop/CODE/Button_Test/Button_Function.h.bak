@@ -1,9 +1,0 @@
-#ifndef __BUTTON_FUN_H
-#define __BUTTON_FUN_H
-#include "Libraries.h"
-#include "Modules.h"
-void doubleclick();
-void click();
-void longclick();
-extern Button button;
-#endif  /*__BUTTON_FUN_H*/

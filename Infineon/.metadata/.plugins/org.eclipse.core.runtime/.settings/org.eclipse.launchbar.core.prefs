@@ -1,8 +1,0 @@
-LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,\u672C\u5730/arch=x86_64
-LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,\u672C\u5730/name=\u672C\u5730
-LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,\u672C\u5730/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:TC264D_Develop,org.eclipse.launchbar.core.descriptorType.default\:TC377T_Develop
-eclipse.preferences.version=1
-org.eclipse.launchbar.core.descriptorType.default\:TC264D_Develop/activeLaunchMode=run
-org.eclipse.launchbar.core.descriptorType.default\:TC264D_Develop/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:\u672C\u5730
-org.eclipse.launchbar.core.descriptorType.default\:TC377T_Develop/activeLaunchMode=debug

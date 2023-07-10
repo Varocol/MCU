@@ -1,4 +1,0 @@
-#include "MSH_FUN.h"
-
-//µ∆¡¡√¸¡Ó
-MSH_CMD_EXPORT(LED_Test , Blink);
