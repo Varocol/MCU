@@ -12,7 +12,11 @@ int main()
 }
 void Setup()
 {
+    system_delay_ms(500);
     LED_1.Init();
+    GPIO pwr(PB7);
+    pwr.Init();
+    pwr.Pin_High();
 }
 void Test()
 {

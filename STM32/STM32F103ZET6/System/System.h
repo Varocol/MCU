@@ -5,12 +5,11 @@
 #include <cstdio>
 using namespace std;
 
-//平台指定的外设(用于重定向C底层函数)
+// 平台指定的外设(用于重定向C底层函数)
 #define PLATFORM_SERIAL USART_1
 #define PLATFORM_LED LED_1
 #define PLATFORM_RTC RTC_x
 #define PLATFORM_I2C I2C_1
-
 
 void tzset(uint8_t);
 

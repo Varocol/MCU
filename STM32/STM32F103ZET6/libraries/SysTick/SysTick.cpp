@@ -42,7 +42,6 @@ void SysTick_Operate::Delay_ms(uint32_t ms)
  */
 void SysTick_Operate::Delay_us(uint32_t us)
 {
-
   SysTick_Config(RCC_Operate::Get_SYSCLK_Frequency() / 1000000);
 
   for (uint32_t i = 0; i < us; i++)

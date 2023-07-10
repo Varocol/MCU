@@ -12,6 +12,19 @@
             "runToEntryPoint": "main",
             "device": "STM32F103ZE (allow opt. bytes)",
             "svdPath": "D:\\Keil_Arm\\Packs\\Keil\\STM32F1xx_DFP\\2.4.0\\SVD\\STM32F103xx.svd"
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "type": "cortex-debug",
+            "request": "launch",
+            "name": "stlink",
+            "servertype": "openocd",
+            "executable": "build\\Debug\\STM32F103ZET6.elf",
+            "runToEntryPoint": "main",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/stm32f1x.cfg"
+            ]
         }
     ]
 }

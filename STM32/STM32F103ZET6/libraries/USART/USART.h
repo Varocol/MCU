@@ -87,6 +87,12 @@ typedef enum
         USART_DMA_BOTH
 } USART_DMA_enum;
 
+typedef enum
+{
+        START,
+        STOP
+} USART_DMA_Queue_Status;
+
 // USART参数列表结构体
 typedef struct
 {

@@ -116,7 +116,7 @@ void adc1_2_handler()
     }
     else if (ADC_GetITStatus(ADC1, ADC_IT_AWD))
     {
-        PLATFORM_SERIAL.Send_String_DMA("[ADC1]:AWD Waring!\n");
+        PLATFORM_SERIAL.Send_String_DMA("[ADC1]:AWD Warning!\n");
         ADC_ClearITPendingBit(ADC1, ADC_IT_AWD);
     }
 
@@ -132,7 +132,7 @@ void adc1_2_handler()
     }
     else if (ADC_GetITStatus(ADC2, ADC_IT_AWD))
     {
-        PLATFORM_SERIAL.Send_String_DMA("[ADC2]:AWD Waring!\n");
+        PLATFORM_SERIAL.Send_String_DMA("[ADC2]:AWD Warning!\n");
         ADC_ClearITPendingBit(ADC2, ADC_IT_AWD);
     }
 }

@@ -72,7 +72,8 @@
             "queue": "cpp",
             "iomanip": "cpp",
             "mutex": "cpp",
-            "__mutex_base": "cpp"
+            "__mutex_base": "cpp",
+            "__availability": "cpp"
         },
         "files.autoGuessEncoding": false,
         "C_Cpp.default.configurationProvider": "cl.eide",

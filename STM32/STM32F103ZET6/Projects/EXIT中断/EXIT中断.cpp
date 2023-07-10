@@ -26,10 +26,10 @@ void Setup()
         .NVIC_IRQChannelSubPriority = 2,
         .NVIC_IRQChannelCmd = ENABLE};
     EXTI_InitTypeDef EXTI_KEY1_InitStructure = {
-        .NVIC_IRQChannel = EXTI_Line0,
-        .NVIC_IRQChannelPreemptionPriority = EXTI_Mode_Interrupt,
-        .NVIC_IRQChannelSubPriority = EXTI_Trigger_Rising,
-        .NVIC_IRQChannelCmd = ENABLE};
+        .EXTI_Line = EXTI_Line0,
+        .EXTI_Mode = EXTI_Mode_Interrupt,
+        .EXTI_Trigger = EXTI_Trigger_Rising,
+        .EXTI_LineCmd = ENABLE};
     EXTI_Operate EXTI_KEY1 = EXTI_Operate(EXTI_KEY1_InitStructure, EXTI_KEY1_NVIC_InitStructure, GPIOA);
     EXTI_KEY1.Init();
     printf("已初始化完成!\n");

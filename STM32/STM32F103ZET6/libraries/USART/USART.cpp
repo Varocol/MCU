@@ -7,11 +7,18 @@ queue<vector<uint8_t>> USART::USART2_DMA_Data_Queue; // USART2消息队列
 queue<vector<uint8_t>> USART::USART3_DMA_Data_Queue; // USART3消息队列
 queue<vector<uint8_t>> USART::UART4_DMA_Data_Queue;  // UART4 消息队列
 
+USART_DMA_Queue_Status USART1_DMA_Queue_Status = STOP; // USART1消息队列状态
+USART_DMA_Queue_Status USART2_DMA_Queue_Status = STOP; // USART2消息队列状态
+USART_DMA_Queue_Status USART3_DMA_Queue_Status = STOP; // USART3消息队列状态
+USART_DMA_Queue_Status UART4_DMA_Queue_Status = STOP;  // UART4 消息队列状态
+
 // 内置DMA默认配置参数
 // USART1_DMA 通道中断子优先级 0
 // USART2_DMA 通道中断子优先级 1
 // USART3_DMA 通道中断子优先级 2
 // UART4_DMA  通道中断子优先级 3
+
+// 默认DMA初始化结构体(公用)
 DMA_InitTypeDef USART_TX_DMA_Default_InitStructure = {
     .DMA_PeripheralBaseAddr = NULL,
     .DMA_MemoryBaseAddr = NULL,
@@ -24,15 +31,37 @@ DMA_InitTypeDef USART_TX_DMA_Default_InitStructure = {
     .DMA_Mode = DMA_Mode_Normal,
     .DMA_Priority = DMA_Priority_High,
     .DMA_M2M = DMA_M2M_Disable};
-NVIC_InitTypeDef USART_TX_DMA_Default_NVIC_InitStructure = {
-    .NVIC_IRQChannel = NULL,
-    .NVIC_IRQChannelPreemptionPriority = NULL,
-    .NVIC_IRQChannelSubPriority = NULL,
+
+NVIC_InitTypeDef USART1_TX_DMA_Default_NVIC_InitStructure = {
+    .NVIC_IRQChannel = DMA1_Channel4_IRQn,
+    .NVIC_IRQChannelPreemptionPriority = 0,
+    .NVIC_IRQChannelSubPriority = 0,
     .NVIC_IRQChannelCmd = ENABLE};
+// NVIC_InitTypeDef USART1_TX_DMA_Default_NVIC_InitStructure = {
+//     .NVIC_IRQChannel = DMA1_Channel4_IRQn,
+//     .NVIC_IRQChannelPreemptionPriority = 0,
+//     .NVIC_IRQChannelSubPriority = 0,
+//     .NVIC_IRQChannelCmd = ENABLE};
+// NVIC_InitTypeDef USART1_TX_DMA_Default_NVIC_InitStructure = {
+//     .NVIC_IRQChannel = DMA1_Channel4_IRQn,
+//     .NVIC_IRQChannelPreemptionPriority = 0,
+//     .NVIC_IRQChannelSubPriority = 0,
+//     .NVIC_IRQChannelCmd = ENABLE};
+// NVIC_InitTypeDef USART1_TX_DMA_Default_NVIC_InitStructure = {
+//     .NVIC_IRQChannel = DMA1_Channel4_IRQn,
+//     .NVIC_IRQChannelPreemptionPriority = 0,
+//     .NVIC_IRQChannelSubPriority = 0,
+//     .NVIC_IRQChannelCmd = ENABLE};
+// NVIC_InitTypeDef USART1_TX_DMA_Default_NVIC_InitStructure = {
+//     .NVIC_IRQChannel = DMA1_Channel4_IRQn,
+//     .NVIC_IRQChannelPreemptionPriority = 0,
+//     .NVIC_IRQChannelSubPriority = 0,
+//     .NVIC_IRQChannelCmd = ENABLE};
+
 DMA_Param USART_TX_DMA_Default_Param = {
     .DMA_Channelx = NULL,
     .DMA_InitStructure = USART_TX_DMA_Default_InitStructure,
-    .DMA_NVIC_InitStructure = USART_TX_DMA_Default_NVIC_InitStructure,
+    .DMA_NVIC_InitStructure = USART1_TX_DMA_Default_NVIC_InitStructure,
     .DMA_IT_Selection = DMA_IT_TC | DMA_IT_TE, // DMA_IT_HT | DMA_IT_TC | DMA_IT_TE
     .DMA_IT_State = ENABLE};
 
@@ -41,7 +70,6 @@ void (*USART2_Handler)(void);
 void (*USART3_Handler)(void);
 void (*UART4_Handler)(void);
 void (*UART5_Handler)(void);
-
 
 /**
  * @brief  USART1_TX对应的DMA通道的中断处理
@@ -164,7 +192,6 @@ void UART4_TX_DMA_Handler()
   }
 }
 
-
 /**
  * @brief  USART-空构造方法
  * @param  None
@@ -261,8 +288,8 @@ void USART::Send_Data_DMA(uint8_t data)
     // 检测DMA通道是否在工作
     if (DMA_Config_Check(USARTx_Param.USARTx) == false)
     {
-      // 如果不在工作则让其工作
-      DMA_Queue_Start(USARTx_Param.USARTx);
+      // 如果不在工作则初始化DMA
+      DMA_Setup(USARTx_Param.USARTx);
     }
   }
 }
@@ -718,6 +745,8 @@ void USART::DMA_Setup(USART_TypeDef *USARTx)
   {
     return;
   }
+  // 挂载DMA中断函数
+  DMA_MAP_FUNC(USARTx);
   DMA_Param DMA_Param = USART_TX_DMA_Default_Param;
   DMA_Param.DMA_Channelx = Get_DMA_Channel(USARTx, USART_DMA_TX);
   DMA_Param.DMA_InitStructure.DMA_PeripheralBaseAddr = Get_DR_ADDR(USARTx);
@@ -741,8 +770,6 @@ void USART::DMA_Setup(USART_TypeDef *USARTx)
   }
   DMA_Param.DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t) & *(USART_DMA_Data_Queue->front().begin());
   DMA_Param.DMA_InitStructure.DMA_BufferSize = USART_DMA_Data_Queue->front().size();
-  // 挂载DMA中断函数
-  DMA_MAP_FUNC(USARTx);
   // 开启DMA位
   USART_DMACmd(USARTx, USART_DMAReq_Tx, ENABLE);
   // 初始化DMA

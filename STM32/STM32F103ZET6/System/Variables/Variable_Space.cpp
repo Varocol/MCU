@@ -195,22 +195,22 @@ USART UART_5(UART5_Param);
 // TIM
 // TIM基本参数初始化结构体
 TIM_TimeBaseInitTypeDef TIM2_TimeBaseStructure = {
-    .TIM_Prescaler = (uint16_t)(RCC_Operate::Get_SYSCLK_Frequency() / 1000000), // 72
+    .TIM_Prescaler = (uint16_t)(RCC_Operate::Get_SYSCLK_Frequency() / 1000000) - 1, // 71
     .TIM_CounterMode = TIM_CounterMode_Up,
-    .TIM_Period = 999,                 //计1000次,这样每次1ms
-    .TIM_ClockDivision = TIM_CKD_DIV1, //输入信号滤波频率
-    .TIM_RepetitionCounter = 0         //重复次数,只用通用和高级定时器才有
+    .TIM_Period = 999,                 // 计1000次,这样每次1ms
+    .TIM_ClockDivision = TIM_CKD_DIV1, // 输入信号滤波频率
+    .TIM_RepetitionCounter = 0         // 重复次数,只用通用和高级定时器才有
 };
 // TIM通道初始化结构体
 TIM_OCInitTypeDef TIM2_OCStructure = {
-    .TIM_OCMode = TIM_OCMode_PWM1,                //通道模式
-    .TIM_OutputState = TIM_OutputState_Enable,    //输入/捕获使能(OCx)
-    .TIM_OutputNState = TIM_OutputNState_Disable, //输入/互补输出使能,只有高级定时器才有(OCxN)
+    .TIM_OCMode = TIM_OCMode_PWM1,                // 通道模式
+    .TIM_OutputState = TIM_OutputState_Enable,    // 输入/捕获使能(OCx)
+    .TIM_OutputNState = TIM_OutputNState_Disable, // 输入/互补输出使能,只有高级定时器才有(OCxN)
     .TIM_Pulse = 500,                             // CCRx的值,用来设置占空比
-    .TIM_OCPolarity = TIM_OCPolarity_High,        //输入/捕获极性,高电平有效(OCx)
-    .TIM_OCNPolarity = TIM_OCNPolarity_High,      //输入/捕获互补输出极性,高电平有效(OCNx)
-    .TIM_OCIdleState = TIM_OCIdleState_Reset,     //输出空闲状态(OCx)
-    .TIM_OCNIdleState = TIM_OCNIdleState_Reset    //输出空闲状态(OCxN)
+    .TIM_OCPolarity = TIM_OCPolarity_High,        // 输入/捕获极性,高电平有效(OCx)
+    .TIM_OCNPolarity = TIM_OCNPolarity_High,      // 输入/捕获互补输出极性,高电平有效(OCNx)
+    .TIM_OCIdleState = TIM_OCIdleState_Reset,     // 输出空闲状态(OCx)
+    .TIM_OCNIdleState = TIM_OCNIdleState_Reset    // 输出空闲状态(OCxN)
 };
 TIM_ICInitTypeDef TIM2_ICSturcture = {
     .TIM_Channel = TIM_Channel_1,
@@ -240,7 +240,7 @@ TIM_Parma TIM2_Parma = {
 TIM TIM_2(TIM2_Parma);
 
 // DMA
-//以USART示范DMA
+// 以USART示范DMA
 #define USART_DR_ADDR (USART1_BASE + 0x04)
 #define USART_TX_DMA_Channel DMA1_Channel4
 #define USART_RX_DMA_Channel DMA1_Channel5
@@ -320,7 +320,7 @@ DMA_Param Flash_SRAM_DMA_Param = {
 DMA USART1_RX_DMA = DMA(USART1_RX_DMA_Param);
 DMA USART1_TX_DMA = DMA(USART1_TX_DMA_Param);
 DMA Flash_SRAM_DMA = DMA(Flash_SRAM_DMA_Param);
-//由于SPI的DMA需要做5个实验所以参数会有变化,这里就不写参数配置了,详细见spi的测试
+// 由于SPI的DMA需要做5个实验所以参数会有变化,这里就不写参数配置了,详细见spi的测试
 DMA SPI2_RX_DMA;
 DMA SPI1_TX_DMA;
 
@@ -417,7 +417,7 @@ EXTI_Operate EXTI_PC6 = EXTI_Operate(EXTI_PC6_InitStructure, EXTI_PC6_NVIC_InitS
 LED LED_1_R(PB5, Low_level_lighting);
 LED LED_1_G(PB0, Low_level_lighting);
 LED LED_1_B(PB1, Low_level_lighting);
-LED LED_1(PB0, Low_level_lighting);
+LED LED_1(PB1, Low_level_lighting);
 LED LED_2(PF7, Low_level_lighting);
 LED LED_3(PF8, Low_level_lighting);
 
@@ -456,7 +456,7 @@ ADC_Channel_InitTypeDef ADC1_RegularChannel_InitStructure = {
     .ADC_ExternalTrig = DISABLE};
 ADC_Channel_InitTypeDef ADC1_InjectedChannel_InitStructure = {
     .ADC_Channellist = ADC1_InjectedChannellist,
-    .ADC_ExternalTrigConv = ADC_ExternalTrigInjecConv_None, //如果用软件开启则直接使用none
+    .ADC_ExternalTrigConv = ADC_ExternalTrigInjecConv_None, // 如果用软件开启则直接使用none
     .ADC_DiscMode = DISABLE,
     .ADC_ExternalTrig = DISABLE};
 ADC_Param ADC1_Param = {
@@ -476,20 +476,20 @@ Button Key1(PA0, false);
 // Buzzer
 Buzzer Beep(TIM1_Channel1_Default);
 
-//系统变量
+// 系统变量
 time_t system_start_time;
 time_t timestamp;
 tm timeinfo;
 char timestr[80];
 
-//普通变量区
+// 普通变量区
 BitAction flag = Bit_SET;
 uint8_t receivedata;
 uint32_t time_ms = 0;
 uint32_t current_time_ms = 0;
-const char SendBuffer1[] = "1235678910\n"; //为了验证spidmaCRC污染问题所以第一个字符随便写
+const char SendBuffer1[] = "1235678910\n"; // 为了验证spidmaCRC污染问题所以第一个字符随便写
 const char SendBuffer[] =
-    "-------------------金辰星我爱你------------------\n"
+    "-------------------戚莹莹我爱你------------------\n"
     "$$$_____$$$$$$$$$$$$$$$_$$$_______$$$_$$$$$$$$$$\n"
     "$$$____$$$____$$$____$$$_$$$_____$$$__$$$_______\n"
     "$$$____$$$___________$$$_$$$_____$$$__$$$_______\n"
@@ -501,4 +501,3 @@ char ReceiveBuffer[500];
 const char FlashBuffer[] =
     "NFBZMOMGEYGJSDWTDYHHCXLGOREVYXGOGPAWTSULKQSFQHHYSQOSWZTUNXDZTZZDRQFWJLFGGNAOJNLLBTWXTSFOALZDYGYUMTHZQTGBEQPPFGYACDPFKVWQWBCPZH";
 char SRAMBuffer[127];
-
